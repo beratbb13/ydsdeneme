@@ -1,16 +1,52 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomepageComponent } from './components/homepage/homepage.component';
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
-import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
+import { LoginComponent } from './views/pages/login/login.component';
+import { RegisterComponent } from './views/pages/register/register.component';
+import { ForgetPasswordComponent } from './views/pages/forget-password/forget-password.component';
+import { ExamPageComponent } from './views/pages/exam-page/exam-page.component';
+import { HomepageComponent } from './views/pages/homepage/homepage.component';
+import { ProfileComponent } from './views/pages/profile/profile/profile.component';
+import { ExamFormComponent } from './views/components/examForm/exam-form/exam-form.component';
+import { AboutusComponent } from './views/pages/Aboutus/aboutus/aboutus.component';
 
 const routes: Routes = [
-  { path: '', component: HomepageComponent },
+  { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'forgetpassword', component: ForgetPasswordComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'forgetpassword', component: ForgetPasswordComponent },
+  {
+    path: 'homepage', component: HomepageComponent, children: [
+      { path: 'aboutus', component: AboutusComponent },
+      { path: 'exampage', component: ExamPageComponent },
+      { path: 'examform', component: ExamFormComponent },
+
+    ]
+  },
 ];
+
+/*
+
+
+  { path: 'register', component: RegisterComponent },
+  { path: 'forgetpassword', component: ForgetPasswordComponent },
+  { path: 'exampage', component: ExamPageComponent },
+  {
+    path: '', component: HomepageComponent, children: [
+      { path: 'examform', component: ExamFormComponent },
+    ]
+  },
+  { path: 'profile', component: ProfileComponent },
+
+
+
+
+  { path: 'register', component: RegisterComponent },
+  { path: 'forgetpassword', component: ForgetPasswordComponent },
+  { path: 'exampage', component: ExamPageComponent },
+  { path: 'homepage', component: HomepageComponent },
+  { path: 'profile', component: ProfileComponent },
+
+*/
 
 @NgModule({
   declarations: [],

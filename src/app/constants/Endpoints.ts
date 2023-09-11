@@ -8,15 +8,11 @@ export const ServerURLs = {
 export const Endpoints = {
     dataops: ServerURLs.bussion + 'Applications/DataOps',
     scriptEndpoint: ServerURLs.bussion + 'Applications',
-    getBussionScripts: '/GetBussionScriptFile',
-    saveBussionScripts: '/SaveBussionScriptFile',
     token: '33722768367448188871',
-    dataStoreid: '72727142666381427723',
-    login: ServerURLs.bussion + 'Logon/Login',
+    answersDataStoreid: '67525733536673626715',
+    questionsDataStoreid: '23474615133847814541',
+    usersDataStoreid: '71346323414335581818',
+    examsDataStoreid: '1122',
     getUsers: ServerURLs.bussion + 'Users/GetUsers',
-    getUserId: ServerURLs.bussion + 'Users/GetUserById',
-    getRoles: ServerURLs.bussion + 'Roles/GetRoles',
-    getUserRoles: ServerURLs.bussion + 'Roles/GetRolesOfUserByUserId',
     logout: ServerURLs.bussion + 'Logon/Logout',
-
 };

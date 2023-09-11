@@ -1,5 +1,5 @@
 export const Queries = {
-    selectUsers: 'select * from ',
+   /* selectUsers: 'select * from ',
     selectQuestions: 'select * from ',
-    selectAnswers: 'select * from ',
+    selectAnswers: 'select * from ',*/
 };

@@ -11,7 +11,6 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^16.2.4",
-    "@angular/cdk": "^15.0.0",
     "@angular/common": "^16.1.0",
     "@angular/compiler": "^16.1.0",
     "@angular/core": "^16.1.0",
@@ -21,9 +20,11 @@
     "@angular/router": "^16.2.4",
     "@nebular/eva-icons": "11.0.1",
     "@nebular/theme": "^11.0.1",
-    "@ng-bootstrap/ng-bootstrap": "^15.1.1",
-    "@popperjs/core": "^2.11.6",
     "bootstrap": "^5.3.1",
+    "jquery": "^3.7.1",
+    "ngx-pagination": "^6.0.3",
+    "ngx-spinner": "^16.0.2",
+    "popper.js": "^1.16.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"

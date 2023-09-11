@@ -1,0 +1,11 @@
+ul {
+    margin-top: -20px;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    padding: 10px;
+}
+
+li>a {
+    text-decoration: none;
+    color: black;
+}
