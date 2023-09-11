@@ -50,15 +50,14 @@ export class RegisterComponent {
       let insertUser: any = {};
       Object.assign(insertUser, this.formGroup.value);
 
-      let isSame = this.users.some((user: user) => {
-        user.username == insertUser.username && user.email == insertUser.email;
+      let isSame = this.users.some((user: any) => {
+        return user.user_name == insertUser.username || user.email_ == insertUser.email;
       })
 
       if (!isSame) {
         this.userService.insertUser(insertUser).subscribe((res: any) => {
           if (res == 'Success') {
             this.toastService.showToast('success', 'Kayıt oluşturma işlemi başarılı.');
-            this.formGroup.reset()
             this.router.navigate(['/']);
           }
           else {
@@ -66,7 +65,7 @@ export class RegisterComponent {
           }
         });
       } else {
-        this.toastService.showToast('warning', 'Bu kullanıcı adıyla kayıtlı bir kullanıcı bulunuyor.');
+        this.toastService.showToast('warning', 'Bu kullanıcı adı veya email ile kayıtlı bir kullanıcı bulunuyor.');
       }
     }
     else {

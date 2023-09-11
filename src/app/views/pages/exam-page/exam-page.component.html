@@ -2,16 +2,39 @@
     <div class="row">
         <div class="col">
             <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center mb-2 fw-bold">
+                    <div class="col">
+                        Sınav Id
+                    </div>
+                    <div class="col">
+                        Sınav Adı
+                    </div>
+                    <div class="col">
+                        Kategori
+                    </div>
+                    <div class="col">
+                        Açıklama
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <ul class="list-group">
                 <li class="list-group-item d-flex justify-content-between align-items-center"
-                    *ngFor="let exam of exams | paginate: {itemsPerPage: 5, currentPage: pageNumber}">
+                    *ngFor="let exam of exams | paginate: {itemsPerPage: 20, currentPage: pageNumber}">
                     <div class="col">
-                        Sınav Adı: {{exam.name}}
+                        {{exam.examid}}
                     </div>
                     <div class="col">
-                        Kategori: {{exam.category}}
+                        {{exam.Name}}
                     </div>
                     <div class="col">
-                        Açıklama: {{exam.description}}
+                        {{exam.category}}
+                    </div>
+                    <div class="col">
+                        {{exam.description}}
                     </div>
                     <button class="btn btn-outline-success btn-sm" (click)="getExam(exam)">Sınava
                         Başla</button>

@@ -1,7 +1,28 @@
-<div class="card">
-    <ul class="list-group">
-        <li class="list-group-item">
-            {{exam}}
-        </li>
-    </ul>
-</div>
+<!--
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <ul class="list-group">
+                    <li class="list-group-item" *ngFor="let question of questions">
+                        <div>{{question.question}}</div>
+                        <button class="btn btn-outline-primary" (click)="getAnswersWithQuestionIds(question.questionid)">Get Answers</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div> 
+
+
+-->
+<nb-accordion>
+    <nb-accordion-item *ngFor="let item of questions">
+        <nb-accordion-item-header>
+            {{item.question}}
+        </nb-accordion-item-header>
+        <nb-accordion-item-body>
+
+        </nb-accordion-item-body>
+    </nb-accordion-item>
+</nb-accordion>

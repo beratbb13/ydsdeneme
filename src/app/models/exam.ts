@@ -1,6 +1,6 @@
 export interface exam {
     examid: string,
-    name: string,
+    Name: string,
     description: string,
     category: string
 }

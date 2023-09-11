@@ -15,14 +15,14 @@ export class AnswerService {
 
   token: string | null = this.authService.getToken()
   answerData: BehaviorSubject<answer[]> = new BehaviorSubject<answer[]>([]);
-  questions = this.answerData.asObservable()
+  answers = this.answerData.asObservable()
 
   insertAnswer(insertAnswer: answer) {
     const body = {
       "Token": this.token,
       "DataStoreId": Endpoints.answersDataStoreid,
       "Operation": "insert",
-      "Data": `Insert Into answers(answerid, questionid, istrue, answer) VALUES('${insertAnswer.answerid}', '${insertAnswer.questionid}', '${insertAnswer.istrue}', '${insertAnswer.answertext}')`,
+      "Data": `Insert Into answers_last(answerid, questionid, istrue, answer) VALUES('${insertAnswer.answerid}', '${insertAnswer.questionid}', '${insertAnswer.true}', '${insertAnswer.answer}')`,
       "Encrypted": '1951'
     }
     return this.http.post(Endpoints.dataops, body).pipe(
@@ -37,7 +37,7 @@ export class AnswerService {
       "Token": this.token,
       "DataStoreId": Endpoints.answersDataStoreid,
       "Operation": "update",
-      "Data": `Update answers set answerid = '${updateAnswer.answerid}', questionid = '${updateAnswer.questionid}', istrue = '${updateAnswer.istrue}', answer = '${updateAnswer.answertext}')`,
+      "Data": `Update answers_last set answerid = '${updateAnswer.answerid}', questionid = '${updateAnswer.questionid}', istrue = '${updateAnswer.true}', answer = '${updateAnswer.answer}')`,
       "Encrypted": "1951",
     }
     return this.http.post(Endpoints.dataops, body).pipe(
@@ -52,7 +52,7 @@ export class AnswerService {
       "Token": this.token,
       "DataStoreId": Endpoints.answersDataStoreid,
       "Operation": "read",
-      "Data": `Select * from answers`,
+      "Data": `Select cast(questionid as text), cast(answerid as text), answer, true from answers_last`,
       "Encrypted": "1951",
     }
     return this.http.post(Endpoints.dataops, body).pipe(
@@ -63,4 +63,18 @@ export class AnswerService {
     );
   }
 
+  getAnswersByQuestionId(questionid: string) {
+    const body = {
+      "Token": this.token,
+      "DataStoreId": Endpoints.answersDataStoreid,
+      "Operation": "read",
+      "Data": `Select cast(answerid as text), cast(questionid as text), answer, true from answers_last where questionid = '${questionid}'`,
+      "Encrypted": "1951",
+    }
+    return this.http.post(Endpoints.dataops, body).pipe(
+      map((response: any) => {
+        return response.message
+      })
+    );
+  }
 }

@@ -10,7 +10,7 @@ import { HttpClientModule } from '@angular/common/http'
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbThemeModule, NbToastrModule, NbLayoutModule, NbButtonModule, NbDialogModule, NbSidebarModule, NbCardModule, NbContextMenuModule, NbMenuModule } from '@nebular/theme';
+import { NbThemeModule, NbAccordionModule, NbToastrModule, NbLayoutModule, NbButtonModule, NbDialogModule, NbSidebarModule, NbCardModule, NbContextMenuModule, NbMenuModule } from '@nebular/theme';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { ExamPageComponent } from './views/pages/exam-page/exam-page.component';
 import { ConfirmationModalComponent } from './views/components/confirmationModal/confirmation-modal/confirmation-modal.component';
@@ -53,8 +53,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     NbSidebarModule,
     NbCardModule,
     NbContextMenuModule,
-    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }),
+    NgxSpinnerModule,
     NgxPaginationModule,
+    NbAccordionModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

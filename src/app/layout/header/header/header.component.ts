@@ -12,11 +12,8 @@ import { AuthService } from 'src/app/services/authService/auth.service';
 })
 export class HeaderComponent {
 
-  currentUser!: user;
-
   ngOnInit() {
-    let temp = localStorage.getItem('currentUser')
-    this.currentUser = temp ? JSON.parse(temp) : [];
+    
   }
 
   constructor(private router: Router,

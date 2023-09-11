@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
-import { exam } from 'src/app/models/exam';
+import { answer } from 'src/app/models/answer';
+import { question } from 'src/app/models/question';
 import { AnswerService } from 'src/app/services/answerService/answer.service';
+import { ExamService } from 'src/app/services/examService/exam.service';
 import { QuestionService } from 'src/app/services/questionService/question.service';
+import { SpinnerService } from 'src/app/services/spinnerService/spinner.service';
 
 @Component({
   selector: 'app-exam-form',
@@ -10,14 +13,49 @@ import { QuestionService } from 'src/app/services/questionService/question.servi
 })
 export class ExamFormComponent {
 
-  constructor(private questionService: QuestionService,
-    private answerService: AnswerService) { }
+  constructor(private examService: ExamService,
+    private questionService: QuestionService,
+    private answerService: AnswerService,
+    private spinnerService: SpinnerService) { }
+  /*
+    exams: exam[] = []
+  
+    ngOnInit() {
+      if (history.state.exam)
+        this.exams = history.state.exam;
+      console.log(this.exams)
+    }
+  */
 
-  exam!: exam
+  questions: question[] = [];
+  answers: answer[] = [];
 
   ngOnInit() {
-    if (history.state.exam)
-      this.exam = history.state.exam
+    this.getQuestions();
+    //this.getAnswers()
   }
 
+  getQuestions() {
+    this.questionService.getQuestions().subscribe(res => {
+      this.spinnerService.show();
+      this.questions = res;
+      this.spinnerService.hide();
+    });
+  }
+
+  /*getAnswers() {
+    this.answerService.getAnswers().subscribe(res => {
+      this.spinnerService.show();
+      this.answers = res
+      this.spinnerService.hide();
+    });
+  }*/
+
+  getAnswersWithQuestionIds(questionid: string) {
+    this.answerService.getAnswersByQuestionId(questionid).subscribe(res => {
+      this.spinnerService.show();
+      console.log(res);
+      this.spinnerService.hide();
+    });
+  }
 }

@@ -20,130 +20,27 @@ export class ExamPageComponent {
 
   ngOnInit() {
     this.listExams();
-
   }
-
-  exam: exam[] = [
-    {
-      examid: '1sdgv23',
-      name: 'berat',
-      description: 'deneme',
-      category: 'ingilizce'
-    },
-    {
-      examid: '1234646',
-      name: 'furkan',
-      description: 'demo',
-      category: 'matematik'
-    },
-    {
-      examid: '123',
-      name: 'berat',
-      description: 'deneme',
-      category: 'ingilizce'
-    },
-    {
-      examid: '1234646',
-      name: 'furkan',
-      description: 'demo',
-      category: 'matematik'
-    },
-    {
-      examid: '12asv3',
-      name: 'berat',
-      description: 'deneme',
-      category: 'ingilizce'
-    },
-    {
-      examid: '123464hg456',
-      name: 'furkan',
-      description: 'demo',
-      category: 'matematik'
-    },
-    {
-      examid: 'dfhvc123',
-      name: 'adem',
-      description: 'deneme',
-      category: 'ingilizce'
-    },
-    {
-      examid: '1235645646',
-      name: 'boran',
-      description: 'demo',
-      category: 'matematik'
-    },
-    {
-      examid: '123256q34646',
-      name: 'alper',
-      description: 'demo',
-      category: 'matematik'
-    },
-    {
-      examid: '126574653',
-      name: 'murat',
-      description: 'deneme',
-      category: 'ingilizce'
-    },
-    {
-      examid: '1234wgs646',
-      name: 'deneme',
-      description: 'demo',
-      category: 'matematik'
-    },
-    {
-      examid: '1yugjh23',
-      name: 'salih',
-      description: 'deneme',
-      category: 'ingilizce'
-    },
-    {
-      examid: '1234646',
-      name: 'gökalp',
-      description: 'demo',
-      category: 'matematik'
-    },
-    {
-      examid: '12b34v3',
-      name: 'sabri',
-      description: 'deneme',
-      category: 'ingilizce'
-    },
-    {
-      examid: '1234646',
-      name: 'furkan',
-      description: 'demo',
-      category: 'matematik'
-    },
-  ]
 
   listExams() {
-    /*this.examService.getExams().subscribe(res => {
+    this.examService.getExams().subscribe(res => {
       if (res)
-        this.exams = res;
-      // this.questions.map((question: question) => {
-        // if (!this.categoryids.includes(question.ecategoryid))
-       //    this.categoryids.push(question.ecategoryid);
-       })
-    })*/
-    this.exams = this.exam
+        this.exams = res.message;
+    })
   }
 
-  //dbeaverda bir exam table olustur sonra bussionda datastore olustur
-
-
-  getExam(cexam: any) {
+  getExam(currentExam: exam) {
     /*this.examService.getExamById(examid).subscribe(res => {
       console.log(res);
       this.router.navigate(['/examform'], res);
     })*/
     let navigationExtras: NavigationExtras = {
       state: {
-        exam: this.exams.filter((exam: exam) => exam.examid === cexam.examid)
+        exam: this.exams.filter((exam: exam) => exam.category === currentExam.category)
       }
     };
 
     this.router.navigate(['/homepage/examform'], navigationExtras);
-
 
   }
 }
