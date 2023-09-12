@@ -13,6 +13,7 @@ export const Endpoints = {
     questionsDataStoreid: '23474615133847814541',
     usersDataStoreid: '71346323414335581818',
     examsDataStoreid: '71228732617281387825',
+    examCategoryDataStoreid: '53551637416518348344',
     getUsers: ServerURLs.bussion + 'Users/GetUsers',
     logout: ServerURLs.bussion + 'Logon/Logout',
 };

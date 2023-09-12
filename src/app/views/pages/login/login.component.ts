@@ -38,8 +38,8 @@ export class LoginComponent {
       this.userService.getUserByUserName(this.loginFormValues.username).subscribe(res => {
         if (res && res.password_ === this.loginFormValues.password) {
           this.toastService.showToast('success', 'Giriş işlemi başarılı');
-          localStorage.setItem('currentUser', res.message);
-          this.router.navigate(['homepage']);
+          localStorage.setItem('currentUser', JSON.stringify(res));
+          this.router.navigate(['homepage/aboutus']);
         } else if (res) {
           this.toastService.showToast('danger', 'Şifrenizi yanlış girdiniz. Lütfen tekrar deneyin.');
         } else {

@@ -1,28 +1,51 @@
-<!--
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <div class="card">
-                <ul class="list-group">
-                    <li class="list-group-item" *ngFor="let question of questions">
-                        <div>{{question.question}}</div>
-                        <button class="btn btn-outline-primary" (click)="getAnswersWithQuestionIds(question.questionid)">Get Answers</button>
-                    </li>
-                </ul>
-            </div>
+<button class="btn btn-outline-primary" (click)="getForm()">Soruları Getir</button>
+<div class="container mt-5">
+    <h1>Sınav Soruları</h1>
+    <div class="progress">
+        <div class="progress-bar" [style.width]="(soruIndex + 1) / soruSayisi * 100 + '%'">
+            {{ (soruIndex + 1) }} / {{ soruSayisi }}
         </div>
     </div>
-</div> 
+    <div class="card mt-3">
+        <div class="card-header">
+            Soru {{ soruIndex + 1 }}
+        </div>
+        <div class="card-body" *ngIf="questions[soruIndex]">
+            <p class="card-text">
+                {{questions[soruIndex].question}}
+            </p>
+            <form>
+                <div class="form-check" *ngFor="let answer of questions[soruIndex].answers">
+                    <input class="form-check-input" type="radio" name="answer.answerid" />
+                    <label class="form-check-label" for="{{answer.answerid}}"> {{answer.answer}}</label>
+                </div>
+            </form>
+        </div>
+        <div class="card-footer">
+            <button class="btn btn-primary" (click)="previousQuestion()" [disabled]="soruIndex == 0">
+                Önceki Soru
+            </button>
+            <button class="btn btn-primary" (click)="nextQuestion()" [disabled]="soruSayisi == soruIndex + 1">
+                Sonraki Soru
+            </button>
+            <button class="btn btn-success" (click)="reply()" [disabled]="!secilenCevap">
+                Cevapla
+            </button>
+        </div>
+    </div>
+</div>
 
+<!--
+
+    
+
+<input class="form-check-input" type="radio" name="" />
+<label class="form-check-label" for=""></label>
+<input class="form-check-input" type="radio" name="" />
+<label class="form-check-label" for=""></label>
+<input class="form-check-input" type="radio" name="" />
+<label class="form-check-label" for=""></label>
+<input class="form-check-input" type="radio" name="" />
+<label class="form-check-label" for=""></label>
 
 -->
-<nb-accordion>
-    <nb-accordion-item *ngFor="let item of questions">
-        <nb-accordion-item-header>
-            {{item.question}}
-        </nb-accordion-item-header>
-        <nb-accordion-item-body>
-
-        </nb-accordion-item-body>
-    </nb-accordion-item>
-</nb-accordion>

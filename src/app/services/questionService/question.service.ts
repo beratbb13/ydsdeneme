@@ -61,4 +61,19 @@ export class QuestionService {
       })
     );
   }
+
+  getQuestionsByCategoryId(categoryId: string) {
+    const body = {
+      "Token": this.token,
+      "DataStoreId": Endpoints.questionsDataStoreid,
+      "Operation": "read",
+      "Data": `Select cast(questionid as text), cast(examid as text), cast (ecategoryid as text), question from questions where ecategoryid = '${categoryId}'`,
+      "Encrypted": "1951",
+    }
+    return this.http.post(Endpoints.dataops, body).pipe(
+      map((response: any) => {
+        return response.message
+      })
+    );
+  }
 }

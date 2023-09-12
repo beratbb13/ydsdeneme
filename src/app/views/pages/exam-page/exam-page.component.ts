@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { AnswerService } from 'src/app/services/answerService/answer.service';
-import { exam } from 'src/app/models/exam';
-import { ExamService } from 'src/app/services/examService/exam.service';
 import { NavigationExtras, Router } from '@angular/router';
+import { question } from 'src/app/models/question';
+import { QuestionService } from 'src/app/services/questionService/question.service';
+import { ExamCategoryService } from 'src/app/services/examCategoryService/exam-category.service';
+import { tap } from 'rxjs';
+import { SpinnerService } from 'src/app/services/spinnerService/spinner.service';
 
 @Component({
   selector: 'app-exam-page',
@@ -12,35 +15,38 @@ import { NavigationExtras, Router } from '@angular/router';
 export class ExamPageComponent {
 
   constructor(private answerService: AnswerService,
-    private examService: ExamService,
+    private examCategoryService: ExamCategoryService,
+    private questionService: QuestionService,
+    private spinnerService: SpinnerService,
     private router: Router) { }
 
-  exams: exam[] = [];
   pageNumber: number = 1;
+  questions: question[] = [];
+  categories: any[] = [];
 
   ngOnInit() {
-    this.listExams();
+    this.getCategories();
   }
 
-  listExams() {
-    this.examService.getExams().subscribe(res => {
-      if (res)
-        this.exams = res.message;
-    })
+  getCategories() {
+    this.spinnerService.show();
+    this.examCategoryService.getCategories().pipe(
+      tap(res => this.categories = res),
+    ).subscribe(() => this.spinnerService.hide());
   }
 
-  getExam(currentExam: exam) {
-    /*this.examService.getExamById(examid).subscribe(res => {
-      console.log(res);
-      this.router.navigate(['/examform'], res);
-    })*/
-    let navigationExtras: NavigationExtras = {
-      state: {
-        exam: this.exams.filter((exam: exam) => exam.category === currentExam.category)
-      }
+  getExam(category: string) {
+    const navigationExtras: NavigationExtras = {
+      state: { category: category }
     };
 
     this.router.navigate(['/homepage/examform'], navigationExtras);
-
   }
+
+  isOpen: boolean = false;
+
+  dropdownToggle() {
+    this.isOpen = !this.isOpen;
+  }
+
 }

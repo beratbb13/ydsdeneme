@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { answer } from 'src/app/models/answer';
-import { question } from 'src/app/models/question';
 import { AnswerService } from 'src/app/services/answerService/answer.service';
 import { ExamService } from 'src/app/services/examService/exam.service';
 import { QuestionService } from 'src/app/services/questionService/question.service';
 import { SpinnerService } from 'src/app/services/spinnerService/spinner.service';
+import { tap } from 'rxjs';
+import { question } from 'src/app/models/question';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-exam-form',
@@ -16,46 +18,66 @@ export class ExamFormComponent {
   constructor(private examService: ExamService,
     private questionService: QuestionService,
     private answerService: AnswerService,
-    private spinnerService: SpinnerService) { }
-  /*
-    exams: exam[] = []
-  
-    ngOnInit() {
-      if (history.state.exam)
-        this.exams = history.state.exam;
-      console.log(this.exams)
-    }
-  */
+    private spinnerService: SpinnerService,
+    private formBuilder: FormBuilder) { }
 
   questions: question[] = [];
-  answers: answer[] = [];
+  answers: answer[] = []
+  questionForm!: FormGroup
+  category: any
+  soruIndex: number = 0;
+  soruSayisi: number = 0;
+  secilenCevap: string | null = null;
 
   ngOnInit() {
+    this.category = history.state.category;
     this.getQuestions();
-    //this.getAnswers()
+
+    this.questionForm = this.formBuilder.group({})
   }
 
   getQuestions() {
-    this.questionService.getQuestions().subscribe(res => {
-      this.spinnerService.show();
-      this.questions = res;
-      this.spinnerService.hide();
-    });
+    this.spinnerService.show();
+    this.questionService.getQuestionsByCategoryId(this.category.ecategoryid).pipe(
+      tap(res => this.questions = res),
+      tap(() => this.soruSayisi = this.questions.length),
+      tap(() => this.spinnerService.hide()),
+      tap(() => this.questions.map(question => this.getAnswersWithQuestionIds(question))),
+    ).subscribe(() => setTimeout(() => this.questions.map((question: question) => this.createForm(question)), 100));
   }
 
-  /*getAnswers() {
-    this.answerService.getAnswers().subscribe(res => {
-      this.spinnerService.show();
-      this.answers = res
-      this.spinnerService.hide();
-    });
-  }*/
-
-  getAnswersWithQuestionIds(questionid: string) {
-    this.answerService.getAnswersByQuestionId(questionid).subscribe(res => {
-      this.spinnerService.show();
-      console.log(res);
-      this.spinnerService.hide();
-    });
+  getAnswersWithQuestionIds(question: question) {
+    this.answerService.getAnswersByQuestionId(question.questionid).subscribe(
+      res => question.answers = res);
   }
+
+  createForm(question: question) {
+    const newFormGroup = this.formBuilder.array([]);
+    question.answers?.map((answer: answer) => {
+      newFormGroup.push(new FormControl(answer))
+    })
+    this.questionForm.addControl(question.questionid, newFormGroup);
+  }
+
+  getForm() {
+    console.log(this.questionForm)
+  }
+
+  previousQuestion() {
+    if (!(this.soruIndex < 0)) {
+      this.soruIndex -= 1;
+    }
+  }
+
+  nextQuestion() {
+    if (this.soruSayisi > this.soruIndex + 1) {
+      this.soruIndex += 1;
+    }
+  }
+
+  reply() {
+
+  }
+
 }
+

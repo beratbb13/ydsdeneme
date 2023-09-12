@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { UserService } from 'src/app/services/userService/user.service';
 
 @Component({
   selector: 'app-profile',
@@ -8,17 +7,13 @@ import { UserService } from 'src/app/services/userService/user.service';
 })
 export class ProfileComponent {
 
-  users: { name: string, title: string }[] = [
-    { name: 'Carla Espinosa', title: 'Nurse' },
-    { name: 'Bob Kelso', title: 'Doctor of Medicine' },
-    { name: 'Janitor', title: 'Janitor' },
-    { name: 'Perry Cox', title: 'Doctor of Medicine' },
-    { name: 'Ben Sullivan', title: 'Carpenter and photographer' },
-  ];
-  constructor(private userService: UserService) { }
+  constructor() { }
+
+  currentUser!: any;
 
   ngOnInit() {
-    this.userService.getUsers()
+    let temp = localStorage.getItem('currentUser');
+    this.currentUser = temp ? JSON.parse(temp) : {};
   }
 
 }
