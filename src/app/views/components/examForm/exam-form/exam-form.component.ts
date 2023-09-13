@@ -119,6 +119,3 @@ export class ExamFormComponent {
     this.showResult('Sonuç', `Dogru: ${dogru}  Yanlis:  ${yanlis}  Bos:  ${bos}`);
   }
 }
-
-
-

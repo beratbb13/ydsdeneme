@@ -8,18 +8,23 @@ import { HomepageComponent } from './views/pages/homepage/homepage.component';
 import { ProfileComponent } from './views/pages/profile/profile/profile.component';
 import { ExamFormComponent } from './views/components/examForm/exam-form/exam-form.component';
 import { AboutusComponent } from './views/pages/Aboutus/aboutus/aboutus.component';
+import { ChooseExamComponent } from './views/pages/choose-exam/choose-exam.component';
+import { ExamFilterComponent } from './views/pages/exam-filter/exam-filter.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'forgetpassword', component: ForgetPasswordComponent },
+  { path: 'choose', component: ChooseExamComponent },
+
   {
     path: 'homepage', component: HomepageComponent, children: [
       { path: 'aboutus', component: AboutusComponent },
       { path: 'exampage', component: ExamPageComponent },
       { path: 'examform', component: ExamFormComponent },
       { path: 'profile', component: ProfileComponent },
+      { path: 'filter', component: ExamFilterComponent },
 
     ]
   },

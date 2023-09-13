@@ -1,0 +1,67 @@
+<div class="container">
+
+    <div class="row " style="height: 150px;">
+        <div class="col-md-6">
+            <h1 style="font-size: 50px;">YDS</h1>
+        </div>
+        <div class="col-md-6 d-flex justify-content-end">
+            <button>
+                <span>SEVIYE TESPIT SINAVI</span>
+              </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 ">
+            <h5>Kategoriler:</h5>
+
+            <select 
+            [(ngModel)]="selectedCategory"
+            (change)="filterByCategory()"
+            style="width: 250px;"
+            class="form-control form-select"
+            >
+                <option >Tüm Kategoriler</option>
+                <option *ngFor="let category of categories" [value]="category.Name">
+                    {{category.Name}}
+                </option>
+            </select>
+        </div>
+
+    </div>
+
+    
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col">
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center mb-2 fw-bold">
+                        <div class="col">
+                            Kategori Adı
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center"
+                        *ngFor="let exam of filteredExams | paginate: {itemsPerPage: 20, currentPage: pageNumber}">
+                        <div class="col">
+                            {{exam.Name}}
+                        </div>
+                        <button class="btn btn-outline-success btn-sm" (click)="getExam(exam)">Sınava
+                            Başla</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col d-flex justify-content-end ">
+                <pagination-controls (pageChange)="pageNumber = $event"></pagination-controls>
+            </div>
+        </div>
+    </div>
+    
+
+</div>

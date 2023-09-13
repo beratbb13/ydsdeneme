@@ -12,7 +12,7 @@
 <div class="container mt-5" *ngIf="isShown">
     <h1>Sınav Soruları</h1>
     <div class="progress">
-        <div class="progress-bar" [style.width]="(soruIndex + 1) / soruSayisi * 100 + '%'">
+        <div style="color: black;" class="progress-bar" [style.width]="(soruIndex + 1) / soruSayisi * 100 + '%'">
             {{ (soruIndex + 1) }} / {{ soruSayisi }}
         </div>
     </div>
