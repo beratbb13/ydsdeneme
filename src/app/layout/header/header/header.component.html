@@ -1,20 +1,22 @@
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <a class="nav-link" (click)="navigate('/homepage/aboutus')">Hakkımızda</a>
-        </div>
-        <div class="col">
-            <a class="nav-link" (click)="navigate('/homepage/exampage')">Sınavları Görüntüle</a>
-        </div>
-        <div class="col">
-            <a class="nav-link" (click)="navigate('/homepage/profile')">Profil</a>
-        </div>
-        <div class="col">
-            <a class="nav-link" (click)="logOut()">Cıkış Yap</a>
-        </div>
-    </div>
-</div>
 
+<div class="page" style="margin-top: -1rem;">
+<nav class="page__menu menu">
+    <ul class="menu__list r-list">
+      <li class="menu__group">
+        <a href="#0" class="menu__link r-link text-underlined" [routerLink]="['/homepage/aboutus']" >Hakkımızda</a>
+    </li>
+      <li class="menu__group">
+        <a href="#0" class="menu__link r-link text-underlined" [routerLink]="['/homepage/filter']">Sınavları Görüntüle</a>
+    </li>
+      <li class="menu__group">
+        <a href="#0" class="menu__link r-link text-underlined" (click)="navigate('/homepage/profile')" [routerLink]="['/homepage/profile']">Profil</a>
+    </li>
+      <li class="menu__group">
+        <a href="#0" class="menu__link r-link text-underlined" (click)="logOut()">Cıkış Yap</a>
+    </li>
+    </ul>
+  </nav>
+</div>
 
 <!--
 

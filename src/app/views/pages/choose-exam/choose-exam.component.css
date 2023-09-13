@@ -1,0 +1,47 @@
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 93vh;
+    position: relative;
+  }
+
+  .center {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  
+  h2 {
+    position: absolute;
+    top: 50px; /* İstediğiniz boşluk miktarına göre ayarlayın */
+    left: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+  }
+  button {
+    margin: 5px;
+    padding: 14px;
+    width: 150px;
+    display: block;
+    line-height: 28pt;
+    background: #ffa580;
+    letter-spacing: 2px;
+    transition: 0.2s all ease-in-out;
+    outline: none;
+    border: 1px solid black;
+    box-shadow: 3px 3px 1px 1px #95a4ff, 3px 3px 1px 2px black;
+  }
+  button:hover {
+    background: black;
+    color: white;
+    border: 1px solid black;
+  }
+
+  button:active{
+    box-shadow: 0px 0px 0px 0px;
+  }
+

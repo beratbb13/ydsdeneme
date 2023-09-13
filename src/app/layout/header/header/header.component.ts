@@ -23,6 +23,7 @@ export class HeaderComponent {
   }
 
   navigate(path: string) {
+    debugger;
     this.router.navigate([path])
   }
 }
