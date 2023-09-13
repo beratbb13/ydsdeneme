@@ -1,9 +1,32 @@
-<button class="btn btn-outline-primary" (click)="getForm()">Soruları Getir</button>
-<div class="container mt-5">
+<div class="container">
+    <div class="row d-flex justify-content-between">
+        <div class="col">
+            <button class="btn btn-outline-primary" (click)="getForm()">Sınavı Başlat</button>
+        </div>
+        <div class="col">
+            <button class="btn btn-outline-primary" disabled="true">Dakika: {{this.dakika}} Saniye:
+                {{this.saniye}}</button>
+        </div>
+    </div>
+</div>
+<div class="container mt-5" *ngIf="isShown">
     <h1>Sınav Soruları</h1>
     <div class="progress">
         <div class="progress-bar" [style.width]="(soruIndex + 1) / soruSayisi * 100 + '%'">
             {{ (soruIndex + 1) }} / {{ soruSayisi }}
+        </div>
+    </div>
+    <div class="container mt-3 d-flex">
+        <div class="col">
+            <button class="btn btn-primary" (click)="previousQuestion()" [disabled]="soruIndex == 0">
+                Önceki Soru
+            </button>
+
+        </div>
+        <div class="col justify-content-end">
+            <button class="btn btn-primary" (click)="nextQuestion()" [disabled]="soruSayisi == soruIndex + 1">
+                Sonraki Soru
+            </button>
         </div>
     </div>
     <div class="card mt-3">
@@ -14,38 +37,54 @@
             <p class="card-text">
                 {{questions[soruIndex].question}}
             </p>
-            <form>
+            <form [formGroup]="questionForm">
                 <div class="form-check" *ngFor="let answer of questions[soruIndex].answers">
-                    <input class="form-check-input" type="radio" name="answer.answerid" />
-                    <label class="form-check-label" for="{{answer.answerid}}"> {{answer.answer}}</label>
+                    <input class="form-check-input" type="radio" formControlName="{{questions[soruIndex].questionid}}"
+                        [value]="answer" />
+                    <label class="form-check-label">{{answer.answer}}</label>
                 </div>
             </form>
         </div>
-        <div class="card-footer">
-            <button class="btn btn-primary" (click)="previousQuestion()" [disabled]="soruIndex == 0">
-                Önceki Soru
-            </button>
-            <button class="btn btn-primary" (click)="nextQuestion()" [disabled]="soruSayisi == soruIndex + 1">
-                Sonraki Soru
-            </button>
-            <button class="btn btn-success" (click)="reply()" [disabled]="!secilenCevap">
-                Cevapla
+        <div class="card-footer d-flex justify-content-center">
+            <button class="btn btn-success" (click)="reply()">
+                Sınavı Bitir
             </button>
         </div>
     </div>
 </div>
 
-<!--
 
-    
 
-<input class="form-check-input" type="radio" name="" />
-<label class="form-check-label" for=""></label>
-<input class="form-check-input" type="radio" name="" />
-<label class="form-check-label" for=""></label>
-<input class="form-check-input" type="radio" name="" />
-<label class="form-check-label" for=""></label>
-<input class="form-check-input" type="radio" name="" />
-<label class="form-check-label" for=""></label>
+
+<!---
+
+1.opsiyon ama birden fazla seciliyor
+
+
+
+            <form [formGroup]="questionForm">
+                <div class="form-check" formArrayName="{{questions[soruIndex].questionid}}"
+                    *ngFor="let answer of questions[soruIndex].answers; let i = index">
+                    <input class="form-check-input" type="radio" formControlName="{{i}}" />
+                    <label class="form-check-label" for="{{i}}">{{answer.answer}}</label>
+                </div>
+            </form>
+
+
+ value="answer.answerid"
+
+            <form [formGroup]="questionForm">
+                <div class="form-check" formArrayName="{{questions[soruIndex].questionid}}">
+                    <div *ngFor="let item of this.questionForm.controls as FormArray">
+                        <input class=" form-check-input" type="radio" name="{{soruIndex}}" />
+                        <label class="form-check-label">{{item}}</label>
+                    </div>
+                </div>
+            </form>
+
+
+
+
+            
 
 -->

@@ -22,7 +22,7 @@ export class AnswerService {
       "Token": this.token,
       "DataStoreId": Endpoints.answersDataStoreid,
       "Operation": "insert",
-      "Data": `Insert Into answers_last(answerid, questionid, istrue, answer) VALUES('${insertAnswer.answerid}', '${insertAnswer.questionid}', '${insertAnswer.true}', '${insertAnswer.answer}')`,
+      "Data": `Insert Into answers_last(answerid, questionid, istrue, answer) VALUES('${insertAnswer.answerid}', '${insertAnswer.questionid}', '${insertAnswer.istrue}', '${insertAnswer.answer}')`,
       "Encrypted": '1951'
     }
     return this.http.post(Endpoints.dataops, body).pipe(
@@ -37,7 +37,7 @@ export class AnswerService {
       "Token": this.token,
       "DataStoreId": Endpoints.answersDataStoreid,
       "Operation": "update",
-      "Data": `Update answers_last set answerid = '${updateAnswer.answerid}', questionid = '${updateAnswer.questionid}', istrue = '${updateAnswer.true}', answer = '${updateAnswer.answer}')`,
+      "Data": `Update answers_last set answerid = '${updateAnswer.answerid}', questionid = '${updateAnswer.questionid}', istrue = '${updateAnswer.istrue}', answer = '${updateAnswer.answer}')`,
       "Encrypted": "1951",
     }
     return this.http.post(Endpoints.dataops, body).pipe(
@@ -52,13 +52,14 @@ export class AnswerService {
       "Token": this.token,
       "DataStoreId": Endpoints.answersDataStoreid,
       "Operation": "read",
-      "Data": `Select cast(questionid as text), cast(answerid as text), answer, true from answers_last`,
+      "Data": `Select cast(answerid as text), cast(questionid as text), answer, istrue from answers_last`,
       "Encrypted": "1951",
     }
     return this.http.post(Endpoints.dataops, body).pipe(
       map((response: any) => {
-        this.answerData.next(response.message)
-        return response.message
+        //this.answerData.next(response.message)
+        console.log(response.message);
+        return response.message;
       })
     );
   }
@@ -68,12 +69,12 @@ export class AnswerService {
       "Token": this.token,
       "DataStoreId": Endpoints.answersDataStoreid,
       "Operation": "read",
-      "Data": `Select cast(answerid as text), cast(questionid as text), answer, true from answers_last where questionid = '${questionid}'`,
+      "Data": `Select cast(answerid as text), cast(questionid as text), answer, istrue from answers_last where questionid = '${questionid}'`,
       "Encrypted": "1951",
     }
     return this.http.post(Endpoints.dataops, body).pipe(
       map((response: any) => {
-        return response.message
+        return response.message;
       })
     );
   }

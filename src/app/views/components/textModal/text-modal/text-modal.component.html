@@ -1,1 +1,9 @@
-<p>text-modal works!</p>
+<nb-card>
+    <nb-card-header>{{ title }}</nb-card-header>
+    <nb-card-body class="header">
+      <div [innerHtml]="html(message)"></div>
+    </nb-card-body>
+    <nb-card-footer>
+      <button style="text-align: right;" class="button" nbButton (click)="action(true)">Kapat</button>
+    </nb-card-footer>
+  </nb-card>

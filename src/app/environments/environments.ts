@@ -1,6 +1,6 @@
 export const environment = {
     production: false,
-    baseUrl: 'https://demo.bussion.com',
-    imageUrl: 'https://demo.bussion.com',
+    baseUrl: 'http://demo.bussion.com',
+    imageUrl: 'http://demo.bussion.com',
 
 };
