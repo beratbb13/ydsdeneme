@@ -39,7 +39,7 @@ export class LoginComponent {
         if (res && res.password_ === this.loginFormValues.password) {
           this.toastService.showToast('success', 'Giriş işlemi başarılı');
           localStorage.setItem('currentUser', JSON.stringify(res));
-          this.router.navigate(['homepage/aboutus']);
+          this.router.navigate(['/choose']);
         } else if (res) {
           this.toastService.showToast('danger', 'Şifrenizi yanlış girdiniz. Lütfen tekrar deneyin.');
         } else {

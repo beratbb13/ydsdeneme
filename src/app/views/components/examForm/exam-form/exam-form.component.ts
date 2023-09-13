@@ -43,7 +43,7 @@ export class ExamFormComponent {
       tap(() => this.soruSayisi = this.questions.length),
       tap(() => this.spinnerService.hide()),
       tap(() => this.questions.map(question => this.getAnswersWithQuestionIds(question))),
-    ).subscribe(() => setTimeout(() => this.questions.map((question: question) => this.createForm(question)), 100));
+    ).subscribe(() => setTimeout(() => this.questions.map((question: question) => this.createForm(question)), 1000));
   }
 
   getAnswersWithQuestionIds(question: question) {

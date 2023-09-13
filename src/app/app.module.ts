@@ -21,6 +21,8 @@ import { FooterComponent } from './layout/footer/footer/footer.component';
 import { HeaderComponent } from './layout/header/header/header.component';
 import { AboutusComponent } from './views/pages/Aboutus/aboutus/aboutus.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ChooseExamComponent } from './views/pages/choose-exam/choose-exam.component';
+import { ExamFilterComponent } from './views/pages/exam-filter/exam-filter.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     FooterComponent,
     HeaderComponent,
     AboutusComponent,
+    ChooseExamComponent,
+    ExamFilterComponent,
   ],
   imports: [
     BrowserModule,

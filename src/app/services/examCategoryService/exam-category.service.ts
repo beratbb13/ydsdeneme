@@ -48,5 +48,18 @@ export class ExamCategoryService {
     );
   }
 
-
+  getExamForCategories(category: string) {
+    const body = {
+      "Token": this.token,
+      "DataStoreId": Endpoints.examCategoryDataStoreid,
+      "Operation": "read",
+      "Data": `select * from exam_categories where Name = '${category}'`,
+      "Encrypted": '1951'
+    }
+    return this.http.post(Endpoints.dataops, body).pipe(
+      map((response: any) => {
+        return response.message[0];
+      })
+    );
+  }
 }

@@ -1,8 +1,20 @@
-<button class="btn btn-outline-primary" (click)="getForm()">Soruları Getir</button>
+<div class="row">
+    <div class="col-md-6">
+        <button class="btn btn-outline-primary" (click)="getForm()">Soruları Getir</button>
+    </div>
+    <div class="col-md-6 text-center d-flex justify-content-end">
+        <div class="card " style="width: 200px;padding: 14px;">
+        <p style="color:green">DOGRU:0</p>
+        <p style="color: red;">YANLIŞ:0</p>
+        <p style="color: grey;">BOŞ:0</p>
+    </div>
+    </div>
+</div>
+
 <div class="container mt-5">
     <h1>Sınav Soruları</h1>
     <div class="progress">
-        <div class="progress-bar" [style.width]="(soruIndex + 1) / soruSayisi * 100 + '%'">
+        <div style="color: black;" class="progress-bar" [style.width]="(soruIndex + 1) / soruSayisi * 100 + '%'">
             {{ (soruIndex + 1) }} / {{ soruSayisi }}
         </div>
     </div>
@@ -21,7 +33,7 @@
                 </div>
             </form>
         </div>
-        <div class="card-footer">
+        <div class="card-footer d-flex justify-content-evenly">
             <button class="btn btn-primary" (click)="previousQuestion()" [disabled]="soruIndex == 0">
                 Önceki Soru
             </button>
