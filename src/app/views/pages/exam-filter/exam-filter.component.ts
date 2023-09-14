@@ -13,28 +13,27 @@ import { SpinnerService } from 'src/app/services/spinnerService/spinner.service'
   templateUrl: './exam-filter.component.html',
   styleUrls: ['./exam-filter.component.css']
 })
-export class ExamFilterComponent implements OnInit{
+export class ExamFilterComponent implements OnInit {
 
-  buttontext!:string
+  buttontext!: string
   selectedCategory: string = ''; // Kullanıcının seçtiği kategori
   filteredExams: any[] = []; // Filtrelenmiş sınavlar
 
-  exams:any
+  exams: any
 
   constructor(private answerService: AnswerService,
     private examCategoryService: ExamCategoryService,
     private questionService: QuestionService,
     private spinnerService: SpinnerService,
-    private router: Router){
+    private router: Router) {
 
   }
 
   pageNumber: number = 1;
   questions: question[] = [];
   categories: any[] = [];
-
   ngOnInit(): void {
-  
+
     this.getCategories()
   }
 
@@ -61,6 +60,7 @@ export class ExamFilterComponent implements OnInit{
 
   filterByCategory() {
     // Seçilen kategoriye göre sınavları filtreleme
+
     if (this.selectedCategory) {
       this.filteredExams = this.categories.filter(
         (exam: any) => exam.Name === this.selectedCategory

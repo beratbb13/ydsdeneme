@@ -76,4 +76,20 @@ export class QuestionService {
       })
     );
   }
+
+  getRandomQuestionsByCategoryId(categoryId: string, limit: number) {
+    const body = {
+      "Token": this.token,
+      "DataStoreId": Endpoints.questionsDataStoreid,
+      "Operation": "read",
+      "Data": `Select cast(questionid as text), cast(examid as text), cast (ecategoryid as text), question from questions where ecategoryid = '${categoryId}' limit ${limit}`,
+      "Encrypted": "1951",
+    }
+    return this.http.post(Endpoints.dataops, body).pipe(
+      map((response: any) => {
+        console.log(response.message);
+        return response.message
+      })
+    );
+  }
 }

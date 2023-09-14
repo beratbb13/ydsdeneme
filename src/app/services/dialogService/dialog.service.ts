@@ -12,6 +12,7 @@ export class DialogService {
   constructor(private nbDialogService: NbDialogService) { }
 
   openModal(component: ComponentType<any>, hasBackdrop: boolean, hasScroll: boolean, customclassName?: string, data?: any) {
+
     const dialogRef = this.nbDialogService.open(component, {
       hasBackdrop: hasBackdrop,
       hasScroll: hasScroll,

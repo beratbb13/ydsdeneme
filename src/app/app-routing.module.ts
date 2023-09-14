@@ -10,6 +10,7 @@ import { ExamFormComponent } from './views/components/examForm/exam-form/exam-fo
 import { AboutusComponent } from './views/pages/Aboutus/aboutus/aboutus.component';
 import { ChooseExamComponent } from './views/pages/choose-exam/choose-exam.component';
 import { ExamFilterComponent } from './views/pages/exam-filter/exam-filter.component';
+import { DenemeExamComponent } from './views/pages/ydsdeneme/deneme-exam/deneme-exam.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -25,6 +26,7 @@ const routes: Routes = [
       { path: 'examform', component: ExamFormComponent },
       { path: 'profile', component: ProfileComponent },
       { path: 'filter', component: ExamFilterComponent },
+      { path: 'deneme', component: DenemeExamComponent },
 
     ]
   },

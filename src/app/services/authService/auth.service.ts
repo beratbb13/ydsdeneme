@@ -19,8 +19,8 @@ export class AuthService {
   }
 
   getToken() {
-    // return localStorage.getItem('token');
-    return "76146844813311712142"
+    return localStorage.getItem('token');
+    //return "76146844813311712142"
   }
 
   setToken(token: string) {
@@ -28,11 +28,11 @@ export class AuthService {
   }
 
   getUserUUID() {
-    return localStorage.getItem('userUUID');
+    return localStorage.getItem('currentUser');
   }
 
   setUserUUID(userid: string) {
-    localStorage.setItem('userUUID', userid);
+    localStorage.setItem('currentUser', userid);
   }
 
   getName() {

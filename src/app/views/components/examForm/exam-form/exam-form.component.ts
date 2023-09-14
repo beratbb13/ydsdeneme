@@ -9,6 +9,7 @@ import { question } from 'src/app/models/question';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DialogService } from 'src/app/services/dialogService/dialog.service';
 import { Router } from '@angular/router';
+import { ToastService } from 'src/app/services/toastService/toast.service';
 
 @Component({
   selector: 'app-exam-form',
@@ -23,6 +24,7 @@ export class ExamFormComponent {
     private spinnerService: SpinnerService,
     private formBuilder: FormBuilder,
     private dialogService: DialogService,
+    private toastService: ToastService,
     private router: Router) { }
 
   questions: question[] = [];
@@ -46,7 +48,10 @@ export class ExamFormComponent {
       tap(() => this.soruSayisi = this.questions.length),
       tap(() => this.spinnerService.hide()),
       tap(() => this.questions.map(question => this.getAnswersWithQuestionIds(question))),
-    ).subscribe(() => this.questions.map((question: question) => this.createFormControlObject(question)))
+      tap(() => this.questions.map((question: question) => this.createFormControlObject(question)))
+    ).subscribe(() => this.timer());
+
+
     //).subscribe(() => setTimeout(() => this.questions.map((question: question) => this.createFormControlObject(question)), 1000));
   }
 
@@ -55,29 +60,24 @@ export class ExamFormComponent {
       res => question.answers = res);
   }
 
+
   createFormControlObject(question: question) {
     const newFormControl = this.formBuilder.control("");
     this.questionForm.addControl(question.questionid, newFormControl);
   }
 
-  isShown: boolean = false;
-  getForm() {
-    this.isShown = true;
-    console.log(this.questionForm.controls)
-    this.timer();
-  }
-  testSuresi: number = 1800;
+
   dakika: number = 0;
   saniye: number = 0;
 
   timer() {
     setInterval(() => {
-      if (this.testSuresi > 0) {
-        this.testSuresi -= 1;
-        this.dakika = Math.floor(this.testSuresi / 60);
-        this.saniye = this.testSuresi % 60;
+      if (!(this.saniye < 60)) {
+        this.dakika = Math.floor(this.saniye / 60);
+        this.saniye = 0;
       }
-    }, 1000);
+      this.saniye += 1;
+    }, 1000)
   }
 
 
@@ -89,16 +89,39 @@ export class ExamFormComponent {
   previousQuestion() {
     if (!(this.soruIndex < 0))
       this.soruIndex -= 1;
+    this.dogruCevap = undefined;
   }
+
+  dogruCevap!: answer | undefined;
 
   nextQuestion() {
     if (this.soruSayisi > this.soruIndex + 1)
       this.soruIndex += 1;
+    this.dogruCevap = undefined;
+    /*
+        let currentid: string = this.questions[this.soruIndex - 1].questionid;
+        let controls = Object.values(this.questionForm.controls);
+        let answered = controls.find(e => currentid == e.value.questionid);
+    
+        if (answered?.value.istrue === 1) {
+          this.toastService.showToast('success', 'Soruyu Doğru Cevapladınız.');
+        } else if (answered?.value.istrue === 0) {
+          this.toastService.showToast('danger', 'Soruyu Yanlış Cevapladınız.');
+          this.dogruCevap = this.questions[this.soruIndex - 1].answers?.find(e => e.istrue == true);
+          this.toastService.showToast('warning', `Dogru cevap: ${this.dogruCevap?.answer}`);
+        } else if (answered?.value.istrue === undefined) {
+          this.toastService.showToast('warning', 'Soruyu Boş Bıraktınız.');
+        }*/
+
   }
 
-  reply() {
-    this.isShown = false;
-    this.testSuresi = 0;
+  trueIcon: string = 'fa-solid fa-check fa-beat';
+  trueIconColor: string = '#20511f';
+  falseIcon: string = 'fa-solid fa-x';
+  falseIconColor: string = '#ff0000';
+
+  reply() {/*
+    //this.testSuresi = 0;
     let dogru = 0;
     let yanlis = 0;
     let bos = 0;
@@ -117,5 +140,34 @@ export class ExamFormComponent {
     });
     //return `Dogru: ${dogru},  Yanlis: , ${yanlis},  Bos: , ${bos}`
     this.showResult('Sonuç', `Dogru: ${dogru}  Yanlis:  ${yanlis}  Bos:  ${bos}`);
+  */
+
+    let currentid: string = this.questions[this.soruIndex].questionid;
+    let controls = Object.values(this.questionForm.controls);
+    let answered = controls.find(e => currentid == e.value.questionid);
+
+    if (answered?.value.istrue === 1) {
+      this.toastService.showToast('success', 'Soruyu Doğru Cevapladınız.');
+      this.dogruCevap = this.questions[this.soruIndex].answers?.find(e => e.istrue == 1);
+      /*this.trueIcon = 'fa-solid fa-check fa-beat'
+      this.trueIconColor = '#20511f'*/
+
+    } else if (answered?.value.istrue === 0) {
+      this.toastService.showToast('danger', 'Soruyu Yanlış Cevapladınız.');
+      this.dogruCevap = this.questions[this.soruIndex].answers?.find(e => e.istrue == 1);
+      this.toastService.showToast('warning', `Dogru cevap: ${this.dogruCevap?.answer}`);
+      /*this.falseIcon = 'fa-solid fa-x'
+      this.falseIconColor = '#ff0000'*/
+
+    } else if (answered?.value.istrue === undefined) {
+      this.toastService.showToast('warning', 'Soruyu Boş Bıraktınız.');
+    }
+
   }
+
+  exit() {
+    this.router.navigate(['/homepage/filter']);
+  }
+
+
 }

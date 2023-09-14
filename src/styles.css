@@ -1,1 +1,46 @@
 /* You can add global styles to this file, and also import other style files */
+@media screen and (max-width: 991px) {
+
+    .left-side .nb-theme-default nb-sidebar.expanded,
+    .nb-theme-default nb-sidebar.collapsed {
+        display: none;
+        /* max-height: calc(100vh - 97px);
+        top: 97px;
+        bottom: 0;
+        overflow: auto;
+        right: -220px;
+        -webkit-transition: all 0.25s ease-out;
+        -o-transition: all 0.25s ease-out;
+        transition: all 0.25s ease-out; */
+    }
+
+    app-leftbar {
+        display: none;
+
+    }
+
+    .main-panel {
+        width: 100%;
+    }
+
+    .welcome-text {
+        display: none;
+    }
+
+    .head-nav {
+        justify-content: flex-end !important;
+    }
+
+    .right-modal {
+        width: 100% !important;
+    }
+}
+
+.right-modal {
+    height: 100%;
+    width: 100%;
+}
+
+.right-modal nb-dialog-container {
+    width: 100%;
+}

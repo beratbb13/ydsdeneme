@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/services/authService/auth.service';
 export class HeaderComponent {
 
   ngOnInit() {
-    
+
   }
 
   constructor(private router: Router,
@@ -22,8 +22,8 @@ export class HeaderComponent {
     this.router.navigate(['/']);
   }
 
-  navigate(path: string) {
+  /*navigate(path: string) {
     debugger;
     this.router.navigate([path])
-  }
+  }*/
 }

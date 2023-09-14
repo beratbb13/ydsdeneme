@@ -10,7 +10,7 @@ import { HttpClientModule } from '@angular/common/http'
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbThemeModule, NbAccordionModule, NbToastrModule, NbLayoutModule, NbButtonModule, NbDialogModule, NbSidebarModule, NbCardModule, NbContextMenuModule, NbMenuModule } from '@nebular/theme';
+import { NbThemeModule, NbAccordionModule, NbToastrModule, NbLayoutModule, NbButtonModule, NbDialogModule, NbSidebarModule, NbCardModule, NbContextMenuModule, NbMenuModule, NbDialogRef } from '@nebular/theme';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { ExamPageComponent } from './views/pages/exam-page/exam-page.component';
 import { ConfirmationModalComponent } from './views/components/confirmationModal/confirmation-modal/confirmation-modal.component';
@@ -23,6 +23,8 @@ import { AboutusComponent } from './views/pages/Aboutus/aboutus/aboutus.componen
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ChooseExamComponent } from './views/pages/choose-exam/choose-exam.component';
 import { ExamFilterComponent } from './views/pages/exam-filter/exam-filter.component';
+import { DenemeExamComponent } from './views/pages/ydsdeneme/deneme-exam/deneme-exam.component';
+import { ExamResultComponent } from './views/components/testResult/exam-result/exam-result.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,8 @@ import { ExamFilterComponent } from './views/pages/exam-filter/exam-filter.compo
     AboutusComponent,
     ChooseExamComponent,
     ExamFilterComponent,
+    DenemeExamComponent,
+    ExamResultComponent,
   ],
   imports: [
     BrowserModule,
