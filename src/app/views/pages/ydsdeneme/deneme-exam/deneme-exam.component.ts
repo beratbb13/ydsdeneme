@@ -18,7 +18,7 @@ import { NbDialogRef } from '@nebular/theme';
 @Component({
   selector: 'app-deneme-exam',
   templateUrl: './deneme-exam.component.html',
-  styleUrls: ['./deneme-exam.component.css']
+  styleUrls: ['./deneme-exam.component.scss']
 })
 export class DenemeExamComponent {
 
@@ -43,8 +43,31 @@ export class DenemeExamComponent {
 
   ngOnInit() {
     this.getQuestions();
-    this.questionForm = this.formBuilder.group({})
+    this.questionForm = this.formBuilder.group({});
+    
+    this.startCountdown();
   }
+
+  minutes: number = 80; 
+  seconds: number = 0; 
+
+  startCountdown() {
+    const countdownInterval = setInterval(() => {
+      if (this.seconds > 0) {
+        this.seconds--;
+      } else if (this.minutes > 0) {
+        this.minutes--;
+        this.seconds = 59;
+      } else {
+        clearInterval(countdownInterval); // zaman bitince durdur
+      }
+      
+    }, 1000);
+  }
+
+
+
+
 
   getQuestions() {
     this.spinnerService.show();

@@ -14,7 +14,7 @@ import { ToastService } from 'src/app/services/toastService/toast.service';
 @Component({
   selector: 'app-exam-form',
   templateUrl: './exam-form.component.html',
-  styleUrls: ['./exam-form.component.css']
+  styleUrls: ['./exam-form.component.scss']
 })
 export class ExamFormComponent {
 

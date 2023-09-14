@@ -1,9 +1,14 @@
 <div class="page" style="margin-top: -1rem;">
     <nav class="page__menu menu">
         <ul class="menu__list r-list">
-            <li class="menu__group">
+            <!-- <li class="menu__group">
                 <a href="#0" class="menu__link r-link text-underlined"
                     [routerLink]="['/homepage/aboutus']">Hakkımızda</a>
+            </li> -->
+            <li class="menu__group yds">
+                <!-- <a href="#0" class="menu__link r-link text-underlined" [routerLink]="['/homepage/aboutus']" >Hakkımızda</a> -->
+                <a href="#0"  class="menu__link r-link "  ><img src="../../../../assets/pictures/yds1.jpg" width="50px"  alt=""></a>
+                
             </li>
             <li class="menu__group">
                 <a href="#0" class="menu__link r-link text-underlined" [routerLink]="['/homepage/filter']">Eğitimler</a>
@@ -15,7 +20,8 @@
                 <a href="#0" class="menu__link r-link text-underlined" [routerLink]="['/homepage/profile']">Profil</a>
             </li>
             <li class="menu__group">
-                <a href="#0" class="menu__link r-link text-underlined" (click)="logOut()">Cıkış Yap</a>
+                <a href="#0" class="menu__link r-link text-underlined" (click)="logOut()">ÇIKIŞ </a>
+                <!-- <i style="font-size: 20px; margin-left: 20px;" class="fa-solid fa-right-from-bracket"></i> -->
             </li>
         </ul>
     </nav>

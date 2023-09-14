@@ -6,7 +6,7 @@
         </div>-->
         <div class="col-md-6 d-flex justify-content-end">
             <button>
-                <span><a [routerLink]="['/homepage/deneme']">SEVIYE TESPIT SINAVI</a></span>
+                <span><a  [routerLink]="['/homepage/deneme']">SEVIYE TESPIT SINAVI</a></span>
             </button>
         </div>
     </div>
@@ -26,7 +26,7 @@
         </div>-->
 
 
-    <div class="container">
+    <!-- <div class="container">
         <div class="row">
             <div class="col">
                 <ul class="list-group">
@@ -49,4 +49,32 @@
     </div>
 
 
-</div>
+</div> -->
+
+
+
+
+
+
+
+<!-- <div class="container"> -->
+    <ul class="responsive-table">
+        <li class="table-header">
+            KONULAR
+        </li>
+        <li class="table-row"
+        *ngFor="let exam of categories | paginate: {itemsPerPage: 15, currentPage: pageNumber}">
+        <div class="col">
+            {{exam.Name}}
+        </div>
+        <button class="btn btn-outline-success btn-sm" (click)="getExam(exam)">Sınava
+            Başla</button>
+    </li>
+    </ul>
+
+    <div class="row mt-3">
+        <div class="col d-flex justify-content-end ">
+            <pagination-controls (pageChange)="pageNumber = $event"></pagination-controls>
+        </div>
+    </div>
+  </div>
