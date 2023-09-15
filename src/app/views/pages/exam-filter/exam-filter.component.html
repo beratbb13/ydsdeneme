@@ -4,13 +4,45 @@
         <!--<div class="col-md-6">
             <h1 style="font-size: 40px;">YDS</h1>
         </div>-->
-        <div class="col-md-6 d-flex justify-content-end">
-            <button>
+        <div class="col d-flex justify-content-center" style="margin-top: 1rem;">
+            <!-- <button style="margin-top: 1rem;">
                 <span><a  [routerLink]="['/homepage/deneme']">SEVIYE TESPIT SINAVI</a></span>
-            </button>
+            </button> -->
+            <h6>Lütfen aşağıdan bir sınav seçip başlayın!</h6>
         </div>
     </div>
-    <!--<div class=" row">
+
+<!-- <div class="container"> -->
+    <ul class="responsive-table">
+        <li class="table-header d-flex">
+            KONULAR
+        </li>
+        <li class="table-row"
+        *ngFor="let exam of categories | paginate: {itemsPerPage: 15, currentPage: pageNumber}">
+        <div class="col-8 buttton">
+        <button class="btn" (click)="getExam(exam)">Sınava
+            Başla</button>
+        </div>
+        <div class="col">
+            {{exam.Name}}
+        </div>
+
+    </li>
+    </ul>
+
+    <div class="row mt-3">
+        <div class="col d-flex justify-content-end ">
+            <pagination-controls (pageChange)="pageNumber = $event"></pagination-controls>
+        </div>
+    </div>
+  </div>
+
+
+
+
+
+
+      <!--<div class=" row">
                     <div class="col-md-6 ">
                         <h5>Kategoriler:</h5>
 
@@ -50,31 +82,3 @@
 
 
 </div> -->
-
-
-
-
-
-
-
-<!-- <div class="container"> -->
-    <ul class="responsive-table">
-        <li class="table-header">
-            KONULAR
-        </li>
-        <li class="table-row"
-        *ngFor="let exam of categories | paginate: {itemsPerPage: 15, currentPage: pageNumber}">
-        <div class="col">
-            {{exam.Name}}
-        </div>
-        <button class="btn btn-outline-success btn-sm" (click)="getExam(exam)">Sınava
-            Başla</button>
-    </li>
-    </ul>
-
-    <div class="row mt-3">
-        <div class="col d-flex justify-content-end ">
-            <pagination-controls (pageChange)="pageNumber = $event"></pagination-controls>
-        </div>
-    </div>
-  </div>
