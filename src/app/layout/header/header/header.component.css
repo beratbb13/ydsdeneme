@@ -261,10 +261,9 @@ DEMO
   padding-right: 20px; /* Sağ taraftan öğeler arasına boşluk bırakmak için */
 }
 .nav-exit a {
-  color: #000;
   text-decoration: none;
   cursor: pointer;
-  color: rgb(0, 0, 0);
+  color: rgb(61, 62, 66);
   font-size: 17px;
   padding: 14px;
   border-radius: 3px;
@@ -273,8 +272,10 @@ DEMO
 }
 
 .nav-exit a:hover {
-  background: #1b9bff;
+  background: #ecedee;
   transition: .5s;
+  color: rgb(37, 79, 250);
+
 }
 
 
@@ -296,9 +297,9 @@ DEMO
 }
 
 .nav > .nav-links > a:hover {
-  /* background-color: rgba(0, 0, 0, 0.3); */
-  background: #1b9bff;
+  background: #ecedee;
   transition: .5s;
+  color: rgb(37, 79, 250);
 }
 
 .nav > #nav-check {
