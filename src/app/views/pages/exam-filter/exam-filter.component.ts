@@ -58,16 +58,16 @@ export class ExamFilterComponent implements OnInit {
     this.isOpen = !this.isOpen;
   }
 
-  filterByCategory() {
-    // Seçilen kategoriye göre sınavları filtreleme
+  // filterByCategory() {
+  //   // Seçilen kategoriye göre sınavları filtreleme
 
-    if (this.selectedCategory) {
-      this.filteredExams = this.categories.filter(
-        (exam: any) => exam.Name === this.selectedCategory
-      );
-    } else {
-      this.filteredExams = this.exams;
-    }
-  }
+  //   if (this.selectedCategory) {
+  //     this.filteredExams = this.categories.filter(
+  //       (exam: any) => exam.Name === this.selectedCategory
+  //     );
+  //   } else {
+  //     this.filteredExams = this.exams;
+  //   }
+  // }
 
 }
