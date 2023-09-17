@@ -9,13 +9,25 @@ import { AuthService } from 'src/app/services/authService/auth.service';
 })
 export class HeaderComponent {
 
-  ngOnInit() {
 
+  ngOnInit() {
+    this.getUserName()
   }
 
   constructor(private router: Router,
     private authService: AuthService) { }
 
+
+  loggedInUser: string=''
+
+    getUserName(){
+      const currentUser=localStorage.getItem('currentUser')
+      if (currentUser){
+        const user=JSON.parse(currentUser);
+        this.loggedInUser=user.user_name
+      }
+      console.log(this.loggedInUser)
+    }
 
   logOut() {
     this.authService.getLogout().subscribe(res => console.log(res));
