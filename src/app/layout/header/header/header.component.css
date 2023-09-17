@@ -350,8 +350,13 @@ DEMO
     height: 0px;
   }
   .nav > #nav-check:checked ~ .nav-links {
-    height: 200px;
+    height: 150px;
     overflow-y: auto;
+  }
+  .nav-exit{
+    /* position: absolute;
+    right: 25px; */
+    margin-left: 1em;
   }
 }
 

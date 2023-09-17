@@ -17,7 +17,162 @@ button:hover span {
     }
 }
 
+  .ccs{
 
+		background: #f8f4e5;
+		padding: 50px 100px;
+		border: 2px solid black;
+		box-shadow: 15px 15px 1px #ffa580, 15px 15px 1px 2px black;
+
+  }
+
+  .button{
+	width: 100px;
+	height: 75px;
+	margin-top: .700em;
+  }
+
+  input[type="radio"] {
+	appearance: none;
+	-webkit-appearance: none;
+	width: 20px;
+	height: 20px;
+	border: 1px solid #fff;
+	border-radius: 50%;
+	margin-right: 10px;
+	background-color: transparent;
+	position: relative;
+	top: 6px;
+}
+
+input[type="radio"]:checked::before {
+	content: "";
+	display: block;
+	width: 12px;
+	height: 12px;
+	background-color: #ca8489;
+	border-radius: 50%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	animation: appear 0.8s;
+}
+
+label {
+	font-size: 16px;
+	font-weight: bold;
+	color: #000000;
+	margin-top: .6em;
+}
+
+.form-check{
+	margin-left: 1em;
+}
+
+
+@keyframes appear {
+	0% {
+		transform: translate(-50%, -50%) scale(0);
+		background-color: #fff;
+	}
+	45% {
+		transform: translate(-50%, -50%) scale(1.6);
+		background-color: #64aedf;
+	}
+	50% {
+		transform: translate(-50%, -50%) scale(1.7);
+		background-color: #ad97b3;
+	}
+	55% {
+		transform: translate(-50%, -50%) scale(1.6);
+	}
+	100% {
+		transform: translate(-50%, -50%) scale(1);
+		background-color: #ca8489;
+	}
+}
+
+
+
+  #countdown {
+    position: relative;
+    margin: auto;
+    width: 100px; /* Genişlik 100px olarak ayarlandı */
+    height: 100px; /* Yükseklik 100px olarak ayarlandı */
+    text-align: center;
+  }
+  
+  #countdown-number {
+    display: inline-block;
+    line-height: 100px; /* Yükseklikle uyumlu hizalama */
+  }
+  
+  svg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100px; /* Genişlik 100px olarak ayarlandı */
+    height: 100px; /* Yükseklik 100px olarak ayarlandı */
+    transform: rotateY(-180deg) rotateZ(-90deg);
+  }
+  
+  svg circle {
+    stroke-dasharray: 251px; /* Yarıçap * 2 * pi */
+    stroke-dashoffset: 0px;
+    stroke-linecap: round;
+    stroke-width: 10px; /* Daha belirgin görünüm için kalınlığı artırın */
+    stroke: purple;
+    fill: none;
+    animation: countdown 4800s linear infinite forwards;
+  }
+  
+
+  
+  @keyframes countdown {
+    from {
+      stroke-dashoffset: 0px;
+    }
+    to {
+      stroke-dashoffset: 113px;
+    }
+  }
+
+
+
+
+
+  button {
+	display: block;
+	margin: 0 auto;
+	line-height: 28pt;
+	padding: 0 20px;
+	background: #ffa580;
+	letter-spacing: 2px;
+	transition: 0.2s all ease-in-out;
+	outline: none;
+	border: 1px solid black;
+	box-shadow: 3px 3px 1px 1px #95a4ff, 3px 3px 1px 2px black;
+  }
+  button:hover {
+	background: black;
+	color: white;
+	border: 1px solid black;
+  }
+
+
+
+
+
+
+  @media screen and (max-width:768px) {
+	button{
+		width: 75px;
+		height: 50px;
+		font-size: 8px;
+
+	}
+  }
 
 $d: 20em;
 $t: 20;
@@ -75,3 +230,7 @@ svg {
 		stroke-dasharray: var(--k) 1
 	}
 }
+
+
+
+
