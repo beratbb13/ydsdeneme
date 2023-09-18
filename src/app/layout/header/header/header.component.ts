@@ -18,24 +18,32 @@ export class HeaderComponent {
     private authService: AuthService) { }
 
 
-  loggedInUser: string=''
+    loggedInUser: string=''
 
-    getUserName(){
-      const currentUser=localStorage.getItem('currentUser')
-      if (currentUser){
-        const user=JSON.parse(currentUser);
-        this.loggedInUser=user.user_name
+    getUserName() {
+      const currentUser = localStorage.getItem('currentUser');
+      if (currentUser) {
+        try {
+          const user = JSON.parse(currentUser);
+          if (user.user_name) {
+            this.loggedInUser = user.user_name;
+          }
+        } catch (error) {
+          console.error('JSON parsing error:', error);
+        }
       }
-      console.log(this.loggedInUser)
+      console.log(this.loggedInUser);
     }
-
-  logOut() {
-    this.authService.getLogout().subscribe(res => console.log(res));
-    this.router.navigate(['/']);
-  }
-
-  /*navigate(path: string) {
-    debugger;
-    this.router.navigate([path])
-  }*/
+    
+  
+    logOut() {
+      this.authService.getLogout().subscribe(res => console.log(res));
+      localStorage.removeItem('currentUser')
+      this.router.navigate(['/']);
+    }
+  
+  
+    goLogin(){
+      this.router.navigate(['/login'])
+    }
 }

@@ -32,62 +32,57 @@
 
 
 <div class="nav">
-    <input type="checkbox" id="nav-check">
-    <div class="nav-header">
-      <div class="nav-title">
-        <img src="../../../../assets/pictures/yds1.jpg" width="50px"  alt="">
-      </div>
-    </div>
-    <div class="nav-btn">
-      <label for="nav-check">
-        <span></span>
-        <span></span>
-        <span></span>
-      </label>
-    </div>
-    
-    <div class="nav-links">
-        <a  [routerLink]="['/homepage/filter']">Eğitimler</a>
-        <a  [routerLink]="['/homepage/deneme']">YDS Deneme Sınavı</a>
-        <a [routerLink]="['/homepage/profile']">Profil</a>
-        <!-- <a  style="cursor: pointer;" (click)="logOut()">Çıkış</a> -->
-    </div>
-    <div class="nav-exit">
-      <span style="margin-right: 1rem;" *ngIf="loggedInUser">Hoşgeldiniz, {{loggedInUser}}</span>
-      <a *ngIf="loggedInUser" style="cursor: pointer;color: red;" (click)="logOut()">Çıkış</a>
+  <input type="checkbox" id="nav-check">
+  <div class="nav-header">
+    <div class="nav-title">
+      <img src="../../../../assets/pictures/yds1.jpg" width="50px"  alt="">
     </div>
   </div>
-  
-<!-- 
-  <nav>
-    <input type="checkbox" id="check">
-    <label for="check" class="checkbtn">
-      <i class="fas fa-bars"></i>
+  <div class="nav-btn">
+    <label for="nav-check">
+      <span></span>
+      <span></span>
+      <span></span>
     </label>
-    <label class="logo">DesignX</label>
-    <ul>
-      <li>
-        <a  [routerLink]="['/homepage/filter']">Eğitimler</a>
-      </li>
-      <li>
-        <a  [routerLink]="['/homepage/deneme']">YDS Deneme Sınavı</a>
-      </li>
-      <li>
-        <a  [routerLink]="['/homepage/profile']">Profil</a>
-      </li>
-      <li>
-        <a   (click)="logOut()">ÇIKIŞ </a>
-      </li>
-      <li>
-        <a href="#">Feedback</a>
-      </li>
-    </ul>
-  </nav>
-  <section></section> -->
+  </div>
+  
+  <div class="nav-links">
+      <a  [routerLink]="['/homepage/filter']">Eğitimler</a>
+      <a  [routerLink]="['/homepage/deneme']">YDS Deneme Sınavı</a>
+      <a [routerLink]="['/homepage/profile']">Profil</a>
+      <!-- <a  style="cursor: pointer;" (click)="logOut()">Çıkış</a> -->
+  </div>
+  <div class="nav-exit">
+    <span style="margin-right: 1rem;" *ngIf="loggedInUser">Hoşgeldiniz, {{loggedInUser}}</span>
+    <a *ngIf="loggedInUser" style="cursor: pointer;color: red;" (click)="logOut()">Çıkış</a>
+    <a *ngIf="!loggedInUser" style="cursor: pointer;color: green;" (click)="goLogin()">Giriş Yap</a>
 
+  </div>
+</div>
 
-
-
-
-
-
+<!-- 
+<nav>
+  <input type="checkbox" id="check">
+  <label for="check" class="checkbtn">
+    <i class="fas fa-bars"></i>
+  </label>
+  <label class="logo">DesignX</label>
+  <ul>
+    <li>
+      <a  [routerLink]="['/homepage/filter']">Eğitimler</a>
+    </li>
+    <li>
+      <a  [routerLink]="['/homepage/deneme']">YDS Deneme Sınavı</a>
+    </li>
+    <li>
+      <a  [routerLink]="['/homepage/profile']">Profil</a>
+    </li>
+    <li>
+      <a   (click)="logOut()">ÇIKIŞ </a>
+    </li>
+    <li>
+      <a href="#">Feedback</a>
+    </li>
+  </ul>
+</nav>
+<section></section> -->
