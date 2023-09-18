@@ -11,7 +11,7 @@ import { SpinnerService } from 'src/app/services/spinnerService/spinner.service'
 @Component({
   selector: 'app-exam-filter',
   templateUrl: './exam-filter.component.html',
-  styleUrls: ['./exam-filter.component.css']
+  styleUrls: ['./exam-filter.component.scss']
 })
 export class ExamFilterComponent implements OnInit {
 

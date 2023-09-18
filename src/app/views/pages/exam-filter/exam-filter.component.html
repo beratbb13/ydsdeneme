@@ -20,7 +20,7 @@
         <li class="table-row"
         *ngFor="let exam of categories | paginate: {itemsPerPage: 15, currentPage: pageNumber}">
         <div class="col-8 buttton">
-        <button class="btn" (click)="getExam(exam)">Sınava
+        <button class="close" (click)="getExam(exam)">Sınava
             Başla</button>
         </div>
         <div class="col examname">
