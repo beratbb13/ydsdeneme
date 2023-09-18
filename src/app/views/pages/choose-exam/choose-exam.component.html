@@ -1,8 +1,43 @@
+<div class="navbar d-flex justify-content-center">
+    <p class="text-center" >Sınavlara Hazırlık Merkezi: Gerçek Sorularla Pratik Yapın</p>
+</div>
 
+<div class="sub-bar">
+    <div class="row ">
+        <div class="col-1"></div>
+        <div class="col-5 desc">
+            <h1> Deneme Sınavı Platformu'na Hoş geldiniz!</h1>
+            <p>Sınavlara hazırlanırken size yardımcı olmak için buradayız. ÖSYM'nin yayınladığı gerçek sınav soruları ile pratik yaparak sınavlarınıza daha iyi hazırlanabilirsiniz. Ücretsiz deneme sınavlarımızı çözerek sınav tecrübenizi artırabilirsiniz.
 
+                Hemen başlamak için lütfen giriş yapın veya kaydolun. Eğer herhangi bir sorunuz veya geri bildiriminiz varsa, bizimle iletişime geçmekten çekinmeyin.
+                
+                Başarılar dileriz!</p>
+        </div>
+        <div class="col-2">
+
+        </div>
+        <div class="col-4" >
+            <img style="width: 300px;" src="../../../../assets/pictures/osym.png" alt="">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+
+        </div>
+        <div class="col-2 ok">
+            <button (click)="gologin()" type="button" class="btn btn--yellow">
+                <span  class="btn__txt">Giriş Yap</span>
+                <i class="btn__bg" aria-hidden="true"></i>
+                <i class="btn__bg" aria-hidden="true"></i>
+                <i class="btn__bg" aria-hidden="true"></i>
+                <i class="btn__bg" aria-hidden="true"></i>
+            </button>
+        </div>
+    </div>
+</div>
 
 <div class="container">
-    <h2 class="text-center">LÜTFEN SORULARINI ÇÖZMEK İSTEDİĞİNİZ SINAVA TIKLAYINIZ!</h2>
+    <h2 class="text-center">Çözmek İstediğim Sınav:</h2>
     <div class="center d-flex justify-content-space-around">
         <button class="button" (click)="goToPage('YDS')" data-button-text="YDS">YDS</button>
         <button class="button" disabled>YKS</button>
