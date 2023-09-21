@@ -1,6 +1,6 @@
 <div class="container">
 
-    <div class="row justify-content-end " style="height: 100px;">
+    <div class="row justify-content-end " style="height: 50px;">
         <!--<div class="col-md-6">
             <h1 style="font-size: 40px;">YDS</h1>
         </div>-->
@@ -8,7 +8,7 @@
             <!-- <button style="margin-top: 1rem;">
                 <span><a  [routerLink]="['/homepage/deneme']">SEVIYE TESPIT SINAVI</a></span>
             </button> -->
-            <h6>Lütfen aşağıdan bir sınav seçip başlayın!</h6>
+            <h6 style="color: rgb(120, 120, 120);">Lütfen aşağıdan bir sınav seçip başlayın!</h6>
         </div>
     </div>
 
@@ -20,11 +20,12 @@
         <li class="table-row"
         *ngFor="let exam of categories | paginate: {itemsPerPage: 15, currentPage: pageNumber}">
         <div class="col-8 buttton">
-        <button class="close" (click)="getExam(exam)">Sınava
-            Başla</button>
+            {{exam.Name}}
         </div>
         <div class="col examname">
-            {{exam.Name}}
+           
+            <button class="close" (click)="getExam(exam)">Çalışmaya
+                Başla</button>
         </div>
 
     </li>

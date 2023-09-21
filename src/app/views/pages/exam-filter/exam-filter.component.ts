@@ -39,15 +39,15 @@ export class ExamFilterComponent implements OnInit {
   }
 
   getCategories() {
-    this.spinnerService.show();
+    // this.spinnerService.show();
     this.examCategoryService.getCategories().pipe(
       tap(res => this.categories = res),
     ).subscribe(() => this.spinnerService.hide());
   }
 
-  getExam(category: string) {
+  getExam(category:string) {
     const navigationExtras: NavigationExtras = {
-      state: { category: category }
+      state: { category: category}
     };
 
     this.router.navigate(['/homepage/examform'], navigationExtras);

@@ -70,7 +70,7 @@ export class DenemeExamComponent {
 
 
   getQuestions() {
-    this.spinnerService.show();
+    // this.spinnerService.show();
     this.questionService.getQuestionsByCategoryId(this.category.ecategoryid).pipe(
       tap(res => this.questions = res),
       tap(() => this.soruSayisi = this.questions.length),

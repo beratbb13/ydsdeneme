@@ -1,14 +1,12 @@
 <div class="container">
     <div class="row " style="margin-top: 1rem;">
         <div id="countdown">
-            <div id="countdown-number">{{ minutes }}:{{ seconds < 10 ? '0' : ''}}{{ seconds }}</div>
-            <svg width="100" height="100">
-                <circle r="40" cx="50" cy="50"></circle>
-              </svg>
-              
+            <div class="timer" >   
+                <div id="countdown-number">{{ minutes }}:{{ seconds < 10 ? '0' : ''}}{{ seconds }}</div>
+            </div>
           </div>
         <div class="col d-flex justify-content-end bitir">
-            <button class="btn btn-outline-success " (click)="reply()">
+            <button class="finish_button" (click)="reply()">
                 Sınavı Bitir
             </button>
         </div>
@@ -37,15 +35,15 @@
                 </div>
             </form>
         </div>
-        <div class=" card-footer justify-content-center">
-            <div class="row justify-content-center">
-                <div class="col col-md-3 mt-3 d-flex justify-content-between">
-                    <button class="btn btn-outline-primary" (click)="previousQuestion()" [disabled]="soruIndex == 0">
+        <div class=" card-footer justify-content-end">
+            <div class="row justify-content-end">
+                <div class="col col-md-1 mt-1 d-flex justify-content-end">
+                    <button (click)="previousQuestion()" [disabled]="soruIndex == 0">
                         Önceki Soru
                     </button>
                 </div>
-                <div class="col col-md-3 mt-3 d-flex justify-content-between">
-                    <button class="btn btn-outline-primary" (click)="nextQuestion()"
+                <div class="col col-md-1 mt-1 d-flex justify-content-end">
+                    <button (click)="nextQuestion()"
                         [disabled]="soruSayisi == soruIndex + 1">
                         Sonraki Soru
                     </button>

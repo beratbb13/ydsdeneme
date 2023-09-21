@@ -1,4 +1,82 @@
 
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css');
+
+body{
+  text-align:center;
+  background-color:#e2e1e0;
+}
+.card {
+  position: relative;
+  display: inline-block;
+  border-radius: 10px;
+  padding:2rem;
+  width: 300px;
+  background: #fdfdfd;
+  margin: 1rem;
+  color:white;
+  transition: all 0.4s ease;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  flex: 1; /* Kartların eşit genişlikte olduğundan emin olmak için */
+  margin: 1rem;
+  max-width: 300px; /* Kartların maksimum genişliği */
+}
+
+.card:hover {
+  transform:scale(103%);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1), 0 10px 10px rgba(0,0,0);
+}
+.card i{
+  font-size:200%;
+}
+.card .card-title{
+  font-size:180%;
+}
+.card .card-text{
+  font-size:90%;
+}
+.card a {
+    text-decoration:none;
+    position: absolute; 
+    margin-bottom: 1.5rem;
+}
+.card .btn-holder{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 4rem;
+}
+
+
+.btn{
+    border: 1px solid transparent;
+    background-image: none;
+    display: inline-block;
+    cursor: pointer;
+    margin-bottom: 0;
+    font-weight: 600;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    line-height: 1.42857143;
+    touch-action: manipulation;
+    user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-touch-action: manipulation;
+}
+.btn.btn-outline-primary{
+    transition: .5s all ease;
+    border: solid 1px #000066;
+    padding: .8rem;
+    color:#000066!important;
+    background-color:white;
+    border-radius: 9999px;
+}
+.btn.btn-outline-primary:hover{
+    background-color: #000066;
+    color: white!important;
+}
 .navbar{
   background-color: rgb(5, 1, 61);
   position: fixed;
@@ -38,11 +116,11 @@ img{
 }
 
 .container {
+ 
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    /* height: 50vh  ; */
+    flex-wrap: wrap; /* Kartlar sırasıyla sığsın ve alt satıra geçsin */
+    justify-content: center; /* Kartları yatayda ortala */
+    align-items: center; /* Kartları dikeyde ortala */
     margin-top: 2rem;
     position: relative;
   }
@@ -51,6 +129,9 @@ img{
     display: flex;
     justify-content: space-around;
     align-items: center;
+  }
+  .text-center{
+    margin-top: 1%;
   }
   
   .center button {

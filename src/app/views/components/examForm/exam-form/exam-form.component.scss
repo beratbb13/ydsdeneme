@@ -1,236 +1,219 @@
-button:hover {
-    animation: scale 0.1s ease-in-out both;
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dosis:wght@300;400&family=Oswald:wght@200;400;500&family=Rubik+Iso&family=Teko:wght@300&display=swap');
+
+
+.close:hover,
+.close:focus {
+  box-shadow: 
+    inset -5em 0 0 0 var(--hover),
+    inset 5em 0 0 0 var(--hover);  
+    
 }
 
-button:hover span {
-    animation: scale 0.1s ease-in-out both;
-    animation-delay: 0.06s;
+$colors: (
+  // raise: #ffa260, 
+  close: #136BEE, 
+);
+
+
+@each $button, $color in $colors {
+  .#{$button} {
+    --color: #{$color};
+    --hover: #{#680FF4};
+  }
 }
 
-@keyframes scale {
-    0% {
-        transform: scale(1);
-    }
-
-    100% {
-        transform: scale(1.1);
-    }
-}
-
-  .ccs{
-
-		background: #f8f4e5;
-		padding: 50px 100px;
-		border: 2px solid black;
-		box-shadow: 15px 15px 1px #ffa580, 15px 15px 1px 2px black;
-
+button {  
+  color: var(--color);
+  transition: 0.25s ;
+  height: 40px;
+  
+  &:hover,
+  &:focus { 
+    border-color: var(--hover);
+    color: #680FF4;
+    // border-radius: 15px;
   }
 
-  .button{
-	width: 100px;
-	height: 75px;
-	margin-top: .700em;
+
+}
+button {
+  background-color: white;
+  border-radius: 7%;
+  border: 2px solid rgb(105, 14, 245);
+  color: rgb(105, 14, 245);
+}
+
+
+
+
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg) translate3d(0, 0, 0);
   }
-
-  input[type="radio"] {
-	appearance: none;
-	-webkit-appearance: none;
-	width: 20px;
-	height: 20px;
-	border: 1px solid #fff;
-	border-radius: 50%;
-	margin-right: 10px;
-	background-color: transparent;
-	position: relative;
-	top: 6px;
+  25% {
+    transform: rotate(3deg) translate3d(0, 0, 0);
+  }
+  50% {
+    transform: rotate(-3deg) translate3d(0, 0, 0);
+  }
+  75% {
+    transform: rotate(1deg) translate3d(0, 0, 0);
+  }
+  100% {
+    transform: rotate(0deg) translate3d(0, 0, 0);
+  }
 }
-
-input[type="radio"]:checked::before {
-	content: "";
-	display: block;
-	width: 12px;
-	height: 12px;
-	background-color: #ca8489;
-	border-radius: 50%;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	animation: appear 0.8s;
-}
-
-label {
-	font-size: 16px;
-	font-weight: bold;
-	color: #000000;
-	margin-top: .6em;
-}
-
-.form-check{
-	margin-left: 1em;
+@keyframes storm {
+  0% {
+    transform: translate3d(0, 0, 0) translateZ(0);
+  }
+  25% {
+    transform: translate3d(4px, 0, 0) translateZ(0);
+  }
+  50% {
+    transform: translate3d(-3px, 0, 0) translateZ(0);
+  }
+  75% {
+    transform: translate3d(2px, 0, 0) translateZ(0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) translateZ(0);
+  }
 }
 
 
-@keyframes appear {
-	0% {
-		transform: translate(-50%, -50%) scale(0);
-		background-color: #fff;
-	}
-	45% {
-		transform: translate(-50%, -50%) scale(1.6);
-		background-color: #64aedf;
-	}
-	50% {
-		transform: translate(-50%, -50%) scale(1.7);
-		background-color: #ad97b3;
-	}
-	55% {
-		transform: translate(-50%, -50%) scale(1.6);
-	}
-	100% {
-		transform: translate(-50%, -50%) scale(1);
-		background-color: #ca8489;
-	}
+.container {
+// max-width: 1000px;
+margin-left: auto;
+margin-right: auto;
+padding-left: 10px;
+padding-right: 10px;
+}
+
+h2 {
+font-size: 26px;
+margin: 20px 0;
+text-align: center;
+small {
+  font-size: 0.5em;
+}
+}
+
+.responsive-table {
+ul{
+}
+li {
+  margin-left: -2rem;
+  height: 70px ;
+  border-radius: 3px;
+  padding: 16px 30px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  transition: all 0.4s ease-in;
+}
+.table-header {
+  background: linear-gradient(90deg, rgba(105,14,245,1) 0%, rgba(60,79,235,1) 71%, rgba(19,108,238,1) 98%);
+  font-size: 30px;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-family: 'Bebas Neue', sans-serif;
+  position: sticky; /* Header'ı sabit yap */
+  top: 0; /* Sayfanın üstüne sabit yap */
+  z-index: 1; /* Diğer içeriklerin önünde görünmesini sağla */
+  height: 50px;
+}
+.table-row {
+  background-color: #ffffff;
+  box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.1);
+}
+.col-1 {
+  flex-basis: 10%;
+}
+.col-2 {
+  flex-basis: 40%;
+}
+.col-3 {
+  flex-basis: 25%;
+}
+.col-4 {
+  flex-basis: 25%;
+}
+
+}
+
+li:hover:not(:first-child){
+  transition: all 0.4s ease-in;
+  opacity: 0.5;
 }
 
 
 
+.contain{
+height: 500px;
+/* border:1px solid black; */
+box-shadow: 2px 2px 2px 2px;
+border-radius: 20px;
+background-color: #fbfdff
+}
+
+
+
+@media screen and (max-width:768px){
+  button{
+    /* width: 100px; */
+    font-size: 10px;
+    width: 75px;
+    height: 50px;
+  }
+  button span {
+    font-size: 8px;
+  }
+  .examname{
+    font-size: 14px;
+  }
+}
+.form{
+    background: #fff;
+    box-shadow: 0 30px 60px 0 rgba(90, 116, 148, 0.4);
+    border-radius: 5px;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 14px;
+    left: 0;
+    right: 0;
+    top: 20%;
+    position: absolute;
+    border-top: 5px solid rgba(105,14,245,1);
+  /*   z-index: 1; */
+    animation: bounce 1.5s infinite;
+  }
+  // countdowner
   #countdown {
     position: relative;
     margin: auto;
-    width: 100px; /* Genişlik 100px olarak ayarlandı */
-    height: 100px; /* Yükseklik 100px olarak ayarlandı */
+    width: 45px; /* Genişlik 100px olarak ayarlandı */
+    height: 46px; /* Yükseklik 100px olarak ayarlandı */
     text-align: center;
   }
-  
+  .timer{
+    border: 3px solid rgba(105,14,245,1);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+  }
+  .finish_button{
+    background-color: white;
+    border-radius: 7%;
+    border:2px solid rgba(105,14,245,1);
+    color: rgba(105,14,245,1);
+  }
   #countdown-number {
     display: inline-block;
-    line-height: 100px; /* Yükseklikle uyumlu hizalama */
+    line-height: 45px; /* Yükseklikle uyumlu hizalama */
   }
   
-  svg {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100px; /* Genişlik 100px olarak ayarlandı */
-    height: 100px; /* Yükseklik 100px olarak ayarlandı */
-    transform: rotateY(-180deg) rotateZ(-90deg);
-  }
-  
-  svg circle {
-    stroke-dasharray: 251px; /* Yarıçap * 2 * pi */
-    stroke-dashoffset: 0px;
-    stroke-linecap: round;
-    stroke-width: 10px; /* Daha belirgin görünüm için kalınlığı artırın */
-    stroke: purple;
-    fill: none;
-    animation: countdown 4800s linear infinite forwards;
-  }
-  
-
-  
-  @keyframes countdown {
-    from {
-      stroke-dashoffset: 0px;
-    }
-    to {
-      stroke-dashoffset: 113px;
-    }
-  }
-
-
-
-
-
-  button {
-	display: block;
-	margin: 0 auto;
-	line-height: 28pt;
-	padding: 0 20px;
-	background: #ffa580;
-	letter-spacing: 2px;
-	transition: 0.2s all ease-in-out;
-	outline: none;
-	border: 1px solid black;
-	box-shadow: 3px 3px 1px 1px #95a4ff, 3px 3px 1px 2px black;
-  }
-  button:hover {
-	background: black;
-	color: white;
-	border: 1px solid black;
-  }
-
-
-
-
-
-
-  @media screen and (max-width:768px) {
-	button{
-		width: 75px;
-		height: 50px;
-		font-size: 8px;
-
-	}
-  }
-
-$d: 20em;
-$t: 20;
-$c: #8a9b0f #940a3d;
-
-@property --t {
-	syntax: '<number>';
-	initial-value: #{$t};
-	inherits: true
-}
-
-/* won't be needed once Chrome supports round() */
-@property --s {
-	syntax: '<integer>';
-	initial-value: 0;
-	inherits: true
-}
-
-.countdown {
-	/* when Chrome supports round(), this can be simplified */
-	/* more on this rounding trick
-	 * https://css-tricks.com/using-absolute-value-sign-rounding-and-modulo-in-css-today/ */
-	--s: calc(var(--t)/1);
-	display: grid;
-	margin: 1em auto;
-	width: $d; height: $d;
-	animation: t $t*1s linear infinite;
-	
-	&::after {
-		grid-column: 1;
-		grid-row: 1;
-		place-self: center;
-		font: #{.25*$d}/ 2 ubuntu mono, consolas, monaco, monospace;
-		counter-reset: s var(--s);
-		content: '0:' counter(s, decimal-leading-zero)
-	}
-}
-
-@keyframes t { to { --t: 0 } }
-
-svg {
-	grid-column: 1;
-	grid-row: 1
-}
-
-[r] {
-	fill: none;
-	stroke: silver;
-	
-	+ [r] {
-		--k: calc(var(--t)/#{$t});
-		transform: rotate(-90deg);
-		stroke-linecap: round;
-		stroke: color-mix(in hsl shorter hue, #{nth($c, 1)} calc(var(--k)*100%), #{nth($c, 2)});
-		stroke-dasharray: var(--k) 1
-	}
-}
-
-
-
-

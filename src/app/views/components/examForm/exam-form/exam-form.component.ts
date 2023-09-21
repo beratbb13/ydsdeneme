@@ -34,15 +34,18 @@ export class ExamFormComponent {
   soruIndex: number = 0;
   soruSayisi: number = 0;
   secilenCevap: string | null = null;
+  selectedCategoryName:any
 
   ngOnInit() {
     this.category = history.state.category;
+    this.selectedCategoryName = this.category.Name;
+    console.log("seçili kategori",this.selectedCategoryName);
     this.getQuestions();
     this.questionForm = this.formBuilder.group({})
   }
 
   getQuestions() {
-    this.spinnerService.show();
+    // this.spinnerService.show();
     this.questionService.getQuestionsByCategoryId(this.category.ecategoryid).pipe(
       tap(res => this.questions = res),
       tap(() => this.soruSayisi = this.questions.length),

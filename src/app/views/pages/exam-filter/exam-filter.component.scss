@@ -11,26 +11,27 @@
 
 $colors: (
   // raise: #ffa260, 
-  close: #1d95f1, 
+  close: #136BEE, 
 );
 
 
 @each $button, $color in $colors {
   .#{$button} {
     --color: #{$color};
-    --hover: #{rgb(1, 242, 255)};
+    --hover: #{#680FF4};
   }
 }
 
 button {  
   color: var(--color);
   transition: 0.25s ;
+  height: 40px;
   
   &:hover,
   &:focus { 
     border-color: var(--hover);
-    color: #030303;
-    border-radius: 15px;
+    color: white;
+    // border-radius: 15px;
   }
 
 
@@ -40,8 +41,8 @@ button {
   border: 2px solid;
   font: inherit;
   line-height: 1;
-  margin: 0.5em;
-  padding: 1em 2em;
+  // margin: 0.5em;
+  // padding: 1em 2em;
 }
 
 
@@ -85,7 +86,7 @@ button {
 
 
 .container {
-max-width: 1000px;
+// max-width: 1000px;
 margin-left: auto;
 margin-right: auto;
 padding-left: 10px;
@@ -106,23 +107,25 @@ ul{
 }
 li {
   margin-left: -2rem;
-
+  height: 70px ;
   border-radius: 3px;
-  padding: 25px 30px;
+  padding: 16px 30px;
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
   transition: all 0.4s ease-in;
 }
 .table-header {
-  background-color: #95A5A6;
+  background: linear-gradient(90deg, rgba(105,14,245,1) 0%, rgba(60,79,235,1) 71%, rgba(19,108,238,1) 98%);
   font-size: 30px;
+  color: white;
   text-transform: uppercase;
   letter-spacing: 0.03em;
   font-family: 'Bebas Neue', sans-serif;
   position: sticky; /* Header'ı sabit yap */
   top: 0; /* Sayfanın üstüne sabit yap */
   z-index: 1; /* Diğer içeriklerin önünde görünmesini sağla */
+  height: 50px;
 }
 .table-row {
   background-color: #ffffff;

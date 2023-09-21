@@ -43,6 +43,10 @@ export class HeaderComponent {
     }
   
   
+    goMain(){
+      this.router.navigate(['/'])
+    }
+    
     goLogin(){
       this.router.navigate(['/login'])
     }

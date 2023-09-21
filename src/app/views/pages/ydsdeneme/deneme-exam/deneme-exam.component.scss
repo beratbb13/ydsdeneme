@@ -1,3 +1,9 @@
+button{
+  background-color: white;
+  border-radius: 7%;
+  border: 2px solid rgb(105, 14, 245);
+  color: rgb(105, 14, 245);
+}
 button:hover {
     animation: buttonScale 0.1s ease-in-out both;
 }
@@ -95,14 +101,15 @@ a {
     background: #fff;
     box-shadow: 0 30px 60px 0 rgba(90, 116, 148, 0.4);
     border-radius: 5px;
-    max-width: 80%;
+    max-width: 90%;
     margin-left: auto;
     margin-right: auto;
     padding: 14px;
     left: 0;
     right: 0;
+    top: 20%;
     position: absolute;
-    border-top: 5px solid #0e3721;
+    border-top: 5px solid rgba(105,14,245,1);
   /*   z-index: 1; */
     animation: bounce 1.5s infinite;
   }
@@ -116,39 +123,50 @@ a {
   }
 
 
-
   // countdowner
   #countdown {
     position: relative;
     margin: auto;
-    width: 100px; /* Genişlik 100px olarak ayarlandı */
-    height: 100px; /* Yükseklik 100px olarak ayarlandı */
+    width: 45px; /* Genişlik 100px olarak ayarlandı */
+    height: 46px; /* Yükseklik 100px olarak ayarlandı */
     text-align: center;
   }
-  
+  .timer{
+    border: 3px solid rgba(105,14,245,1);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+  }
+  .finish_button{
+    background-color: white;
+    border-radius: 7%;
+    border:2px solid rgba(105,14,245,1);
+    color: rgba(105,14,245,1);
+  }
   #countdown-number {
     display: inline-block;
-    line-height: 100px; /* Yükseklikle uyumlu hizalama */
+    line-height: 45px; /* Yükseklikle uyumlu hizalama */
   }
   
-  svg {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100px; /* Genişlik 100px olarak ayarlandı */
-    height: 100px; /* Yükseklik 100px olarak ayarlandı */
-    transform: rotateY(-180deg) rotateZ(-90deg);
-  }
+  // svg {
+  //   position: absolute;
+  //   top: 0;
+  //   right: 0;
+  //   // width: 100px; /* Genişlik 100px olarak ayarlandı */
+  //   // height: 100px; /* Yükseklik 100px olarak ayarlandı */
+  //   // transform: rotateY(-180deg) rotateZ(-90deg);
+  // }
   
-  svg circle {
-    stroke-dasharray: 251px; /* Yarıçap * 2 * pi */
-    stroke-dashoffset: 0px;
-    stroke-linecap: round;
-    stroke-width: 10px; /* Daha belirgin görünüm için kalınlığı artırın */
-    stroke: purple;
-    fill: none;
-    animation: countdown 4800s linear infinite forwards;
-  }
+  // svg circle {
+  //   stroke-dasharray: 251px; /* Yarıçap * 2 * pi */
+  //   stroke-dashoffset: 0px;
+  //   stroke-linecap: round;
+  //   stroke-width: 5px; /* Daha belirgin görünüm için kalınlığı artırın */
+  //   stroke: purple;
+  //   fill: none;
+  //   animation: countdown 4800s linear infinite forwards;
+  // }
   
 
   
