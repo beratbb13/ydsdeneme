@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, map } from 'rxjs';
 import { Endpoints } from 'src/app/constants/Endpoints';
+import { LoginRequest, LoginResponse, User } from 'src/app/models/login';
 
 @Injectable({
   providedIn: 'root',
@@ -57,6 +58,21 @@ export class AuthService {
     } else return [];
   }
 
+  login(loginRequest: LoginRequest) {
+    return this.http.post(Endpoints.login, loginRequest).pipe(
+      map((response: any) => {
+        return response;
+      })
+    );
+  }
+
+  register(user:User){
+    return this.http.post(Endpoints.register, user).pipe(
+      map((response: any) => {
+        return response;
+      })
+    );
+  }
 
   getLogout() {
     let param = {
