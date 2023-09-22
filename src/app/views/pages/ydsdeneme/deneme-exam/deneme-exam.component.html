@@ -1,12 +1,12 @@
 <div class="container">
-    <div class="row  d-flex justify-content-end">
-        <div class="col d-flex justify-content-start">
-            <button class="btn btn-success" disabled="true">
-                Süre: {{dakika}}:{{saniye}}
-            </button>
-        </div>
-        <div class="col d-flex justify-content-end">
-            <button class="btn btn-outline-success" (click)="reply()">
+    <div class="row " style="margin-top: 1rem;">
+        <div id="countdown">
+            <div class="timer" >   
+                <div id="countdown-number">{{ minutes }}:{{ seconds < 10 ? '0' : ''}}{{ seconds }}</div>
+            </div>
+          </div>
+        <div class="col d-flex justify-content-end bitir">
+            <button class="finish_button" (click)="reply()">
                 Sınavı Bitir
             </button>
         </div>
@@ -17,10 +17,11 @@
     </div>
 </div>
 <div class="container mt-5 p-2">
-    <div class="card mt-3">
-        <div class="card-header">
+    <div class="form mt-3">
+        <div style="font-weight: 900;">
             {{ soruIndex + 1 }}. Question
         </div>
+        <hr>
         <div class="card-body mb-2" *ngIf="questions[soruIndex]">
             <p class="card-text border-bottom border-primary rounded p-3">
                 {{questions[soruIndex].question}}
@@ -34,15 +35,15 @@
                 </div>
             </form>
         </div>
-        <div class=" card-footer justify-content-center">
-            <div class="row justify-content-center">
-                <div class="col col-md-3 mt-3 d-flex justify-content-between">
-                    <button class="btn btn-outline-primary" (click)="previousQuestion()" [disabled]="soruIndex == 0">
+        <div class=" card-footer justify-content-end">
+            <div class="row justify-content-end">
+                <div class="col col-md-1 mt-1 d-flex justify-content-end">
+                    <button (click)="previousQuestion()" [disabled]="soruIndex == 0">
                         Önceki Soru
                     </button>
                 </div>
-                <div class="col col-md-3 mt-3 d-flex justify-content-between">
-                    <button class="btn btn-outline-primary" (click)="nextQuestion()"
+                <div class="col col-md-1 mt-1 d-flex justify-content-end">
+                    <button (click)="nextQuestion()"
                         [disabled]="soruSayisi == soruIndex + 1">
                         Sonraki Soru
                     </button>
@@ -114,3 +115,27 @@
             
 
 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  

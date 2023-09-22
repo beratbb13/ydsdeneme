@@ -11,7 +11,7 @@ import { SpinnerService } from 'src/app/services/spinnerService/spinner.service'
 @Component({
   selector: 'app-exam-filter',
   templateUrl: './exam-filter.component.html',
-  styleUrls: ['./exam-filter.component.css']
+  styleUrls: ['./exam-filter.component.scss']
 })
 export class ExamFilterComponent implements OnInit {
 
@@ -20,6 +20,7 @@ export class ExamFilterComponent implements OnInit {
   filteredExams: any[] = []; // Filtrelenmiş sınavlar
 
   exams: any
+
 
   constructor(private answerService: AnswerService,
     private examCategoryService: ExamCategoryService,
@@ -38,15 +39,15 @@ export class ExamFilterComponent implements OnInit {
   }
 
   getCategories() {
-    this.spinnerService.show();
+    // this.spinnerService.show();
     this.examCategoryService.getCategories().pipe(
       tap(res => this.categories = res),
     ).subscribe(() => this.spinnerService.hide());
   }
 
-  getExam(category: string) {
+  getExam(category:string) {
     const navigationExtras: NavigationExtras = {
-      state: { category: category }
+      state: { category: category}
     };
 
     this.router.navigate(['/homepage/examform'], navigationExtras);
@@ -58,16 +59,16 @@ export class ExamFilterComponent implements OnInit {
     this.isOpen = !this.isOpen;
   }
 
-  filterByCategory() {
-    // Seçilen kategoriye göre sınavları filtreleme
+  // filterByCategory() {
+  //   // Seçilen kategoriye göre sınavları filtreleme
 
-    if (this.selectedCategory) {
-      this.filteredExams = this.categories.filter(
-        (exam: any) => exam.Name === this.selectedCategory
-      );
-    } else {
-      this.filteredExams = this.exams;
-    }
-  }
+  //   if (this.selectedCategory) {
+  //     this.filteredExams = this.categories.filter(
+  //       (exam: any) => exam.Name === this.selectedCategory
+  //     );
+  //   } else {
+  //     this.filteredExams = this.exams;
+  //   }
+  // }
 
 }

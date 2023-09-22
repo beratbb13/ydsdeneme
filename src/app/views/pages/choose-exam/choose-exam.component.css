@@ -1,10 +1,159 @@
 
-.container {
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css');
+
+body{
+  text-align:center;
+  background-color:#e2e1e0;
+}
+.card {
+  position: relative;
+  display: inline-block;
+  border-radius: 10px;
+  padding:2rem;
+  width: 300px;
+  background: #fdfdfd;
+  margin: 1rem;
+  color:white;
+  transition: all 0.4s ease;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  flex: 1; /* Kartların eşit genişlikte olduğundan emin olmak için */
+  margin: 1rem;
+  max-width: 300px; /* Kartların maksimum genişliği */
+  display: flex;
+  flex-direction: row;
+}
+
+.card:hover {
+  transform:scale(103%);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1), 0 10px 10px rgba(0,0,0);
+}
+.card i{
+  font-size:200%;
+}
+.card .card-title{
+  font-size:180%;
+}
+.card .card-text{
+  font-size:90%;
+}
+.card a {
+    text-decoration:none;
+    position: absolute; 
+    margin-bottom: 1.5rem;
+}
+.card .btn-holder{
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 93vh;
+    margin-top: 4rem;
+}
+.avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 30px;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+}
+
+.avatar.Y {
+  background-color: #ff5733; /* Kırmızı */
+}
+.avatar.YK {
+  background-color: #9a2c9a; /* Kırmızı */
+}
+
+
+.avatar.L {
+  background-color: #33ff57; /* Yeşil */
+}
+
+.avatar.A {
+  background-color: #3366ff; /* Mavi */
+}
+
+.avatar.K {
+  background-color: #ffcc33; /* Sarı */
+}
+
+
+.btn{
+    border: 1px solid transparent;
+    background-image: none;
+    display: inline-block;
+    cursor: pointer;
+    margin-bottom: 0;
+    font-weight: 600;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    line-height: 1.42857143;
+    touch-action: manipulation;
+    user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-touch-action: manipulation;
+}
+.btn.btn-outline-primary{
+    transition: .5s all ease;
+    border: solid 1px #000066;
+    padding: .8rem;
+    color:#000066!important;
+    background-color:white;
+    border-radius: 9999px;
+}
+.btn.btn-outline-primary:hover{
+    background-color: #000066;
+    color: white!important;
+}
+.navbar{
+  background-color: rgb(5, 1, 61);
+  position: fixed;
+  width: 100%;
+}
+.navbar p{
+  font-weight: 900;
+  color: white;
+  padding: .50rem .3125rem;
+  margin: 0;
+}
+
+.sub-bar{
+  background: linear-gradient(90deg, rgba(105,14,245,1) 0%, rgba(60,79,235,1) 71%, rgba(19,108,238,1) 98%);
+  height: 600px;
+ }
+
+.desc{
+  font-size: 2.5rem;
+  line-height: 3.25rem;
+  font-weight: 800;
+  margin-top: 6rem;
+  /* margin-left: 2rem; */
+}
+.desc p, .desc h1{
+  color: white;
+  font-family:Arial, Helvetica, sans-serif
+}
+.desc p{
+  font-size: 18px;
+  line-height: 2rem;
+  word-wrap: break-word;
+}
+
+img{
+  margin-top: 7rem;
+}
+
+.container {
+ 
+    display: flex;
+    flex-wrap: wrap; /* Kartlar sırasıyla sığsın ve alt satıra geçsin */
+    justify-content: center; /* Kartları yatayda ortala */
+    align-items: center; /* Kartları dikeyde ortala */
+    margin-top: 2rem;
     position: relative;
   }
 
@@ -13,16 +162,11 @@
     justify-content: space-around;
     align-items: center;
   }
-  
-  h2 {
-    position: absolute;
-    top: 50px; /* İstediğiniz boşluk miktarına göre ayarlayın */
-    left: 0;
-    right: 0;
-    margin: 0;
-    padding: 0;
+  .text-center{
+    margin-top: 1%;
   }
-  button {
+  
+  .center button {
     margin: 5px;
     padding: 14px;
     width: 150px;
@@ -35,13 +179,125 @@
     border: 1px solid black;
     box-shadow: 3px 3px 1px 1px #95a4ff, 3px 3px 1px 2px black;
   }
-  button:hover {
+  .center button:hover {
     background: black;
     color: white;
     border: 1px solid black;
   }
 
-  button:active{
+  .center button:active{
     box-shadow: 0px 0px 0px 0px;
   }
 
+  @media (max-width: 900px) {
+    .center {
+      flex-wrap: wrap; 
+      justify-content: space-between; 
+      margin-top: 2rem;
+    }
+  
+    .center button {
+      width: calc(50% - 10px); /* Butonların yarısını genişlet ve boşlukları hesapla */    
+    }
+    h2{
+      font-size: 24px;
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+  .btn {
+    background: hsl(var(--hue), 98%, 80%);
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    color: black;
+    font: 600 1.05rem/1 "Nunito", sans-serif;
+    letter-spacing: 0.05em;
+    overflow: hidden;
+    padding: 1.15em 3.5em;
+    min-height: 3.3em;
+    position: relative;
+    /* text-transform: lowercase; */
+    margin-top: 1rem;
+  }
+  .btn--yellow {
+    --hue: 46;
+  }
+  .btn--green {
+    --hue: 163;
+  }
+  .btn--purple {
+    --hue: 244;
+  }
+  .btn--red {
+    --hue: 0;
+  }
+  .btn--blue {
+    --hue: 210;
+  }
+  .btn:active, .btn:focus {
+    outline: 3px solid hsl(calc(var(--hue) + 90), 98%, 80%);
+  }
+  .btn + .btn {
+    margin-top: 2.5em;
+  }
+  .btn__txt {
+    position: relative;
+    z-index: 2;
+  }
+  .btn__bg {
+    background: hsl(var(--hueBg), 98%, 80%);
+    border-radius: 50%;
+    display: block;
+    height: 0;
+    left: 50%;
+    margin: -50% 0 0 -50%;
+    padding-top: 100%;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    transform: scale(0);
+    transform-origin: 50% 50%;
+    transition: transform 0.175s cubic-bezier(0.5, 1, 0.89, 1);
+    z-index: 1;
+  }
+  .btn__bg:nth-of-type(1) {
+    --hueBg: calc(var(--hue) - 90);
+    transition-delay: 0.1725s;
+  }
+  .btn__bg:nth-of-type(2) {
+    --hueBg: calc(var(--hue) - 180);
+    transition-delay: 0.115s;
+  }
+  .btn__bg:nth-of-type(3) {
+    --hueBg: calc(var(--hue) - 270);
+    transition-delay: 0.0575s;
+  }
+  .btn__bg:nth-of-type(4) {
+    --hueBg: calc(var(--hue) - 360);
+    transition-delay: 0s;
+  }
+  .btn:hover .btn__bg, .btn:focus .btn__bg, .btn:active .btn__bg {
+    transform: scale(1.5);
+    transition: transform 0.35s cubic-bezier(0.11, 0, 0.5, 0);
+  }
+  .btn:hover .btn__bg:nth-of-type(1), .btn:focus .btn__bg:nth-of-type(1), .btn:active .btn__bg:nth-of-type(1) {
+    transition-delay: 0.115s;
+  }
+  .btn:hover .btn__bg:nth-of-type(2), .btn:focus .btn__bg:nth-of-type(2), .btn:active .btn__bg:nth-of-type(2) {
+    transition-delay: 0.23s;
+  }
+  .btn:hover .btn__bg:nth-of-type(3), .btn:focus .btn__bg:nth-of-type(3), .btn:active .btn__bg:nth-of-type(3) {
+    transition-delay: 0.345s;
+  }
+  .btn:hover .btn__bg:nth-of-type(4), .btn:focus .btn__bg:nth-of-type(4), .btn:active .btn__bg:nth-of-type(4) {
+    transition-delay: 0.46s;
+  }

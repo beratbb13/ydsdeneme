@@ -14,7 +14,7 @@ import { ToastService } from 'src/app/services/toastService/toast.service';
 @Component({
   selector: 'app-exam-form',
   templateUrl: './exam-form.component.html',
-  styleUrls: ['./exam-form.component.css']
+  styleUrls: ['./exam-form.component.scss']
 })
 export class ExamFormComponent {
 
@@ -34,15 +34,18 @@ export class ExamFormComponent {
   soruIndex: number = 0;
   soruSayisi: number = 0;
   secilenCevap: string | null = null;
+  selectedCategoryName:any
 
   ngOnInit() {
     this.category = history.state.category;
+    this.selectedCategoryName = this.category.Name;
+    console.log("seçili kategori",this.selectedCategoryName);
     this.getQuestions();
     this.questionForm = this.formBuilder.group({})
   }
 
   getQuestions() {
-    this.spinnerService.show();
+    // this.spinnerService.show();
     this.questionService.getQuestionsByCategoryId(this.category.ecategoryid).pipe(
       tap(res => this.questions = res),
       tap(() => this.soruSayisi = this.questions.length),
@@ -165,9 +168,36 @@ export class ExamFormComponent {
 
   }
 
-  exit() {
-    this.router.navigate(['/homepage/filter']);
+  sinaviBitir() {
+    // Sınavı bitirme işlemleri
+    let dogruSayisi = 0;
+    let yanlisSayisi = 0;
+    let bosSayisi = 0;
+  
+    // Tüm soruları dönerek cevapları kontrol et
+    this.questions.forEach((soru, index) => {
+      const soruForm = this.questionForm.get(index.toString()); // Soru formunu al
+  
+      if (soruForm) {
+        const cevap = soruForm.value; // Kullanıcının verdiği cevap
+        const dogruCevap = soru.answers?.find(answer => answer.istrue === 1); // Doğru cevap
+  
+        if (cevap === undefined) {
+          bosSayisi++;
+        } else if (cevap === dogruCevap?.answer) {
+          dogruSayisi++;
+        } else {
+          yanlisSayisi++;
+        }
+      }
+    });
+  
+    // Sonuçları göster
+    this.toastService.showToast('success', `Doğru Sayısı: ${dogruSayisi}`);
+    this.toastService.showToast('danger', `Yanlış Sayısı: ${yanlisSayisi}`);
+    this.toastService.showToast('warning', `Boş Sayısı: ${bosSayisi}`);
   }
+  
 
 
 }

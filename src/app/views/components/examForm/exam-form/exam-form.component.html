@@ -1,27 +1,26 @@
-<div class="container">
+<!-- <div class="container">
     <div class="row mt-2 d-flex justify-content-end">
-        <div class="col d-flex justify-content-start">
-            <button class="btn btn-outline-success" disabled="true">
-                Süre: {{dakika}}:{{saniye}}
-            </button>
-        </div>
-        <div class="col d-flex justify-content-end">
-            <button class="btn btn-outline-success" (click)="exit()">
+        <div  id="countdown">
+            <div id="countdown-number">{{ dakika }}:{{ saniye < 10 ? '0' : ''}}{{ saniye }}</div>
+            <svg width="100" height="100">
+                <circle r="40" cx="50" cy="50"></circle>
+              </svg>
+              
+          </div>
+        <div class="col-6 d-flex justify-content-end">
+            <button class="btn button btn-outline-success" (click)="sinaviBitir()">
                 Sınavı Bitir
             </button>
         </div>
-        <!--<div class="col">
-            <button class="btn btn-outline-primary" disabled="true">Dakika: {{this.dakika}} Saniye:
-                {{this.saniye}}</button>
-        </div>-->
+   
     </div>
 </div>
-<div class="container mt-5 p-2">
-    <div class="card mt-3">
-        <div class="card-header d-flex justify-content-center">
+<div class="container ccs mt-5 p-2">
+    <div class=" mt-3">
+        <div class=" d-flex justify-content-center">
             <h6 class="border-bottom border-primary rounded">{{ soruIndex + 1 }}. Question</h6>
         </div>
-        <div class="card-body mb-2" *ngIf="questions[soruIndex]">
+        <div class=" mb-2" *ngIf="questions[soruIndex]">
             <p class="card-text border-bottom border-primary rounded p-3">
                 {{questions[soruIndex].question}}
             </p>
@@ -30,8 +29,6 @@
                     <input class="form-check-input" type="radio" formControlName="{{questions[soruIndex].questionid}}"
                         [value]="answer" />
                     <label class="form-check-label">{{answer.answer}} <span *ngIf="dogruCevap">
-                            <!--{{answer.answer === this.dogruCevap?.answer ?
-                            'dogru' : 'yanlis' }}-->
                             &nbsp;
                             <i [class]="answer.answer === this.dogruCevap?.answer ?
                             trueIcon : falseIcon" [style.color]="answer.answer === this.dogruCevap?.answer ?
@@ -44,19 +41,19 @@
         <div class=" card-footer justify-content-center">
             <div class="row justify-content-center">
                 <div class="col col-md-3 mt-3 d-flex justify-content-between">
-                    <button class="btn btn-outline-primary" (click)="previousQuestion()" [disabled]="soruIndex == 0">
-                        Önceki Soru
+                    <button class="" (click)="previousQuestion()" [disabled]="soruIndex == 0">
+                        Önceki 
                     </button>
                 </div>
                 <div class="col col-md-3 mt-3 d-flex justify-content-between">
-                    <button class="btn btn-outline-primary" (click)="reply()">
+                    <button class="" (click)="reply()">
                         Cevapla
                     </button>
                 </div>
                 <div class="col col-md-3 mt-3 d-flex justify-content-between">
-                    <button class="btn btn-outline-primary" (click)="nextQuestion()"
+                    <button class="" (click)="nextQuestion()"
                         [disabled]="soruSayisi == soruIndex + 1">
-                        Sonraki Soru
+                        Sonraki 
                     </button>
                 </div>
 
@@ -64,6 +61,65 @@
         </div>
     </div>
 </div>
+ -->
+
+ <div class="container">
+    <div class="col d-flex justify-content-end bitir " style="margin-top: 2rem;">
+        <div id="countdown">
+            <div class="timer" >   
+                <div id="countdown-number">{{ dakika }}:{{ saniye < 10 ? '0' : ''}}{{ saniye }}</div>
+            </div>
+          </div>
+          <h6  style="margin-top: 1rem;margin-left: 20px;">{{ selectedCategoryName }}</h6>
+        <div class="col d-flex justify-content-end bitir">
+            <button class="finish_button" (click)="sinaviBitir()">
+                Sınavı Bitir
+            </button>
+        </div>
+    </div>
+    <br>
+   
+
+
+</div>
+<div class="container mt-5 p-2">
+    <div class="form mt-3">
+        <div style="font-weight: 900;">
+            {{ soruIndex + 1 }}. Question
+        </div>
+        <hr>
+        <div class="card-body mb-2" *ngIf="questions[soruIndex]">
+            <p class="card-text border-bottom border-primary rounded p-3">
+                {{questions[soruIndex].question}}
+            </p>
+            <form [formGroup]="questionForm">
+                <div class="form-check mb-3" *ngFor="let answer of questions[soruIndex].answers">
+                    <input class="form-check-input" type="radio" formControlName="{{questions[soruIndex].questionid}}"
+                        [value]="answer" />
+                    <label class="form-check-label">{{answer.answer}}
+                    </label>
+                </div>
+            </form>
+        </div>
+        <div class=" card-footer justify-content-end">
+            <div class="row justify-content-end">
+                <div class="col col-md-1 mt-1 d-flex justify-content-end">
+                    <button  (click)="previousQuestion()" [disabled]="soruIndex == 0">
+                        Önceki Soru
+                    </button>
+                </div>
+                <div class="col col-md-1 mt-1 d-flex justify-content-end">
+                    <button  (click)="nextQuestion()"
+                        [disabled]="soruSayisi == soruIndex + 1">
+                        Sonraki Soru
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 
 
