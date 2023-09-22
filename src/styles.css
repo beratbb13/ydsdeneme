@@ -3,8 +3,21 @@
   }
 
 
-
   
+  .nb-theme-default nb-tabset .tab:hover .tab-link {
+    color: white !important;
+  }
+  .nb-theme-default nb-tabset .tab-link {
+    background-color: rgba(0,0,0,0);
+    cursor: pointer;
+    padding: 1rem 2rem;
+    color: white !important;
+    font-family: Open Sans, sans-serif;
+    font-size: .1000rem;
+    font-weight: 700;
+    line-height: 1rem;
+    text-transform: uppercase;
+}
 /* You can add global styles to this file, and also import other style files */
 @media screen and (max-width: 991px) {
 

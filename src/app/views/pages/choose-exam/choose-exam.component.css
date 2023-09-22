@@ -19,6 +19,8 @@ body{
   flex: 1; /* Kartların eşit genişlikte olduğundan emin olmak için */
   margin: 1rem;
   max-width: 300px; /* Kartların maksimum genişliği */
+  display: flex;
+  flex-direction: row;
 }
 
 .card:hover {
@@ -44,6 +46,36 @@ body{
     align-items: center;
     justify-content: center;
     margin-top: 4rem;
+}
+.avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 30px;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+}
+
+.avatar.Y {
+  background-color: #ff5733; /* Kırmızı */
+}
+.avatar.YK {
+  background-color: #9a2c9a; /* Kırmızı */
+}
+
+
+.avatar.L {
+  background-color: #33ff57; /* Yeşil */
+}
+
+.avatar.A {
+  background-color: #3366ff; /* Mavi */
+}
+
+.avatar.K {
+  background-color: #ffcc33; /* Sarı */
 }
 
 
