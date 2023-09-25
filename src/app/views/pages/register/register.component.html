@@ -6,10 +6,11 @@
       <div class="col-lg-12 col-xl-11">
         <div class="card text-black" style="border-radius: 25px;">
           <div class="card-body p-md-5">
-            <div (click)="redirectLogin()">
+            <div (click)="redirectLogin()" style="padding-left: 1rem;cursor: pointer;box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;width: 15%;padding: 1rem;border-radius: 20px;">
 
               <i class="fa-solid fa-arrow-left"></i>
-             <span style="margin-left: 0.5rem;"> Giriş Ekranı</span>
+
+              <span style="margin-left: 0.5rem;font-weight: bold;"> Giriş Ekranı</span>
 
 
             </div>
@@ -23,7 +24,7 @@
                       <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
                         <label for="exampleInputEmail1" class="form-label">İsim</label>
-                        <input type="text" class="form-control" formControlName="name">
+                        <input type="text" class="form-control" formControlName="name_">
                         <small class="form-text text-muted">*İsim sadece harflerden oluşmalı ve 3 -
                           20 karakter uzunluğu arasında olmalıdır.</small>
 
@@ -34,7 +35,7 @@
                       <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
                         <label for="exampleInputEmail1" class="form-label">Soyisim</label>
-                        <input type="text" class="form-control" formControlName="surname">
+                        <input type="text" class="form-control" formControlName="surname_">
                         <small class="form-text text-muted">*Soyisim sadece harflerden oluşmalı ve 3
                           - 20 karakter uzunluğu arasında olmalıdır.</small>
 
@@ -43,20 +44,18 @@
                   </div>
                   <div class="row">
                     <div class="col-lg-6 d-flex flex-row align-items-center mb-4">
-                      <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                      <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <label for="exampleInputEmail1" class="form-label">Kullanıcı Adı</label>
-                        <input type="text" class="form-control" formControlName="username">
-                        <small class="form-text text-muted">*Kullanıcı adı sadece harflerden
-                          oluşmalı ve 3 - 20 karakter uzunluğu arasında olmalıdır.</small>
+                        <label for="exampleInputEmail1" class="form-label">Email</label>
+                        <input type="email" class="form-control" formControlName="email_">
+                        <small class="form-text text-muted"></small>
                       </div>
                     </div>
-
                     <div class="col-lg-6 d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
                         <label for="exampleInputEmail1" class="form-label">Şifre</label>
-                        <input type="password" class="form-control" formControlName="password">
+                        <input type="password" class="form-control" formControlName="password_">
                         <small class="form-text text-muted">*Şifre 3 - 20 karakter uzunluğu arasında
                           olmalıdır.</small>
 
@@ -68,28 +67,22 @@
                       <i class="fas fa-phone fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
                         <label for="exampleInputEmail1" class="form-label">Telefon Numarası</label>
-                        <input type="text" class="form-control" formControlName="phonenumber">
+                        <input type="text" class="form-control" formControlName="phone_number">
                         <small class="form-text text-muted">*Telefon numarası 10 veya 11 karakter
                           şeklinde olmalıdır.</small>
                       </div>
                     </div>
 
                     <div class="col-lg-6 d-flex flex-row align-items-center mb-4">
-                      <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                      <i class="fas fa-calendar fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <label for="exampleInputEmail1" class="form-label">Email</label>
-                        <input type="email" class="form-control" formControlName="email">
-                        <small class="form-text text-muted"></small>
+                        <label for="exampleInputEmail1" class="form-label">Doğum Tarihi</label>
+                        <input type="date" class="form-control" formControlName="birth_date">
+                        <small class="form-text text-muted">*</small>
                       </div>
                     </div>
                   </div>
-                  <div class="d-flex flex-row align-items-center mb-4">
-                    <i class="fas fa-key fa-lg me-3 fa-fw"></i>
-                    <div class="form-outline flex-fill mb-0">
-                      <label for="exampleInputEmail1" class="form-label">Doğum Tarihi</label>
-                      <input type="date" class="form-control" formControlName="birthdate">
-                    </div>
-                  </div>
+
 
                   <div class="d-flex justify-content-end">
                     <button type="submit" nbButton status="info" style="margin-right: 1rem;">Kayıt Ol</button>

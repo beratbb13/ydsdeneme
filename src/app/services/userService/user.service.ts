@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { user } from '../../models/user'
+
 import { Endpoints } from 'src/app/constants/Endpoints';
 import { map } from 'rxjs'
 import { AuthService } from '../authService/auth.service';
+import { User } from 'src/app/models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -15,12 +16,12 @@ export class UserService {
 
   token: string | null = this.authService.getToken()
 
-  insertUser(insertUser: user) {
+  insertUser(insertUser: User) {
     const body = {
       "Token": this.token,
       "DataStoreId": Endpoints.usersDataStoreid,
       "Operation": "insert",
-      "Data": `Insert Into users(user_name, name_, surname_, password_, email_, phone_number, birth_date) VALUES('${insertUser.username}', '${insertUser.name}', '${insertUser.surname}', '${insertUser.password}', '${insertUser.email}', '${insertUser.phonenumber}', '${insertUser.birthdate}')`,
+      "Data": `Insert Into users(user_name, name_, surname_, password_, email_, phone_number, birth_date) VALUES('${insertUser.user_name}', '${insertUser.name_}', '${insertUser.surname_}', '${insertUser.password_}', '${insertUser.email_}', '${insertUser.phone_number}', '${insertUser.birth_date}')`,
       "Encrypted": '1951'
     }
     return this.http.post(Endpoints.dataops, body).pipe(
@@ -30,12 +31,12 @@ export class UserService {
     );
   }
 
-  updateUser(updateUser: user) {
+  updateUser(updateUser: User) {
     const body = {
       "Token": this.token,
       "DataStoreId": Endpoints.usersDataStoreid,
       "Operation": "update",
-      "Data": `Update users set user_name = '${updateUser.username}', name_ = '${updateUser.name}', surname_ = '${updateUser.surname}', password_ = '${updateUser.password}', email_ = '${updateUser.email}', phone_number = '${updateUser.phonenumber}', birth_date = '${updateUser.birthdate}'`,
+      "Data": `Update users set user_name = '${updateUser.user_name}', name_ = '${updateUser.name_}', surname_ = '${updateUser.surname_}', password_ = '${updateUser.password_}', email_ = '${updateUser.email_}', phone_number = '${updateUser.phone_number}', birth_date = '${updateUser.birth_date}'`,
       "Encrypted": "1951",
     }
     return this.http.post(Endpoints.dataops, body).pipe(

@@ -8,7 +8,7 @@ export const ServerURLs = {
 export const Endpoints = {
   dataops: ServerURLs.bussion + 'Applications/DataOps',
   scriptEndpoint: ServerURLs.bussion + 'Applications',
-  register: ServerURLs.bussion + 'Register/CreateAccount',
+  register: ServerURLs.bussion + 'Users/SelfRegisterUser',
   login: ServerURLs.bussion + "Logon/Login",
   token: '33722768367448188871',
   answersDataStoreid: '67525733536673626715',

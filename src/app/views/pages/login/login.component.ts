@@ -24,17 +24,38 @@ export class LoginComponent {
 
   formGroup!: FormGroup
   loginFormValues: LoginRequest = { Username: '', Password: '' }
-
+  rememberMe: string = 'false'
 
   ngOnInit() {
     this.formGroup = this.formBuilder.group({
       Username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
       Password: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
+
     })
+    this.isCheckedRemember()
+  }
+
+  isCheckedRemember() {
+    if (localStorage.getItem('remember')){
+      this.rememberMe='true'
+      var userName=localStorage.getItem('Username')
+      var password=localStorage.getItem('Password')
+      this.formGroup.patchValue({
+        Username:userName,
+        Password:password
+      })
+
+    }
   }
 
   onSubmit() {
     this.spinnerService.show();
+    if (this.rememberMe) {
+      localStorage.setItem('Username', this.formGroup.value.Username)
+      localStorage.setItem('Password', this.formGroup.value.Password)
+      localStorage.setItem('remember', this.rememberMe)
+
+    }
     if (this.formGroup.valid) {
       Object.assign(this.loginFormValues, this.formGroup.value);
       this.login(this.loginFormValues)
