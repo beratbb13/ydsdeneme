@@ -10,7 +10,7 @@ import { HttpClientModule } from '@angular/common/http'
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbThemeModule, NbAccordionModule, NbToastrModule, NbLayoutModule, NbButtonModule, NbDialogModule, NbSidebarModule, NbCardModule, NbContextMenuModule, NbMenuModule, NbDialogRef, NbTabsetModule } from '@nebular/theme';
+import { NbThemeModule, NbWindowModule, NbStepperModule, NbAccordionModule, NbToastrModule, NbLayoutModule, NbButtonModule, NbDialogModule, NbSidebarModule, NbCardModule, NbContextMenuModule, NbMenuModule, NbDialogRef, NbTabsetModule } from '@nebular/theme';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { ExamPageComponent } from './views/pages/exam-page/exam-page.component';
 import { ConfirmationModalComponent } from './views/components/confirmationModal/confirmation-modal/confirmation-modal.component';
@@ -25,6 +25,8 @@ import { ChooseExamComponent } from './views/pages/choose-exam/choose-exam.compo
 import { ExamFilterComponent } from './views/pages/exam-filter/exam-filter.component';
 import { DenemeExamComponent } from './views/pages/ydsdeneme/deneme-exam/deneme-exam.component';
 import { ExamResultComponent } from './views/components/testResult/exam-result/exam-result.component';
+import { ResultTableComponent } from './views/components/result-table/result-table/result-table.component';
+import { QuestionTableComponent } from './views/components/question-table/question-table/question-table.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { ExamResultComponent } from './views/components/testResult/exam-result/e
     ExamFilterComponent,
     DenemeExamComponent,
     ExamResultComponent,
+    ResultTableComponent,
+    QuestionTableComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,10 +57,13 @@ import { ExamResultComponent } from './views/components/testResult/exam-result/e
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NbThemeModule.forRoot(),
+    NbThemeModule.forRoot({ name: 'default' }),
     NbToastrModule.forRoot(),
     NbMenuModule.forRoot(),
     NbDialogModule.forRoot(),
+    NbSidebarModule.forRoot(),
+    NbWindowModule.forRoot(),
+    NbStepperModule,
     NbLayoutModule,
     NbButtonModule,
     NbSidebarModule,

@@ -63,68 +63,79 @@
 </div>
  -->
 
- <div class="container">
+<div class="container">
     <div class="col d-flex justify-content-end bitir " style="margin-top: 2rem;">
         <div id="countdown">
-            <div class="timer" >   
-                <div id="countdown-number">{{ dakika }}:{{ saniye < 10 ? '0' : ''}}{{ saniye }}</div>
-            </div>
-          </div>
-          <h6  style="margin-top: 1rem;margin-left: 20px;">{{ selectedCategoryName }}</h6>
-        <div class="col d-flex justify-content-end bitir">
-            <button class="finish_button" (click)="sinaviBitir()">
-                Sınavı Bitir
-            </button>
-        </div>
-    </div>
-    <br>
-   
-
-
-</div>
-<div class="container mt-5 p-2">
-    <div class="form mt-3">
-        <div style="font-weight: 900;">
-            {{ soruIndex + 1 }}. Question
-        </div>
-        <hr>
-        <div class="card-body mb-2" *ngIf="questions[soruIndex]">
-            <p class="card-text border-bottom border-primary rounded p-3">
-                {{questions[soruIndex].question}}
-            </p>
-            <form [formGroup]="questionForm">
-                <div class="form-check mb-3" *ngFor="let answer of questions[soruIndex].answers">
-                    <input class="form-check-input" type="radio" formControlName="{{questions[soruIndex].questionid}}"
-                        [value]="answer" />
-                    <label class="form-check-label">{{answer.answer}}
-                    </label>
-                </div>
-            </form>
-        </div>
-        <div class=" card-footer justify-content-end">
-            <div class="row justify-content-end">
-                <div class="col col-md-1 mt-1 d-flex justify-content-end">
-                    <button  (click)="previousQuestion()" [disabled]="soruIndex == 0">
-                        Önceki Soru
-                    </button>
-                </div>
-                <div class="col col-md-1 mt-1 d-flex justify-content-end">
-                    <button  (click)="nextQuestion()"
-                        [disabled]="soruSayisi == soruIndex + 1">
-                        Sonraki Soru
-                    </button>
+            <div class="timer">
+                <div id="countdown-number">{{ dakika }}:{{ saniye < 10 ? '0' : '' }}{{ saniye }}</div>
                 </div>
             </div>
+            <h6 style="margin-top: 1rem;margin-left: 20px;">{{ selectedCategoryName }}</h6>
+            <div class="col d-flex justify-content-end bitir">
+                <button class="finish_button" (click)="sinaviBitir()">
+                    Sınavı Bitir
+                </button>
+            </div>
+        </div>
+        <br>
+
+
+
+    </div>
+    <div class="container mt-5 p-2">
+        <div class="form mt-3">
+            <div style="font-weight: 900;">
+                {{ soruIndex + 1 }}. Soru
+            </div>
+            <hr>
+            <div class="card-body mb-2" *ngIf="questions[soruIndex]">
+                <p class="card-text border-bottom border-primary rounded p-3">
+                    {{questions[soruIndex].question}}
+                </p>
+                <form [formGroup]="questionForm">
+                    <div class="form-check mb-3" *ngFor="let answer of questions[soruIndex].answers">
+                        <input class="form-check-input" type="radio"
+                            formControlName="{{questions[soruIndex].questionid}}" [value]="answer" />
+                        <label class="form-check-label">
+                            <span *ngIf="dogruCevap">
+                                <i [class]="answer.answer === this.dogruCevap.answer ?
+                                    trueIcon : falseIcon" [style.color]="answer.answer === this.dogruCevap.answer ?
+                                    trueIconColor : falseIconColor"></i>
+                                &nbsp;
+                            </span>
+                            {{answer.answer}}
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class=" card-footer justify-content-end">
+                <div class="row justify-content-end">
+                    <div class="col col-md-1 mt-1 d-flex justify-content-end">
+                        <button (click)="previousQuestion()" [disabled]="soruIndex == 0">
+                            Önceki Soru
+                        </button>
+                    </div>
+                    <div class="col col-md-1 mt-1 d-flex justify-content-end">
+                        <button (click)="reply()">
+                            Cevabı Gör
+                        </button>
+                    </div>
+                    <div class="col col-md-1 mt-1 d-flex justify-content-end">
+                        <button (click)="nextQuestion()" >
+                            Sonraki Soru
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 
 
 
 
 
 
-<!---
+    <!---
 
 -----
     <div class="card mt-3">
