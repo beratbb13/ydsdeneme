@@ -13,12 +13,12 @@ import { ExamFilterComponent } from './views/pages/exam-filter/exam-filter.compo
 import { DenemeExamComponent } from './views/pages/ydsdeneme/deneme-exam/deneme-exam.component';
 
 const routes: Routes = [
-// { path: '', component: LoginComponent },
-{ path: '', component: ChooseExamComponent },
-{ path: 'login', component: LoginComponent },
-{ path: 'register', component: RegisterComponent },
-{ path: 'forgetpassword', component: ForgetPasswordComponent },
-{ path: 'choose', component: ChooseExamComponent },
+  // { path: '', component: LoginComponent },
+  { path: '', component: ChooseExamComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'forgetpassword', component: ForgetPasswordComponent },
+  { path: 'choose', component: ChooseExamComponent },
 
   {
     path: 'homepage', component: HomepageComponent, children: [

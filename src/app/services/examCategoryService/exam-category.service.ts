@@ -23,7 +23,7 @@ export class ExamCategoryService {
       "Token": this.token,
       "DataStoreId": Endpoints.examCategoryDataStoreid,
       "Operation": "read",
-      "Data": `select exam_categories.\"Name\", cast(ecategoryid as text) from exam_categories`,
+      "Data": `select exam_categories.\"Name\", cast(ecategoryid as text), cast(parentid as text) from exam_categories`,
       "Encrypted": '1951'
     }
     return this.http.post(Endpoints.dataops, body).pipe(

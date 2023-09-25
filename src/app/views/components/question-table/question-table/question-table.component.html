@@ -1,0 +1,20 @@
+<nb-flip-card *ngFor="let question of questions">
+    <nb-card-front>
+        <nb-card accent="warning" status="primary">
+            <nb-card-header>Soru</nb-card-header>
+            <nb-card-body>
+                {{question.question}}
+            </nb-card-body>
+        </nb-card>
+    </nb-card-front>
+    <nb-card-back>
+        <nb-card accent="info" status="success">
+            <nb-card-header>Cevap</nb-card-header>
+            <nb-card-body *ngFor="let answer of question.answers">
+                <div *ngIf="answer.istrue == 1">
+                    {{answer.answer}}
+                </div>
+            </nb-card-body>
+        </nb-card>
+    </nb-card-back>
+</nb-flip-card>

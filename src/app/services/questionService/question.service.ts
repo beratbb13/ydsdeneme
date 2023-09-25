@@ -37,7 +37,7 @@ export class QuestionService {
       "Token": this.token,
       "DataStoreId": Endpoints.questionsDataStoreid,
       "Operation": "update",
-      "Data": `Update questions set questionid = '${updateQuestion.questionid}', examid = '${updateQuestion.examid}', ecategoryid = '${updateQuestion.ecategoryid}', question = '${updateQuestion.question}')`,
+      "Data": `Update questions set questionid = '${updateQuestion.questionid}', examid = '${updateQuestion.examid}', ecategoryid = '${updateQuestion.ecategoryid}', question = '${updateQuestion.question}'`,
       "Encrypted": "1951",
     }
     return this.http.post(Endpoints.dataops, body).pipe(
@@ -57,6 +57,37 @@ export class QuestionService {
     }
     return this.http.post(Endpoints.dataops, body).pipe(
       map((response: any) => {
+        return response.message
+      })
+    );
+  }
+
+  getQuestionsAndAnswers() {
+    const body = {
+      "Token": this.token,
+      "DataStoreId": Endpoints.questionsDataStoreid,
+      "Operation": "read",
+      "Data": `select cast(questions.questionid as text), cast(questions.examid as text), cast(questions.ecategoryid as text), questions.question, answers_last.answer, answers_last.istrue, cast(answers_last.answerid as text) from questions inner join answers_last on questions.questionid=answers_last.questionid`,
+      "Encrypted": "1951",
+    }
+    return this.http.post(Endpoints.dataops, body).pipe(
+      map((response: any) => {
+        return response.message
+      })
+    );
+  }
+
+  getQuestionsAndAnswersByCategoryId(category_id: string) {
+    const body = {
+      "Token": this.token,
+      "DataStoreId": Endpoints.questionsDataStoreid,
+      "Operation": "read",
+      "Data": `select cast(questions.questionid as text), cast(questions.examid as text), cast(questions.ecategoryid as text), questions.question, answers_last.answer, answers_last.istrue, cast(answers_last.answerid as text) from questions inner join answers_last on questions.questionid=answers_last.questionid LEFT JOIN user_score ON questions.questionid = user_score.question_id WHERE user_score.question_id IS NULL LIMIT 50`,
+      "Encrypted": "1951",
+    }
+    return this.http.post(Endpoints.dataops, body).pipe(
+      map((response: any) => {
+        console.log(response.message)
         return response.message
       })
     );
