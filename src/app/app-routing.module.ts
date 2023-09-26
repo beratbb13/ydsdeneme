@@ -12,15 +12,18 @@ import { ChooseExamComponent } from './views/pages/choose-exam/choose-exam.compo
 import { ExamFilterComponent } from './views/pages/exam-filter/exam-filter.component';
 import { DenemeExamComponent } from './views/pages/ydsdeneme/deneme-exam/deneme-exam.component';
 import { AuthGuard } from './services/authService/auth.guard';
-
+import { UserDashboardComponent } from './views/pages/user-dashboard/user-dashboard/user-dashboard.component';
 
 const routes: Routes = [
-  { path: '', component: ChooseExamComponent },
-  // { path: '', component: ChooseExamComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'forgetpassword', component: ForgetPasswordComponent },
-  { path: 'choose', component: ChooseExamComponent, canActivate: [AuthGuard] },
+// { path: '', component: LoginComponent },
+{ path: '', component: ChooseExamComponent },
+{ path: 'login', component: LoginComponent },
+{ path: 'register', component: RegisterComponent },
+{ path: 'forgetpassword', component: ForgetPasswordComponent },
+{ path: 'choose', component: ChooseExamComponent },
+{ path: 'user', component:UserDashboardComponent },
+
+
 
   {
     path: 'homepage', component: HomepageComponent, children: [

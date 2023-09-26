@@ -67,6 +67,12 @@
     width: 100%;
 }
 
+
+.card{
+    width: 90%;
+    margin: 2%;
+}
+
 div, h4,h5,h6,span,p,h1,h2,h3{
   font-family: 'Montserrat', sans-serif !important;
 }
@@ -75,4 +81,5 @@ div, h4,h5,h6,span,p,h1,h2,h3{
 
   margin-right: 0 !important;
    margin-left: 0 !important;
+
 }
