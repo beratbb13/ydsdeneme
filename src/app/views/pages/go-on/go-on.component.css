@@ -1,0 +1,48 @@
+
+.container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    line-height: 1.7;
+    padding: 24px;
+}
+
+/* .wrapper{
+    background-color: #4d42ea;
+
+} */
+
+.page-header{
+    /* flex-wrap: wrap; */
+    /* width: 300px; */
+}
+
+.btn{
+    border-radius: 25px;
+    width: 250px;
+    padding: 10px;
+    background-color: #4d42ea;
+}
+
+a{
+    text-decoration: none;
+    color: blue;
+    transition: all 0.3s ease;
+}
+a:hover{
+    opacity: 0.7;
+}
+.page{
+    padding: 34px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 30px 60px 0 rgba(90, 116, 148, 0.4);
+    border-radius: 25px;
+}
+
+h5 a{
+    cursor: pointer;
+    color: #4d42ea;
+}
+

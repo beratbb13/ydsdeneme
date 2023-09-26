@@ -58,7 +58,9 @@ export class LoginComponent {
     }
     if (this.formGroup.valid) {
       Object.assign(this.loginFormValues, this.formGroup.value);
+
       this.login(this.loginFormValues)
+
     } else {
       this.toastService.showToast('warning', 'Lütfen formu düzgün bir şekilde doldurunuz.');
     }
@@ -70,7 +72,7 @@ export class LoginComponent {
     this.authService.login(loginReq).subscribe(res => {
       if (res.result) {
         this.toastService.showToast('success', 'Giriş işlemi başarılı');
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['user/dashboard']);
       } else if (res) {
         this.toastService.showToast('danger', 'Kullanıcı bilgilerinizi yanlış girdiniz. Lütfen tekrar deneyin.');
       } else {

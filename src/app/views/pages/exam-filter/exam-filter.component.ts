@@ -45,7 +45,7 @@ export class ExamFilterComponent implements OnInit {
       state: { category: category }
     };
 
-    this.router.navigate(['/homepage/examform'], navigationExtras);
+    this.router.navigate(['/user/examform'], navigationExtras);
   }
 
   dropdownToggle() {

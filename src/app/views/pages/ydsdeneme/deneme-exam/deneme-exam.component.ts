@@ -113,13 +113,13 @@ export class DenemeExamComponent {
   }
 
   showResult(sonuc: string, message: string) {
-    this.dialogService.openTextModal(sonuc, message).onClose.subscribe(() => this.router.navigate(['/homepage/aboutus']))
+    this.dialogService.openTextModal(sonuc, message).onClose.subscribe(() => this.router.navigate(['/user/aboutus']))
   }
 
   openResultModal(sonuc: any) {
     let dialogref: NbDialogRef<any> = this.dialogService.openModal(ExamResultComponent, true, true, 'right-modal', sonuc)
     dialogref.onClose.subscribe(() => {
-      this.router.navigate(['/homepage/filter']);
+      this.router.navigate(['/user/filter']);
     })
   }
 
@@ -138,7 +138,7 @@ export class DenemeExamComponent {
   }
 
   exit() {
-    this.router.navigate(['/homepage/filter']);
+    this.router.navigate(['/user/filter']);
   }
 
   reply() {

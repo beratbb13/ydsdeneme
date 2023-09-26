@@ -1,8 +1,8 @@
 import { environment } from '../environments/environments';
 
 export const ServerURLs = {
-  bussion: environment.baseUrl + '/api/V3/',
-  connector: window.location.protocol + '//' + window.location.hostname + ':**port**/api/V3/',
+    bussion: environment.baseUrl + '/api/V3/',
+    connector: window.location.protocol + '//' + window.location.hostname + ':**port**/api/V3/',
 }
 
 export const Endpoints = {

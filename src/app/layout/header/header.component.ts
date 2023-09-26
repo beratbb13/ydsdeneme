@@ -20,17 +20,25 @@ export class HeaderComponent {
 
     loggedInUser: string=''
 
+    // getUserName() {
+    //   const currentUser = localStorage.getItem('Username');
+    //   if (currentUser) {
+    //     try {
+    //       const user = JSON.parse(currentUser);
+    //       if (user.user_name) {
+    //         this.loggedInUser = user.user_name;
+    //       }
+    //     } catch (error) {
+    //       console.error('JSON parsing error:', error);
+    //     }
+    //   }
+    //   console.log(this.loggedInUser);
+    // }
+
     getUserName() {
-      const currentUser = localStorage.getItem('currentUser');
+      const currentUser = localStorage.getItem('Username');
       if (currentUser) {
-        try {
-          const user = JSON.parse(currentUser);
-          if (user.user_name) {
-            this.loggedInUser = user.user_name;
-          }
-        } catch (error) {
-          console.error('JSON parsing error:', error);
-        }
+        this.loggedInUser=currentUser
       }
       console.log(this.loggedInUser);
     }
@@ -43,6 +51,8 @@ export class HeaderComponent {
     }
 
 
+
+
     goMain(){
       this.router.navigate(['/'])
     }
@@ -51,6 +61,6 @@ export class HeaderComponent {
       this.router.navigate(['/login'])
     }
     goDashboard(){
-      this.router.navigate(['/user'])
+      this.router.navigate(['/user/dashboard']);
     }
 }

@@ -17,14 +17,17 @@ import { ConfirmationModalComponent } from './views/components/confirmationModal
 import { TextModalComponent } from './views/components/textModal/text-modal/text-modal.component';
 import { ProfileComponent } from './views/pages/profile/profile/profile.component';
 import { ExamFormComponent } from './views/components/examForm/exam-form/exam-form.component';
-import { FooterComponent } from './layout/footer/footer/footer.component';
-import { HeaderComponent } from './layout/header/header/header.component';
+import { FooterComponent } from './layout/footer/footer.component';
+import { HeaderComponent } from './layout/header/header.component';
 import { AboutusComponent } from './views/pages/Aboutus/aboutus/aboutus.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ChooseExamComponent } from './views/pages/choose-exam/choose-exam.component';
 import { ExamFilterComponent } from './views/pages/exam-filter/exam-filter.component';
 import { DenemeExamComponent } from './views/pages/ydsdeneme/deneme-exam/deneme-exam.component';
 import { ExamResultComponent } from './views/components/testResult/exam-result/exam-result.component';
+import { GoOnComponent } from './views/pages/go-on/go-on.component';
+import { DenemeSinaviComponent } from './views/pages/deneme-sinavi/deneme-sinavi.component';
+import { BeforeDenemeComponent } from './views/pages/before-deneme/before-deneme.component';
 
 import { UserDashboardComponent } from './views/pages/user-dashboard/user-dashboard/user-dashboard.component';
 import { ResultTableComponent } from './views/components/result-table/result-table/result-table.component';
@@ -32,6 +35,7 @@ import { QuestionTableComponent } from './views/components/question-table/questi
 import { ExamCustomCardComponent } from './views/components/exam-custom-card/exam-custom-card.component';
 import { InfocardComponent } from './views/components/infocard/infocard.component';
 import { CustomHttpInterceptorInterceptor } from './utils/custom-http-interceptor.interceptor';
+import { LoggedInLayoutComponent } from './layout/logged-in-layout/logged-in-layout.component';
 
 
 @NgModule({
@@ -53,11 +57,16 @@ import { CustomHttpInterceptorInterceptor } from './utils/custom-http-intercepto
     ExamFilterComponent,
     DenemeExamComponent,
     ExamResultComponent,
+
+    GoOnComponent,
+    DenemeSinaviComponent,
+    BeforeDenemeComponent,
     UserDashboardComponent,
     ResultTableComponent,
     QuestionTableComponent,
     ExamCustomCardComponent,
     InfocardComponent,
+    LoggedInLayoutComponent,
 
   ],
   imports: [
