@@ -53,7 +53,7 @@
       <!-- <a  style="cursor: pointer;" (click)="logOut()">Çıkış</a> -->
   </div>
   <div class="nav-exit">
-    <span style="margin-right: 1rem;" *ngIf="loggedInUser">Hoşgeldiniz, {{loggedInUser}}</span>
+    <span style="margin-right: 1rem;" *ngIf="loggedInUser">Hello, {{loggedInUser}}</span>
 
     <a *ngIf="!loggedInUser" style="cursor: pointer;color: rgba(105,14,245,1);" (click)="goDashboard()">Dashboard'um</a>
     <a *ngIf="loggedInUser" style="cursor: pointer;color: rgba(105,14,245,1);" (click)="logOut()">Çıkış</a>

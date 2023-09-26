@@ -41,7 +41,7 @@ export class GoOnComponent implements OnInit{
   }
 
   registerToCourse(){
-    const currentuser=localStorage.getItem('currentUser')
+    const currentuser=localStorage.getItem('Username')
     if ((currentuser !== null && currentuser !== undefined)){
       const userJSON=JSON.parse(currentuser)
       if (userJSON.user_name) {
@@ -82,17 +82,25 @@ export class GoOnComponent implements OnInit{
 
   loggedInUser: string=''
 
-  ifLoggedIn(){
-    const currentuser=localStorage.getItem('currentUser')
-    if ((currentuser !== null && currentuser !== undefined)){
-      const userJSON=JSON.parse(currentuser)
-      if (userJSON.user_name) {
-        const username = userJSON.user_name;
-        if (username) {
-          this.loggedInUser=username;
-          this.loggedIn=true
-        }
-    }}
-  }
+  // ifLoggedIn(){
+  //   const currentuser=localStorage.getItem('User')
+  //   if ((currentuser !== null && currentuser !== undefined)){
+  //     const userJSON=JSON.parse(currentuser)
+  //     if (currentuser) {
+  //       const username = userJSON.user_name;
+  //       if (username) {
+  //         this.loggedInUser=username;
+  //         this.loggedIn=true
+  //       }
+  //   }}
+  // }
     
+  ifLoggedIn(){
+    const currentuser=localStorage.getItem('Username')
+    console.log(currentuser)
+    if (currentuser) {
+      this.loggedInUser=currentuser
+      this.loggedIn=true
+    }
+  }
 }
