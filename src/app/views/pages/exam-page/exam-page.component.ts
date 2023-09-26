@@ -29,7 +29,7 @@ export class ExamPageComponent {
   }
 
   getCategories() {
-    this.spinnerService.show();
+    // this.spinnerService.show();
     this.examCategoryService.getCategories().pipe(
       tap(res => this.categories = res),
     ).subscribe(() => this.spinnerService.hide());

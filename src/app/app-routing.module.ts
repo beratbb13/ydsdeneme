@@ -11,24 +11,30 @@ import { AboutusComponent } from './views/pages/Aboutus/aboutus/aboutus.componen
 import { ChooseExamComponent } from './views/pages/choose-exam/choose-exam.component';
 import { ExamFilterComponent } from './views/pages/exam-filter/exam-filter.component';
 import { DenemeExamComponent } from './views/pages/ydsdeneme/deneme-exam/deneme-exam.component';
+import { AuthGuard } from './services/authService/auth.guard';
+import { UserDashboardComponent } from './views/pages/user-dashboard/user-dashboard/user-dashboard.component';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'forgetpassword', component: ForgetPasswordComponent },
-  { path: 'choose', component: ChooseExamComponent },
+// { path: '', component: LoginComponent },
+{ path: '', component: ChooseExamComponent },
+{ path: 'login', component: LoginComponent },
+{ path: 'register', component: RegisterComponent },
+{ path: 'forgetpassword', component: ForgetPasswordComponent },
+{ path: 'choose', component: ChooseExamComponent },
+{ path: 'dashboard', component:UserDashboardComponent,canActivate: [AuthGuard]  },
+
+
 
   {
     path: 'homepage', component: HomepageComponent, children: [
-      { path: 'aboutus', component: AboutusComponent },
-      { path: 'exampage', component: ExamPageComponent },
-      { path: 'examform', component: ExamFormComponent },
-      { path: 'profile', component: ProfileComponent },
-      { path: 'filter', component: ExamFilterComponent },
-      { path: 'deneme', component: DenemeExamComponent },
+      { path: 'aboutus', component: AboutusComponent,canActivate: [AuthGuard] },
+      { path: 'exampage', component: ExamPageComponent ,canActivate: [AuthGuard]},
+      { path: 'examform', component: ExamFormComponent,canActivate: [AuthGuard] },
+      { path: 'profile', component: ProfileComponent ,canActivate: [AuthGuard]},
+      { path: 'filter', component: ExamFilterComponent,canActivate: [AuthGuard] },
+      { path: 'deneme', component: DenemeExamComponent,canActivate: [AuthGuard] },
 
-    ]
+    ], canActivate: [AuthGuard]
   },
 ];
 
@@ -59,6 +65,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [],
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers:[AuthGuard]
 })
 export class AppRoutingModule { }

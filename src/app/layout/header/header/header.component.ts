@@ -9,21 +9,48 @@ import { AuthService } from 'src/app/services/authService/auth.service';
 })
 export class HeaderComponent {
 
-  ngOnInit() {
 
+  ngOnInit() {
+    this.getUserName()
   }
 
   constructor(private router: Router,
     private authService: AuthService) { }
 
 
-  logOut() {
-    this.authService.getLogout().subscribe(res => console.log(res));
-    this.router.navigate(['/']);
-  }
+    loggedInUser: string=''
 
-  /*navigate(path: string) {
-    debugger;
-    this.router.navigate([path])
-  }*/
+    getUserName() {
+      const currentUser = localStorage.getItem('currentUser');
+      if (currentUser) {
+        try {
+          const user = JSON.parse(currentUser);
+          if (user.user_name) {
+            this.loggedInUser = user.user_name;
+          }
+        } catch (error) {
+          console.error('JSON parsing error:', error);
+        }
+      }
+      console.log(this.loggedInUser);
+    }
+
+
+    logOut() {
+      this.authService.getLogout().subscribe(res => console.log(res));
+      localStorage.clear()
+      this.router.navigate(['/']);
+    }
+
+
+    goMain(){
+      this.router.navigate(['/'])
+    }
+
+    goLogin(){
+      this.router.navigate(['/login'])
+    }
+    goDashboard(){
+      this.router.navigate(['/user'])
+    }
 }

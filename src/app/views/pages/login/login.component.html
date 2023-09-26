@@ -1,54 +1,56 @@
+<!-- <app-header></app-header> -->
 <section style="background-color: #eee;">
-    <div class="container">
-        <div class="row d-flex justify-content-center align-items-center">
-            <div class="col-lg-12">
-                <div class="card text-black" style="border-radius: 25px;">
-                    <div class="card-body p-5">
-                        <div class="row justify-content-center">
-                            <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
-                                <p class="text-center h4 fw-bold mb-1 mx-1 mx-md-4 mt-1">Giriş Yap</p>
+  <div class="container">
+    <div class="row d-flex justify-content-center align-items-center">
+      <div class="col-lg-12">
+        <div class="card text-black" style="border-radius: 25px;">
+          <div class="card-body p-5">
+            <div class="row justify-content-center">
+              <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+                <p class="text-center h4 fw-bold mb-1 mx-1 mx-md-4 mt-1">Giriş Yap</p>
 
-                                <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+                <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
 
-                                    <div class="form-outline mb-4">
-                                        <label for="exampleInputEmail1" class="form-label">Kullanıcı Adı</label>
-                                        <input type="text" class="form-control" formControlName="username">
-                                    </div>
+                  <div class="form-outline mb-4">
+                    <label for="exampleInputEmail1" class="form-label">E-Mail</label>
+                    <input type="text" class="form-control" formControlName="Username">
+                  </div>
 
-                                    <div class="form-outline mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">Şifre</label>
-                                        <input type="password" class="form-control" formControlName="password">
-                                    </div>
+                  <div class="form-outline mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Şifre</label>
+                    <input type="password" class="form-control" formControlName="Password">
+                  </div>
 
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="form-check mb-0">
-                                            <input class="form-check-input me-2" type="checkbox" />
-                                            <label class="form-check-label" for="form2Example3">
-                                                Beni hatırla
-                                            </label>
-                                        </div>
-                                        <a routerLink="/forgetpassword" class="text-body">Şifrenizi mi
-                                            unuttunuz?</a>
-                                    </div>
-
-                                    <div class="text-center text-lg-start mt-4 pt-2">
-                                        <button type="submit" class="btn btn-primary btn-lg"
-                                            style="padding-left: 2.5rem; padding-right: 2.5rem;">Giriş Yap</button>
-                                        <p class="small fw-bold mt-2 pt-1 mb-0">Henüz bir hesabınız yok mu? <br><a
-                                                routerLink="/register"> Hemen
-                                                kayıt olun.</a></p>
-                                    </div>
-                                </form>
-
-                            </div>
-                            <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
-                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
-                                    class="img-fluid" alt="Sample image">
-                            </div>
-                        </div>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="form-check mb-0">
+                      <input [(ngModel)]="rememberMe" class="form-check-input me-2"
+                        [checked]="rememberMe=='true'?true:false" type="checkbox" />
+                      <label class="form-check-label" for="form2Example3">
+                        Beni hatırla
+                      </label>
                     </div>
-                </div>
+                    <a routerLink="/forgetpassword" class="text-body">Şifrenizi mi
+                      unuttunuz?</a>
+                  </div>
+
+                  <div class="text-center text-lg-start mt-4 pt-2">
+                    <button type="submit" class="btn btn-primary btn-lg"
+                      style="padding-left: 2.5rem; padding-right: 2.5rem;">Giriş Yap</button>
+                    <p class="small fw-bold mt-2 pt-1 mb-0">Henüz bir hesabınız yok mu? <br><a routerLink="/register">
+                        Hemen
+                        kayıt olun.</a></p>
+                  </div>
+                </form>
+
+              </div>
+              <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                  class="img-fluid" alt="Sample image">
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </section>
