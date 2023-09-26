@@ -6,7 +6,7 @@ import { ForgetPasswordComponent } from './views/pages/forget-password/forget-pa
 
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http'
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -29,6 +29,7 @@ import { ResultTableComponent } from './views/components/result-table/result-tab
 import { QuestionTableComponent } from './views/components/question-table/question-table/question-table.component';
 import { ExamCustomCardComponent } from './views/components/exam-custom-card/exam-custom-card.component';
 import { InfocardComponent } from './views/components/infocard/infocard.component';
+import { CustomHttpInterceptorInterceptor } from './utils/custom-http-interceptor.interceptor';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,9 @@ import { InfocardComponent } from './views/components/infocard/infocard.componen
     NbAccordionModule,
     NbTabsetModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: CustomHttpInterceptorInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
