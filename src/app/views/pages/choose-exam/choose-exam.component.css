@@ -1,7 +1,10 @@
 
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css');
 
-
+body{
+  text-align:center;
+  background-color:#e2e1e0;
+}
 .card {
   position: relative;
   display: inline-block;
@@ -16,12 +19,8 @@
   flex: 1; /* Kartların eşit genişlikte olduğundan emin olmak için */
   margin: 1rem;
   max-width: 300px; /* Kartların maksimum genişliği */
-
-  cursor: pointer;
-
   display: flex;
   flex-direction: row;
-
 }
 
 .card:hover {
@@ -217,7 +216,7 @@
 
 
 
-/* 
+
 
   .btn {
     background: hsl(var(--hue), 98%, 80%);
@@ -231,6 +230,7 @@
     padding: 1.15em 3.5em;
     min-height: 3.3em;
     position: relative;
+    /* text-transform: lowercase; */
     margin-top: 1rem;
   }
   .btn--yellow {
@@ -305,7 +305,6 @@
   }
   .btn:hover .btn__bg:nth-of-type(4), .btn:focus .btn__bg:nth-of-type(4), .btn:active .btn__bg:nth-of-type(4) {
     transition-delay: 0.46s;
-
   }
 
 
@@ -384,4 +383,3 @@
   }
 
 } */
-

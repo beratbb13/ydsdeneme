@@ -1,10 +1,7 @@
 <div>
   <div class="navbar d-flex justify-content-center">
     <p class="text-center">Sınavlara Hazırlık Merkezi: Gerçek Sorularla Pratik Yapın</p>
-
-    <p *ngIf="loggedIn" style="position: absolute; right: 2%;" class="text-end">Hoşgeldiniz, {{loggedUser}}</p>
-</div>
-
+  </div>
 
   <div class="sub-bar" style="padding-top: 3rem;">
     <div class="row" style="padding-left: 2rem;padding-right: 2rem;width: 100%;">
@@ -41,7 +38,6 @@
       </div>
     </div>
 
-
   </div>
   <div style="padding-top: 1rem;">
     <h2 class="text-center">Sistem Üzerinde Çalışabileceğin Sınavlar</h2>
@@ -56,7 +52,6 @@
       <div class="row" style="width: 100%;align-items: center;justify-content: center;">
         <app-exam-custom-card *ngFor="let item of exams" [exam]="item" class="col-lg-2"></app-exam-custom-card>
       </div>
-
     </div>
   </div>
   <div class="row info-container">

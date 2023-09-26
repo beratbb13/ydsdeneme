@@ -1,12 +1,11 @@
 import { environment } from '../environments/environments';
 
 export const ServerURLs = {
-  bussion: environment.baseUrl + '/api/V3/',
-  connector: window.location.protocol + '//' + window.location.hostname + ':**port**/api/V3/',
+    bussion: environment.baseUrl + '/api/V3/',
+    connector: window.location.protocol + '//' + window.location.hostname + ':**port**/api/V3/',
 }
 
 export const Endpoints = {
-
   dataops: ServerURLs.bussion + 'Applications/DataOps',
   scriptEndpoint: ServerURLs.bussion + 'Applications',
   register: ServerURLs.bussion + 'Users/SelfRegisterUser',
@@ -21,4 +20,3 @@ export const Endpoints = {
   getUsers: ServerURLs.bussion + 'Users/GetUsers',
   logout: ServerURLs.bussion + 'Logon/Logout',
 };
-

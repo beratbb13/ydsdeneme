@@ -36,6 +36,8 @@ const routes: Routes = [
 
   {
     path: 'homepage', component: HomepageComponent, children: [
+      { path: 'before-deneme', component: BeforeDenemeComponent,canActivate: [AuthGuard] },
+
       { path: 'aboutus', component: AboutusComponent,canActivate: [AuthGuard] },
       { path: 'exampage', component: ExamPageComponent ,canActivate: [AuthGuard]},
       { path: 'examform', component: ExamFormComponent,canActivate: [AuthGuard] },
