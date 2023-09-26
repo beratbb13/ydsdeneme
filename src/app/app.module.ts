@@ -25,6 +25,9 @@ import { ChooseExamComponent } from './views/pages/choose-exam/choose-exam.compo
 import { ExamFilterComponent } from './views/pages/exam-filter/exam-filter.component';
 import { DenemeExamComponent } from './views/pages/ydsdeneme/deneme-exam/deneme-exam.component';
 import { ExamResultComponent } from './views/components/testResult/exam-result/exam-result.component';
+import { GoOnComponent } from './views/pages/go-on/go-on.component';
+import { DenemeSinaviComponent } from './views/pages/deneme-sinavi/deneme-sinavi.component';
+import { BeforeDenemeComponent } from './views/pages/before-deneme/before-deneme.component';
 
 import { UserDashboardComponent } from './views/pages/user-dashboard/user-dashboard/user-dashboard.component';
 import { ResultTableComponent } from './views/components/result-table/result-table/result-table.component';
@@ -53,6 +56,10 @@ import { CustomHttpInterceptorInterceptor } from './utils/custom-http-intercepto
     ExamFilterComponent,
     DenemeExamComponent,
     ExamResultComponent,
+
+    GoOnComponent,
+    DenemeSinaviComponent,
+    BeforeDenemeComponent,
     UserDashboardComponent,
     ResultTableComponent,
     QuestionTableComponent,

@@ -6,6 +6,7 @@ export const ServerURLs = {
 }
 
 export const Endpoints = {
+
   dataops: ServerURLs.bussion + 'Applications/DataOps',
   scriptEndpoint: ServerURLs.bussion + 'Applications',
   register: ServerURLs.bussion + 'Users/SelfRegisterUser',
@@ -20,3 +21,4 @@ export const Endpoints = {
   getUsers: ServerURLs.bussion + 'Users/GetUsers',
   logout: ServerURLs.bussion + 'Logon/Logout',
 };
+

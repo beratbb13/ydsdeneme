@@ -77,6 +77,7 @@ export class RegisterComponent {
   onSubmit() {
     this.spinnerService.show();
 
+
     // if (this.formGroup.valid) {
 
     Object.assign(this.insertUser, this.formGroup.value);
@@ -88,6 +89,7 @@ export class RegisterComponent {
 
 
     this.register(this.regiterUser, this.insertUser)
+
     this.spinnerService.hide();
   }
 

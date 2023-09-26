@@ -1,0 +1,28 @@
+<div class="wrapper">
+<div class="container">
+    <div class="page ">
+        <div class="page-header">
+            <div class="welcome text-center">
+                <div>
+                <!-- <img src="../../../../assets/pictures/Bussion-2.png" width="100px" alt=""> -->
+                <h2>Hoşgeldiniz!</h2>
+            </div>
+            </div>
+            <h1 class="text-center"> {{selectedButton}} Eğitimine Kayıt Oluyorsunuz!</h1>
+        </div>
+        <div class="text-center" style="">
+            <button class="btn btn-primary" *ngIf="!loggedIn"  [routerLink]="['/login']">Kullanıcı Girişi Yap</button>
+            <button class="btn btn-primary" *ngIf="loggedIn" [routerLink]="['/homepage/filter']"> {{loggedInUser}} Olarak Devam et</button>
+        </div>
+<hr>
+        <div class="text-center" style="margin-top: 1rem;">
+             <h5>Eğitime kaydolmadın mı? <a style=" font-size: 24px;" (click)="registerToCourse()"> Kaydol</a></h5>
+             <small style="opacity: 0.5;">*Kaydolduğunuz zaman tek sefere mahsus bir deneme sınavına gireceksiniz.</small>
+            
+         </div>
+    </div>
+
+</div>
+
+
+</div>

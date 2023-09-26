@@ -58,7 +58,9 @@ export class LoginComponent {
     }
     if (this.formGroup.valid) {
       Object.assign(this.loginFormValues, this.formGroup.value);
+
       this.login(this.loginFormValues)
+
     } else {
       this.toastService.showToast('warning', 'Lütfen formu düzgün bir şekilde doldurunuz.');
     }

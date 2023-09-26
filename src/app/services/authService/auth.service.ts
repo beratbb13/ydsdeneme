@@ -16,13 +16,23 @@ export class AuthService {
     private router: Router,
   ) { }
 
+  selectedButton: string | null = null;
+
+  setSelectedButton(buttonName: string) {
+    this.selectedButton = buttonName;
+  }
+
+  getSelectedButton() {
+    return this.selectedButton;
+  }
+
   getUserId() {
     return localStorage.getItem('userId');
   }
 
   getToken() {
-    return localStorage.getItem('token');
-    // return "26637314813674523712"
+    // return localStorage.getItem('token');
+    return "63436373258483285215"
   }
 
   setToken(token: string) {
