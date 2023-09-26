@@ -110,27 +110,37 @@
             </div>
             <div class=" card-footer justify-content-end">
                 <div class="row justify-content-end">
-                    <div class="col col-md-1 mt-1 d-flex justify-content-end">
-                        <button (click)="previousQuestion()" [disabled]="soruIndex == 0">
-                            Önceki Soru
-                        </button>
-                    </div>
+                   
                     <div class="col col-md-1 mt-1 d-flex justify-content-end">
                         <button (click)="reply()">
                             Cevabı Gör
                         </button>
                     </div>
-                    <div class="col col-md-1 mt-1 d-flex justify-content-end">
-                        <button (click)="nextQuestion()" >
-                            Sonraki Soru
-                        </button>
-                    </div>
+                  
                 </div>
             </div>
         </div>
+
     </div>
-
-
+    <div class="pagination">
+        <button class="button_pag" (click)="previousQuestion()" [disabled]="soruIndex == 0">
+          Önceki Soru
+        </button>
+        <button
+          *ngFor="let i of visibleButtons"
+          (click)="goToQuestion(i)"
+          [ngStyle]="{'background-color': getButtonBackgroundColor(questions[i].questionid)}"
+          [class.active]="i === soruIndex"
+        >
+          {{ i + 1 }}
+        </button>
+        <button *ngIf="shouldShowEllipsis()" (click)="loadNextPage()">
+            ...
+          </button>
+        <button class="button_pag" (click)="nextQuestion()">
+          Sonraki Soru
+        </button>
+      </div>
 
 
 

@@ -41,12 +41,55 @@ export class ExamFormComponent {
   trueIconColor: string = '#20511f';
   falseIcon: string = 'fa-solid fa-x';
   falseIconColor: string = '#ff0000';
+  questionStatus: { [key: string]: 'correct' | 'incorrect' | 'unanswered' } = {};
 
+
+  showEllipsisButton: boolean = false;
+  currentPage: number = 0;
+  itemsPerPage: number = 10;
+  visibleButtons:any=[];
+  totalPages: number = 0;
 
   ngOnInit() {
     this.category = history.state.category;
     this.getQuestionsAndAnswers();
     this.questionForm = this.formBuilder.group({})
+    this.currentPage = 0; 
+    this.visibleButtons = Array.from({ length: this.itemsPerPage }, (_, i) => i);
+    this.soruIndex = 0;
+  }
+
+
+  goToQuestion(index: number) {
+    if (index >= 0 && index <= this.soruSayisi) {
+      this.soruIndex = index;
+      this.currentPage = Math.floor(index / this.itemsPerPage);
+
+      // Tüm düğmelerden .active sınıfını kaldır
+      const buttons = document.querySelectorAll('.pagination button');
+      buttons.forEach((button) => {
+        button.classList.remove('active');
+      });
+
+      // Tıklanan düğmeye .active sınıfını ekle
+      buttons[index].classList.add('active');
+      this.updatePaginationButtons();
+    }
+
+  }
+  updatePaginationButtons() {
+    const startIndex = this.currentPage * this.itemsPerPage;
+    const endIndex = Math.min(startIndex + this.itemsPerPage, this.questions.length);
+    this.visibleButtons = [];
+    for (let i = startIndex; i < endIndex; i++) {
+      this.visibleButtons.push(i);
+    }
+    this.showEllipsisButton = this.currentPage < this.totalPages - 1;
+  }
+
+  shouldShowEllipsis(): boolean {
+    const totalPages = Math.ceil(this.questions.length / this.itemsPerPage);
+    return this.currentPage < totalPages - 1;
   }
 
   getQuestionsAndAnswers() {
@@ -58,6 +101,8 @@ export class ExamFormComponent {
       tap(() => this.answerswithQuestions.map((answer: any) => this.createFormControlObject(answer.questionid))),
       tap(() => this.spinnerService.hide())
     ).subscribe(() => this.timer());
+    this.totalPages = Math.ceil(this.questions.length / this.itemsPerPage);
+    this.updatePaginationButtons();
   }
 
   pullQuestions() {
@@ -114,28 +159,81 @@ export class ExamFormComponent {
     })
   }
 
-  previousQuestion() {
-    if (!(this.soruIndex < 0))
-      this.soruIndex -= 1;
+  // previousQuestion() {
+  //   if (!(this.soruIndex < 0))
+  //     this.soruIndex -= 1;
+  //   this.dogruCevap = undefined;
+  // }
+
+  // nextQuestion() {
+  //   if (this.soruSayisi > this.soruIndex + 1)
+  //     this.soruIndex += 1;
+  //   this.dogruCevap = undefined;
+  //   if ((this.soruIndex + 1) % 10 == 0) {
+  //     this.setScore();
+  //     this.getQuestionsAndAnswers();
+  //   }
+  // }
+
+  nextQuestion() {
+    if (this.soruSayisi > this.soruIndex + 1) {
+      this.soruIndex += 1;
+      this.currentPage = Math.floor(this.soruIndex / this.itemsPerPage);
+
+      if ((this.soruIndex + 1) % this.itemsPerPage === 0) {
+        this.loadNextPage();
+      }
+      this.updatePaginationButtons();
+    }
     this.dogruCevap = undefined;
   }
 
-  nextQuestion() {
-    if (this.soruSayisi > this.soruIndex + 1)
-      this.soruIndex += 1;
-    this.dogruCevap = undefined;
-    if ((this.soruIndex + 1) % 10 == 0) {
-      this.setScore();
-      this.getQuestionsAndAnswers();
+loadNextPage() {
+  this.currentPage++;
+  this.updatePaginationButtons();
+}
+  
+  previousQuestion() {
+    if (!(this.soruIndex < 0)) {
+      this.soruIndex -= 1;
+      this.currentPage = Math.floor(this.soruIndex / this.itemsPerPage);
+      this.updatePaginationButtons();
     }
+    this.dogruCevap = undefined;
   }
+
+  // reply() {
+  //   clearInterval(this.interval);
+
+  //   let current: question = this.questions[this.soruIndex];
+  //   let trueAnswer: answer | undefined = current.answers?.find(answer => answer.istrue === 1);
+  //   this.dogruCevap = trueAnswer;
+  // }
 
   reply() {
     clearInterval(this.interval);
 
     let current: question = this.questions[this.soruIndex];
     let trueAnswer: answer | undefined = current.answers?.find(answer => answer.istrue === 1);
-    this.dogruCevap = trueAnswer;
+
+    if (trueAnswer) {
+      this.dogruCevap = trueAnswer;
+      this.questionStatus[current.questionid] = 'correct';
+    } else {
+      this.questionStatus[current.questionid] = 'incorrect';
+    }
+  }
+
+  getButtonBackgroundColor(questionId: string): string {
+    const status = this.questionStatus[questionId];
+
+    if (status === 'correct') {
+      return 'green'; // Doğru cevaplanan sorular için yeşil arka plan
+    } else if (status === 'incorrect') {
+      return 'red'; // Yanlış cevaplanan sorular için kırmızı arka plan
+    } else {
+      return '#EDF1F6'; // Cevap verilmemiş sorular için varsayılan arka plan
+    }
   }
 
   sinaviBitir() {
