@@ -11,6 +11,9 @@ import { AboutusComponent } from './views/pages/Aboutus/aboutus/aboutus.componen
 import { ChooseExamComponent } from './views/pages/choose-exam/choose-exam.component';
 import { ExamFilterComponent } from './views/pages/exam-filter/exam-filter.component';
 import { DenemeExamComponent } from './views/pages/ydsdeneme/deneme-exam/deneme-exam.component';
+import { GoOnComponent } from './views/pages/go-on/go-on.component';
+import { DenemeSinaviComponent } from './views/pages/deneme-sinavi/deneme-sinavi.component';
+import { BeforeDenemeComponent } from './views/pages/before-deneme/before-deneme.component';
 
 const routes: Routes = [
 // { path: '', component: LoginComponent },
@@ -19,15 +22,20 @@ const routes: Routes = [
 { path: 'register', component: RegisterComponent },
 { path: 'forgetpassword', component: ForgetPasswordComponent },
 { path: 'choose', component: ChooseExamComponent },
+{ path: 'goon', component: GoOnComponent },
+{ path: 'deneme-sinavi', component: DenemeSinaviComponent },
+
 
   {
-    path: 'homepage', component: HomepageComponent, children: [
+    path: 'homepage', component: HomepageComponent,
+     children: [
       { path: 'aboutus', component: AboutusComponent },
       { path: 'exampage', component: ExamPageComponent },
       { path: 'examform', component: ExamFormComponent },
       { path: 'profile', component: ProfileComponent },
       { path: 'filter', component: ExamFilterComponent },
       { path: 'deneme', component: DenemeExamComponent },
+      { path: 'before-deneme', component: BeforeDenemeComponent },
 
     ]
   },

@@ -14,6 +14,7 @@ export const Endpoints = {
     usersDataStoreid: '71346323414335581818',
     examsDataStoreid: '71228732617281387825',
     examCategoryDataStoreid: '53551637416518348344',
+    YDSregistrationDSid:'81847847264814581885',
     getUsers: ServerURLs.bussion + 'Users/GetUsers',
     logout: ServerURLs.bussion + 'Logon/Logout',
 };

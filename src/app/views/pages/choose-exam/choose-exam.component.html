@@ -1,5 +1,6 @@
 <div class="navbar d-flex justify-content-center">
     <p class="text-center">Sınavlara Hazırlık Merkezi: Gerçek Sorularla Pratik Yapın</p>
+    <p *ngIf="loggedIn" style="position: absolute; right: 2%;" class="text-end">Hoşgeldiniz, {{loggedUser}}</p>
 </div>
 
 <div class="sub-bar">
@@ -23,12 +24,12 @@
             <img style="width: 300px;" src="../../../../assets/pictures/osym.png" alt="">
         </div>
     </div>
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-4">
 
         </div>
-        <div class="col-2 ok">
-            <button (click)="gologin()" type="button" class="btn btn--yellow">
+        <div  class="col-2 ok">
+            <button *ngIf="!loggedIn" (click)="gologin()" type="button" class="btn btn--yellow">
                 <span class="btn__txt">Giriş Yap</span>
                 <i class="btn__bg" aria-hidden="true"></i>
                 <i class="btn__bg" aria-hidden="true"></i>
@@ -36,33 +37,18 @@
                 <i class="btn__bg" aria-hidden="true"></i>
             </button>
         </div>
-    </div>
+    </div> -->
 </div>
 <h2 class="text-center">Çalışmak İstediğim Sınav:</h2>
 <div class="container">
-    <!-- <div class="center d-flex justify-content-space-around">
-        <button class="button" (click)="goToPage('YDS')" data-button-text="YDS">YDS</button>
-        <button class="button" disabled>YKS</button>
-        <button class="button" disabled>LGS</button>
-        <button class="button" disabled>ALES</button>
-        <button class="button" disabled>KPSS</button>
-    </div> -->
-    <div class="card" (click)="goToPage('YDS')">
-
+    <div class="card" (click)="onButtonClick('YDS')" [routerLink]="['/goon']">
         <h4 class="card-title">YDS</h4>
         <p class="card-text">Some description here</p>
-        <!-- <div class="btn-holder">
-          <a class="btn btn-outline-primary" href="#" title="">Button Text</a>
-          </div> -->
     </div>
+
     <div class="card">
-
-
         <h4 class="card-title">YKS</h4>
         <p class="card-text">Some description here</p>
-        <!-- <div class="btn-holder">
-          <a class="btn btn-outline-primary" href="#" title="">Button Text</a>
-          </div> -->
     </div>
     <div class="card">
 

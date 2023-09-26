@@ -11,6 +11,9 @@ import { UserService } from 'src/app/services/userService/user.service';
 })
 export class HomepageComponent {
 
+  selectedButton: string | null = null;
+
+
   constructor(private spinnerService: SpinnerService,
     private authService: AuthService,
     private userService: UserService) { }
@@ -18,6 +21,8 @@ export class HomepageComponent {
   currentUser!: user;
 
   ngOnInit() {
+    this.selectedButton = this.authService.getSelectedButton();
+
     if (history.state.user) {
       this.currentUser = history.state.user;
       console.log(history.state.user);

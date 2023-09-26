@@ -58,7 +58,9 @@ export class RegisterComponent {
         this.userService.insertUser(insertUser).subscribe((res: any) => {
           if (res == 'Success') {
             this.toastService.showToast('success', 'Kayıt oluşturma işlemi başarılı.');
-            this.router.navigate(['/']);
+
+            this.router.navigate(['/deneme-sinavi']);
+
           }
           else {
             this.toastService.showToast('danger', 'Kayıt oluşturulurken bir hatayla karşılaşıldı.');
