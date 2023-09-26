@@ -1,23 +1,17 @@
 <div class="container">
 
     <div class="row justify-content-end " style="height: 50px;">
-        <!--<div class="col-md-6">
-            <h1 style="font-size: 40px;">YDS</h1>
-        </div>-->
         <div class="col d-flex justify-content-center text-center" style="margin-top: 1rem;">
-            <!-- <button style="margin-top: 1rem;">
-                <span><a  [routerLink]="['/homepage/deneme']">SEVIYE TESPIT SINAVI</a></span>
-            </button> -->
             <h6 style="color: rgb(120, 120, 120);">Lütfen aşağıdan bir sınav seçip başlayın!</h6>
         </div>
     </div>
 
-<!-- <div class="container"> -->
-    
     <ul class="responsive-table">
         <li class="table-header d-flex">
-            <nb-tabset fullWidth style="width: 100%;margin-top: -13px;border-bottom: none !important;">
+            <nb-tabset fullWidth style="width: 100%;margin-top: -13px;border-bottom: none !important;"
+                (click)="filter($event)">
                 <nb-tab tabTitle="Konular" class="custom-tabset">
+
                     <!-- <li class="table-row"
                     *ngFor="let exam of categories | paginate: {itemsPerPage: 7, currentPage: pageNumber}">
                     <div class="col-8 buttton">
@@ -132,27 +126,41 @@
         </div>-->
 
 
-    <!-- <div class="container">
-        <div class="row">
-            <div class="col">
-                <ul class="list-group">
-                    <li class="list-group-item d-flex justify-content-between align-items-center"
-                        *ngFor="let exam of categories | paginate: {itemsPerPage: 15, currentPage: pageNumber}">
-                        <div class="col">
-                            {{exam.Name}}
-                        </div>
-                        <button class="btn btn-outline-success btn-sm" (click)="getExam(exam)">Sınava
-                            Başla</button>
-                    </li>
-                </ul>
+
+                <button class="close" (click)="getExam(exam)">Çalışmaya
+                    Başla</button>
             </div>
-        </div>
+
+        </li>
         <div class="row mt-3">
             <div class="col d-flex justify-content-end ">
                 <pagination-controls (pageChange)="pageNumber = $event"></pagination-controls>
             </div>
         </div>
-    </div>
 
+        </nb-tab>
+        <nb-tab tabTitle="Çıkmış Sorular" class="custom-tabset">
+            <li class="table-row"
+                *ngFor="let exam of filteredCategories | paginate: {itemsPerPage: 5, currentPage: pageNumber}">
+                <div class="col-8 buttton">
+                    {{exam.Name}}
+                </div>
+                <div class="col examname">
 
-</div> -->
+                    <button class="close" (click)="getExam(exam)">Çalışmaya
+                        Başla</button>
+                </div>
+
+            </li>
+            <div class="row mt-3">
+                <div class="col d-flex justify-content-end ">
+                    <pagination-controls (pageChange)="pageNumber = $event"></pagination-controls>
+                </div>
+            </div>
+
+        </nb-tab>
+        </nb-tabset>
+        </li>
+    </ul>
+
+</div>

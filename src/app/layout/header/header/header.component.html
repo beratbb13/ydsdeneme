@@ -3,7 +3,7 @@
         <ul class="menu__list r-list">
             <li class="menu__group yds">
                 <a href="#0"  class="menu__link r-link "  ><img src="../../../../assets/pictures/yds1.jpg" width="50px"  alt=""></a>
-                
+
             </li>
             <li class="menu__group">
                 <a href="#0" class="menu__link r-link text-underlined" [routerLink]="['/homepage/filter']">Eğitimler</a>
@@ -45,7 +45,7 @@
       <span></span>
     </label>
   </div>
-  
+
   <div class="nav-links">
       <a  [routerLink]="['/homepage/filter']">Eğitimler</a>
       <a  [routerLink]="['/homepage/deneme']">YDS Deneme Sınavı</a>
@@ -54,14 +54,16 @@
   </div>
   <div class="nav-exit">
     <span style="margin-right: 1rem;" *ngIf="loggedInUser">Hoşgeldiniz, {{loggedInUser}}</span>
+
     <a *ngIf="!loggedInUser" style="cursor: pointer;color: rgba(105,14,245,1);" (click)="goDashboard()">Dashboard'um</a>
     <a *ngIf="loggedInUser" style="cursor: pointer;color: rgba(105,14,245,1);" (click)="logOut()">Çıkış</a>
     <a *ngIf="!loggedInUser" style="cursor: pointer;color: rgba(105,14,245,1);" (click)="goLogin()">Giriş Yap</a>
 
+
   </div>
 </div>
 
-<!-- 
+<!--
 <nav>
   <input type="checkbox" id="check">
   <label for="check" class="checkbtn">

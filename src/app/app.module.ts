@@ -25,7 +25,12 @@ import { ChooseExamComponent } from './views/pages/choose-exam/choose-exam.compo
 import { ExamFilterComponent } from './views/pages/exam-filter/exam-filter.component';
 import { DenemeExamComponent } from './views/pages/ydsdeneme/deneme-exam/deneme-exam.component';
 import { ExamResultComponent } from './views/components/testResult/exam-result/exam-result.component';
+
 import { UserDashboardComponent } from './views/pages/user-dashboard/user-dashboard/user-dashboard.component';
+import { ResultTableComponent } from './views/components/result-table/result-table/result-table.component';
+import { QuestionTableComponent } from './views/components/question-table/question-table/question-table.component';
+import { ExamCustomCardComponent } from './views/components/exam-custom-card/exam-custom-card.component';
+import { InfocardComponent } from './views/components/infocard/infocard.component';
 
 
 @NgModule({
@@ -48,6 +53,10 @@ import { UserDashboardComponent } from './views/pages/user-dashboard/user-dashbo
     DenemeExamComponent,
     ExamResultComponent,
     UserDashboardComponent,
+    ResultTableComponent,
+    QuestionTableComponent,
+    ExamCustomCardComponent,
+    InfocardComponent,
 
   ],
   imports: [
@@ -57,10 +66,13 @@ import { UserDashboardComponent } from './views/pages/user-dashboard/user-dashbo
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NbThemeModule.forRoot(),
+    NbThemeModule.forRoot({ name: 'default' }),
     NbToastrModule.forRoot(),
     NbMenuModule.forRoot(),
     NbDialogModule.forRoot(),
+    NbSidebarModule.forRoot(),
+    NbWindowModule.forRoot(),
+    NbStepperModule,
     NbLayoutModule,
     NbButtonModule,
     NbSidebarModule.forRoot(),

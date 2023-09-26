@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { answer } from 'src/app/models/answer';
-import { AnswerService } from 'src/app/services/answerService/answer.service';
-import { ExamService } from 'src/app/services/examService/exam.service';
 import { QuestionService } from 'src/app/services/questionService/question.service';
 import { SpinnerService } from 'src/app/services/spinnerService/spinner.service';
 import { tap } from 'rxjs';
@@ -9,7 +7,9 @@ import { question } from 'src/app/models/question';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DialogService } from 'src/app/services/dialogService/dialog.service';
 import { Router } from '@angular/router';
-import { ToastService } from 'src/app/services/toastService/toast.service';
+import { ExamResultComponent } from '../../testResult/exam-result/exam-result.component';
+import { NbDialogRef } from '@nebular/theme/public_api';
+import { UserScoreService } from 'src/app/services/userScoreService/user-score.service';
 
 @Component({
   selector: 'app-exam-form',
@@ -18,63 +18,83 @@ import { ToastService } from 'src/app/services/toastService/toast.service';
 })
 export class ExamFormComponent {
 
-  constructor(private examService: ExamService,
+  constructor(
     private questionService: QuestionService,
-    private answerService: AnswerService,
     private spinnerService: SpinnerService,
     private formBuilder: FormBuilder,
     private dialogService: DialogService,
-    private toastService: ToastService,
+    private userScoreService: UserScoreService,
     private router: Router) { }
 
-  questions: question[] = [];
-  answers: answer[] = []
   questionForm!: FormGroup
   category: any
+  answerswithQuestions: any[] = [];
+  answers: answer[] = [];
+  questions: question[] = [];
+  questionids: string[] = [];
+  dogruCevap!: answer | undefined;
   soruIndex: number = 0;
   soruSayisi: number = 0;
   secilenCevap: string | null = null;
-  selectedCategoryName:any
+  selectedCategoryName: any
+  trueIcon: string = 'fa-solid fa-check fa-beat';
+  trueIconColor: string = '#20511f';
+  falseIcon: string = 'fa-solid fa-x';
+  falseIconColor: string = '#ff0000';
+
 
   ngOnInit() {
     this.category = history.state.category;
-    this.selectedCategoryName = this.category.Name;
-    console.log("seçili kategori",this.selectedCategoryName);
-    this.getQuestions();
+    this.getQuestionsAndAnswers();
     this.questionForm = this.formBuilder.group({})
   }
 
-  getQuestions() {
-    // this.spinnerService.show();
-    this.questionService.getQuestionsByCategoryId(this.category.ecategoryid).pipe(
-      tap(res => this.questions = res),
-      tap(() => this.soruSayisi = this.questions.length),
-      tap(() => this.spinnerService.hide()),
-      tap(() => this.questions.map(question => this.getAnswersWithQuestionIds(question))),
-      tap(() => this.questions.map((question: question) => this.createFormControlObject(question)))
+  getQuestionsAndAnswers() {
+    this.spinnerService.show();
+    this.questionService.getQuestionsAndAnswersByCategoryId(this.category.ecategoryid).pipe(
+      tap(res => this.answerswithQuestions = [...this.answerswithQuestions, ...res]), // =  res
+      tap(() => this.soruSayisi += this.answerswithQuestions.length / 5),
+      tap(() => this.pullQuestions()),
+      tap(() => this.answerswithQuestions.map((answer: any) => this.createFormControlObject(answer.questionid))),
+      tap(() => this.spinnerService.hide())
     ).subscribe(() => this.timer());
-
-
-    //).subscribe(() => setTimeout(() => this.questions.map((question: question) => this.createFormControlObject(question)), 1000));
   }
 
-  getAnswersWithQuestionIds(question: question) {
-    this.answerService.getAnswersByQuestionId(question.questionid).subscribe(
-      res => question.answers = res);
+  pullQuestions() {
+    this.answerswithQuestions.map(answer => {
+      if (!this.questionids.includes(answer.questionid)) {
+        this.questions.push({ questionid: answer.questionid, question: answer.question, examid: answer.examid, ecategoryid: answer.ecategoryid });
+        this.questionids.push(answer.questionid)
+      }
+    })
+    this.questions.map(ques => {
+      ques.answers = this.answerswithQuestions.filter(ans => ans.questionid == ques.questionid)
+    })
+    console.log(this.questions)
   }
 
+  setScore() {
+    let user = localStorage.getItem('currentUser')
+    let user_id = user ? JSON.parse(user).user_id : '';
 
-  createFormControlObject(question: question) {
-    const newFormControl = this.formBuilder.control("");
-    this.questionForm.addControl(question.questionid, newFormControl);
+    this.questionids.map(id => {
+      this.userScoreService.insertUserScore({ user_id: user_id, question_id: id }).subscribe(res => console.log(res));
+    })
   }
 
+  createFormControlObject(questionid: string) {
+    if (this.questionForm.get(questionid) == null) {
+      const newFormControl = this.formBuilder.control("");
+      this.questionForm.addControl(questionid, newFormControl);
+    }
+  }
 
   dakika: number = 0;
   saniye: number = 0;
+  interval: any;
 
   timer() {
-    setInterval(() => {
+    this.interval = setInterval(() => {
       if (!(this.saniye < 60)) {
         this.dakika = Math.floor(this.saniye / 60);
         this.saniye = 0;
@@ -83,10 +103,15 @@ export class ExamFormComponent {
     }, 1000)
   }
 
-
   showResult(sonuc: string, message: string) {
-    //let sonuc = this.reply();
     this.dialogService.openTextModal(sonuc, message).onClose.subscribe(() => this.router.navigate(['/homepage/aboutus']))
+  }
+
+  openResultModal(sonuc: any) {
+    let dialogref: NbDialogRef<any> = this.dialogService.openModal(ExamResultComponent, true, true, 'right-modal', sonuc)
+    dialogref.onClose.subscribe(() => {
+      this.router.navigate(['/homepage/filter']);
+    })
   }
 
   previousQuestion() {
@@ -95,109 +120,84 @@ export class ExamFormComponent {
     this.dogruCevap = undefined;
   }
 
-  dogruCevap!: answer | undefined;
-
   nextQuestion() {
     if (this.soruSayisi > this.soruIndex + 1)
       this.soruIndex += 1;
     this.dogruCevap = undefined;
-    /*
-        let currentid: string = this.questions[this.soruIndex - 1].questionid;
-        let controls = Object.values(this.questionForm.controls);
-        let answered = controls.find(e => currentid == e.value.questionid);
-    
-        if (answered?.value.istrue === 1) {
-          this.toastService.showToast('success', 'Soruyu Doğru Cevapladınız.');
-        } else if (answered?.value.istrue === 0) {
-          this.toastService.showToast('danger', 'Soruyu Yanlış Cevapladınız.');
-          this.dogruCevap = this.questions[this.soruIndex - 1].answers?.find(e => e.istrue == true);
-          this.toastService.showToast('warning', `Dogru cevap: ${this.dogruCevap?.answer}`);
-        } else if (answered?.value.istrue === undefined) {
-          this.toastService.showToast('warning', 'Soruyu Boş Bıraktınız.');
-        }*/
-
+    if ((this.soruIndex + 1) % 10 == 0) {
+      this.setScore();
+      this.getQuestionsAndAnswers();
+    }
   }
 
-  trueIcon: string = 'fa-solid fa-check fa-beat';
-  trueIconColor: string = '#20511f';
-  falseIcon: string = 'fa-solid fa-x';
-  falseIconColor: string = '#ff0000';
+  reply() {
+    clearInterval(this.interval);
 
-  reply() {/*
-    //this.testSuresi = 0;
-    let dogru = 0;
-    let yanlis = 0;
-    let bos = 0;
-    let controlNames = Object.values(this.questionForm.controls);
-    controlNames.map(e => {
-      if (e.value.istrue === 1) {
-        console.log('dogru');
-        dogru++;
-      } else if (e.value.istrue === 0) {
-        console.log('yanlis')
-        yanlis++;
-      } else if (e.value.istrue === undefined) {
-        console.log('bos')
-        bos++;
-      }
-    });
-    //return `Dogru: ${dogru},  Yanlis: , ${yanlis},  Bos: , ${bos}`
-    this.showResult('Sonuç', `Dogru: ${dogru}  Yanlis:  ${yanlis}  Bos:  ${bos}`);
-  */
-
-    let currentid: string = this.questions[this.soruIndex].questionid;
-    let controls = Object.values(this.questionForm.controls);
-    let answered = controls.find(e => currentid == e.value.questionid);
-
-    if (answered?.value.istrue === 1) {
-      this.toastService.showToast('success', 'Soruyu Doğru Cevapladınız.');
-      this.dogruCevap = this.questions[this.soruIndex].answers?.find(e => e.istrue == 1);
-      /*this.trueIcon = 'fa-solid fa-check fa-beat'
-      this.trueIconColor = '#20511f'*/
-
-    } else if (answered?.value.istrue === 0) {
-      this.toastService.showToast('danger', 'Soruyu Yanlış Cevapladınız.');
-      this.dogruCevap = this.questions[this.soruIndex].answers?.find(e => e.istrue == 1);
-      this.toastService.showToast('warning', `Dogru cevap: ${this.dogruCevap?.answer}`);
-      /*this.falseIcon = 'fa-solid fa-x'
-      this.falseIconColor = '#ff0000'*/
-
-    } else if (answered?.value.istrue === undefined) {
-      this.toastService.showToast('warning', 'Soruyu Boş Bıraktınız.');
-    }
-
+    let current: question = this.questions[this.soruIndex];
+    let trueAnswer: answer | undefined = current.answers?.find(answer => answer.istrue === 1);
+    this.dogruCevap = trueAnswer;
   }
 
   sinaviBitir() {
-    // Sınavı bitirme işlemleri
-    let dogruSayisi = 0;
-    let yanlisSayisi = 0;
-    let bosSayisi = 0;
-  
-    // Tüm soruları dönerek cevapları kontrol et
-    this.questions.forEach((soru, index) => {
-      const soruForm = this.questionForm.get(index.toString()); // Soru formunu al
-  
-      if (soruForm) {
-        const cevap = soruForm.value; // Kullanıcının verdiği cevap
-        const dogruCevap = soru.answers?.find(answer => answer.istrue === 1); // Doğru cevap
-  
-        if (cevap === undefined) {
-          bosSayisi++;
-        } else if (cevap === dogruCevap?.answer) {
-          dogruSayisi++;
-        } else {
-          yanlisSayisi++;
-        }
-      }
-    });
-  
-    // Sonuçları göster
-    this.toastService.showToast('success', `Doğru Sayısı: ${dogruSayisi}`);
-    this.toastService.showToast('danger', `Yanlış Sayısı: ${yanlisSayisi}`);
-    this.toastService.showToast('warning', `Boş Sayısı: ${bosSayisi}`);
-  }
-  
 
+    let controls = Object.values(this.questionForm.controls);
+    let trueQuestions: question[] = [];
+    let falseQuestions: question[] = [];
+    let emptyQuestions: question[] = [];
+    let trueIds: any[] = [];
+    let falseIds: any[] = [];
+
+    controls.map(control => {
+      if (control.value.istrue == 1) {
+        trueQuestions.push(this.questions.filter(ques => control.value.questionid == ques.questionid)[0]);
+        trueIds.push(control.value.questionid);
+      }
+      else if (control.value.istrue == 0) {
+        falseQuestions.push(this.questions.filter(ques => control.value.questionid == ques.questionid)[0]);
+        falseIds.push(control.value.questionid);
+      }
+    })
+
+    emptyQuestions = this.questions.filter(ques => (!trueIds.includes(ques.questionid) && !falseIds.includes(ques.questionid)));
+
+    let items = [
+      {
+        title: 'Soru Sayısı',
+        expanded: true,
+        badge: {
+          text: this.questions.length,
+          status: 'primary',
+        },
+        children: [
+          {
+            title: 'Doğru Cevaplar',
+            badge: {
+              text: trueQuestions.length,
+              status: 'success',
+            }
+          },
+          {
+            title: 'Yanlış Cevaplar',
+            badge: {
+              text: falseQuestions.length,
+              status: 'danger',
+            }
+          },
+          {
+            title: 'Boş Cevaplar',
+            badge: {
+              text: emptyQuestions.length,
+              status: 'warning',
+            }
+          }
+        ]
+      }
+    ]
+
+    let allQuestions = [...trueQuestions, ...falseQuestions, ...emptyQuestions];
+
+    this.openResultModal({ items: items, questions: allQuestions });
+
+  }
 
 }
