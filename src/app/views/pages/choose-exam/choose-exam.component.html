@@ -1,84 +1,75 @@
-<div class="navbar d-flex justify-content-center">
+<div>
+  <div class="navbar d-flex justify-content-center">
     <p class="text-center">Sınavlara Hazırlık Merkezi: Gerçek Sorularla Pratik Yapın</p>
-</div>
+  </div>
 
-<div class="sub-bar">
-    <div class="row ">
-        <div class="col-1"></div>
-        <div class="col-5 desc">
-            <h1> Deneme Sınavı Platformu'na Hoş geldiniz!</h1>
-            <p>Sınavlara hazırlanırken size yardımcı olmak için buradayız. ÖSYM'nin yayınladığı gerçek sınav soruları
-                ile pratik yaparak sınavlarınıza daha iyi hazırlanabilirsiniz. Ücretsiz deneme sınavlarımızı çözerek
-                sınav tecrübenizi artırabilirsiniz.
+  <div class="sub-bar" style="padding-top: 3rem;">
+    <div class="row" style="padding-left: 2rem;padding-right: 2rem;width: 100%;">
+      <div class="col-lg-7 desc">
+        <h1> Deneme Sınavı Platformu'na Hoş geldiniz!</h1>
+        <p>Sınavlara hazırlanırken size yardımcı olmak için buradayız. ÖSYM'nin yayınladığı gerçek sınav soruları
+          ile pratik yaparak sınavlarınıza daha iyi hazırlanabilirsiniz. Ücretsiz deneme sınavlarımızı çözerek
+          sınav tecrübenizi artırabilirsiniz.
 
-                Hemen başlamak için lütfen giriş yapın veya kaydolun. Eğer herhangi bir sorunuz veya geri bildiriminiz
-                varsa, bizimle iletişime geçmekten çekinmeyin.
+          Hemen başlamak için lütfen giriş yapın veya kaydolun. Eğer herhangi bir sorunuz veya geri bildiriminiz
+          varsa, bizimle iletişime geçmekten çekinmeyin.
 
-                Başarılar dileriz!</p>
-        </div>
-        <div class="col-2">
+          Başarılar dileriz!</p>
+        <!-- <div class="col-2 ok"> -->
+          <button (click)="goregister()" type="button" class="btn btn--yellow" style="margin-right: 2rem;">
+            <span class="btn__txt">Üye Ol</span>
+            <i class="btn__bg" aria-hidden="true"></i>
+            <i class="btn__bg" aria-hidden="true"></i>
+            <i class="btn__bg" aria-hidden="true"></i>
+            <i class="btn__bg" aria-hidden="true"></i>
+          </button>
+          <button (click)="gologin()" type="button" class="btn btn--yellow">
+            <span class="btn__txt">Giriş Yap</span>
+            <i class="btn__bg" aria-hidden="true"></i>
+            <i class="btn__bg" aria-hidden="true"></i>
+            <i class="btn__bg" aria-hidden="true"></i>
+            <i class="btn__bg" aria-hidden="true"></i>
+          </button>
 
-        </div>
-        <div class="col-4">
-            <img style="width: 300px;" src="../../../../assets/pictures/clip-somplete-purchases.png" alt="">
-        </div>
+        <!-- </div> -->
+      </div>
+      <div class="col-lg-5" style="display: flex;align-items: center;justify-content: center;">
+        <img style="width: 300px;" src="../../../../assets/pictures/clip-somplete-purchases.png" alt="">
+      </div>
     </div>
-    <div class="row">
-        <div class="col-4">
 
-        </div>
-        <div class="col-2 ok">
-            <button (click)="gologin()" type="button" class="btn btn--yellow">
-                <span class="btn__txt">Giriş Yap</span>
-                <i class="btn__bg" aria-hidden="true"></i>
-                <i class="btn__bg" aria-hidden="true"></i>
-                <i class="btn__bg" aria-hidden="true"></i>
-                <i class="btn__bg" aria-hidden="true"></i>
-            </button>
-        </div>
-    </div>
-</div>
-<h2 class="text-center">Çalışmak İstediğim Sınav:</h2>
-<div class="container">
-    <!-- <div class="center d-flex justify-content-space-around">
+  </div>
+  <div style="padding-top: 1rem;">
+    <h2 class="text-center">Sistem Üzerinde Çalışabileceğin Sınavlar</h2>
+    <div style="width:100%;padding-top: 2rem;">
+      <!-- <div class="center d-flex justify-content-space-around">
         <button class="button" (click)="goToPage('YDS')" data-button-text="YDS">YDS</button>
         <button class="button" disabled>YKS</button>
         <button class="button" disabled>LGS</button>
         <button class="button" disabled>ALES</button>
         <button class="button" disabled>KPSS</button>
     </div> -->
-    <div class="card" (click)="goToPage('YDS')">
-        <div class="avatar Y">Y</div> <!-- Y harfi için avatar -->
-        <h4 class="card-title">YDS</h4>
-        <!-- <p class="card-text">Some description here</p> -->
+      <div class="row" style="width: 100%;align-items: center;justify-content: center;">
+        <app-exam-custom-card *ngFor="let item of exams" [exam]="item" class="col-lg-2"></app-exam-custom-card>
       </div>
-
-      <div class="card">
-        <div class="avatar YK">Y</div> <!-- Y harfi için avatar -->
-        <h4 class="card-title">YKS</h4>
-        <br>
-        <!-- <p class="card-text">Some description here</p> -->
-      </div>
-
-      <div class="card">
-        <div class="avatar L">L</div> <!-- L harfi için avatar -->
-        <h4 class="card-title">LGS</h4>
-        <!-- <p class="card-text">Some description here</p> -->
-      </div>
-
-      <div class="card">
-        <div class="avatar A">A</div> <!-- A harfi için avatar -->
-        <h4 class="card-title">ALES</h4>
-        <!-- <p class="card-text">Some description here</p> -->
-      </div>
-
-      <div class="card">
-        <div class="avatar K">K</div> <!-- K harfi için avatar -->
-        <h4 class="card-title">KPSS</h4>
-
-        <!-- <p class="card-text">Some description here</p> -->
-        <!-- <div class="btn-holder">
-          <a class="btn btn-outline-primary" href="#" title="">Button Text</a>
-          </div> -->
     </div>
+  </div>
+  <div class="row info-container">
+    <app-infocard *ngFor="let item of infos" [info]="item" class="col-lg-4 col-md-4"></app-infocard>
+
+  </div>
+  <div class="ads-section">
+    <div style="display: flex;justify-content: flex-end;">
+      <div class="text-area" style="flex-basis: 80%;">
+        <h1>Kontrol Senin Elinde</h1>
+        <small>Kişisel asistanın herzaman yanında! Günden güne analizlerini yaparak çalışma sürecinin tüm kontrolünü sağlayabilirsin.</small>
+      </div>
+      <div style="flex-basis: 20%;">
+        <img class="hareketli-element" src="/assets/pictures/assistant.png" width="150" />
+      </div>
+    </div>
+  </div>
+  <div class="footer d-flex justify-content-center" style="padding-top:3rem ;">
+    <p class="text-center">Powered By Bussion</p>
+  </div>
 </div>

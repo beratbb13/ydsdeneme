@@ -1,0 +1,22 @@
+.custom-exam-card{
+  padding: 1rem;
+  background-color: transparent;
+  border: 1px solid rgb(53, 101, 229);
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.exam-icon{
+  background-color: rgba(75,59,229,0.4);
+  width: 60px;
+  border-radius: 50px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-title{
+  color: rgb(75,59,229);
+}

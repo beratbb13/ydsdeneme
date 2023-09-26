@@ -1,0 +1,15 @@
+.info-card{
+  /* border: 1px solid gray; */
+  border-radius: 20px;
+  padding: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
+  min-height: 500px;
+}
+
+.text-area{
+  margin-top: 3rem;
+}
