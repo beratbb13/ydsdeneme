@@ -64,3 +64,8 @@
 .right-modal nb-dialog-container {
     width: 100%;
 }
+
+.card{
+    width: 90%;
+    margin: 2%;
+}

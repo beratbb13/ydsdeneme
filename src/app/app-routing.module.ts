@@ -11,6 +11,7 @@ import { AboutusComponent } from './views/pages/Aboutus/aboutus/aboutus.componen
 import { ChooseExamComponent } from './views/pages/choose-exam/choose-exam.component';
 import { ExamFilterComponent } from './views/pages/exam-filter/exam-filter.component';
 import { DenemeExamComponent } from './views/pages/ydsdeneme/deneme-exam/deneme-exam.component';
+import { UserDashboardComponent } from './views/pages/user-dashboard/user-dashboard/user-dashboard.component';
 
 const routes: Routes = [
 // { path: '', component: LoginComponent },
@@ -19,7 +20,7 @@ const routes: Routes = [
 { path: 'register', component: RegisterComponent },
 { path: 'forgetpassword', component: ForgetPasswordComponent },
 { path: 'choose', component: ChooseExamComponent },
-
+{ path: 'user', component:UserDashboardComponent },
   {
     path: 'homepage', component: HomepageComponent, children: [
       { path: 'aboutus', component: AboutusComponent },

@@ -10,7 +10,7 @@ import { HttpClientModule } from '@angular/common/http'
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbThemeModule, NbAccordionModule, NbToastrModule, NbLayoutModule, NbButtonModule, NbDialogModule, NbSidebarModule, NbCardModule, NbContextMenuModule, NbMenuModule, NbDialogRef, NbTabsetModule } from '@nebular/theme';
+import { NbThemeModule, NbAccordionModule, NbToastrModule, NbLayoutModule, NbButtonModule, NbDialogModule, NbSidebarModule, NbCardModule, NbContextMenuModule, NbMenuModule, NbDialogRef, NbTabsetModule, NbUserModule, NbListModule, NbProgressBarModule, NbSelectModule, NbDatepickerModule, NbDatepickerAdapter, NbSearchModule } from '@nebular/theme';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { ExamPageComponent } from './views/pages/exam-page/exam-page.component';
 import { ConfirmationModalComponent } from './views/components/confirmationModal/confirmation-modal/confirmation-modal.component';
@@ -25,6 +25,8 @@ import { ChooseExamComponent } from './views/pages/choose-exam/choose-exam.compo
 import { ExamFilterComponent } from './views/pages/exam-filter/exam-filter.component';
 import { DenemeExamComponent } from './views/pages/ydsdeneme/deneme-exam/deneme-exam.component';
 import { ExamResultComponent } from './views/components/testResult/exam-result/exam-result.component';
+import { UserDashboardComponent } from './views/pages/user-dashboard/user-dashboard/user-dashboard.component';
+
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { ExamResultComponent } from './views/components/testResult/exam-result/e
     ExamFilterComponent,
     DenemeExamComponent,
     ExamResultComponent,
+    UserDashboardComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -59,13 +63,21 @@ import { ExamResultComponent } from './views/components/testResult/exam-result/e
     NbDialogModule.forRoot(),
     NbLayoutModule,
     NbButtonModule,
-    NbSidebarModule,
+    NbSidebarModule.forRoot(),
     NbCardModule,
     NbContextMenuModule,
     NgxSpinnerModule,
     NgxPaginationModule,
     NbAccordionModule,
-    NbTabsetModule
+    NbTabsetModule,
+    NbLayoutModule,
+    NbCardModule,
+    NbUserModule,
+    NbListModule,
+    NbProgressBarModule,
+    NbSelectModule,
+    NbDatepickerModule.forRoot(),
+    NbSearchModule
   ],
   providers: [],
   bootstrap: [AppComponent],
