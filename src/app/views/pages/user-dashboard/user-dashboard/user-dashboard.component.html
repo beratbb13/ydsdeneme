@@ -1,0 +1,176 @@
+<!-- <nb-card class="header">
+  <nb-card-body>
+    <nb-user shape="round" name="John Doe" title="Engineer"></nb-user>
+
+  </nb-card-body>
+  <nb-search type="rotate-layout"></nb-search>
+</nb-card> -->
+<app-header></app-header>
+<div style="display: flex;justify-content: center;margin-top: 3%;">
+  <div class="panel-header panel-header-lg" style="width: 96%;">
+
+    <div baseChart id="bigDashboardChart">
+      <div class="content-container">
+        <h3>Welcome back User</h3>
+        <p>You've le#rned &o% of your gool this week!
+          Keep it up ond improve your resulls
+        </p>
+      </div>
+
+      <img class="img" src="../../../../../assets/pictures/casual-life-3d-young-woman-working-at-desk.png" alt="">
+    </div>
+
+  </div>
+</div>
+
+<div class="main-content">
+  <div class="row" style="display: flex; flex-wrap: wrap;">
+    <nb-card class="latest" size="medium">
+      <nb-card-header>
+        Latest Result
+      </nb-card-header>
+      <nb-list>
+        <nb-list-item>
+          Deneme
+          <nb-progress-bar style="    width: 100% !important;
+           margin-left: 2% !important;" [value]="60" status="primary"></nb-progress-bar>
+        </nb-list-item>
+        <nb-list-item>
+          Deneme
+          <nb-progress-bar style="    width: 100% !important;
+            margin-left: 2% !important;" [value]="60" status="primary"></nb-progress-bar>
+        </nb-list-item>
+        <nb-list-item>
+          Deneme
+          <nb-progress-bar style="    width: 100% !important;
+            margin-left: 2% !important;" [value]="60" status="primary"></nb-progress-bar>
+        </nb-list-item>
+        <nb-list-item>
+          Deneme
+          <nb-progress-bar style="    width: 100% !important;
+            margin-left: 2% !important;" [value]="70" status="primary"></nb-progress-bar>
+        </nb-list-item>
+        <nb-list-item>
+          Deneme
+          <nb-progress-bar style="    width: 100% !important;
+             margin-left: 2% !important;" [value]="20" status="primary"></nb-progress-bar>
+        </nb-list-item>
+        <nb-list-item>
+          Deneme
+          <nb-progress-bar style="    width: 100% !important;
+             margin-left: 2% !important;" [value]="40" status="primary"></nb-progress-bar>
+        </nb-list-item>
+        <nb-list-item>
+          Deneme
+          <nb-progress-bar style="    width: 100% !important;
+                margin-left: 2% !important;" [value]="80" status="primary"></nb-progress-bar>
+        </nb-list-item>
+      </nb-list>
+
+    </nb-card>
+
+
+    <nb-card size="medium" style="flex: 50%;">
+      <nb-card-header style="display: flex;justify-content: space-around;">
+        Time spent on learning..
+        <input nbInput placeholder="Pick Date" style="border: none !important;" [nbDatepicker]="dateTimePicker">
+        <nb-datepicker #dateTimePicker></nb-datepicker>
+      </nb-card-header>
+      <nb-list>
+        <nb-list-item>
+          Deneme
+          <nb-progress-bar style="    width: 100% !important;
+                    margin-left: 2% !important;" [value]="40" status="danger"></nb-progress-bar>
+        </nb-list-item>
+        <nb-list-item>
+          Deneme
+          <nb-progress-bar style="    width: 100% !important;
+                    margin-left: 2% !important;" [value]="70" status="danger"></nb-progress-bar>
+        </nb-list-item>
+        <nb-list-item>
+          Deneme
+          <nb-progress-bar style="    width: 100% !important;
+                    margin-left: 2% !important;" [value]="10" status="danger"></nb-progress-bar>
+        </nb-list-item>
+        <nb-list-item>
+          Deneme
+          <nb-progress-bar style="    width: 100% !important;
+                    margin-left: 2% !important;" [value]="50" status="danger"></nb-progress-bar>
+        </nb-list-item>
+        <nb-list-item>
+          Deneme
+          <nb-progress-bar style="    width: 100% !important;
+                    margin-left: 2% !important;" [value]="70" status="danger"></nb-progress-bar>
+        </nb-list-item>
+        <nb-list-item>
+          Deneme
+          <nb-progress-bar style="    width: 100% !important;
+                    margin-left: 2% !important;" [value]="30" status="danger"></nb-progress-bar>
+        </nb-list-item>
+        <nb-list-item>
+          Deneme
+          <nb-progress-bar style="    width: 100% !important;
+                    margin-left: 2% !important;" [value]="40" status="danger"></nb-progress-bar>
+        </nb-list-item>
+      </nb-list>
+    </nb-card>
+  </div>
+</div>
+<div style="padding: 40px;">
+  <div class="courses">
+    <h3>Your courses</h3>
+    <img width="32" height="32" src="https://img.icons8.com/fluency-systems-regular/48/more.png" alt="more"/>
+  </div>
+  <div style="display: flex;justify-content: space-between;">
+
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <span><img width="64" height="64"
+              src="https://img.icons8.com/external-photo3ideastudio-lineal-color-photo3ideastudio/64/external-exam-online-learning-photo3ideastudio-lineal-color-photo3ideastudio.png"
+              alt="external-exam-online-learning-photo3ideastudio-lineal-color-photo3ideastudio" /></span>
+          <h3>Deneme</h3>
+        </div>
+      </div>
+      <div class="card-footer">
+        <img src="https://img.icons8.com/pulsar-line/48/start.png" alt="start" />Çalışmaya Devam Et
+      </div>
+    </div>
+
+
+
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <span><img width="64" height="64"
+              src="https://img.icons8.com/external-photo3ideastudio-lineal-color-photo3ideastudio/64/external-exam-online-learning-photo3ideastudio-lineal-color-photo3ideastudio.png"
+              alt="external-exam-online-learning-photo3ideastudio-lineal-color-photo3ideastudio" /></span>
+          <h3>Deneme</h3>
+        </div>
+      </div>
+      <div class="card-footer">
+        <img src="https://img.icons8.com/pulsar-line/48/start.png" alt="start" />Çalışmaya Devam Et
+      </div>
+    </div>
+
+
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <span><img width="64" height="64"
+              src="https://img.icons8.com/external-photo3ideastudio-lineal-color-photo3ideastudio/64/external-exam-online-learning-photo3ideastudio-lineal-color-photo3ideastudio.png"
+              alt="external-exam-online-learning-photo3ideastudio-lineal-color-photo3ideastudio" /></span>
+          <h3>Deneme</h3>
+        </div>
+      </div>
+      <div class="card-footer">
+        <img src="https://img.icons8.com/pulsar-line/48/start.png" alt="start" />Çalışmaya Devam Et
+      </div>
+    </div>
+  </div>
+
+
+</div>
