@@ -1,10 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400&display=swap');
+
 .nb-theme-default .layout .layout-container .content .columns nb-layout-column {
     padding: 0 !important;
   }
 
 
 
-  
+  .nb-theme-default nb-tabset .tab:hover .tab-link {
+    color: white !important;
+  }
+  .nb-theme-default nb-tabset .tab-link {
+    background-color: rgba(0,0,0,0);
+    cursor: pointer;
+    padding: 1rem 2rem;
+    color: white !important;
+    font-family: Open Sans, sans-serif;
+    font-size: .1000rem;
+    font-weight: 700;
+    line-height: 1rem;
+    text-transform: uppercase;
+}
 /* You can add global styles to this file, and also import other style files */
 @media screen and (max-width: 991px) {
 
@@ -50,4 +65,21 @@
 
 .right-modal nb-dialog-container {
     width: 100%;
+}
+
+
+.card{
+    width: 90%;
+    margin: 2%;
+}
+
+div, h4,h5,h6,span,p,h1,h2,h3{
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+.row {
+
+  margin-right: 0 !important;
+   margin-left: 0 !important;
+
 }

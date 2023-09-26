@@ -34,20 +34,23 @@ export class HeaderComponent {
       }
       console.log(this.loggedInUser);
     }
-    
-  
+
+
     logOut() {
       this.authService.getLogout().subscribe(res => console.log(res));
-      localStorage.removeItem('currentUser')
+      localStorage.clear()
       this.router.navigate(['/']);
     }
-  
-  
+
+
     goMain(){
       this.router.navigate(['/'])
     }
-    
+
     goLogin(){
       this.router.navigate(['/login'])
+    }
+    goDashboard(){
+      this.router.navigate(['/user'])
     }
 }

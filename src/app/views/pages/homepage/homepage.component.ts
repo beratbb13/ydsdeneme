@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { user } from 'src/app/models/user';
+import { User } from 'src/app/models/user';
+
 import { AuthService } from 'src/app/services/authService/auth.service';
 import { SpinnerService } from 'src/app/services/spinnerService/spinner.service';
 import { UserService } from 'src/app/services/userService/user.service';
@@ -18,7 +19,7 @@ export class HomepageComponent {
     private authService: AuthService,
     private userService: UserService) { }
 
-  currentUser!: user;
+  currentUser!: User;
 
   ngOnInit() {
     this.selectedButton = this.authService.getSelectedButton();

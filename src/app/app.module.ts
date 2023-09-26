@@ -6,11 +6,11 @@ import { ForgetPasswordComponent } from './views/pages/forget-password/forget-pa
 
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http'
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbThemeModule, NbAccordionModule, NbToastrModule, NbLayoutModule, NbButtonModule, NbDialogModule, NbSidebarModule, NbCardModule, NbContextMenuModule, NbMenuModule, NbDialogRef } from '@nebular/theme';
+import { NbThemeModule, NbAccordionModule, NbToastrModule, NbLayoutModule, NbButtonModule, NbDialogModule, NbSidebarModule, NbCardModule, NbContextMenuModule, NbMenuModule, NbDialogRef, NbTabsetModule, NbUserModule, NbListModule, NbProgressBarModule, NbSelectModule, NbDatepickerModule, NbDatepickerAdapter, NbSearchModule, NbWindowModule, NbStepperModule } from '@nebular/theme';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { ExamPageComponent } from './views/pages/exam-page/exam-page.component';
 import { ConfirmationModalComponent } from './views/components/confirmationModal/confirmation-modal/confirmation-modal.component';
@@ -28,6 +28,14 @@ import { ExamResultComponent } from './views/components/testResult/exam-result/e
 import { GoOnComponent } from './views/pages/go-on/go-on.component';
 import { DenemeSinaviComponent } from './views/pages/deneme-sinavi/deneme-sinavi.component';
 import { BeforeDenemeComponent } from './views/pages/before-deneme/before-deneme.component';
+
+import { UserDashboardComponent } from './views/pages/user-dashboard/user-dashboard/user-dashboard.component';
+import { ResultTableComponent } from './views/components/result-table/result-table/result-table.component';
+import { QuestionTableComponent } from './views/components/question-table/question-table/question-table.component';
+import { ExamCustomCardComponent } from './views/components/exam-custom-card/exam-custom-card.component';
+import { InfocardComponent } from './views/components/infocard/infocard.component';
+import { CustomHttpInterceptorInterceptor } from './utils/custom-http-interceptor.interceptor';
+
 
 @NgModule({
   declarations: [
@@ -48,9 +56,16 @@ import { BeforeDenemeComponent } from './views/pages/before-deneme/before-deneme
     ExamFilterComponent,
     DenemeExamComponent,
     ExamResultComponent,
+
     GoOnComponent,
     DenemeSinaviComponent,
     BeforeDenemeComponent,
+    UserDashboardComponent,
+    ResultTableComponent,
+    QuestionTableComponent,
+    ExamCustomCardComponent,
+    InfocardComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -59,20 +74,34 @@ import { BeforeDenemeComponent } from './views/pages/before-deneme/before-deneme
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NbThemeModule.forRoot(),
+    NbThemeModule.forRoot({ name: 'default' }),
     NbToastrModule.forRoot(),
     NbMenuModule.forRoot(),
     NbDialogModule.forRoot(),
+    NbSidebarModule.forRoot(),
+    NbWindowModule.forRoot(),
+    NbStepperModule,
     NbLayoutModule,
     NbButtonModule,
-    NbSidebarModule,
+    NbSidebarModule.forRoot(),
     NbCardModule,
     NbContextMenuModule,
     NgxSpinnerModule,
     NgxPaginationModule,
     NbAccordionModule,
+    NbTabsetModule,
+    NbLayoutModule,
+    NbCardModule,
+    NbUserModule,
+    NbListModule,
+    NbProgressBarModule,
+    NbSelectModule,
+    NbDatepickerModule.forRoot(),
+    NbSearchModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: CustomHttpInterceptorInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

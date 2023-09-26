@@ -5,6 +5,7 @@ import { SpinnerService } from 'src/app/services/spinnerService/spinner.service'
 import { ToastService } from 'src/app/services/toastService/toast.service';
 import { UserService } from 'src/app/services/userService/user.service';
 import { Router } from '@angular/router';
+import { LoginRequest } from 'src/app/models/login';
 
 
 @Component({
@@ -18,37 +19,65 @@ export class LoginComponent {
     private toastService: ToastService,
     private spinnerService: SpinnerService,
     private userService: UserService,
-    private router: Router) { }
+    private router: Router,
+    private authService: AuthService) { }
 
   formGroup!: FormGroup
-  loginFormValues: any = {}
-
+  loginFormValues: LoginRequest = { Username: '', Password: '' }
+  rememberMe: string = 'false'
 
   ngOnInit() {
     this.formGroup = this.formBuilder.group({
-      username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
-      password: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
+      Username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+      Password: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
+
     })
+    this.isCheckedRemember()
+  }
+
+  isCheckedRemember() {
+    if (localStorage.getItem('remember')){
+      this.rememberMe='true'
+      var userName=localStorage.getItem('Username')
+      var password=localStorage.getItem('Password')
+      this.formGroup.patchValue({
+        Username:userName,
+        Password:password
+      })
+
+    }
   }
 
   onSubmit() {
     this.spinnerService.show();
+    if (this.rememberMe) {
+      localStorage.setItem('Username', this.formGroup.value.Username)
+      localStorage.setItem('Password', this.formGroup.value.Password)
+      localStorage.setItem('remember', this.rememberMe)
+
+    }
     if (this.formGroup.valid) {
       Object.assign(this.loginFormValues, this.formGroup.value);
-      this.userService.getUserByUserName(this.loginFormValues.username).subscribe(res => {
-        if (res && res.password_ === this.loginFormValues.password) {
-          this.toastService.showToast('success', 'Giriş işlemi başarılı');
-          localStorage.setItem('currentUser', JSON.stringify(res));
-          this.router.navigate(['/']);
-        } else if (res) {
-          this.toastService.showToast('danger', 'Şifrenizi yanlış girdiniz. Lütfen tekrar deneyin.');
-        } else {
-          this.toastService.showToast('warning', 'Böyle bir hesap bulunmuyor.');
-        }
-      });
+
+      this.login(this.loginFormValues)
+
     } else {
       this.toastService.showToast('warning', 'Lütfen formu düzgün bir şekilde doldurunuz.');
     }
     this.spinnerService.hide();
+  }
+
+
+  login(loginReq: LoginRequest) {
+    this.authService.login(loginReq).subscribe(res => {
+      if (res.result) {
+        this.toastService.showToast('success', 'Giriş işlemi başarılı');
+        this.router.navigate(['/dashboard']);
+      } else if (res) {
+        this.toastService.showToast('danger', 'Kullanıcı bilgilerinizi yanlış girdiniz. Lütfen tekrar deneyin.');
+      } else {
+        this.toastService.showToast('warning', 'Böyle bir hesap bulunmuyor.');
+      }
+    })
   }
 }

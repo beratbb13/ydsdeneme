@@ -16,7 +16,12 @@
   flex: 1; /* Kartların eşit genişlikte olduğundan emin olmak için */
   margin: 1rem;
   max-width: 300px; /* Kartların maksimum genişliği */
+
   cursor: pointer;
+
+  display: flex;
+  flex-direction: row;
+
 }
 
 .card:hover {
@@ -34,7 +39,7 @@
 }
 .card a {
     text-decoration:none;
-    position: absolute; 
+    position: absolute;
     margin-bottom: 1.5rem;
 }
 .card .btn-holder{
@@ -42,6 +47,36 @@
     align-items: center;
     justify-content: center;
     margin-top: 4rem;
+}
+.avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 30px;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+}
+
+.avatar.Y {
+  background-color: #ff5733; /* Kırmızı */
+}
+.avatar.YK {
+  background-color: #9a2c9a; /* Kırmızı */
+}
+
+
+.avatar.L {
+  background-color: #33ff57; /* Yeşil */
+}
+
+.avatar.A {
+  background-color: #3366ff; /* Mavi */
+}
+
+.avatar.K {
+  background-color: #ffcc33; /* Sarı */
 }
 
 
@@ -78,7 +113,10 @@
 .navbar{
   background-color: rgb(5, 1, 61);
   position: fixed;
-  width: 100%;
+  width: 100vw;
+  overflow: hidden;
+  z-index: 100000;
+  height: 3rem;
 }
 .navbar p{
   font-weight: 900;
@@ -90,13 +128,17 @@
 .sub-bar{
   background: linear-gradient(90deg, rgba(105,14,245,1) 0%, rgba(60,79,235,1) 71%, rgba(19,108,238,1) 98%);
   height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
  }
 
 .desc{
   font-size: 2.5rem;
   line-height: 3.25rem;
   font-weight: 800;
-  margin-top: 6rem;
+  /* margin-top: 6rem; */
   /* margin-left: 2rem; */
 }
 .desc p, .desc h1{
@@ -109,12 +151,10 @@
   word-wrap: break-word;
 }
 
-img{
-  margin-top: 7rem;
-}
+
 
 .container {
- 
+
     display: flex;
     flex-wrap: wrap; /* Kartlar sırasıyla sığsın ve alt satıra geçsin */
     justify-content: center; /* Kartları yatayda ortala */
@@ -131,7 +171,7 @@ img{
   .text-center{
     margin-top: 1%;
   }
-  
+
   .center button {
     margin: 5px;
     padding: 14px;
@@ -157,13 +197,13 @@ img{
 
   @media (max-width: 900px) {
     .center {
-      flex-wrap: wrap; 
-      justify-content: space-between; 
+      flex-wrap: wrap;
+      justify-content: space-between;
       margin-top: 2rem;
     }
-  
+
     .center button {
-      width: calc(50% - 10px); /* Butonların yarısını genişlet ve boşlukları hesapla */    
+      width: calc(50% - 10px); /* Butonların yarısını genişlet ve boşlukları hesapla */
     }
     h2{
       font-size: 24px;
@@ -212,7 +252,7 @@ img{
     outline: 3px solid hsl(calc(var(--hue) + 90), 98%, 80%);
   }
   .btn + .btn {
-    margin-top: 2.5em;
+    /* margin-top: 2.5em; */
   }
   .btn__txt {
     position: relative;
@@ -265,4 +305,83 @@ img{
   }
   .btn:hover .btn__bg:nth-of-type(4), .btn:focus .btn__bg:nth-of-type(4), .btn:active .btn__bg:nth-of-type(4) {
     transition-delay: 0.46s;
-  } */
+
+  }
+
+
+.info-container{
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 3rem;
+}
+
+
+@media screen and (max-width: 768px) {
+  /* Bu alan içinde telefon boyutları için CSS kurallarınızı tanımlayabilirsiniz */
+  .sub-bar{
+    height: 50%;
+  }
+  .ads-section,.text-area{
+    padding-top: 1rem !important;
+    padding-left: 1rem !important;
+
+  }
+  .ads-section h1{
+    font-size: large;
+    line-height: inherit;
+  }
+  /* Örnek olarak font boyutunu küçültebilirsiniz */
+}
+
+/*
+  ##Device = Tablets, Ipads (portrait)
+  ##Screen = B/w 768px to 1024px
+*/
+
+
+
+
+
+.ads-section{
+  background-color: rgb(4, 1, 58);
+  margin-top: 3rem;
+  height: 30vh;
+  padding: 3rem;
+  color: white;
+}
+.text-area{
+  padding-left: 3rem;
+
+}
+.text-area h1{
+  color: rgb(238, 241, 246) !important;
+}
+
+.hareketli-element {
+  /* width: 100px;
+  height: 100px;
+  background-color: blue; */
+  position: relative;
+  animation: hareket 2s ease infinite; /* Sonsuz hareketi başlatır */
+}
+
+@keyframes hareket {
+  0%, 100% {
+    top: 0;
+  }
+  50% {
+    top: 15px; /* Orta noktada yükseklik değişikliği */
+  }
+}
+
+
+/* @media screen and (min-width: 800px) and (min-height: 1170px) and (max-width: 800px) and (max-height: 1170px) {
+  .sub-bar{
+    height: 60%;
+  }
+  .info-card{
+    min-height: 30vh !important;
+  }
+
+} */
+
