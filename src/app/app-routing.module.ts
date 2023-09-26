@@ -18,33 +18,29 @@ import { BeforeDenemeComponent } from './views/pages/before-deneme/before-deneme
 
 import { AuthGuard } from './services/authService/auth.guard';
 import { UserDashboardComponent } from './views/pages/user-dashboard/user-dashboard/user-dashboard.component';
+import { LoggedInLayoutComponent } from './layout/logged-in-layout/logged-in-layout.component';
 
 
 const routes: Routes = [
-// { path: '', component: LoginComponent },
-{ path: '', component: ChooseExamComponent },
-{ path: 'login', component: LoginComponent },
-{ path: 'register', component: RegisterComponent },
-{ path: 'forgetpassword', component: ForgetPasswordComponent },
-{ path: 'choose', component: ChooseExamComponent },
-{ path: 'goon', component: GoOnComponent },
-{ path: 'deneme-sinavi', component: DenemeSinaviComponent },
-
-{ path: 'dashboard', component:UserDashboardComponent,canActivate: [AuthGuard]  },
-
-
+  // { path: '', component: LoginComponent },
+  { path: '', component: ChooseExamComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'forgetpassword', component: ForgetPasswordComponent },
+  { path: 'goon', component: GoOnComponent },
+  { path: 'deneme-sinavi', component: DenemeSinaviComponent },
 
   {
-    path: 'homepage', component: HomepageComponent, children: [
-      { path: 'before-deneme', component: BeforeDenemeComponent,canActivate: [AuthGuard] },
+    path: 'user', component: LoggedInLayoutComponent, children: [
+      { path: 'before-deneme', component: BeforeDenemeComponent, canActivate: [AuthGuard] },
 
-      { path: 'aboutus', component: AboutusComponent,canActivate: [AuthGuard] },
-      { path: 'exampage', component: ExamPageComponent ,canActivate: [AuthGuard]},
-      { path: 'examform', component: ExamFormComponent,canActivate: [AuthGuard] },
-      { path: 'profile', component: ProfileComponent ,canActivate: [AuthGuard]},
-      { path: 'filter', component: ExamFilterComponent,canActivate: [AuthGuard] },
-      { path: 'deneme', component: DenemeExamComponent,canActivate: [AuthGuard] },
-
+      { path: 'aboutus', component: AboutusComponent, canActivate: [AuthGuard] },
+      { path: 'exampage', component: ExamPageComponent, canActivate: [AuthGuard] },
+      { path: 'examform', component: ExamFormComponent, canActivate: [AuthGuard] },
+      { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+      { path: 'filter', component: ExamFilterComponent, canActivate: [AuthGuard] },
+      { path: 'deneme', component: DenemeExamComponent, canActivate: [AuthGuard] },
+      { path: 'dashboard', component: UserDashboardComponent, canActivate: [AuthGuard] },
 
     ], canActivate: [AuthGuard]
   },
@@ -78,6 +74,6 @@ const routes: Routes = [
   declarations: [],
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers:[AuthGuard]
+  providers: [AuthGuard]
 })
 export class AppRoutingModule { }

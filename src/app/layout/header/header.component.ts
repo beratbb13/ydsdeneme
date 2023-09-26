@@ -51,6 +51,8 @@ export class HeaderComponent {
     }
 
 
+
+
     goMain(){
       this.router.navigate(['/'])
     }
@@ -59,6 +61,6 @@ export class HeaderComponent {
       this.router.navigate(['/login'])
     }
     goDashboard(){
-      this.router.navigate(['/user'])
+      this.router.navigate(['/user/dashboard']);
     }
 }

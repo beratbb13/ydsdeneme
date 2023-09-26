@@ -36,7 +36,7 @@ export class DenemeSinaviComponent implements OnInit{
   soruSayisi: number = 0;
   secilenCevap: string | null = null;
   selectedCategoryName:any
-  
+
   ngOnInit(): void {
     this.category = history.state.category;
     this.selectedCategoryName = this.category.Name;
@@ -87,7 +87,7 @@ export class DenemeSinaviComponent implements OnInit{
 
   showResult(sonuc: string, message: string) {
     //let sonuc = this.reply();
-    this.dialogService.openTextModal(sonuc, message).onClose.subscribe(() => this.router.navigate(['/homepage/aboutus']))
+    this.dialogService.openTextModal(sonuc, message).onClose.subscribe(() => this.router.navigate(['/user/aboutus']))
   }
 
   previousQuestion() {
@@ -138,15 +138,15 @@ export class DenemeSinaviComponent implements OnInit{
     let dogruSayisi = 0;
     let yanlisSayisi = 0;
     let bosSayisi = 0;
-  
+
     // Tüm soruları dönerek cevapları kontrol et
     this.questions.forEach((soru, index) => {
       const soruForm = this.questionForm.get(index.toString()); // Soru formunu al
-  
+
       if (soruForm) {
         const cevap = soruForm.value; // Kullanıcının verdiği cevap
         const dogruCevap = soru.answers?.find(answer => answer.istrue === 1); // Doğru cevap
-  
+
         if (cevap === undefined) {
           bosSayisi++;
         } else if (cevap === dogruCevap?.answer) {
@@ -156,7 +156,7 @@ export class DenemeSinaviComponent implements OnInit{
         }
       }
     });
-  
+
     // Sonuçları göster
     this.toastService.showToast('success', `Doğru Sayısı: ${dogruSayisi}`);
     this.toastService.showToast('danger', `Yanlış Sayısı: ${yanlisSayisi}`);

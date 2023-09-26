@@ -58,7 +58,7 @@ export class GoOnComponent implements OnInit{
                 this.spinner.show();
 
                 this.tost.showToast('success','Kullanıcı Başarıyla Kaydoldu!')
-                this.router.navigate(['/homepage/before-deneme'])
+                this.router.navigate(['/user/before-deneme'])
                 this.spinner.hide()
 
 
@@ -67,7 +67,7 @@ export class GoOnComponent implements OnInit{
                 // console.error('Kullanici zaten mevcut.');
               }
             });
-        
+
           }else{
             console.warn('Kullanıcı bulunamadı.');
           }
@@ -94,7 +94,7 @@ export class GoOnComponent implements OnInit{
   //       }
   //   }}
   // }
-    
+
   ifLoggedIn(){
     const currentuser=localStorage.getItem('Username')
     console.log(currentuser)

@@ -17,8 +17,8 @@ import { ConfirmationModalComponent } from './views/components/confirmationModal
 import { TextModalComponent } from './views/components/textModal/text-modal/text-modal.component';
 import { ProfileComponent } from './views/pages/profile/profile/profile.component';
 import { ExamFormComponent } from './views/components/examForm/exam-form/exam-form.component';
-import { FooterComponent } from './layout/footer/footer/footer.component';
-import { HeaderComponent } from './layout/header/header/header.component';
+import { FooterComponent } from './layout/footer/footer.component';
+import { HeaderComponent } from './layout/header/header.component';
 import { AboutusComponent } from './views/pages/Aboutus/aboutus/aboutus.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ChooseExamComponent } from './views/pages/choose-exam/choose-exam.component';
@@ -35,6 +35,7 @@ import { QuestionTableComponent } from './views/components/question-table/questi
 import { ExamCustomCardComponent } from './views/components/exam-custom-card/exam-custom-card.component';
 import { InfocardComponent } from './views/components/infocard/infocard.component';
 import { CustomHttpInterceptorInterceptor } from './utils/custom-http-interceptor.interceptor';
+import { LoggedInLayoutComponent } from './layout/logged-in-layout/logged-in-layout.component';
 
 
 @NgModule({
@@ -65,6 +66,7 @@ import { CustomHttpInterceptorInterceptor } from './utils/custom-http-intercepto
     QuestionTableComponent,
     ExamCustomCardComponent,
     InfocardComponent,
+    LoggedInLayoutComponent,
 
   ],
   imports: [
