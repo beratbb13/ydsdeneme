@@ -27,6 +27,8 @@ import { DenemeExamComponent } from './views/pages/ydsdeneme/deneme-exam/deneme-
 import { ExamResultComponent } from './views/components/testResult/exam-result/exam-result.component';
 import { ResultTableComponent } from './views/components/result-table/result-table/result-table.component';
 import { QuestionTableComponent } from './views/components/question-table/question-table/question-table.component';
+import { ExamCustomCardComponent } from './views/components/exam-custom-card/exam-custom-card.component';
+import { InfocardComponent } from './views/components/infocard/infocard.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,8 @@ import { QuestionTableComponent } from './views/components/question-table/questi
     ExamResultComponent,
     ResultTableComponent,
     QuestionTableComponent,
+    ExamCustomCardComponent,
+    InfocardComponent,
   ],
   imports: [
     BrowserModule,
