@@ -33,7 +33,7 @@ export class ChooseExamComponent implements OnInit{
 
 
   goToPage(buttonText: string) {
-    this.router.navigate(['/homepage/filter'], { state: { buttonText: buttonText } });
+    this.router.navigate(['/user/filter'], { state: { buttonText: buttonText } });
   }
   gologin(){
     this.router.navigate(['/login'])
