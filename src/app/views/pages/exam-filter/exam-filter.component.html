@@ -2,7 +2,12 @@
 
   <div class="row " style="height: 50px;">
     <div class="col-lg-3">
-      <h6> Kayıt Olduğum Sınavlar</h6>
+      <div style="display: flex;align-items: center;justify-content: space-between;">
+        <h6> Kayıt Olduğum Sınavlar</h6>
+        <div class="add-button">
+          <i class="fa-solid fa-plus"></i>
+        </div>
+      </div>
       <hr>
       <app-exam-card *ngFor="let item of exams" [cardInfo]="item"></app-exam-card>
     </div>

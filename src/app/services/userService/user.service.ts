@@ -18,10 +18,10 @@ export class UserService {
 
   insertUser(insertUser: User) {
     const body = {
-      "Token": this.token,
+      "Token": this.authService.getToken(),
       "DataStoreId": Endpoints.usersDataStoreid,
       "Operation": "insert",
-      "Data": `Insert Into users(user_name, name_, surname_, password_, email_, phone_number, birth_date) VALUES('${insertUser.user_name}', '${insertUser.name_}', '${insertUser.surname_}', '${insertUser.password_}', '${insertUser.email_}', '${insertUser.phone_number}', '${insertUser.birth_date}')`,
+      "Data": `Insert Into users(user_name, name_, surname_, password_, email_, phone_number, birth_date,user_id) VALUES('${insertUser.user_name}', '${insertUser.name_}', '${insertUser.surname_}', '${insertUser.password_}', '${insertUser.email_}', '${insertUser.phone_number}', '${insertUser.birth_date}','${insertUser.user_id}')`,
       "Encrypted": '1951'
     }
     return this.http.post(Endpoints.dataops, body).pipe(

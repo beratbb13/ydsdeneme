@@ -88,6 +88,7 @@ export class RegisterComponent {
     this.insertUser.user_name = this.formGroup.value.email_
 
 
+
     this.register(this.regiterUser, this.insertUser)
 
     this.spinnerService.hide();
@@ -99,8 +100,12 @@ export class RegisterComponent {
       if (res.result) {
         this.toastService.showToast('success', 'Kayıt oluşturma işlemi başarılı.');
         this.authService.login({ Username: user.User.email, Password: user.User.password }).subscribe(res => {
-          this.insertUserDb(insertUser)
-          this.router.navigate(['/choose']);
+          if (this.authService.getUser()) {
+            this.insertUser.user_id = this.authService.getUser().userId
+            this.insertUserDb(insertUser)
+            this.router.navigate(['/user/dashboard']);
+
+          }
         })
       }
       else {

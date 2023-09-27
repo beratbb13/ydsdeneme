@@ -79,7 +79,7 @@ export class AuthService {
   }
 
   setStorage(response: any) {
-    localStorage.setItem('user',response)
+    localStorage.setItem('user',JSON.stringify(response))
     this.setToken(response.token)
   }
 
