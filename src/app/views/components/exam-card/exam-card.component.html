@@ -1,0 +1,15 @@
+<div class="card-container">
+  <div class="d-flex card-text">
+    <div class="exam-icon" style="width: 15%;">
+      <img [src]="cardInfo.img" width="30" />
+    </div>
+    <div style="width: 100%;">
+      <div>{{cardInfo.name}}</div>
+      <nb-progress-bar class="custom-progress" [value]="20" size="tiny" status="warning"></nb-progress-bar>
+      <small>
+        <i class="fa-solid fa-pen"></i>Çıkmış Sorular: 20Yıl/ Konular: 20 Konu
+      </small>
+    </div>
+
+  </div>
+</div>

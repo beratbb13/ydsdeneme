@@ -1,0 +1,28 @@
+.card-container {
+  background-color: white;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+.exam-icon{
+  background-color: rgba(75,59,229,0.4);
+  width: 40px;
+  border-radius: 50px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  margin-right: 0.5rem;
+  justify-content: center;
+}
+.card-text{
+  align-items: center;
+  font-weight: 600;
+  color: rgba(75,59,229,0.9);
+
+}
+
+small{
+  font-weight: 400;
+}
+
