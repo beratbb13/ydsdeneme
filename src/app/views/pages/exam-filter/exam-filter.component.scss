@@ -378,14 +378,21 @@ html {
     margin-top: 2rem;
   }
 
+
   .card-header div {
     flex-wrap: wrap;
 
     h3 {
       text-align: center;
+      font-size: 14px;
+    }
+
+    .card-body {
+      p {
+        font-size: 12px;
+      }
     }
   }
-
 }
 
 .add-button {
