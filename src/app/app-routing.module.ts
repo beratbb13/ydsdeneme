@@ -38,7 +38,7 @@ const routes: Routes = [
       { path: 'exampage', component: ExamPageComponent, canActivate: [AuthGuard] },
       { path: 'examform', component: ExamFormComponent, canActivate: [AuthGuard] },
       { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
-      { path: 'filter', component: ExamFilterComponent, canActivate: [AuthGuard] },
+      { path: 'exams', component: ExamFilterComponent, canActivate: [AuthGuard] },
       { path: 'deneme', component: DenemeExamComponent, canActivate: [AuthGuard] },
       { path: 'dashboard', component: UserDashboardComponent, canActivate: [AuthGuard] },
 

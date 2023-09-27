@@ -83,3 +83,9 @@ div, h4,h5,h6,span,p,h1,h2,h3{
    margin-left: 0 !important;
 
 }
+
+
+
+.nb-theme-default nb-progress-bar.size-tiny .progress-container {
+   height: 0.3rem !important;
+}

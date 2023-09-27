@@ -36,6 +36,7 @@ import { ExamCustomCardComponent } from './views/components/exam-custom-card/exa
 import { InfocardComponent } from './views/components/infocard/infocard.component';
 import { CustomHttpInterceptorInterceptor } from './utils/custom-http-interceptor.interceptor';
 import { LoggedInLayoutComponent } from './layout/logged-in-layout/logged-in-layout.component';
+import { ExamCardComponent } from './views/components/exam-card/exam-card.component';
 
 
 @NgModule({
@@ -67,6 +68,7 @@ import { LoggedInLayoutComponent } from './layout/logged-in-layout/logged-in-lay
     ExamCustomCardComponent,
     InfocardComponent,
     LoggedInLayoutComponent,
+    ExamCardComponent,
 
   ],
   imports: [
