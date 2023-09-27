@@ -47,15 +47,16 @@
   </div>
 
   <div class="nav-links">
+
       <a  [routerLink]="['/user/exams']">Eğitimlerim</a>
       <a  [routerLink]="['/user/before-deneme']">Deneme Sınavlarım</a>
+      <a  style="cursor: pointer" (click)="goDashboard()">Çalışma Verilerim</a>
       <!-- <a [routerLink]="['/homepage/profile']">Profil</a> -->
       <!-- <a  style="cursor: pointer;" (click)="logOut()">Çıkış</a> -->
   </div>
   <div class="nav-exit">
     <span style="margin-right: 1rem;" *ngIf="loggedInUser">Hello, {{loggedInUser}}</span>
 
-    <a  style="cursor: pointer;color: rgba(105,14,245,1);" (click)="goDashboard()">Çalışma Verilerim</a>
     <a *ngIf="loggedInUser" style="cursor: pointer;color: rgba(105,14,245,1);" (click)="logOut()">Çıkış</a>
     <a *ngIf="!loggedInUser" style="cursor: pointer;color: rgba(105,14,245,1);" (click)="goLogin()">Giriş Yap</a>
 

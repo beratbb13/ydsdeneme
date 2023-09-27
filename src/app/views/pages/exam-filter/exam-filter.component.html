@@ -8,9 +8,12 @@
     </div>
     <ul style="margin-left: 1rem;" class="responsive-table col-lg-8">
       <li class="table-header d-flex">
-        <nb-tabset fullWidth style="width: 100%;margin-top: -13px;border-bottom: none !important;">
+
+        <nb-tabset (changeTab)="pageNumber=1" fullWidth
+          style="width: 100%;margin-top: -13px;border-bottom: none !important;">
           <nb-tab tabTitle="Konular" class="custom-tabset">
             <!-- <li class="table-row"
+
                   *ngFor="let exam of categories | paginate: {itemsPerPage: 7, currentPage: pageNumber}">
                   <div class="col-8 buttton">
                       {{exam.Name}}
@@ -22,9 +25,10 @@
                   </div>
 
               </li>  -->
+
             <div class="row" style="margin-top:3%">
               <div class="col-md-4 mb-5"
-                *ngFor="let exam of categories | paginate: {itemsPerPage: 6, currentPage: pageNumber}">
+                *ngFor="let exam of filteredSubject | paginate: {itemsPerPage: 6, currentPage: pageNumber}">
                 <div class="card">
                   <div class="card-header">
                     <div>
@@ -32,6 +36,7 @@
                           src="https://img.icons8.com/external-photo3ideastudio-lineal-color-photo3ideastudio/64/external-exam-online-learning-photo3ideastudio-lineal-color-photo3ideastudio.png"
                           alt="external-exam-online-learning-photo3ideastudio-lineal-color-photo3ideastudio" /></span>
                       <h3>{{exam.Name}}</h3>
+
                     </div>
                   </div>
                   <div class="card-body">
@@ -50,9 +55,11 @@
               </div>
             </div>
 
+
           </nb-tab>
           <nb-tab tabTitle="Çıkmış Sorular" class="custom-tabset">
             <!-- <li class="table-row"
+
                   *ngFor="let exam of categories | paginate: {itemsPerPage: 7, currentPage: pageNumber}">
                   <div class="col-8 buttton">
                       {{exam.Name}}
@@ -64,9 +71,10 @@
                   </div>
 
               </li>  -->
+
             <div class="row" style="margin-top:3%">
               <div class="col-md-4 mb-5"
-                *ngFor="let exam of categories | paginate: {itemsPerPage: 6, currentPage: pageNumber}">
+                *ngFor="let exam of filteredExams | paginate: {itemsPerPage: 6, currentPage: pageNumber}">
                 <div class="card">
                   <div class="card-header">
                     <div>
@@ -74,6 +82,7 @@
                           src="https://img.icons8.com/external-photo3ideastudio-lineal-color-photo3ideastudio/64/external-exam-online-learning-photo3ideastudio-lineal-color-photo3ideastudio.png"
                           alt="external-exam-online-learning-photo3ideastudio-lineal-color-photo3ideastudio" /></span>
                       <h3>{{exam.Name}}</h3>
+
                     </div>
                   </div>
                   <div class="card-body">

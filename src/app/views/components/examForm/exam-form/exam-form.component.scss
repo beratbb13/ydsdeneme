@@ -1,6 +1,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dosis:wght@300;400&family=Oswald:wght@200;400;500&family=Rubik+Iso&family=Teko:wght@300&display=swap');
 
 
+.pagination {
+  margin-top: 30%;
+  display: flex;
+  justify-content: center;
+
+  button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 1%;
+    color: #690FF4;
+    background-color: #EDF1F6; // Tüm butonları gri olarak ayarla
+    border: 1px solid #BEC9D7; // Tüm butonların border'ını kaldır
+    outline: none; // Tüm butonların odaklı görünümünü kaldır
+    cursor: pointer; // Tüm butonları tıklanabilir yap
+    transition: background-color 0.3s; // Arka plan rengi için geçiş efekti ekle
+  }
+
+  // Tıklanan butonun arka plan rengini özelleştir
+  button.active {
+    border: 2px solid #690FF4; // Tıklanan butonun arka plan rengi mor olsun
+  }
+}
+.pagination .button_pag{
+  background-color: white;
+    border-radius: 7%;
+    border: 2px solid rgb(105, 14, 245);
+    color: rgb(105, 14, 245);
+    transition: 0.25s;
+    height: 40px;
+    width: 70px;
+}
+
 .close:hover,
 .close:focus {
   box-shadow: 

@@ -2,6 +2,10 @@ body {
     background-color: #EAEEF2;
 }
 
+*{
+  box-sizing: border-box;
+}
+
 #bigDashboardChart {
     width: 100%;
     height: 90%;
@@ -10,7 +14,8 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    
+    flex-wrap: wrap;
+    padding: 18px;
 }
 
 .content-container {
@@ -41,11 +46,18 @@ body {
 
 .latest {
     min-width: 10rem;
-    max-width: 35rem;
+    max-width: 50%;
     margin: 0 auto 2rem;
     flex: 50%;
     margin-right: 2%
 }
+.timespent{
+  min-width: 10rem;
+  max-width: 48%;
+}
+
+
+
 .main-content{
    padding: 40px;
 }
@@ -182,3 +194,21 @@ nb-progress-bar~nb-progress-bar {
     cursor: pointer;
 }
   
+.cardWrap{
+  display: flex;
+  justify-content: space-between;
+
+}
+@media screen and (max-width:700px){
+    .cardWrap{
+      flex-wrap: wrap;
+      justify-content: center;
+
+    }
+    .latest{
+      max-width: 100%;
+    }
+    .timespent{
+      max-width: 100%;
+    }
+  }

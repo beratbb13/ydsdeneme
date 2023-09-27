@@ -33,8 +33,9 @@ export class ExamFilterComponent implements OnInit {
   pageNumber: number = 1;
   questions: question[] = [];
   categories: any[] = [];
-  filteredCategories: any[] = [];
+  filteredExams: any[] = [];
   isOpen: boolean = false;
+  filteredSubject: any[] = []
 
   ngOnInit(): void {
 
@@ -44,8 +45,12 @@ export class ExamFilterComponent implements OnInit {
   getCategories() {
     this.spinnerService.show();
     this.examCategoryService.getCategories().pipe(
-      tap(res => this.categories = res),
-      tap(() => this.filteredCategories = this.categories.filter(category => category.parentid == '50f8882f-ac66-4e5f-9756-5fa3b7958996'))
+      tap(res => { this.categories = res; console.log(this.categories) }),
+      tap(() => {
+        this.filteredExams = this.categories.filter(category => category.parentid =='e02a5db0-5d15-4c73-b1d6-80ea6d1f5b10');
+        this.filteredSubject = this.categories.filter(category => category.parentid ==  '50f8882f-ac66-4e5f-9756-5fa3b7958996')
+        console.log(this.filteredExams,this.filteredSubject)
+      })
     ).subscribe(() => this.spinnerService.hide());
   }
 
@@ -61,17 +66,17 @@ export class ExamFilterComponent implements OnInit {
     this.isOpen = !this.isOpen;
   }
 
-  filter(event: any) {
-    let sonuc = event.target.innerText;
+  // filter(event: any) {
+  //   let sonuc = event.target.innerText;
 
-    switch (sonuc) {
-      case 'KONULAR':
-        this.filteredCategories = this.categories.filter(category => category.parentid == '50f8882f-ac66-4e5f-9756-5fa3b7958996')
-        break;
-      case 'ÇIKMIŞ SORULAR':
-        this.filteredCategories = this.categories.filter(category => category.parentid == 'e02a5db0-5d15-4c73-b1d6-80ea6d1f5b10')
-        break;
-    }
+  //   switch (sonuc) {
+  //     case 'KONULAR':
+  //       this.filteredCategories = this.categories.filter(category => category.parentid == '50f8882f-ac66-4e5f-9756-5fa3b7958996')
+  //       break;
+  //     case 'ÇIKMIŞ SORULAR':
+  //       this.filteredCategories = this.categories.filter(category => category.parentid == 'e02a5db0-5d15-4c73-b1d6-80ea6d1f5b10')
+  //       break;
+  //   }
 
-  }
+  // }
 }
