@@ -41,20 +41,20 @@ export class ExamFormComponent {
   trueIconColor: string = '#20511f';
   falseIcon: string = 'fa-solid fa-x';
   falseIconColor: string = '#ff0000';
-  questionStatus: { [key: string]: 'correct' | 'incorrect' | 'unanswered' } = {};
+  questionStatus: { [key: string]: 'correct' | 'incorrect' | 'unanswered' | 'answered' } = {};
 
 
   showEllipsisButton: boolean = false;
   currentPage: number = 0;
   itemsPerPage: number = 10;
-  visibleButtons:any=[];
+  visibleButtons: any = [];
   totalPages: number = 0;
 
   ngOnInit() {
     this.category = history.state.category;
     this.getQuestionsAndAnswers();
     this.questionForm = this.formBuilder.group({})
-    this.currentPage = 0; 
+    this.currentPage = 0;
     this.visibleButtons = Array.from({ length: this.itemsPerPage }, (_, i) => i);
     this.soruIndex = 0;
   }
@@ -66,7 +66,7 @@ export class ExamFormComponent {
       this.currentPage = Math.floor(index / this.itemsPerPage);
 
       // Tüm düğmelerden .active sınıfını kaldır
-      const buttons = document.querySelectorAll('.pagination button');
+      const buttons = document.querySelectorAll('.paginationbuttons');
       buttons.forEach((button) => {
         button.classList.remove('active');
       });
@@ -188,11 +188,11 @@ export class ExamFormComponent {
     this.dogruCevap = undefined;
   }
 
-loadNextPage() {
-  this.currentPage++;
-  this.updatePaginationButtons();
-}
-  
+  loadNextPage() {
+    this.currentPage++;
+    this.updatePaginationButtons();
+  }
+
   previousQuestion() {
     if (!(this.soruIndex < 0)) {
       this.soruIndex -= 1;
@@ -209,6 +209,13 @@ loadNextPage() {
   //   let trueAnswer: answer | undefined = current.answers?.find(answer => answer.istrue === 1);
   //   this.dogruCevap = trueAnswer;
   // }
+
+  checked() {
+    let current: question = this.questions[this.soruIndex];
+    if (this.questionStatus[current.questionid] == undefined) {
+      this.questionStatus[current.questionid] = 'answered';
+    }
+  }
 
   reply() {
     clearInterval(this.interval);
@@ -231,7 +238,10 @@ loadNextPage() {
       return 'green'; // Doğru cevaplanan sorular için yeşil arka plan
     } else if (status === 'incorrect') {
       return 'red'; // Yanlış cevaplanan sorular için kırmızı arka plan
-    } else {
+    } else if (status === 'answered') {
+      return 'rgb(105, 14, 245)'; // Yanlış cevaplanan sorular için kırmızı arka plan
+    }
+    else {
       return '#EDF1F6'; // Cevap verilmemiş sorular için varsayılan arka plan
     }
   }
