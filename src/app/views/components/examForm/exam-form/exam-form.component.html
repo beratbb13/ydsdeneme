@@ -95,7 +95,8 @@
                 <form [formGroup]="questionForm">
                     <div class="form-check mb-3" *ngFor="let answer of questions[soruIndex].answers">
                         <input class="form-check-input" type="radio"
-                            formControlName="{{questions[soruIndex].questionid}}" [value]="answer" (change)="checked()" />
+                            formControlName="{{questions[soruIndex].questionid}}" [value]="answer"
+                            (change)="checked()" />
                         <label class="form-check-label">
                             <span *ngIf="dogruCevap">
                                 <i [class]="answer.answer === this.dogruCevap.answer ?
@@ -122,26 +123,23 @@
         </div>
 
     </div>
-    <div class="pagination">
+
+    <div class="pagination" *ngIf="questions.length">
         <button class="button_pag" (click)="previousQuestion()" [disabled]="soruIndex == 0">
-          Önceki Soru
+            Önceki Soru
         </button>
-        <button
-        class="paginationbuttons"
-          *ngFor="let i of visibleButtons"
-          (click)="goToQuestion(i)"
-          [ngStyle]="{'background-color': getButtonBackgroundColor(questions[i].questionid),'color':getButtonBackgroundColor(questions[i].questionid)=='#EDF1F6'?'':'white'}"
-          [class.active]="i === soruIndex"
-        >
-          {{ i + 1 }}
+        <button class="paginationbuttons" *ngFor="let i of visibleButtons" (click)="goToQuestion(i)"
+            [ngStyle]="{'background-color': getButtonBackgroundColor(questions[i].questionid),'color':getButtonBackgroundColor(questions[i].questionid)=='#EDF1F6'?'':'white'}"
+            [class.active]="i === soruIndex">
+            {{ i + 1 }}
         </button>
         <button *ngIf="shouldShowEllipsis()" (click)="loadNextPage()">
             ...
-          </button>
-        <button class="button_pag" (click)="nextQuestion()">
-          Sonraki Soru
         </button>
-      </div>
+        <button class="button_pag" (click)="nextQuestion()">
+            Sonraki Soru
+        </button>
+    </div>
 
 
 
