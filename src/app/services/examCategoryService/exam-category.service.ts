@@ -62,4 +62,34 @@ export class ExamCategoryService {
       })
     );
   }
+
+  getUsersCourse(userid:any) {
+    const body = {
+      "Token": this.token,
+      "DataStoreId": Endpoints.examCategoryDataStoreid,
+      "Operation": "read",
+      "Data": `SELECT exam_categories."Name" FROM exam_categories INNER JOIN users_course ON exam_categories.ecategoryid::text = users_course.categoryid WHERE users_course.userid = '${userid}'`,
+      "Encrypted": '1951'
+    }
+    return this.http.post(Endpoints.dataops, body).pipe(
+      map((response: any) => {
+        return response.message[0];
+      })
+    );
+  }
+  getUsersExams(userid:any){
+    const body = {
+      "Token": this.token,
+      "DataStoreId": Endpoints.examsDataStoreid,
+      "Operation": "read",
+      "Data": `SELECT DISTINCT ex."Name" FROM exam ex INNER JOIN users_course uc ON ex.examid::text = uc.examid WHERE uc.userid = '${userid}'`,
+      "Encrypted": '1951'
+    }
+    return this.http.post(Endpoints.dataops, body).pipe(
+      map((response: any) => {
+        return response.message[0];
+      })
+    );
+  }
+  
 }

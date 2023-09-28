@@ -8,6 +8,9 @@ import { ExamService } from 'src/app/services/examService/exam.service';
 import { QuestionService } from 'src/app/services/questionService/question.service';
 import { SpinnerService } from 'src/app/services/spinnerService/spinner.service';
 
+export interface examName {
+  name: string,
+}
 @Component({
   selector: 'app-exam-filter',
   templateUrl: './exam-filter.component.html',
@@ -29,6 +32,9 @@ export class ExamFilterComponent implements OnInit {
     { name: 'LGS', text: 'lorem ipsum dolar sit amet', img: '/assets/icons/lgs.png' },
 
   ]
+  sinavlar: any[] = [];
+
+
 
   pageNumber: number = 1;
   questions: question[] = [];
@@ -38,7 +44,7 @@ export class ExamFilterComponent implements OnInit {
   filteredSubject: any[] = []
 
   ngOnInit(): void {
-
+    this.getRegisteredCoursesAndExams()
     this.getCategories()
   }
 
@@ -60,6 +66,36 @@ export class ExamFilterComponent implements OnInit {
     };
 
     this.router.navigate(['/user/examform'], navigationExtras);
+  }
+
+  getRegisteredCoursesAndExams(){
+    const currentuser=localStorage.getItem('user')
+    if ((currentuser !== null && currentuser !== undefined)){
+      const userJSON=JSON.parse(currentuser)
+      if (userJSON.userId) {
+        const userid = userJSON.userId;
+        // console.log('useerid',userid)
+        this.examCategoryService.getUsersCourse(userid).subscribe(
+          (res: any) => {
+            console.log('Başarılı istek, alinan kurslar:', res);
+          },
+          (error: any) => {
+            console.error('Hata oluştu', error);
+          }
+        )
+        this.examCategoryService.getUsersExams(userid).subscribe(
+          (res: any) => {
+            console.log('Basarili Istek, alinan SINAVLAR:', res);
+            // Eğer res bir nesne ise, bu nesneyi bir diziye dönüştürün.
+            this.sinavlar = Object.values(res);
+            console.log('agabababa', this.sinavlar);
+          },
+          (error: any) => {
+            console.error('basarisiz istek', error);
+          }
+        );
+      }
+    }
   }
 
   dropdownToggle() {

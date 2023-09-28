@@ -1,15 +1,18 @@
 <div style="padding: 3rem;">
-
+<!-- <ul *ngFor="let item of sinavlar">
+  <li> {{item}} </li>
+</ul> -->
   <div class="row " style="height: 50px;">
     <div class="col-lg-3">
-      <div style="display: flex;align-items: center;justify-content: space-between;">
-        <h6> Kayıt Olduğum Sınavlar</h6>
-        <div class="add-button">
-          <i class="fa-solid fa-plus"></i>
-        </div>
-      </div>
+      <h6> Kayıt Olduğum Sınavlar</h6>
       <hr>
-      <app-exam-card *ngFor="let item of exams" [cardInfo]="item"></app-exam-card>
+      <ng-container *ngIf="sinavlar.length === 0" >
+        <p class="text-center">Kayitli Sinav Bulunamadi!</p>
+      </ng-container>
+      
+      <app-exam-card *ngFor="let item of sinavlar" [cardInfo]="item"></app-exam-card>
+      
+
     </div>
     <ul style="margin-left: 1rem;" class="responsive-table col-lg-8">
       <li class="table-header d-flex">

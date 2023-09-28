@@ -3,7 +3,11 @@
       <div class="col-md-12 col-lg-4 mb-4">
         <h6> Kayıt Olduğum Sınavlar</h6>
         <hr>
-        <app-exam-card *ngFor="let item of exams" [cardInfo]="item"></app-exam-card>
+        <ng-container *ngIf="sinavlar.length === 0" >
+          <p class="text-center">Kayitli Sinav Bulunamadi!</p>
+        </ng-container>
+        <app-exam-card *ngFor="let item of sinavlar"  [cardInfo]="item"></app-exam-card>
+
       </div>
   
       <div class="col-md-12 col-lg-7">

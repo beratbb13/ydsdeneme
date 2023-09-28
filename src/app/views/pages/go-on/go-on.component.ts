@@ -41,17 +41,17 @@ export class GoOnComponent implements OnInit{
   }
 
   registerToCourse(){
-    const currentuser=localStorage.getItem('Username')
+    const currentuser=localStorage.getItem('user')
     if ((currentuser !== null && currentuser !== undefined)){
       const userJSON=JSON.parse(currentuser)
-      if (userJSON.user_name) {
-        const username = userJSON.user_name;
+      if (userJSON.email) {
+        const username = userJSON.email;
         console.log(username)
         this.userService.getUserByUserName(username).subscribe((user: any) => {
           if (user) {
             const ydsRegistration = {
-              id: user.user_id,
-              user_name:user.user_name,
+              userid: user.userid,
+              email:user.email,
             };
             this.examRegister.insertUser(ydsRegistration).subscribe((response)=>{
               if (response==='Success'){
