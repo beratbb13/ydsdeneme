@@ -23,7 +23,7 @@
 
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="form-check mb-0">
-                      <input [(ngModel)]="rememberMe" class="form-check-input me-2"
+                      <input [(ngModel)]="rememberMe" [ngModelOptions]="{standalone: true}" class="form-check-input me-2"
                         [checked]="rememberMe=='true'?true:false" type="checkbox" />
                       <label class="form-check-label" for="form2Example3">
                         Beni hatırla

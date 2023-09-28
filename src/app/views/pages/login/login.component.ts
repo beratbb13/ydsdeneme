@@ -30,7 +30,6 @@ export class LoginComponent {
     this.formGroup = this.formBuilder.group({
       Username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
       Password: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
-
     })
     this.isCheckedRemember()
   }

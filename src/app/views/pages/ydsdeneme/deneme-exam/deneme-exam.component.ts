@@ -39,6 +39,7 @@ export class DenemeExamComponent {
   ngOnInit() {
     this.getQuestionsAndAnswers();
     this.questionForm = this.formBuilder.group({});
+    this.startCountdown();
   }
 
   minutes: number = 80;
@@ -80,7 +81,7 @@ export class DenemeExamComponent {
       tap(() => this.pullQuestions()),
       tap(() => this.answerswithQuestions.map((answer: any) => this.createFormControlObject(answer.questionid))),
       tap(() => this.spinnerService.hide())
-    ).subscribe(() => this.startCountdown());
+    ).subscribe();
   }
 
   pullQuestions() {
@@ -92,15 +93,6 @@ export class DenemeExamComponent {
     })
     this.questions.map(ques => {
       ques.answers = this.answerswithQuestions.filter(ans => ans.questionid == ques.questionid)
-    })
-  }
-
-  setScore() {
-    let user = localStorage.getItem('currentUser')
-    let user_id = user ? JSON.parse(user).user_id : '';
-
-    this.questionids.map(id => {
-      this.userScoreService.insertUserScore({ user_id: user_id, question_id: id }).subscribe(res => console.log(res));
     })
   }
 
@@ -132,7 +124,6 @@ export class DenemeExamComponent {
     if (this.soruSayisi > this.soruIndex + 1)
       this.soruIndex += 1;
     if ((this.soruIndex + 1) % 10 == 0) {
-      this.setScore();
       this.getQuestionsAndAnswers();
     }
   }
