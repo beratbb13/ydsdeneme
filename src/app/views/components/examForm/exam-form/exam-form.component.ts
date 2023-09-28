@@ -54,11 +54,10 @@ export class ExamFormComponent {
     this.category = history.state.category;
     this.getQuestionsAndAnswers();
     this.questionForm = this.formBuilder.group({})
-    this.currentPage = 0;
     this.visibleButtons = Array.from({ length: this.itemsPerPage }, (_, i) => i);
     this.soruIndex = 0;
+    this.timer()
   }
-
 
   goToQuestion(index: number) {
     if (index >= 0 && index <= this.soruSayisi) {
@@ -73,10 +72,12 @@ export class ExamFormComponent {
 
       // Tıklanan düğmeye .active sınıfını ekle
       buttons[index].classList.add('active');
-      this.updatePaginationButtons();
+
+      this.dogruCevap = undefined;
     }
 
   }
+
   updatePaginationButtons() {
     const startIndex = this.currentPage * this.itemsPerPage;
     const endIndex = Math.min(startIndex + this.itemsPerPage, this.questions.length);
@@ -85,6 +86,8 @@ export class ExamFormComponent {
       this.visibleButtons.push(i);
     }
     this.showEllipsisButton = this.currentPage < this.totalPages - 1;
+
+    debugger
   }
 
   shouldShowEllipsis(): boolean {
@@ -96,13 +99,13 @@ export class ExamFormComponent {
     this.spinnerService.show();
     this.questionService.getQuestionsAndAnswersByCategoryId(this.category.ecategoryid).pipe(
       tap(res => this.answerswithQuestions = [...this.answerswithQuestions, ...res]), // =  res
-      tap(() => this.soruSayisi += this.answerswithQuestions.length / 5),
+      tap(() => this.soruSayisi = this.answerswithQuestions.length / 5),
       tap(() => this.pullQuestions()),
       tap(() => this.answerswithQuestions.map((answer: any) => this.createFormControlObject(answer.questionid))),
+      tap(() => this.updatePaginationButtons()),
+      tap(() => this.totalPages = Math.ceil(this.questions.length / this.itemsPerPage)),
       tap(() => this.spinnerService.hide())
-    ).subscribe(() => this.timer());
-    this.totalPages = Math.ceil(this.questions.length / this.itemsPerPage);
-    this.updatePaginationButtons();
+    ).subscribe(() => { console.log(this.visibleButtons) });
   }
 
   pullQuestions() {
@@ -119,8 +122,8 @@ export class ExamFormComponent {
   }
 
   setScore() {
-    let user = localStorage.getItem('currentUser')
-    let user_id = user ? JSON.parse(user).user_id : '';
+    let user = localStorage.getItem('user')
+    let user_id = user ? JSON.parse(user).userId : '';
 
     this.questionids.map(id => {
       this.userScoreService.insertUserScore({ user_id: user_id, question_id: id }).subscribe(res => console.log(res));
@@ -159,28 +162,13 @@ export class ExamFormComponent {
     })
   }
 
-  // previousQuestion() {
-  //   if (!(this.soruIndex < 0))
-  //     this.soruIndex -= 1;
-  //   this.dogruCevap = undefined;
-  // }
-
-  // nextQuestion() {
-  //   if (this.soruSayisi > this.soruIndex + 1)
-  //     this.soruIndex += 1;
-  //   this.dogruCevap = undefined;
-  //   if ((this.soruIndex + 1) % 10 == 0) {
-  //     this.setScore();
-  //     this.getQuestionsAndAnswers();
-  //   }
-  // }
-
   nextQuestion() {
-    if (this.soruSayisi > this.soruIndex + 1) {
+    if (this.soruSayisi > this.soruIndex) {
       this.soruIndex += 1;
       this.currentPage = Math.floor(this.soruIndex / this.itemsPerPage);
 
-      if ((this.soruIndex + 1) % this.itemsPerPage === 0) {
+      if ((this.soruIndex + 1) % this.itemsPerPage === 1) {
+        this.getQuestionsAndAnswers();
         this.loadNextPage();
       }
       this.updatePaginationButtons();
@@ -189,7 +177,6 @@ export class ExamFormComponent {
   }
 
   loadNextPage() {
-    this.currentPage++;
     this.updatePaginationButtons();
   }
 
@@ -201,14 +188,6 @@ export class ExamFormComponent {
     }
     this.dogruCevap = undefined;
   }
-
-  // reply() {
-  //   clearInterval(this.interval);
-
-  //   let current: question = this.questions[this.soruIndex];
-  //   let trueAnswer: answer | undefined = current.answers?.find(answer => answer.istrue === 1);
-  //   this.dogruCevap = trueAnswer;
-  // }
 
   checked() {
     let current: question = this.questions[this.soruIndex];
