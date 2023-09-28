@@ -1,29 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dosis:wght@300;400&family=Oswald:wght@200;400;500&family=Rubik+Iso&family=Teko:wght@300&display=swap');
 
 
-.pagination {
-  margin-top: 30%;
-  display: flex;
-  justify-content: center;
+// .pagination {
+//   margin-top: 30%;
+//   display: flex;
+//   justify-content: center;
 
-  button {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin: 1%;
-    color: #690FF4;
-    background-color: #EDF1F6; // Tüm butonları gri olarak ayarla
-    border: 1px solid #BEC9D7; // Tüm butonların border'ını kaldır
-    outline: none; // Tüm butonların odaklı görünümünü kaldır
-    cursor: pointer; // Tüm butonları tıklanabilir yap
-    transition: background-color 0.3s; // Arka plan rengi için geçiş efekti ekle
-  }
+//   button {
+//     width: 40px;
+//     height: 40px;
+//     border-radius: 50%;
+//     margin: 1%;
+//     color: #690FF4;
+//     background-color: #EDF1F6; // Tüm butonları gri olarak ayarla
+//     border: 1px solid #BEC9D7; // Tüm butonların border'ını kaldır
+//     outline: none; // Tüm butonların odaklı görünümünü kaldır
+//     cursor: pointer; // Tüm butonları tıklanabilir yap
+//     transition: background-color 0.3s; // Arka plan rengi için geçiş efekti ekle
+//   }
 
-  // Tıklanan butonun arka plan rengini özelleştir
-  button.active {
-    border: 2px solid #690FF4; // Tıklanan butonun arka plan rengi mor olsun
-  }
-}
+//   // Tıklanan butonun arka plan rengini özelleştir
+//   button.active {
+//     border: 2px solid #690FF4; // Tıklanan butonun arka plan rengi mor olsun
+//   }
+// }
 .pagination .button_pag{
   background-color: white;
     border-radius: 7%;
@@ -33,6 +33,51 @@
     height: 40px;
     width: 70px;
 }
+
+.pagination {
+  position: fixed; /* Make the pagination bar fixed */
+  bottom: 0; /* Stick it to the bottom of the screen */
+  width: 100%; /* Take up the full width of the screen */
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  padding: 10px 0; /* Add some padding for spacing */
+  box-shadow: 0px -3px 6px rgba(0, 0, 0, 0.1); /* Add a shadow at the bottom */
+  z-index: 1000; /* Ensure it's above other content */
+  
+  button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 1%;
+    color: #690FF4;
+    background-color: #EDF1F6;
+    border: 1px solid #BEC9D7;
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  /* Rest of your button styles... */
+
+  button.active {
+    border: 2px solid #690FF4;
+  }
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 768px) {
+  .pagination {
+    padding: 5px 0; /* Reduce padding for smaller screens */
+  }
+
+  button {
+    width: 30px; /* Adjust button size for smaller screens */
+    height: 30px;
+    font-size: 12px; /* Reduce font size for button text */
+  }
+}
+
 
 .close:hover,
 .close:focus {
@@ -249,4 +294,3 @@ background-color: #fbfdff
     display: inline-block;
     line-height: 45px; /* Yükseklikle uyumlu hizalama */
   }
-  
