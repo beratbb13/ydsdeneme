@@ -1,0 +1,9 @@
+<div class="container">
+<div *ngFor="let item of exam" (click)="takeExamName(item.name)" class="card custom-exam-card">
+    <div class="exam-icon">
+      <img [src]="item.img" width="50"/>
+    </div>
+    <h4 class="card-title">{{item.name}}</h4>
+    <!-- <p class="card-text">Some description here</p> -->
+  </div>
+</div>

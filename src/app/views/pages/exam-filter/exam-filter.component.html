@@ -4,7 +4,12 @@
 </ul> -->
   <div class="row " style="height: 50px;">
     <div class="col-lg-3">
+      <div style="display: flex;align-items: center;justify-content: space-between;">
       <h6> Kayıt Olduğum Sınavlar</h6>
+      <div class="add-button">
+        <i [routerLink]="['/user/registry']" class="fa-solid fa-plus"></i>
+      </div>
+    </div>
       <hr>
       <ng-container *ngIf="sinavlar.length === 0" >
         <p class="text-center">Kayitli Sinav Bulunamadi!</p>
@@ -94,6 +99,7 @@
 
 
 </div>
+
 
 
 

@@ -19,6 +19,7 @@ import { BeforeDenemeComponent } from './views/pages/before-deneme/before-deneme
 import { AuthGuard } from './services/authService/auth.guard';
 import { UserDashboardComponent } from './views/pages/user-dashboard/user-dashboard/user-dashboard.component';
 import { LoggedInLayoutComponent } from './layout/logged-in-layout/logged-in-layout.component';
+import { RegisterExamComponent } from './views/components/register-exam/register-exam.component';
 
 
 const routes: Routes = [
@@ -27,7 +28,6 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'forgetpassword', component: ForgetPasswordComponent },
-  { path: 'goon', component: GoOnComponent },
   { path: 'deneme-sinavi', component: DenemeSinaviComponent },
 
   {
@@ -41,6 +41,9 @@ const routes: Routes = [
       { path: 'exams', component: ExamFilterComponent, canActivate: [AuthGuard] },
       { path: 'deneme', component: DenemeExamComponent, canActivate: [AuthGuard] },
       { path: 'dashboard', component: UserDashboardComponent, canActivate: [AuthGuard] },
+      { path: 'registry', component: RegisterExamComponent, canActivate: [AuthGuard] },
+      { path: 'goon', component: GoOnComponent,canActivate: [AuthGuard] },
+
 
     ], canActivate: [AuthGuard]
   },

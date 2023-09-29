@@ -13,7 +13,7 @@ import { UserService } from 'src/app/services/userService/user.service';
   styleUrls: ['./go-on.component.css']
 })
 export class GoOnComponent implements OnInit{
-  selectedButton: string | null = null;
+  selectedExam:string| null = null;
 
   loggedIn:boolean=false
 
@@ -28,9 +28,18 @@ export class GoOnComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.selectedButton = this.authService.getSelectedButton();
-    this.getUsersFromYDS()
+    this.getSelectedExam()
+
+    // this.getUsersFromYDS()
     this.ifLoggedIn()
+
+
+  }
+
+  getSelectedExam(){
+    const selectedex=localStorage.getItem('currentExam')
+    this.selectedExam=selectedex
+    console.log(this.selectedExam)
   }
 
   getUsersFromYDS(){
@@ -39,6 +48,21 @@ export class GoOnComponent implements OnInit{
       console.log(this.users)
     })
   }
+
+  addUserToExam(){
+    const data=this.userService.saveId()
+    this.userService.insertUserToExam(data).subscribe((res:any)=>{
+      console.log('Kayıt başarılı:', res);
+      this.tost.showToast('success','Başarıyla Kayıt Olundu!')
+      this.router.navigate(['/user/deneme'])
+    },
+    ()=>{
+      this.tost.showToast('danger','Kullanıcı Zaten Kayıtlı!')
+    }
+    )
+
+  }
+  
 
   registerToCourse(){
     const currentuser=localStorage.getItem('user')

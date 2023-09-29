@@ -40,7 +40,7 @@ export class HeaderComponent {
       if (currentUser) {
         this.loggedInUser=currentUser
       }
-      console.log(this.loggedInUser);
+      // console.log(this.loggedInUser);
     }
 
 

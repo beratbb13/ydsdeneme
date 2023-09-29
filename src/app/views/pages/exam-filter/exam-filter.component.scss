@@ -395,9 +395,9 @@ html {
   }
 }
 
-.add-button {
+.add-button i{
   color: white;
-  background-color: rgba(75, 59, 229, 0.4);
+  background-color: #6218f4;
   width: 40px;
   border-radius: 50px;
   height: 40px;
@@ -405,5 +405,12 @@ html {
   align-items: center;
   margin-right: 0.5rem;
   justify-content: center;
+  transition: all 0.4s ease;
+  cursor: pointer;
+
+    &:hover{
+      opacity: 0.6;
+      // background-color:rgb(26, 1, 255) ;
+    }
 
 }
