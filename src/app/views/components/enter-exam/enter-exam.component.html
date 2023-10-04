@@ -1,0 +1,33 @@
+<div class="container">
+    <h1>{{ selectedExam }}  </h1>
+    <div class="exam-info">
+        <p>Merhaba Değerli Katılımcı,</p>
+    </div>
+    <div class="exam-details">
+        <p>Bu deneme sınavı, Yabancı Dil Sınavı (YDS) için kendinizi hazırlarken ne kadar yol kat ettiğinizi değerlendirmek için tasarlanmıştır. Bu sınav, gerçek YDS sınavına benzer bir deneyim sunmayı hedeflemektedir.</p>
+        <p><strong>Sınav Bilgileri:</strong></p>
+        <ul >
+            <li style="color: blueviolet;font-weight: 900;font-family:'Montserrat', sans-serif;">Toplam Soru Sayısı: 20</li>
+            <li style="color: blueviolet;font-family: 'Montserrat', sans-serif;font-weight: 900;">Toplam Süre: 20 Dakika</li>
+        </ul>
+        <p><strong>Sınav İçeriği:</strong></p>
+        <p>Sınavda, dil yeteneklerinizi ölçmek için İngilizce dilinde çeşitli dilbilgisi, kelime bilgisi ve okuma anlama soruları bulunmaktadır. Sorular, farklı seviyelerde zorluk içerebilir ve sınavın her bölümünü temsil edebilir.</p>
+        <p><strong>Nasıl Çalışmalısınız:</strong></p>
+        <ul>
+            <li>Sınavı başlatmadan önce sessiz bir ortamda olduğunuzdan emin olun.</li>
+            <li>Soruları dikkatlice okuyun ve her soruya verilen süreye dikkat edin.</li>
+            <li>Sınavı tamamladıktan sonra sonuçlarınızı değerlendirin ve eksik olduğunuz konuları belirleyin.</li>
+            <li>Dil becerilerinizi geliştirmek için düzenli olarak pratik yapmaya devam edin.</li>
+        </ul>
+        <strong>Sınava hazır olduğunuz zaman aşağıdaki butona tıklayarak başlayabilirsiniz. Başarılar!</strong>
+    </div>
+    <div style="margin-top: 0.70em;" class="text-center">
+        <button [routerLink]="['/user/deneme']" type="button" class="btn btn--yellow">
+            <span class="btn__txt">Sınava Gir</span>
+            <i class="btn__bg" aria-hidden="true"></i>
+            <i class="btn__bg" aria-hidden="true"></i>
+            <i class="btn__bg" aria-hidden="true"></i>
+            <i class="btn__bg" aria-hidden="true"></i>
+        </button>
+    </div>
+</div>

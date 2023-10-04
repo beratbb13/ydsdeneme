@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NbSidebarService } from '@nebular/theme';
+import { json } from 'body-parser';
+import { UserService } from 'src/app/services/userService/user.service';
 
 
 @Component({
@@ -7,13 +9,77 @@ import { NbSidebarService } from '@nebular/theme';
   templateUrl: './user-dashboard.component.html',
   styleUrls: ['./user-dashboard.component.css']
 })
-export class UserDashboardComponent {
-  constructor(private sidebarService: NbSidebarService) {
+export class UserDashboardComponent implements OnInit{
+  
+  user_id:string=''
+
+  constructor(private sidebarService: NbSidebarService,private userservice:UserService) {
   }
+
+  ngOnInit(): void {
+    this.getUserId()
+    this.getUserCourses(this.user_id)
+  }
+
+  getUserId(){
+    const user=localStorage.getItem('user')
+    if (user){
+      const jsonuser=JSON.parse(user)
+      if (jsonuser) {
+        this.user_id=jsonuser.userId
+        console.log(this.user_id)
+      }
+    }else{
+      console.error('userid mevcut degil!')
+    }
+  }
+
   toggle() {
     this.sidebarService.toggle(true);
     return false;
   }
+  
+  userCourses: any[] = [];
+  sinavAdlari: string[] = [];
+  
+  getUserCourses(userId: string) {
+    this.userservice.getUserIDfromCourses(userId).subscribe((res: any) => {
+      this.userCourses = Array.isArray(res) ? res : [res];
+      console.log(this.userCourses);
+  
+      // Kullanıcı kimliğine göre verileri filtrele
+      const filteredUserCourses = this.filterUserCoursesByUserId(userId, this.userCourses);
+  
+      if (filteredUserCourses.length > 0) {
+        const examIds = filteredUserCourses.map(course => course.examid); // Tüm kursların examid'lerini aldık
+        console.log(`Kullanıcının katıldığı tüm sınavların examid'leri: ${examIds}`);
+  
+        // examid'ye göre sinav adını döndüren bir işlev kullanın
+        examIds.forEach(examid => {
+          const sinavAdi = this.getSinavAdi(examid);
+          this.sinavAdlari.push(sinavAdi); // Sinav adini sinavAdlari dizisine ekleyin
+          console.log(`Kullanıcının katıldığı sınav adları: ${this.sinavAdlari}`);
+        });
+      }
+    });
+  }
 
+  filterUserCoursesByUserId(userId: string, userCourses: any[]): any[] {
+    return userCourses.filter(course => course.userid === userId);
+  }
+
+  getSinavAdi(examid: any): string {
+    if (examid === '6e6e28f6-5df0-4da5-9e29-53a91dbb0e9c') {
+      return 'YDS';
+    }
+    //  else if (examid === 2) {
+    //   return 'YGS';
+    // } else if (examid === 3) {
+    //   return 'LYS';
+    // } 
+    else {
+      return 'Bilinmeyen Sinav';
+    }
+  }
 
 }

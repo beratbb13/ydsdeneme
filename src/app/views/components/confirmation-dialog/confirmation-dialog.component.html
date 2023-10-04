@@ -1,0 +1,12 @@
+<nb-card>
+    <nb-card-header>Silme Onayı</nb-card-header>
+    <nb-card-body>
+      <p>{{ message }}</p>
+    </nb-card-body>
+    <nb-card-footer>
+        <div class="buttons">
+      <button nbButton status="danger" (click)="confirm(true)">Sil</button>
+      <button  nbButton status="info" (click)="confirm(false)">Silme</button>
+        </div>
+    </nb-card-footer>
+  </nb-card>

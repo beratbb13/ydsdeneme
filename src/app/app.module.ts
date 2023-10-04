@@ -38,6 +38,8 @@ import { CustomHttpInterceptorInterceptor } from './utils/custom-http-intercepto
 import { LoggedInLayoutComponent } from './layout/logged-in-layout/logged-in-layout.component';
 import { ExamCardComponent } from './views/components/exam-card/exam-card.component';
 import { RegisterExamComponent } from './views/components/register-exam/register-exam.component';
+import { ConfirmationDialogComponent } from './views/components/confirmation-dialog/confirmation-dialog.component';
+import { EnterExamComponent } from './views/components/enter-exam/enter-exam.component';
 
 
 @NgModule({
@@ -71,6 +73,8 @@ import { RegisterExamComponent } from './views/components/register-exam/register
     LoggedInLayoutComponent,
     ExamCardComponent,
     RegisterExamComponent,
+    ConfirmationDialogComponent,
+    EnterExamComponent,
 
   ],
   imports: [

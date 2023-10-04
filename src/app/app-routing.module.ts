@@ -20,6 +20,7 @@ import { AuthGuard } from './services/authService/auth.guard';
 import { UserDashboardComponent } from './views/pages/user-dashboard/user-dashboard/user-dashboard.component';
 import { LoggedInLayoutComponent } from './layout/logged-in-layout/logged-in-layout.component';
 import { RegisterExamComponent } from './views/components/register-exam/register-exam.component';
+import { EnterExamComponent } from './views/components/enter-exam/enter-exam.component';
 
 
 const routes: Routes = [
@@ -33,7 +34,7 @@ const routes: Routes = [
   {
     path: 'user', component: LoggedInLayoutComponent, children: [
       { path: 'before-deneme', component: BeforeDenemeComponent, canActivate: [AuthGuard] },
-
+      { path: 'enter-exam', component: EnterExamComponent, canActivate: [AuthGuard] },
       { path: 'aboutus', component: AboutusComponent, canActivate: [AuthGuard] },
       { path: 'exampage', component: ExamPageComponent, canActivate: [AuthGuard] },
       { path: 'examform', component: ExamFormComponent, canActivate: [AuthGuard] },

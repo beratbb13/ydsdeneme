@@ -348,7 +348,7 @@ li:hover:not(:first-child) {
   // padding: 1rem 1.25rem;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex-start;
   border-top: 1px solid var(--c-border-primary);
   cursor: pointer;
 
@@ -413,4 +413,19 @@ html {
       // background-color:rgb(26, 1, 255) ;
     }
 
+}
+
+@media screen and (max-width:1550px) {
+  .card-header div {
+    h3 {
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .card-body {
+      p {
+        font-size: 12px;
+      }
+    }
+  }
 }

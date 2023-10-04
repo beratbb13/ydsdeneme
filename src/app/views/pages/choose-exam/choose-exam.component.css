@@ -114,7 +114,7 @@ body{
   position: fixed;
   width: 100vw;
   overflow: hidden;
-  z-index: 100000;
+  z-index: 1;
   /* height: 3rem; */
 }
 .navbar p{

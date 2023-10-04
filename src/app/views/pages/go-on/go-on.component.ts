@@ -54,7 +54,7 @@ export class GoOnComponent implements OnInit{
     this.userService.insertUserToExam(data).subscribe((res:any)=>{
       console.log('Kayıt başarılı:', res);
       this.tost.showToast('success','Başarıyla Kayıt Olundu!')
-      this.router.navigate(['/user/deneme'])
+      this.router.navigate(['/user/enter-exam'])
     },
     ()=>{
       this.tost.showToast('danger','Kullanıcı Zaten Kayıtlı!')
@@ -62,6 +62,7 @@ export class GoOnComponent implements OnInit{
     )
 
   }
+  
   
 
   registerToCourse(){
@@ -82,7 +83,7 @@ export class GoOnComponent implements OnInit{
                 this.spinner.show();
 
                 this.tost.showToast('success','Kullanıcı Başarıyla Kaydoldu!')
-                this.router.navigate(['/user/before-deneme'])
+                this.router.navigate(['/user/enter-exam'])
                 this.spinner.hide()
 
 

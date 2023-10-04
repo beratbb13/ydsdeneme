@@ -93,7 +93,20 @@ export class UserService {
     )
   }
 
-
+  getUserIDfromCourses(id:any){
+    const body = {
+      "Token": this.token,
+      "DataStoreId": Endpoints.usersCourseDataStoreId,
+      "Operation": "read",
+      "Data": `select * from users_course where userid= '${id}'`,
+      "Encrypted": '1951'
+    }
+    return this.http.post(Endpoints.dataops, body).pipe(
+      map((response: any) => {
+        return response.message[0];
+      })
+    );
+  }
 
 
 
@@ -113,10 +126,26 @@ export class UserService {
 }
 
 
+deleteUserFromExam(userid: string,examid:string) {
+  const body = {
+    "Token": this.token,
+    "DataStoreId": Endpoints.usersCourseDataStoreId,
+    "Operation": "delete",
+    "Data": `delete from users_course where userid = '${userid}' and examid='${examid}`,
+    "Encrypted": "1951"
+  }
+  return this.http.post(Endpoints.dataops, body).pipe(
+    map((response: any) => {
+      return response
+    })
+  )
+}
+
+
 
   exams = [
     { name: 'YDS', examid: '6e6e28f6-5df0-4da5-9e29-53a91dbb0e9c', img: '/assets/icons/yds.png'},
-    { name: 'YGS', examid: 1, img: '/assets/icons/ygs.png'},
+    { name: 'YGS', examid: '1', img: '/assets/icons/ygs.png'},
     { name: 'KPSS', examid: 3 , img: '/assets/icons/kpss.png'},
     { name: 'ALES', examid: 3 , img: '/assets/icons/ales.png'},
     { name: 'LGS', examid: 3 , img: '/assets/icons/lgs.png'}

@@ -4,6 +4,7 @@
       <img [src]="getSinavResmi(cardInfo)" width="30" />
     </div>
     <div style="width: 100%;">
+      <i class="fa-regular fa-circle-xmark" (click)="openConfirmationDialog()"></i>
       <div>{{cardInfo}}</div>
 
       <nb-progress-bar class="custom-progress" [value]="20" size="tiny" status="warning"></nb-progress-bar>
