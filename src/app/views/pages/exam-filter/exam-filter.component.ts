@@ -4,8 +4,10 @@ import { tap } from 'rxjs';
 import { question } from 'src/app/models/question';
 import { Usercourse } from 'src/app/models/usercourse';
 import { AnswerService } from 'src/app/services/answerService/answer.service';
+import { DialogService } from 'src/app/services/dialogService/dialog.service';
 import { ExamCategoryService } from 'src/app/services/examCategoryService/exam-category.service';
 import { SpinnerService } from 'src/app/services/spinnerService/spinner.service';
+import { RegisterExamComponent } from '../../components/register-exam/register-exam.component';
 
 export interface examName {
   name: string,
@@ -20,6 +22,7 @@ export class ExamFilterComponent implements OnInit {
   constructor(private answerService: AnswerService,
     private examCategoryService: ExamCategoryService,
     private spinnerService: SpinnerService,
+    private dialogservice: DialogService,
     private router: Router) { }
 
   exams = [
@@ -66,10 +69,10 @@ export class ExamFilterComponent implements OnInit {
 
   sinavlar: Usercourse[] = [];
 
-  getRegisteredCoursesAndExams(){
-    const currentuser=localStorage.getItem('user')
-    if ((currentuser !== null && currentuser !== undefined)){
-      const userJSON=JSON.parse(currentuser)
+  getRegisteredCoursesAndExams() {
+    const currentuser = localStorage.getItem('user')
+    if ((currentuser !== null && currentuser !== undefined)) {
+      const userJSON = JSON.parse(currentuser)
       if (userJSON.userId) {
         const userid = userJSON.userId;
         // console.log('useerid',userid)
@@ -84,7 +87,7 @@ export class ExamFilterComponent implements OnInit {
         this.examCategoryService.getUsersExams(userid).subscribe(
           (res: any) => {
             console.log('Basarili Istek, alinan SINAVLAR:', res);
-        
+
             if (res && typeof res === 'object') {
               // Convert the object to an array
               this.sinavlar = [res];
@@ -97,8 +100,8 @@ export class ExamFilterComponent implements OnInit {
             console.error('basarisiz istek', error);
           }
         );
-        
-        
+
+
       }
     }
   }
@@ -132,5 +135,9 @@ export class ExamFilterComponent implements OnInit {
         break;
     }
     this.pageNumber = 1;
+  }
+
+  openRegisterModal() {
+    this.dialogservice.openModal(RegisterExamComponent,true,true)
   }
 }

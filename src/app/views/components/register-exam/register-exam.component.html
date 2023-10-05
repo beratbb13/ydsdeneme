@@ -1,9 +1,17 @@
-<div class="container">
-<div *ngFor="let item of exam" (click)="takeExamName(item.name)" class="card custom-exam-card">
-    <div class="exam-icon">
-      <img [src]="item.img" width="50"/>
+<nb-card style="width: 100%;">
+  <nb-card-header class="d-flex justify-content-between">
+    Lütfen Kayıt Olmak İstediğiniz Sınavı Seçiniz
+    <div (click)="closeModal()">X</div>
+  </nb-card-header>
+  <nb-card-body>
+    <div class="container row" style="justify-content: center;">
+      <div *ngFor="let item of exam" (click)="takeExamName(item.name)" class="card custom-exam-card col-lg-5">
+        <div class="exam-icon">
+          <img [src]="item.img" width="50" />
+        </div>
+        <h4 class="card-title">{{item.name}}</h4>
+        <!-- <p class="card-text">Some description here</p> -->
+      </div>
     </div>
-    <h4 class="card-title">{{item.name}}</h4>
-    <!-- <p class="card-text">Some description here</p> -->
-  </div>
-</div>
+  </nb-card-body>
+</nb-card>

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NbDialogRef } from '@nebular/theme';
 import { ExamRegisterService } from 'src/app/services/exam-registration/exam-register.service';
 import { SpinnerService } from 'src/app/services/spinnerService/spinner.service';
 import { ToastService } from 'src/app/services/toastService/toast.service';
@@ -11,19 +12,20 @@ import { UserService } from 'src/app/services/userService/user.service';
   styleUrls: ['./register-exam.component.css']
 })
 export class RegisterExamComponent implements OnInit{
-  // exams = [ 
+  // exams = [
   //   { name: 'YDS', text: 'lorem ipsum dolar sit amet', img: '/assets/icons/yds.png' },
   //   { name: 'KPSS', text: 'lorem ipsum dolar sit amet', img: '/assets/icons/kpss.png' },
   //   { name: 'YGS', text: 'lorem ipsum dolar sit amet', img: '/assets/icons/ygs.png' },
   //   { name: 'ALES', text: 'lorem ipsum dolar sit amet', img: '/assets/icons/ales.png' },
   //   { name: 'LGS', text: 'lorem ipsum dolar sit amet', img: '/assets/icons/lgs.png' },
-    
+
   // ]
 
   exam:any
 
   constructor
   (
+    private dialogRef: NbDialogRef<RegisterExamComponent>,
   private userService:UserService,
   private examRegister:ExamRegisterService,
   private spinner:SpinnerService,
@@ -33,10 +35,15 @@ export class RegisterExamComponent implements OnInit{
   ){
 
   }
-  
+
   ngOnInit(): void {
     localStorage.removeItem('currentExam')
     this.exam=this.userService.getexams()
+  }
+
+
+  closeModal(){
+    this.dialogRef.close()
   }
 
 
@@ -45,8 +52,9 @@ export class RegisterExamComponent implements OnInit{
     localStorage.setItem('currentExam',examname)
     localStorage.getItem('currentExam')
     this.router.navigate(['/user/goon'])
+    this.closeModal()
   }
-  
+
   // registerToCourse(){
   //   const currentuser=localStorage.getItem('user')
   //   if ((currentuser !== null && currentuser !== undefined)){
