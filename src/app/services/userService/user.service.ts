@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { Endpoints } from 'src/app/constants/Endpoints';
-import { map } from 'rxjs'
+import { Observable, map } from 'rxjs'
 import { AuthService } from '../authService/auth.service';
 import { User } from 'src/app/models/user';
 import { json } from 'body-parser';
@@ -126,12 +126,12 @@ export class UserService {
 }
 
 
-deleteUserFromExam(userid: string,examid:string) {
+deleteUserFromExam(usercourseid:any): Observable<any[]> {
   const body = {
     "Token": this.token,
     "DataStoreId": Endpoints.usersCourseDataStoreId,
     "Operation": "delete",
-    "Data": `delete from users_course where userid = '${userid}' and examid='${examid}`,
+    "Data": `delete from users_course where usercourseid = ${usercourseid}`,
     "Encrypted": "1951"
   }
   return this.http.post(Endpoints.dataops, body).pipe(

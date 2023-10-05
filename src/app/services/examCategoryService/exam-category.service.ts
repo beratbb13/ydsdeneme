@@ -82,7 +82,7 @@ export class ExamCategoryService {
       "Token": this.token,
       "DataStoreId": Endpoints.examsDataStoreid,
       "Operation": "read",
-      "Data": `SELECT DISTINCT ex."Name" FROM exam ex INNER JOIN users_course uc ON ex.examid::text = uc.examid WHERE uc.userid = '${userid}'`,
+      "Data": `SELECT DISTINCT uc.usercourseid, ex."Name" FROM exam ex INNER JOIN users_course uc ON ex.examid::text = uc.examid WHERE uc.userid = '${userid}'`,
       "Encrypted": '1951'
     }
     return this.http.post(Endpoints.dataops, body).pipe(

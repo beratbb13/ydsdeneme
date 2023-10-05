@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Usercourse } from 'src/app/models/usercourse';
 import { ExamCategoryService } from 'src/app/services/examCategoryService/exam-category.service';
 
 @Component({
@@ -16,7 +17,7 @@ export class BeforeDenemeComponent implements OnInit{
   //   { name: 'LGS', text: 'lorem ipsum dolar sit amet', img: '/assets/icons/lgs.png' },
 
   // ]
-  sinavlar:any[]=[]
+  sinavlar:Usercourse[]=[]
 
   constructor(private examCategoryService:ExamCategoryService){}
 
@@ -42,9 +43,14 @@ export class BeforeDenemeComponent implements OnInit{
         this.examCategoryService.getUsersExams(userid).subscribe(
           (res: any) => {
             console.log('Basarili Istek, alinan SINAVLAR:', res);
-            // Eğer res bir nesne ise, bu nesneyi bir diziye dönüştürün.
-            this.sinavlar = Object.values(res);
-            console.log('agabababa', this.sinavlar);
+        
+            if (res && typeof res === 'object') {
+              // Convert the object to an array
+              this.sinavlar = [res];
+              console.log('agabababa', this.sinavlar);
+            } else {
+              console.error('Response is not an object:', res);
+            }
           },
           (error: any) => {
             console.error('basarisiz istek', error);
