@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { ExamResultComponent } from '../../testResult/exam-result/exam-result.component';
 import { NbDialogRef } from '@nebular/theme/public_api';
 import { UserScoreService } from 'src/app/services/userScoreService/user-score.service';
+import { AnswerService } from 'src/app/services/answerService/answer.service';
 
 @Component({
   selector: 'app-exam-form',
@@ -20,6 +21,7 @@ export class ExamFormComponent {
 
   constructor(
     private questionService: QuestionService,
+    private answerService: AnswerService,
     private spinnerService: SpinnerService,
     private formBuilder: FormBuilder,
     private dialogService: DialogService,
@@ -50,7 +52,11 @@ export class ExamFormComponent {
   visibleButtons: any = [];
   totalPages: number = 0;
 
+  user: any
+
   ngOnInit() {
+    this.user = localStorage.getItem('user')
+    this.user = JSON.parse(this.user)
     this.category = history.state.category;
     this.getQuestionsAndAnswers();
     this.questionForm = this.formBuilder.group({})
@@ -87,7 +93,6 @@ export class ExamFormComponent {
     }
     this.showEllipsisButton = this.currentPage < this.totalPages - 1;
 
-    debugger
   }
 
   shouldShowEllipsis(): boolean {
@@ -97,18 +102,36 @@ export class ExamFormComponent {
 
   getQuestionsAndAnswers() {
     this.spinnerService.show();
-    this.questionService.getQuestionsAndAnswersByCategoryId(this.category.ecategoryid).pipe(
+    this.questionService.getQuestionsAndAnswers(this.user.userId, this.category.ecategoryid).pipe(
       tap(res => this.answerswithQuestions = [...this.answerswithQuestions, ...res]), // =  res
+      tap(res => this.lastQuestions = res),
       tap(() => this.soruSayisi = this.answerswithQuestions.length / 5),
       tap(() => this.pullQuestions()),
       tap(() => this.answerswithQuestions.map((answer: any) => this.createFormControlObject(answer.questionid))),
       tap(() => this.updatePaginationButtons()),
       tap(() => this.totalPages = Math.ceil(this.questions.length / this.itemsPerPage)),
       tap(() => this.spinnerService.hide())
-    ).subscribe(() => { console.log(this.visibleButtons) });
+    ).subscribe(() => {
+      /*console.log(this.visibleButtons)
+      console.log(this.totalPages)
+      console.log(this.soruIndex)
+      console.log(this.soruSayisi)
+      console.log(this.answerswithQuestions)*/
+    });
   }
 
+  lastQuestions: any[] = []
+  lastQuestionIds: any[] = []
+
   pullQuestions() {
+    this.lastQuestionIds = []
+    this.lastQuestions.map(answer => {
+      if (!this.lastQuestionIds.includes(answer.questionid))
+        this.lastQuestionIds.push(answer.questionid)
+    })
+
+    console.log(this.lastQuestionIds)
+
     this.answerswithQuestions.map(answer => {
       if (!this.questionids.includes(answer.questionid)) {
         this.questions.push({ questionid: answer.questionid, question: answer.question, examid: answer.examid, ecategoryid: answer.ecategoryid });
@@ -118,15 +141,18 @@ export class ExamFormComponent {
     this.questions.map(ques => {
       ques.answers = this.answerswithQuestions.filter(ans => ans.questionid == ques.questionid)
     })
-    console.log(this.questions)
   }
 
   setScore() {
-    let user = localStorage.getItem('user')
-    let user_id = user ? JSON.parse(user).userId : '';
+    let array: any[] = []
+    this.lastQuestionIds.map(id => {
+      array.push({ user_id: this.user.userId, question_id: id })
+      //this.userScoreService.insertUserScore([{ user_id: user_id, question_id: id }])/*.subscribe(res => console.log(res));*/
+    })
+    this.userScoreService.insertUserScore(array).subscribe(res => {
+      if (res.message == 'Success')
+        this.getQuestionsAndAnswers();
 
-    this.questionids.map(id => {
-      this.userScoreService.insertUserScore({ user_id: user_id, question_id: id }).subscribe(res => console.log(res));
     })
   }
 
@@ -168,7 +194,7 @@ export class ExamFormComponent {
       this.currentPage = Math.floor(this.soruIndex / this.itemsPerPage);
 
       if ((this.soruIndex + 1) % this.itemsPerPage === 1) {
-        this.getQuestionsAndAnswers();
+        this.setScore()
         this.loadNextPage();
       }
       this.updatePaginationButtons();

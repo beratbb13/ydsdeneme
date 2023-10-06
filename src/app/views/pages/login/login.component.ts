@@ -35,13 +35,13 @@ export class LoginComponent {
   }
 
   isCheckedRemember() {
-    if (localStorage.getItem('remember')){
-      this.rememberMe='true'
-      var userName=localStorage.getItem('Username')
-      var password=localStorage.getItem('Password')
+    if (localStorage.getItem('remember')) {
+      this.rememberMe = 'true'
+      var userName = localStorage.getItem('Username')
+      var password = localStorage.getItem('Password')
       this.formGroup.patchValue({
-        Username:userName,
-        Password:password
+        Username: userName,
+        Password: password
       })
 
     }
@@ -71,7 +71,6 @@ export class LoginComponent {
     this.authService.login(loginReq).subscribe(res => {
       if (res.result) {
         this.toastService.showToast('success', 'Giriş işlemi başarılı');
-
         this.router.navigate(['/user/dashboard']);
 
       } else if (res) {

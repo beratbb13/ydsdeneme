@@ -62,12 +62,12 @@ export class QuestionService {
     );
   }
 
-  getQuestionsAndAnswers() {
+  getQuestionsAndAnswers(user_id: string, categoryid: string) {
     const body = {
       "Token": this.token,
       "DataStoreId": Endpoints.questionsDataStoreid,
       "Operation": "read",
-      "Data": `select cast(questions.questionid as text), cast(questions.examid as text), cast(questions.ecategoryid as text), questions.question, answers_last.answer, answers_last.istrue, cast(answers_last.answerid as text) from questions inner join answers_last on questions.questionid=answers_last.questionid`,
+      "Data": `select cast(al.answerid as text), al.answer, al.istrue, cast(q.questionid as text), cast(q.examid as text),cast(q.ecategoryid as text), q.question from questions_27_09 q left join answers_last al on al.questionid  = q.questionid left join (select us.user_id, us.question_id from user_score us where us.user_id = '${user_id}') us on us.question_id  = q.questionid where us.question_id is null and ecategoryid = '${categoryid}' order by q."number" asc limit 50`,
       "Encrypted": "1951",
     }
     return this.http.post(Endpoints.dataops, body).pipe(

@@ -72,7 +72,8 @@
     <nb-card class="timespent" size="medium" style="flex: 50%;">
       <nb-card-header style="display: flex;justify-content: space-around;">
         Time spent on learning..
-        <input nbInput placeholder="Pick Date" style="border: none !important;" [nbDatepicker]="dateTimePicker">
+        <input nbInput placeholder="Pick Date" style="border: none !important;" [(ngModel)]="selectedDate"
+          (ngModelChange)="setDate()" [nbDatepicker]="dateTimePicker">
         <nb-datepicker #dateTimePicker></nb-datepicker>
       </nb-card-header>
       <nb-list>
@@ -138,7 +139,8 @@
               alt="external-exam-online-learning-photo3ideastudio-lineal-color-photo3ideastudio" /></span>
           <h3>{{sinav}}</h3>
         </div>
-        <h5 *ngIf="sinavAdlari.length===0" class="text-center" style="font-weight: 600">Çalışılan herhangi bir sınav yok !</h5>
+        <h5 *ngIf="sinavAdlari.length===0" class="text-center" style="font-weight: 600">Çalışılan herhangi bir sınav yok
+          !</h5>
       </div>
       <div class="card-footer">
         <img src="https://img.icons8.com/pulsar-line/48/start.png" alt="start" />Çalışmaya Devam Et
@@ -146,4 +148,4 @@
     </div>
 
 
-</div>
+  </div>

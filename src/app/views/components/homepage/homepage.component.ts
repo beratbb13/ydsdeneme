@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+/*import { Component } from '@angular/core';
 import { user } from '../../../models/user';
 import { AuthService } from 'src/app/services/authService/auth.service';
 import { SpinnerService } from 'src/app/services/spinnerService/spinner.service';
@@ -31,3 +31,4 @@ export class HomepageComponent {
     this.userService.deleteUser('qqqqq').subscribe(res => console.log(res))
   }
 }
+*/

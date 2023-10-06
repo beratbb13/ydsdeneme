@@ -51,9 +51,9 @@ export class CustomHttpInterceptorInterceptor implements HttpInterceptor {
 
           if (event.body.messageId == 19511952) {
             this.toastService.showToast('warning', 'Oturum Süreniz Dolmuştur!');
-            this.authService.getLogout().subscribe(res => {
+            /*this.authService.getLogout().subscribe(res => {
               this.Spinner.hide()
-            })
+            })*/
           }
 
           if (event.body.result === false) {
