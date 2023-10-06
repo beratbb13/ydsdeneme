@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NbSidebarService } from '@nebular/theme';
 import { json } from 'body-parser';
+import { UserScoreService } from 'src/app/services/userScoreService/user-score.service';
 import { UserService } from 'src/app/services/userService/user.service';
 
 
@@ -15,7 +16,9 @@ export class UserDashboardComponent implements OnInit {
   selectedDate: any
   user_id: string = ''
 
-  constructor(private sidebarService: NbSidebarService, private userservice: UserService) {
+  constructor(private sidebarService: NbSidebarService,
+    private userservice: UserService,
+    private userScoreService: UserScoreService) {
   }
 
   ngOnInit(): void {

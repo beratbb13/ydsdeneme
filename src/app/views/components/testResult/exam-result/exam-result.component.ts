@@ -18,10 +18,6 @@ export class ExamResultComponent {
 
   constructor(private dialogRef: NbDialogRef<ExamResultComponent>) { }
 
-  ngOnInit() {
-    console.log(this.data);
-  }
-
   stepperChange(event: any) {
     this.stepperIndex = event.index
   }

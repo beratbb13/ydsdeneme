@@ -222,8 +222,9 @@ export class ExamFormComponent {
     }
   }
 
+
   reply() {
-    clearInterval(this.interval);
+    //clearInterval(this.interval);
 
     let current: question = this.questions[this.soruIndex];
     let trueAnswer: answer | undefined = current.answers?.find(answer => answer.istrue === 1);
@@ -234,6 +235,7 @@ export class ExamFormComponent {
     } else {
       this.questionStatus[current.questionid] = 'incorrect';
     }
+
   }
 
   getButtonBackgroundColor(questionId: string): string {
@@ -254,24 +256,28 @@ export class ExamFormComponent {
   sinaviBitir() {
 
     let controls = Object.values(this.questionForm.controls);
-    let trueQuestions: question[] = [];
-    let falseQuestions: question[] = [];
-    let emptyQuestions: question[] = [];
+    let trueQuestions: any[] = [];
+    let falseQuestions: any[] = [];
+    let emptyQuestions: any[] = [];
     let trueIds: any[] = [];
     let falseIds: any[] = [];
 
     controls.map(control => {
       if (control.value.istrue == 1) {
-        trueQuestions.push(this.questions.filter(ques => control.value.questionid == ques.questionid)[0]);
+        trueQuestions.push({ question: this.questions.filter(ques => control.value.questionid == ques.questionid)[0], istrue: true });
         trueIds.push(control.value.questionid);
       }
       else if (control.value.istrue == 0) {
-        falseQuestions.push(this.questions.filter(ques => control.value.questionid == ques.questionid)[0]);
+        falseQuestions.push({ question: this.questions.filter(ques => control.value.questionid == ques.questionid)[0], istrue: false });
         falseIds.push(control.value.questionid);
       }
     })
 
     emptyQuestions = this.questions.filter(ques => (!trueIds.includes(ques.questionid) && !falseIds.includes(ques.questionid)));
+    let emptyQuestion: any[] = []
+    emptyQuestions.map(ques => {
+      emptyQuestion.push({ question: ques, istrue: false })
+    })
 
     let items = [
       {
@@ -306,8 +312,15 @@ export class ExamFormComponent {
         ]
       }
     ]
+    /*console.log(trueQuestions)
+    console.log(falseQuestions)
+    console.log(emptyQuestions)*/
 
-    let allQuestions = [...trueQuestions, ...falseQuestions, ...emptyQuestions];
+
+    let allQuestions = [...trueQuestions, ...falseQuestions, ...emptyQuestion];
+
+    this.userScoreService.insertExamScore(this.user.userId, allQuestions).subscribe(res => console.log(res))
+
 
     this.openResultModal({ items: items, questions: allQuestions });
 
