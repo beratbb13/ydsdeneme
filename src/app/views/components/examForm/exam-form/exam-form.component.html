@@ -129,7 +129,7 @@
             Önceki Soru
         </button>
         <button class="paginationbuttons" *ngFor="let i of visibleButtons" (click)="goToQuestion(i)"
-            [ngStyle]="{'background-color': getButtonBackgroundColor(questions[i].questionid),'color':getButtonBackgroundColor(questions[i].questionid)=='#EDF1F6'?'':'white'}"
+            [ngStyle]="{'background-color': getButtonBackgroundColor(questions[i].questionid),'color':getButtonBackgroundColor(questions[i].questionid)=='#EDF1F6'?'black':'white'}"
             [class.active]="i === soruIndex">
             {{ i + 1 }}
         </button>

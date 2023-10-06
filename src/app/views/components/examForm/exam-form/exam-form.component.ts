@@ -193,7 +193,7 @@ export class ExamFormComponent {
       this.soruIndex += 1;
       this.currentPage = Math.floor(this.soruIndex / this.itemsPerPage);
 
-      if ((this.soruIndex + 1) % this.itemsPerPage === 1) {
+      if ((this.soruIndex + 1) % this.itemsPerPage === 1 && (this.currentPage * this.itemsPerPage) === this.questions.length) {
         this.setScore()
         this.loadNextPage();
       }
@@ -227,19 +227,35 @@ export class ExamFormComponent {
     //clearInterval(this.interval);
 
     let current: question = this.questions[this.soruIndex];
-    let trueAnswer: answer | undefined = current.answers?.find(answer => answer.istrue === 1);
+    this.dogruCevap = current.answers?.find(answer => answer.istrue === 1);
+    let answered = this.questionForm.controls[current.questionid].value
 
-    if (trueAnswer) {
-      this.dogruCevap = trueAnswer;
+    if (!answered)
+      this.questionStatus[current.questionid] = 'unanswered'
+    else if (this.dogruCevap == answered) {
       this.questionStatus[current.questionid] = 'correct';
     } else {
       this.questionStatus[current.questionid] = 'incorrect';
     }
-
   }
 
   getButtonBackgroundColor(questionId: string): string {
-    const status = this.questionStatus[questionId];
+    /*const status = this.questionStatus[questionId];
+*/
+    /*let isTrue = this.questionForm.controls[questionId].value
+
+    if (isTrue && isTrue === 1) {
+      console.log('true')
+      return 'green'
+    } else if (isTrue && isTrue === 0) {
+      console.log('false')
+      return 'red'
+    } else {
+      console.log('yok')
+      return 'white'
+    }*/
+
+    const status = this.questionStatus[questionId]
 
     if (status === 'correct') {
       return 'green'; // Doğru cevaplanan sorular için yeşil arka plan
