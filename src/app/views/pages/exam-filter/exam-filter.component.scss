@@ -237,6 +237,7 @@ li:hover:not(:first-child) {
   border-radius: 8px;
   overflow: hidden;
   display: flex;
+  min-height: 100%;
   flex-direction: column;
   // width: 23%;
   border-bottom: #680FF4;
