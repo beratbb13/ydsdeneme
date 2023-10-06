@@ -24,27 +24,33 @@
 //     border: 2px solid #690FF4; // Tıklanan butonun arka plan rengi mor olsun
 //   }
 // }
-.pagination .button_pag{
+.pagination .button_pag {
   background-color: white;
-    border-radius: 7%;
-    border: 2px solid rgb(105, 14, 245);
-    color: rgb(105, 14, 245);
-    transition: 0.25s;
-    height: 40px;
-    width: 70px;
+  border-radius: 7%;
+  border: 2px solid rgb(105, 14, 245);
+  color: rgb(105, 14, 245);
+  transition: 0.25s;
+  height: 40px;
+  width: 70px;
 }
 
 .pagination {
-  position: fixed; /* Make the pagination bar fixed */
-  bottom: 0; /* Stick it to the bottom of the screen */
-  width: 100%; /* Take up the full width of the screen */
+  position: fixed;
+  /* Make the pagination bar fixed */
+  bottom: 0;
+  /* Stick it to the bottom of the screen */
+  width: 100%;
+  /* Take up the full width of the screen */
   display: flex;
   justify-content: center;
   background-color: white;
-  padding: 10px 0; /* Add some padding for spacing */
-  box-shadow: 0px -3px 6px rgba(0, 0, 0, 0.1); /* Add a shadow at the bottom */
-  z-index: 1000; /* Ensure it's above other content */
-  
+  padding: 10px 0;
+  /* Add some padding for spacing */
+  box-shadow: 0px -3px 6px rgba(0, 0, 0, 0.1);
+  /* Add a shadow at the bottom */
+  z-index: 1000;
+  /* Ensure it's above other content */
+
   button {
     width: 40px;
     height: 40px;
@@ -68,28 +74,31 @@
 /* Media query for smaller screens */
 @media screen and (max-width: 768px) {
   .pagination {
-    padding: 5px 0; /* Reduce padding for smaller screens */
+    padding: 5px 0;
+    /* Reduce padding for smaller screens */
   }
 
   button {
-    width: 30px; /* Adjust button size for smaller screens */
+    width: 30px;
+    /* Adjust button size for smaller screens */
     height: 30px;
-    font-size: 12px; /* Reduce font size for button text */
+    font-size: 12px;
+    /* Reduce font size for button text */
   }
 }
 
 
 .close:hover,
 .close:focus {
-  box-shadow: 
+  box-shadow:
     inset -5em 0 0 0 var(--hover),
-    inset 5em 0 0 0 var(--hover);  
-    
+    inset 5em 0 0 0 var(--hover);
+
 }
 
 $colors: (
   // raise: #ffa260, 
-  close: #136BEE, 
+  close: #136BEE,
 );
 
 
@@ -100,13 +109,13 @@ $colors: (
   }
 }
 
-button {  
+button {
   color: var(--color);
-  transition: 0.25s ;
+  transition: 0.25s;
   height: 40px;
-  
+
   &:hover,
-  &:focus { 
+  &:focus {
     border-color: var(--hover);
     color: #680FF4;
     // border-radius: 15px;
@@ -114,6 +123,7 @@ button {
 
 
 }
+
 button {
   background-color: white;
   border-radius: 7%;
@@ -129,32 +139,41 @@ button {
   0% {
     transform: rotate(0deg) translate3d(0, 0, 0);
   }
+
   25% {
     transform: rotate(3deg) translate3d(0, 0, 0);
   }
+
   50% {
     transform: rotate(-3deg) translate3d(0, 0, 0);
   }
+
   75% {
     transform: rotate(1deg) translate3d(0, 0, 0);
   }
+
   100% {
     transform: rotate(0deg) translate3d(0, 0, 0);
   }
 }
+
 @keyframes storm {
   0% {
     transform: translate3d(0, 0, 0) translateZ(0);
   }
+
   25% {
     transform: translate3d(4px, 0, 0) translateZ(0);
   }
+
   50% {
     transform: translate3d(-3px, 0, 0) translateZ(0);
   }
+
   75% {
     transform: translate3d(2px, 0, 0) translateZ(0);
   }
+
   100% {
     transform: translate3d(0, 0, 0) translateZ(0);
   }
@@ -162,135 +181,155 @@ button {
 
 
 .container {
-// max-width: 1000px;
-margin-left: auto;
-margin-right: auto;
-padding-left: 10px;
-padding-right: 10px;
+  // max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 h2 {
-font-size: 26px;
-margin: 20px 0;
-text-align: center;
-small {
-  font-size: 0.5em;
-}
+  font-size: 26px;
+  margin: 20px 0;
+  text-align: center;
+
+  small {
+    font-size: 0.5em;
+  }
 }
 
 .responsive-table {
-ul{
-}
-li {
-  margin-left: -2rem;
-  height: 70px ;
-  border-radius: 3px;
-  padding: 16px 30px;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-  transition: all 0.4s ease-in;
-}
-.table-header {
-  background: linear-gradient(90deg, rgba(105,14,245,1) 0%, rgba(60,79,235,1) 71%, rgba(19,108,238,1) 98%);
-  font-size: 30px;
-  color: white;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-  font-family: 'Bebas Neue', sans-serif;
-  position: sticky; /* Header'ı sabit yap */
-  top: 0; /* Sayfanın üstüne sabit yap */
-  z-index: 1; /* Diğer içeriklerin önünde görünmesini sağla */
-  height: 50px;
-}
-.table-row {
-  background-color: #ffffff;
-  box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.1);
-}
-.col-1 {
-  flex-basis: 10%;
-}
-.col-2 {
-  flex-basis: 40%;
-}
-.col-3 {
-  flex-basis: 25%;
-}
-.col-4 {
-  flex-basis: 25%;
-}
+  ul {}
+
+  li {
+    margin-left: -2rem;
+    height: 70px;
+    border-radius: 3px;
+    padding: 16px 30px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    transition: all 0.4s ease-in;
+  }
+
+  .table-header {
+    background: linear-gradient(90deg, rgba(105, 14, 245, 1) 0%, rgba(60, 79, 235, 1) 71%, rgba(19, 108, 238, 1) 98%);
+    font-size: 30px;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    font-family: 'Bebas Neue', sans-serif;
+    position: sticky;
+    /* Header'ı sabit yap */
+    top: 0;
+    /* Sayfanın üstüne sabit yap */
+    z-index: 1;
+    /* Diğer içeriklerin önünde görünmesini sağla */
+    height: 50px;
+  }
+
+  .table-row {
+    background-color: #ffffff;
+    box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
+  }
+
+  .col-1 {
+    flex-basis: 10%;
+  }
+
+  .col-2 {
+    flex-basis: 40%;
+  }
+
+  .col-3 {
+    flex-basis: 25%;
+  }
+
+  .col-4 {
+    flex-basis: 25%;
+  }
 
 }
 
-li:hover:not(:first-child){
+li:hover:not(:first-child) {
   transition: all 0.4s ease-in;
   opacity: 0.5;
 }
 
 
 
-.contain{
-height: 500px;
-/* border:1px solid black; */
-box-shadow: 2px 2px 2px 2px;
-border-radius: 20px;
-background-color: #fbfdff
+.contain {
+  height: 500px;
+  /* border:1px solid black; */
+  box-shadow: 2px 2px 2px 2px;
+  border-radius: 20px;
+  background-color: #fbfdff
 }
 
 
 
-@media screen and (max-width:768px){
-  button{
+@media screen and (max-width:768px) {
+  button {
     /* width: 100px; */
     font-size: 10px;
     width: 75px;
     height: 50px;
   }
+
   button span {
     font-size: 8px;
   }
-  .examname{
+
+  .examname {
     font-size: 14px;
   }
 }
-.form{
-    background: #fff;
-    box-shadow: 0 30px 60px 0 rgba(90, 116, 148, 0.4);
-    border-radius: 5px;
-    max-width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 14px;
-    left: 0;
-    right: 0;
-    top: 20%;
-    position: absolute;
-    border-top: 5px solid rgba(105,14,245,1);
+
+.form {
+  background: #fff;
+  box-shadow: 0 30px 60px 0 rgba(90, 116, 148, 0.4);
+  border-radius: 5px;
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 14px;
+  left: 0;
+  right: 0;
+  top: 20%;
+  position: absolute;
+  border-top: 5px solid rgba(105, 14, 245, 1);
   /*   z-index: 1; */
-    animation: bounce 1.5s infinite;
-  }
-  // countdowner
-  #countdown {
-    position: relative;
-    margin: auto;
-    width: 45px; /* Genişlik 100px olarak ayarlandı */
-    height: 46px; /* Yükseklik 100px olarak ayarlandı */
-    text-align: center;
-  }
-  .timer{
-    border: 3px solid rgba(105,14,245,1);
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    text-align: center;
-  }
-  .finish_button{
-    background-color: white;
-    border-radius: 7%;
-    border:2px solid rgba(105,14,245,1);
-    color: rgba(105,14,245,1);
-  }
-  #countdown-number {
-    display: inline-block;
-    line-height: 45px; /* Yükseklikle uyumlu hizalama */
-  }
+  animation: bounce 1.5s infinite;
+}
+
+// countdowner
+#countdown {
+  position: relative;
+  margin: auto;
+  width: 45px;
+  /* Genişlik 100px olarak ayarlandı */
+  height: 46px;
+  /* Yükseklik 100px olarak ayarlandı */
+  text-align: center;
+}
+
+.timer {
+  border: 3px solid rgba(105, 14, 245, 1);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+}
+
+.finish_button {
+  background-color: white;
+  border-radius: 7%;
+  border: 2px solid rgba(105, 14, 245, 1);
+  color: rgba(105, 14, 245, 1);
+}
+
+#countdown-number {
+  display: inline-block;
+  line-height: 45px;
+  /* Yükseklikle uyumlu hizalama */
+}

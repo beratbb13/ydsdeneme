@@ -9,11 +9,13 @@ import { UserService } from 'src/app/services/userService/user.service';
   templateUrl: './user-dashboard.component.html',
   styleUrls: ['./user-dashboard.component.css']
 })
-export class UserDashboardComponent implements OnInit{
-  
-  user_id:string=''
+export class UserDashboardComponent implements OnInit {
 
-  constructor(private sidebarService: NbSidebarService,private userservice:UserService) {
+
+  selectedDate: any
+  user_id: string = ''
+
+  constructor(private sidebarService: NbSidebarService, private userservice: UserService) {
   }
 
   ngOnInit(): void {
@@ -21,15 +23,15 @@ export class UserDashboardComponent implements OnInit{
     this.getUserCourses(this.user_id)
   }
 
-  getUserId(){
-    const user=localStorage.getItem('user')
-    if (user){
-      const jsonuser=JSON.parse(user)
+  getUserId() {
+    const user = localStorage.getItem('user')
+    if (user) {
+      const jsonuser = JSON.parse(user)
       if (jsonuser) {
-        this.user_id=jsonuser.userId
+        this.user_id = jsonuser.userId
         console.log(this.user_id)
       }
-    }else{
+    } else {
       console.error('userid mevcut degil!')
     }
   }
@@ -38,22 +40,22 @@ export class UserDashboardComponent implements OnInit{
     this.sidebarService.toggle(true);
     return false;
   }
-  
+
   userCourses: any[] = [];
   sinavAdlari: string[] = [];
-  
+
   getUserCourses(userId: string) {
     this.userservice.getUserIDfromCourses(userId).subscribe((res: any) => {
       this.userCourses = Array.isArray(res) ? res : [res];
       console.log(this.userCourses);
-  
+
       // Kullanıcı kimliğine göre verileri filtrele
       const filteredUserCourses = this.filterUserCoursesByUserId(userId, this.userCourses);
-  
+
       if (filteredUserCourses.length > 0) {
         const examIds = filteredUserCourses.map(course => course.examid); // Tüm kursların examid'lerini aldık
         console.log(`Kullanıcının katıldığı tüm sınavların examid'leri: ${examIds}`);
-  
+
         // examid'ye göre sinav adını döndüren bir işlev kullanın
         examIds.forEach(examid => {
           const sinavAdi = this.getSinavAdi(examid);
@@ -80,6 +82,14 @@ export class UserDashboardComponent implements OnInit{
     else {
       return 'Bilinmeyen Sinav';
     }
+  }
+
+  setDate() {
+    const tarih = new Date(this.selectedDate)
+    const tarihFormat = tarih.toLocaleDateString("tr-TR")
+
+    console.log(tarihFormat)
+
   }
 
 }

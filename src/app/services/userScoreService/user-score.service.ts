@@ -14,7 +14,7 @@ export class UserScoreService {
 
   token: string | null = this.authService.getToken();
 
-  getUserScore() {
+  getUserScore(userid: string) {
     const body = {
       "Token": this.token,
       "DataStoreId": Endpoints.userScoreDataStoreid,
@@ -29,12 +29,36 @@ export class UserScoreService {
     );
   }
 
-  insertUserScore(score: any) {
+  getUserScoreByDate(userid: string, date: string) {
+    const body = {
+      "Token": this.token,
+      "DataStoreId": Endpoints.userScoreDataStoreid,
+      "Operation": "read",
+      "Data": `select cast(user_id as text), cast(question_id as text) from user_score`,
+      "Encrypted": '1951'
+    }
+    return this.http.post(Endpoints.dataops, body).pipe(
+      map((response: any) => {
+        console.log(response)
+      })
+    );
+  }
+
+  insertUserScore(scores: any[]) {
+    let scoreBody: any = ''
+    scores.map((score: any, indis: number) => {
+      if (scores[indis + 1]) {
+        scoreBody += `('${score.user_id}', '${score.question_id}'), `
+      } else {
+        scoreBody += `('${score.user_id}', '${score.question_id}')`
+      }
+    })
+
     const body = {
       "Token": this.token,
       "DataStoreId": Endpoints.userScoreDataStoreid,
       "Operation": "insert",
-      "Data": `insert into user_score(user_id, question_id) values('${score.user_id}', '${score.question_id}')`,
+      "Data": `insert into user_score(user_id, question_id) values${scoreBody}`,
       "Encrypted": '1951'
     }
     return this.http.post(Endpoints.dataops, body).pipe(

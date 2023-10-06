@@ -69,7 +69,7 @@ export class AnswerService {
       "Token": this.token,
       "DataStoreId": Endpoints.answersDataStoreid,
       "Operation": "read",
-      "Data": `Select cast(answerid as text), cast(questionid as text), answer, istrue from answers_last where questionid = '${questionid}'`,
+      "Data": `select cast(al.questionid as text), q.question, cast(al.answerid as text), al.answer, al.istrue from answers_last al inner join questions q on q.questionid = al.questionid  where al.questionid = '${questionid}'`,
       "Encrypted": "1951",
     }
     return this.http.post(Endpoints.dataops, body).pipe(
