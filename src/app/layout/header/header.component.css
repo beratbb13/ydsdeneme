@@ -7,7 +7,7 @@
 }
 
 .nav {
-  height: 60px;
+  height: 65px;
   width: 100%;
   background-color: #ffffff;
   position: relative;
@@ -97,6 +97,9 @@
 }
 
 @media (max-width:600px) {
+  .nav{
+    height: 60px;
+  }
   .nav > .nav-btn {
     display: inline-block;
     position: absolute;
@@ -151,8 +154,8 @@
   }
 }
 
+.active{
+  background: #ecedee !important;
+  color: rgb(37, 79, 250) !important;
 
-
-
-
-
+}

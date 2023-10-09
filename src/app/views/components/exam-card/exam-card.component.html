@@ -1,11 +1,11 @@
 <div class="card-container">
   <div class="d-flex card-text">
     <div class="exam-icon" style="width: 15%;">
-      <img [src]="getSinavResmi(cardInfo.Name)" width="30" />
+      <img [src]="getSinavResmi(cardInfo.exam_name)" width="30" />
     </div>
     <div style="width: 100%;">
       <i class="fa-regular fa-circle-xmark" (click)="openConfirmationDialog(cardInfo.usercourseid)"></i>
-      <div>{{cardInfo.Name}}</div>
+      <div>{{cardInfo.exam_name}}</div>
 
       <nb-progress-bar class="custom-progress" [value]="20" size="tiny" status="warning"></nb-progress-bar>
       <small>

@@ -35,7 +35,7 @@
   <input type="checkbox" id="nav-check">
   <div class="nav-header">
     <div class="nav-title">
-      <img (click)="goMain()" src="../../../../assets/pictures/Bussion.png" width="50px"  alt="">
+      <img (click)="goMain()" src="../../../../assets/pictures/sinavkurdu.png" width="50px"  alt="">
     </div>
   </div>
   <div class="nav-btn">
@@ -48,9 +48,9 @@
 
   <div class="nav-links">
 
-      <a  [routerLink]="['/user/exams']">Eğitimlerim</a>
-      <a  [routerLink]="['/user/before-deneme']">Deneme Sınavlarım</a>
-      <a  style="cursor: pointer" (click)="goDashboard()">Çalışma Verilerim</a>
+      <a  routerLink="/user/exams" routerLinkActive="active">Eğitimlerim</a>
+      <a  routerLink="/user/before-deneme" routerLinkActive="active">Deneme Sınavlarım</a>
+      <a  style="cursor: pointer" routerLink="/user/dashboard" routerLinkActive="active">Çalışma Verilerim</a>
       <!-- <a [routerLink]="['/homepage/profile']">Profil</a> -->
       <!-- <a  style="cursor: pointer;" (click)="logOut()">Çıkış</a> -->
   </div>

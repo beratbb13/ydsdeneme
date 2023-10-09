@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NbSidebarService } from '@nebular/theme';
 import { json } from 'body-parser';
+import { ExamCategoryService } from 'src/app/services/examCategoryService/exam-category.service';
 import { UserScoreService } from 'src/app/services/userScoreService/user-score.service';
 import { UserService } from 'src/app/services/userService/user.service';
+import { Router } from '@angular/router'
 
 
 @Component({
@@ -18,12 +20,15 @@ export class UserDashboardComponent implements OnInit {
 
   constructor(private sidebarService: NbSidebarService,
     private userservice: UserService,
-    private userScoreService: UserScoreService) {
+    private userScoreService: UserScoreService,
+    private examCategoryService:ExamCategoryService,
+    private router:Router) {
   }
 
   ngOnInit(): void {
     this.getUserId()
     this.getUserCourses(this.user_id)
+    this.getRegisteredCourses()
   }
 
   getUserId() {
@@ -38,6 +43,40 @@ export class UserDashboardComponent implements OnInit {
       console.error('userid mevcut degil!')
     }
   }
+
+  goExam(examname:any){
+    switch (examname) {
+      case 'YDS':
+        this.router.navigate(['/user/enter-exam'])
+        break;
+      case 'LGS':
+        // this.router.navigate(['/user/deneme'])
+        break;
+      case 'KPSS':
+        // this.router.navigate(['/user/deneme'])
+        break;
+      case 'ALES':
+        // this.router.navigate(['/user/deneme'])
+        break;
+    
+      default:
+        break;
+    }
+  }
+
+  kurslar:any[]=[]
+  getRegisteredCourses(){
+        this.examCategoryService.getUsersCourse(this.user_id).subscribe(
+          (res: any) => {
+            this.kurslar = [res];
+            console.log('KURSLAAAR',this.kurslar)
+          },
+          (error: any) => {
+            console.error('Hata oluştu', error);
+          }
+      )
+  }
+  
 
   toggle() {
     this.sidebarService.toggle(true);

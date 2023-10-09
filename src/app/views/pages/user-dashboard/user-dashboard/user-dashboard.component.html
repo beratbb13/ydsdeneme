@@ -122,30 +122,49 @@
     <img width="32" height="32" src="https://img.icons8.com/fluency-systems-regular/48/more.png" alt="more" />
   </div>
 
+      <!-- KAYDOLUNAN SINAVLAR -->
+      <div *ngFor="let sinav of sinavAdlari" class="card">
+        <div class="card-header">
+          <div >
+            <span><img width="64" height="64"
+                src="https://img.icons8.com/external-photo3ideastudio-lineal-color-photo3ideastudio/64/external-exam-online-learning-photo3ideastudio-lineal-color-photo3ideastudio.png"
+                alt="external-exam-online-learning-photo3ideastudio-lineal-color-photo3ideastudio" /></span>
+            <h3>{{sinav}}</h3>
+          </div>
+          <h5 *ngIf="sinavAdlari.length===0" class="text-center" style="font-weight: 600">Çalışılan herhangi bir sınav yok
+            !</h5>
+        </div>
+        <div class="card-footer">
+          <img src="https://img.icons8.com/pulsar-line/48/start.png" (click)="goExam(sinav)" alt="start" />Çalışmaya Devam Et
+        </div>
+      </div>
+
   <div class="courses">
     <h3>Çalıştığım Konular</h3>
     <img width="32" height="32" src="https://img.icons8.com/fluency-systems-regular/48/more.png" alt="more" />
   </div>
   <div class="cardWrap">
 
-
-
-
+    <!-- KAYDOLUNAN KURSLAR -->
     <div class="card">
       <div class="card-header">
-        <div *ngFor="let sinav of sinavAdlari">
+        <div *ngFor="let kurs of kurslar">
           <span><img width="64" height="64"
               src="https://img.icons8.com/external-photo3ideastudio-lineal-color-photo3ideastudio/64/external-exam-online-learning-photo3ideastudio-lineal-color-photo3ideastudio.png"
               alt="external-exam-online-learning-photo3ideastudio-lineal-color-photo3ideastudio" /></span>
-          <h3>{{sinav}}</h3>
+          <h3>{{kurs.Name}}</h3>
         </div>
-        <h5 *ngIf="sinavAdlari.length===0" class="text-center" style="font-weight: 600">Çalışılan herhangi bir sınav yok
+        <h5 *ngIf="sinavAdlari.length===0" class="text-center" style="font-weight: 600">Alınan herhangi bir kurs yok
           !</h5>
       </div>
       <div class="card-footer">
         <img src="https://img.icons8.com/pulsar-line/48/start.png" alt="start" />Çalışmaya Devam Et
       </div>
     </div>
+
+
+
+
 
 
   </div>

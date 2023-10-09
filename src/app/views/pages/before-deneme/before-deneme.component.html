@@ -6,7 +6,10 @@
         <ng-container *ngIf="sinavlar.length === 0" >
           <p class="text-center">Kayitli Sinav Bulunamadi!</p>
         </ng-container>
-        <app-exam-card *ngFor="let item of sinavlar"  [cardInfo]="item"></app-exam-card>
+
+        <div [routerLink]="['/user/enter-exam']" style="cursor: pointer">
+          <app-exam-card *ngFor="let item of sinavlar"  [cardInfo]="item"></app-exam-card>
+        </div>
 
       </div>
   

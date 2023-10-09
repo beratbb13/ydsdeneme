@@ -60,7 +60,7 @@ export class HeaderComponent {
     goLogin(){
       this.router.navigate(['/login'])
     }
-    goDashboard(){
-      this.router.navigate(['/user/dashboard']);
-    }
+    // goDashboard(){
+    //   this.router.navigate(['/user/dashboard']);
+    // }
 }
