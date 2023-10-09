@@ -95,7 +95,7 @@ export class UserService {
 
   getUserIDfromCourses(id:any){
     const body = {
-      "Token": this.token,
+      "Token":this.authService.getToken(),
       "DataStoreId": Endpoints.usersCourseDataStoreId,
       "Operation": "read",
       "Data": `select * from users_course where userid= '${id}'`,
@@ -186,7 +186,7 @@ deleteUserFromExam(usercourseid:any): Observable<any[]> {
     }
     return data
     // console.log(data)
-    
+
 
   }
 
@@ -194,5 +194,5 @@ deleteUserFromExam(usercourseid:any): Observable<any[]> {
     return this.exams
   }
 
-  
+
 }
