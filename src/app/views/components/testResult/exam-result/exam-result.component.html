@@ -8,19 +8,13 @@
 
         </nb-card-header>
         <nb-card-body>
-            <nb-stepper orientation="horizontal" #stepper (stepChange)="stepperChange($event)">
+            <app-result-table [resultData]="data.items"></app-result-table>
 
-                <nb-step [label]="sonuclar">
-                    <ng-template #sonuclar>Sınav Sonuçları</ng-template>
-                    <app-result-table [resultData]="data.items"></app-result-table>
-                </nb-step>
-
-                <!--<nb-step [label]="sorular">
+            <!--<nb-step [label]="sorular">
                     <ng-template #sorular>Sorular</ng-template>
                     <app-question-table [questions]="data.questions"></app-question-table>
                 </nb-step>-->
 
-            </nb-stepper>
         </nb-card-body>
         <!--<nb-card-footer class="d-flex justify-content-between">
             <button nbButton outline status="danger" [disabled]="stepperIndex <= 0"

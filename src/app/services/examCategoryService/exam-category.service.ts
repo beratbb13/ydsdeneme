@@ -18,12 +18,12 @@ export class ExamCategoryService {
   public examData: BehaviorSubject<exam[]> = new BehaviorSubject<exam[]>([]);
   exams = this.examData.asObservable();
 
-  getCategories() {
+  getCategories(examid: string) {
     const body = {
       "Token": this.token,
       "DataStoreId": Endpoints.examCategoryDataStoreid,
       "Operation": "read",
-      "Data": `select exam_categories.\"Name\", cast(ecategoryid as text), cast(parentid as text) from exam_categories`,
+      "Data": `select cast(ex.ecategoryid as text), cast(ex.parentid as text), cast(ex.examid as text), ex."Name", p.parent_name  from exam_categories ex left join parent p on p.parent_id = ex.parentid  where ex.examid = '${examid}' order by ex.parentid asc`,
       "Encrypted": '1951'
     }
     return this.http.post(Endpoints.dataops, body).pipe(
@@ -63,7 +63,7 @@ export class ExamCategoryService {
     );
   }
 
-  getUsersCourse(userid:any) {
+  getUsersCourse(userid: any) {
     const body = {
       "Token": this.token,
       "DataStoreId": Endpoints.examCategoryDataStoreid,
@@ -77,12 +77,12 @@ export class ExamCategoryService {
       })
     );
   }
-  getUsersExams(userid:any){
+  getUsersExams(userid: any) {
     const body = {
       "Token": this.token,
       "DataStoreId": Endpoints.examsDataStoreid,
       "Operation": "read",
-      "Data": `SELECT DISTINCT uc.usercourseid, ex.exam_name FROM exam ex INNER JOIN users_course uc ON ex.examid::text = uc.examid WHERE uc.userid = '${userid}'`,
+      "Data": `SELECT DISTINCT uc.usercourseid, cast(ex.examid as text), ex.exam_name FROM exam ex INNER JOIN users_course uc ON ex.examid::text = uc.examid WHERE uc.userid = '${userid}'`,
       "Encrypted": '1951'
     }
     return this.http.post(Endpoints.dataops, body).pipe(

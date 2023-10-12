@@ -34,7 +34,7 @@ export class ExamFormComponent {
   answers: answer[] = [];
   questions: question[] = [];
   questionids: string[] = [];
-  dogruCevap!: answer | undefined;
+  dogruCevap!: any | undefined;
   soruIndex: number = 0;
   soruSayisi: number = 0;
   secilenCevap: string | null = null;
@@ -66,6 +66,11 @@ export class ExamFormComponent {
   }
 
   goToQuestion(index: number) {
+    if (index != this.soruIndex) {
+      this.reply()
+      this.dogruCevap = undefined
+    }
+
     if (index >= 0 && index <= this.soruSayisi) {
       this.soruIndex = index;
       this.currentPage = Math.floor(index / this.itemsPerPage);
@@ -79,7 +84,6 @@ export class ExamFormComponent {
       // Tıklanan düğmeye .active sınıfını ekle
       buttons[index].classList.add('active');
 
-      this.dogruCevap = undefined;
     }
 
   }
@@ -139,7 +143,7 @@ export class ExamFormComponent {
       }
     })
     this.questions.map(ques => {
-      ques.answers = this.answerswithQuestions.filter(ans => ans.questionid == ques.questionid)
+      ques.answers = this.answerswithQuestions.filter(ans => (ans.questionid == ques.questionid))
     })
   }
 
@@ -189,6 +193,11 @@ export class ExamFormComponent {
   }
 
   nextQuestion() {
+
+    this.reply()
+
+    this.questions[this.soruIndex].answers?.map(a => console.log(a))
+
     if (this.soruSayisi > this.soruIndex) {
       this.soruIndex += 1;
       this.currentPage = Math.floor(this.soruIndex / this.itemsPerPage);
@@ -207,6 +216,8 @@ export class ExamFormComponent {
   }
 
   previousQuestion() {
+    this.reply()
+
     if (!(this.soruIndex < 0)) {
       this.soruIndex -= 1;
       this.currentPage = Math.floor(this.soruIndex / this.itemsPerPage);
@@ -227,7 +238,7 @@ export class ExamFormComponent {
     //clearInterval(this.interval);
 
     let current: question = this.questions[this.soruIndex];
-    this.dogruCevap = current.answers?.find(answer => answer.istrue === 1);
+    this.dogruCevap = current.answers?.find(answer => answer.trueanswer === 1);
     let answered = this.questionForm.controls[current.questionid].value
 
     if (!answered)
@@ -279,11 +290,11 @@ export class ExamFormComponent {
     let falseIds: any[] = [];
 
     controls.map(control => {
-      if (control.value.istrue == 1) {
+      if (control.value.trueanswer == 1) {
         trueQuestions.push({ question: this.questions.filter(ques => control.value.questionid == ques.questionid)[0], istrue: true });
         trueIds.push(control.value.questionid);
       }
-      else if (control.value.istrue == 0) {
+      else if (control.value.trueanswer == 0) {
         falseQuestions.push({ question: this.questions.filter(ques => control.value.questionid == ques.questionid)[0], istrue: false });
         falseIds.push(control.value.questionid);
       }
