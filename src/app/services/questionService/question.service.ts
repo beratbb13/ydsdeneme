@@ -67,7 +67,7 @@ export class QuestionService {
       "Token": this.token,
       "DataStoreId": Endpoints.questionsDataStoreid,
       "Operation": "read",
-      "Data": `select cast(al.answerid as text), al.answer, al.istrue, cast(q.questionid as text), cast(q.examid as text),cast(q.ecategoryid as text), q.question from questions_27_09 q left join answers_last al on al.questionid  = q.questionid left join (select us.user_id, us.question_id from user_score us where us.user_id = '${user_id}') us on us.question_id  = q.questionid where us.question_id is null and ecategoryid = '${categoryid}' order by q."number" asc limit 50`,
+      "Data": `select cast(al.answerid as text), al.choice, al.trueanswer, cast(q.questionid as text), cast(q.examid as text),cast(q.ecategoryid as text), q.question from questions_27_09 q left join answer_06_10_23 al on al.questionid  = q.questionid left join (select us.user_id, us.question_id from user_score us where us.user_id = '${user_id}') us on us.question_id  = q.questionid where us.question_id is null and ecategoryid = '${categoryid}' order by q."number" asc limit 50`,
       "Encrypted": "1951",
     }
     return this.http.post(Endpoints.dataops, body).pipe(

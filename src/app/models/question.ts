@@ -5,5 +5,5 @@ export interface question {
     examid: string,
     ecategoryid: string,
     question: string,
-    answers?: answer[]
+    answers?: any[]
 }

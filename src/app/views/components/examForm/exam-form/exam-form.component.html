@@ -99,12 +99,12 @@
                             (change)="checked()" />
                         <label class="form-check-label">
                             <span *ngIf="dogruCevap">
-                                <i [class]="answer.answer === this.dogruCevap.answer ?
-                                    trueIcon : falseIcon" [style.color]="answer.answer === this.dogruCevap.answer ?
+                                <i [class]="answer.choice === this.dogruCevap.choice ?
+                                    trueIcon : falseIcon" [style.color]="answer.choice === this.dogruCevap.choice ?
                                     trueIconColor : falseIconColor"></i>
                                 &nbsp;
                             </span>
-                            {{answer.answer}}
+                            {{answer.choice}}
                         </label>
                     </div>
                 </form>

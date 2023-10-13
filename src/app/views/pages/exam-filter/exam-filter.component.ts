@@ -43,19 +43,33 @@ export class ExamFilterComponent implements OnInit {
   isOpen: boolean = false;
   filteredSubject: any[] = []
 
+  parentNames: any[] = []
+  parentids: any[] = []
+
+  fexams: any
+
   ngOnInit(): void {
     this.getRegisteredCoursesAndExams()
-    this.getCategories()
   }
 
-  getCategories() {
+  getCategories(examid: string) {
     this.spinnerService.show();
-    this.examCategoryService.getCategories().pipe(
+    this.examCategoryService.getCategories(examid).pipe(
       tap(res => { this.categories = res; console.log(this.categories) }),
       tap(() => {
-        this.filteredExams = this.categories.filter(category => category.parentid == '50f8882f-ac66-4e5f-9756-5fa3b7958996');
-        //this.filteredSubject = this.categories.filter(category => category.parentid == '50f8882f-ac66-4e5f-9756-5fa3b7958996')
-      })
+        this.categories.map(cat => {
+          if (!this.parentids.includes(cat.parentid)) {
+            this.parentids.push(cat.parentid)
+          }
+          if (!this.parentNames.includes(cat.parent_name)) {
+            this.parentNames.push(cat.parent_name)
+          }
+        })
+        this.filteredExams = this.categories.filter(category => category.parentid == '50f8882f-ac66-4e5f-9756-5fa3b7958996')
+
+      }),
+      //this.filteredExams = this.categories.filter(category => category.parentid == '50f8882f-ac66-4e5f-9756-5fa3b7958996');
+      //this.filteredSubject = this.categories.filter(category => category.parentid == '50f8882f-ac66-4e5f-9756-5fa3b7958996')
     ).subscribe(() => this.spinnerService.hide());
   }
 
@@ -87,7 +101,7 @@ export class ExamFilterComponent implements OnInit {
         this.examCategoryService.getUsersExams(userid).subscribe(
           (res: any) => {
             console.log('Basarili Istek, alinan SINAVLAR:', res);
-
+            this.getCategories(res.examid)
             if (res && typeof res === 'object') {
               // Convert the object to an array
               this.sinavlar = [res];
@@ -100,7 +114,6 @@ export class ExamFilterComponent implements OnInit {
             console.error('basarisiz istek', error);
           }
         );
-
 
       }
     }
@@ -138,6 +151,6 @@ export class ExamFilterComponent implements OnInit {
   }
 
   openRegisterModal() {
-    this.dialogservice.openModal(RegisterExamComponent,true,true)
+    this.dialogservice.openModal(RegisterExamComponent, true, true)
   }
 }
