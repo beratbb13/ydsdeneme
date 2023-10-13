@@ -47,7 +47,7 @@ export class UserDashboardComponent implements OnInit {
   goExam(examname:any){
     switch (examname) {
       case 'YDS':
-        this.router.navigate(['/user/enter-exam'])
+        this.router.navigate(['/user/exams'])
         break;
       case 'LGS':
         // this.router.navigate(['/user/deneme'])

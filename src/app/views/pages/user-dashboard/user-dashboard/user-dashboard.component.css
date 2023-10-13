@@ -66,22 +66,6 @@ nb-progress-bar~nb-progress-bar {
     margin-top: 1rem;
 }
 
-.card-grid {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    column-gap: 1.5rem;
-    row-gap: 1.5rem;
-  }
-  @media (min-width: 600px) {
-    .card-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-  @media (min-width: 1200px) {
-    .card-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
   .card {
     background-color: var(--c-background-primary);
     box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.05), 0 5px 15px 0 rgba(0, 0, 0, 0.05);
@@ -196,7 +180,7 @@ nb-progress-bar~nb-progress-bar {
   
 .cardWrap{
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 
 }
 @media screen and (max-width:700px){
