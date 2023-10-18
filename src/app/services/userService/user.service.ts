@@ -93,12 +93,12 @@ export class UserService {
     )
   }
 
-  getUserIDfromCourses(id:any){
+  getUserIDfromCourses(id: any) {
     const body = {
-      "Token":this.authService.getToken(),
+      "Token": this.authService.getToken(),
       "DataStoreId": Endpoints.usersCourseDataStoreId,
       "Operation": "read",
-      "Data": `select * from users_course where userid= '${id}'`,
+      "Data": `select cast(examid as text), cast(categoryid as text), userid, usercourseid from users_course where userid= '${id}'`,
       "Encrypted": '1951'
     }
     return this.http.post(Endpoints.dataops, body).pipe(
@@ -110,7 +110,7 @@ export class UserService {
 
 
 
-  insertUserToExam(data:any){
+  insertUserToExam(data: any) {
     const body = {
       "Token": this.authService.getToken(),
       "DataStoreId": Endpoints.usersCourseDataStoreId,
@@ -123,53 +123,68 @@ export class UserService {
         return response.message
       })
     );
-}
-
-
-deleteUserFromExam(usercourseid:any): Observable<any[]> {
-  const body = {
-    "Token": this.token,
-    "DataStoreId": Endpoints.usersCourseDataStoreId,
-    "Operation": "delete",
-    "Data": `delete from users_course where usercourseid = ${usercourseid}`,
-    "Encrypted": "1951"
   }
-  return this.http.post(Endpoints.dataops, body).pipe(
-    map((response: any) => {
-      return response
-    })
-  )
-}
+
+  insertUserToExamWCategory(data: any) {
+    const body = {
+      "Token": this.authService.getToken(),
+      "DataStoreId": Endpoints.usersCourseDataStoreId,
+      "Operation": "insert",
+      "Data": `INSERT INTO users_course (userid, examid, categoryid) VALUES ('${data.userid}','${data.examid}', '${data.categoryid}')`,
+      "Encrypted": '1951'
+    }
+    return this.http.post(Endpoints.dataops, body).pipe(
+      map((response: any) => {
+        return response.message
+      })
+    );
+  }
+
+
+  deleteUserFromExam(usercourseid: any): Observable<any[]> {
+    const body = {
+      "Token": this.token,
+      "DataStoreId": Endpoints.usersCourseDataStoreId,
+      "Operation": "delete",
+      "Data": `delete from users_course where usercourseid = ${usercourseid}`,
+      "Encrypted": "1951"
+    }
+    return this.http.post(Endpoints.dataops, body).pipe(
+      map((response: any) => {
+        return response
+      })
+    )
+  }
 
 
 
   exams = [
-    { name: 'YDS', examid: '6e6e28f6-5df0-4da5-9e29-53a91dbb0e9c', img: '/assets/icons/yds.png'},
-    { name: 'YGS', examid: '1', img: '/assets/icons/ygs.png'},
-    { name: 'KPSS', examid: 3 , img: '/assets/icons/kpss.png'},
-    { name: 'ALES', examid: 3 , img: '/assets/icons/ales.png'},
-    { name: 'LGS', examid: 3 , img: '/assets/icons/lgs.png'}
+    { name: 'YDS', examid: '6e6e28f6-5df0-4da5-9e29-53a91dbb0e9c', img: '/assets/icons/yds.png' },
+    { name: 'YGS', examid: '1', img: '/assets/icons/ygs.png' },
+    { name: 'KPSS', examid: 3, img: '/assets/icons/kpss.png' },
+    { name: 'ALES', examid: 3, img: '/assets/icons/ales.png' },
+    { name: 'LGS', examid: 3, img: '/assets/icons/lgs.png' }
   ];
 
-  selectedExam:any
-  selectedUserId:any
-  examidd:any
+  selectedExam: any
+  selectedUserId: any
+  examidd: any
 
-  saveId(){
-    const user=localStorage.getItem('user')
+  saveId() {
+    const user = localStorage.getItem('user')
     if (user) {
-      const jsonuser=JSON.parse(user)
+      const jsonuser = JSON.parse(user)
       if (jsonuser.userId) {
-        this.selectedUserId=jsonuser.userId
+        this.selectedUserId = jsonuser.userId
       }
-      else{
+      else {
         console.error('parse hatasi')
       }
       // // // console.log('USERID',this.selectedUserId)
     }
 
     // localStorage.setItem('currentExam',examname)
-    this.selectedExam=localStorage.getItem('currentExam')
+    this.selectedExam = localStorage.getItem('currentExam')
     // console.log('secilen sinav',this.selectedExam)
 
     // return this.selectedExam
@@ -180,9 +195,9 @@ deleteUserFromExam(usercourseid:any): Observable<any[]> {
     } else {
       console.log('Geçersiz sınav adı.');
     }
-    const data= {
-      userid:this.selectedUserId,
-      examid:this.examidd
+    const data = {
+      userid: this.selectedUserId,
+      examid: this.examidd
     }
     return data
     // console.log(data)
@@ -190,7 +205,7 @@ deleteUserFromExam(usercourseid:any): Observable<any[]> {
 
   }
 
-  getexams(){
+  getexams() {
     return this.exams
   }
 

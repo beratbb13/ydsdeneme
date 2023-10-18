@@ -23,7 +23,7 @@ export class ExamCategoryService {
       "Token": this.token,
       "DataStoreId": Endpoints.examCategoryDataStoreid,
       "Operation": "read",
-      "Data": `select cast(ex.ecategoryid as text), cast(ex.parentid as text), cast(ex.examid as text), ex."Name", p.parent_name  from exam_categories ex left join parent p on p.parent_id = ex.parentid  where ex.examid = '${examid}' order by ex.parentid asc`,
+      "Data": `select cast(ex.ecategoryid as text), cast(ex.parentid as text), cast(ex.examid as text), ex."Name", p.parent_name  from exam_categories ex left join parent p on p.parentid = ex.parentid  where ex.examid = '${examid}' order by ex.parentid asc`,
       "Encrypted": '1951'
     }
     return this.http.post(Endpoints.dataops, body).pipe(
@@ -68,7 +68,7 @@ export class ExamCategoryService {
       "Token": this.token,
       "DataStoreId": Endpoints.examCategoryDataStoreid,
       "Operation": "read",
-      "Data": `SELECT exam_categories."Name" FROM exam_categories INNER JOIN users_course ON exam_categories.ecategoryid::text = users_course.categoryid WHERE users_course.userid = '${userid}'`,
+      "Data": `SELECT exam_categories."Name" FROM exam_categories INNER JOIN users_course ON exam_categories.ecategoryid = users_course.categoryid WHERE users_course.userid = '${userid}'`,
       "Encrypted": '1951'
     }
     return this.http.post(Endpoints.dataops, body).pipe(
@@ -82,7 +82,7 @@ export class ExamCategoryService {
       "Token": this.token,
       "DataStoreId": Endpoints.examsDataStoreid,
       "Operation": "read",
-      "Data": `SELECT DISTINCT uc.usercourseid, cast(ex.examid as text), ex.exam_name FROM exam ex INNER JOIN users_course uc ON ex.examid::text = uc.examid WHERE uc.userid = '${userid}'`,
+      "Data": `SELECT DISTINCT uc.usercourseid, cast(ex.examid as text), ex.exam_name FROM exam ex INNER JOIN users_course uc ON ex.examid = uc.examid WHERE uc.userid = '${userid}'`,
       "Encrypted": '1951'
     }
     return this.http.post(Endpoints.dataops, body).pipe(

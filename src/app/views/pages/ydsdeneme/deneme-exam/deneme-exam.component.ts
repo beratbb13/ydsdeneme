@@ -35,8 +35,13 @@ export class DenemeExamComponent {
   soruSayisi: number = 0;
   secilenCevap: string | null = null;
   answerswithQuestions: any[] = [];
+  user: any
 
   ngOnInit() {
+    this.user = localStorage.getItem('user')
+    this.user = JSON.parse(this.user)
+
+
     this.getQuestionsAndAnswers();
     this.questionForm = this.formBuilder.group({});
     this.startCountdown();
@@ -75,7 +80,7 @@ export class DenemeExamComponent {
 
   getQuestionsAndAnswers() {
     this.spinnerService.show();
-    this.questionService.getQuestionsAndAnswersByCategoryId(this.category.ecategoryid).pipe(
+    this.questionService.getQuestionsAndAnswers(this.user.userId, this.category.ecategoryid).pipe(
       tap(res => this.answerswithQuestions = [...this.answerswithQuestions, ...res]),
       tap(() => this.soruSayisi += this.answerswithQuestions.length / 5),
       tap(() => this.pullQuestions()),
@@ -141,11 +146,11 @@ export class DenemeExamComponent {
     let falseIds: any[] = [];
 
     controls.map(control => {
-      if (control.value.istrue == 1) {
+      if (control.value.truanswer == 1) {
         trueQuestions.push(this.questions.filter(ques => control.value.questionid == ques.questionid)[0]);
         trueIds.push(control.value.questionid);
       }
-      else if (control.value.istrue == 0) {
+      else if (control.value.truanswer == 0) {
         falseQuestions.push(this.questions.filter(ques => control.value.questionid == ques.questionid)[0]);
         falseIds.push(control.value.questionid);
       }

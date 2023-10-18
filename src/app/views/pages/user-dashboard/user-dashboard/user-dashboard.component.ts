@@ -17,15 +17,17 @@ export class UserDashboardComponent implements OnInit {
 
   selectedDate: any
   user_id: string = ''
+  performs: any[] = []
 
   constructor(private sidebarService: NbSidebarService,
     private userservice: UserService,
     private userScoreService: UserScoreService,
-    private examCategoryService:ExamCategoryService,
-    private router:Router) {
+    private examCategoryService: ExamCategoryService,
+    private router: Router) {
   }
 
   ngOnInit(): void {
+
     this.getUserId()
     this.getUserCourses(this.user_id)
     this.getRegisteredCourses()
@@ -38,13 +40,14 @@ export class UserDashboardComponent implements OnInit {
       if (jsonuser) {
         this.user_id = jsonuser.userId
         console.log(this.user_id)
+        this.getCategoryPerforms()
       }
     } else {
       console.error('userid mevcut degil!')
     }
   }
 
-  goExam(examname:any){
+  goExam(examname: any) {
     switch (examname) {
       case 'YDS':
         this.router.navigate(['/user/exams'])
@@ -58,25 +61,25 @@ export class UserDashboardComponent implements OnInit {
       case 'ALES':
         // this.router.navigate(['/user/deneme'])
         break;
-    
+
       default:
         break;
     }
   }
 
-  kurslar:any[]=[]
-  getRegisteredCourses(){
-        this.examCategoryService.getUsersCourse(this.user_id).subscribe(
-          (res: any) => {
-            this.kurslar = [res];
-            console.log('KURSLAAAR',this.kurslar)
-          },
-          (error: any) => {
-            console.error('Hata oluştu', error);
-          }
-      )
+  kurslar: any[] = []
+  getRegisteredCourses() {
+    this.examCategoryService.getUsersCourse(this.user_id).subscribe(
+      (res: any) => {
+        this.kurslar = [res];
+        console.log('KURSLAAAR', this.kurslar)
+      },
+      (error: any) => {
+        console.error('Hata oluştu', error);
+      }
+    )
   }
-  
+
 
   toggle() {
     this.sidebarService.toggle(true);
@@ -131,7 +134,12 @@ export class UserDashboardComponent implements OnInit {
     const tarihFormat = tarih.toLocaleDateString("tr-TR")
 
     console.log(tarihFormat)
+    this.userScoreService.getExamScoresByUserIdAndDate(this.user_id, tarih.toISOString().split('T')[0]).subscribe(res => this.performs = res)
 
+  }
+
+  getCategoryPerforms() {
+    this.userScoreService.getExamScoresByUserId(this.user_id).subscribe(res => this.performs = res)
   }
 
 }

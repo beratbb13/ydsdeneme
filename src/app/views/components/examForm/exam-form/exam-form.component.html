@@ -27,11 +27,11 @@
             <form [formGroup]="questionForm">
                 <div class="form-check mb-3" *ngFor="let answer of questions[soruIndex].answers">
                     <input class="form-check-input" type="radio" formControlName="{{questions[soruIndex].questionid}}"
-                        [value]="answer" />
-                    <label class="form-check-label">{{answer.answer}} <span *ngIf="dogruCevap">
+                        [value]="answertext" />
+                    <label class="form-check-label">{{answer.answertext}} <span *ngIf="dogruCevap">
                             &nbsp;
-                            <i [class]="answer.answer === this.dogruCevap?.answer ?
-                            trueIcon : falseIcon" [style.color]="answer.answer === this.dogruCevap?.answer ?
+                            <i [class]="answer.answertext === this.dogruCevap?.answertext ?
+                            trueIcon : falseIcon" [style.color]="answer.answertext === this.dogruCevap?.answer ?
                             trueIconColor : falseIconColor"></i>
                         </span>
                     </label>
@@ -66,7 +66,7 @@
 <div class="container">
     <div class="col d-flex justify-content-end bitir " style="margin-top: 2rem;">
         <div id="countdown">
-            <div class="timer">
+            <div class="timer" *ngIf="saniye != 60">
                 <div id="countdown-number">{{ dakika }}:{{ saniye < 10 ? '0' : '' }}{{ saniye }}</div>
                 </div>
             </div>
@@ -99,12 +99,12 @@
                             (change)="checked()" />
                         <label class="form-check-label">
                             <span *ngIf="dogruCevap">
-                                <i [class]="answer.choice === this.dogruCevap.choice ?
-                                    trueIcon : falseIcon" [style.color]="answer.choice === this.dogruCevap.choice ?
+                                <i [class]="answer.answertext === this.dogruCevap.answertext ?
+                                    trueIcon : falseIcon" [style.color]="answer.answertext === this.dogruCevap.answertext ?
                                     trueIconColor : falseIconColor"></i>
                                 &nbsp;
                             </span>
-                            {{answer.choice}}
+                            {{answer.answertext}}
                         </label>
                     </div>
                 </form>

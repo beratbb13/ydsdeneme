@@ -29,12 +29,12 @@
         Latest Result
       </nb-card-header>
       <nb-list>
-        <nb-list-item>
-          Deneme
-          <nb-progress-bar style="    width: 100% !important;
-           margin-left: 2% !important;" [value]="60" status="primary"></nb-progress-bar>
+        <nb-list-item *ngFor="let perform of performs">
+          {{perform.Name}}
+          <nb-progress-bar style="width: 100% !important;
+           margin-left: 2% !important;" [value]="perform.performans" status="primary"></nb-progress-bar>
         </nb-list-item>
-        <nb-list-item>
+        <!--<nb-list-item>
           Deneme
           <nb-progress-bar style="    width: 100% !important;
             margin-left: 2% !important;" [value]="60" status="primary"></nb-progress-bar>
@@ -63,7 +63,7 @@
           Deneme
           <nb-progress-bar style="    width: 100% !important;
                 margin-left: 2% !important;" [value]="80" status="primary"></nb-progress-bar>
-        </nb-list-item>
+        </nb-list-item>-->
       </nb-list>
 
     </nb-card>
@@ -116,62 +116,58 @@
     </nb-card>
   </div>
 </div>
+<!--
 <div style="padding: 40px;">
   <div class="courses">
     <h3>Çalıştığım Sınavlar</h3>
     <img width="32" height="32" src="https://img.icons8.com/fluency-systems-regular/48/more.png" alt="more" />
   </div>
 
-      <!-- KAYDOLUNAN SINAVLAR -->
-      <div class="row">
-        <div class="col-4">
+  <div class="row">
+    <div class="col-4">
       <div *ngFor="let sinav of sinavAdlari" class="card">
         <div class="card-header">
-          <div >
+          <div>
             <span><img width="64" height="64"
                 src="https://img.icons8.com/external-photo3ideastudio-lineal-color-photo3ideastudio/64/external-exam-online-learning-photo3ideastudio-lineal-color-photo3ideastudio.png"
                 alt="external-exam-online-learning-photo3ideastudio-lineal-color-photo3ideastudio" /></span>
             <h3>{{sinav}}</h3>
           </div>
-          <h5 *ngIf="sinavAdlari.length===0" class="text-center" style="font-weight: 600">Çalışılan herhangi bir sınav yok
+          <h5 *ngIf="sinavAdlari.length===0" class="text-center" style="font-weight: 600">Çalışılan herhangi bir sınav
+            yok
             !</h5>
         </div>
         <div class="card-footer">
-          <img src="https://img.icons8.com/pulsar-line/48/start.png" (click)="goExam(sinav)" alt="start" />Çalışmaya Devam Et
+          <img src="https://img.icons8.com/pulsar-line/48/start.png" (click)="goExam(sinav)" alt="start" />Çalışmaya
+          Devam Et
         </div>
       </div>
     </div>
   </div>
-
-  <div class="courses">
+-->
+<!--<div class="courses">
     <h3>Çalıştığım Konular</h3>
     <img width="32" height="32" src="https://img.icons8.com/fluency-systems-regular/48/more.png" alt="more" />
   </div>
-  <!-- <div class="cardWrap"> -->
 
-    <!-- KAYDOLUNAN KURSLAR -->
-<div *ngIf="kurslar.length>=1" class="row">
-  <div class="col-4">
-    <div class="card ">
-      <div class="card-header">
-        <div *ngFor="let kurs of kurslar">
-          <span><img width="64" height="64"
-              src="https://img.icons8.com/external-photo3ideastudio-lineal-color-photo3ideastudio/64/external-exam-online-learning-photo3ideastudio-lineal-color-photo3ideastudio.png"
-              alt="external-exam-online-learning-photo3ideastudio-lineal-color-photo3ideastudio" /></span>
-          <h3>{{kurs.Name}}</h3>
+  <div *ngIf="kurslar.length>=1" class="row">
+    <div class="col-4">
+      <div class="card ">
+        <div class="card-header">
+          <div *ngFor="let kurs of kurslar">
+            <span><img width="64" height="64"
+                src="https://img.icons8.com/external-photo3ideastudio-lineal-color-photo3ideastudio/64/external-exam-online-learning-photo3ideastudio-lineal-color-photo3ideastudio.png"
+                alt="external-exam-online-learning-photo3ideastudio-lineal-color-photo3ideastudio" /></span>
+            <h3>{{kurs.Name}}</h3>
+          </div>
+
         </div>
-
-      </div>
-      <div class="card-footer">
-        <img src="https://img.icons8.com/pulsar-line/48/start.png" alt="start" />Çalışmaya Devam Et
+        <div class="card-footer">
+          <img src="https://img.icons8.com/pulsar-line/48/start.png" alt="start" />Çalışmaya Devam Et
+        </div>
       </div>
     </div>
   </div>
-</div>
-<h5 *ngIf="kurslar.length===0" class="text-center" style="font-weight: 600">Alınan herhangi bir kurs yok
-  !</h5>
-
-
-
-
-  <!-- </div> -->
+  <h5 *ngIf="kurslar.length===0" class="text-center" style="font-weight: 600">Alınan herhangi bir kurs yok
+    !</h5>
+  -->

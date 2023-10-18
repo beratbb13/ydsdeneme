@@ -22,7 +22,7 @@ export class AnswerService {
       "Token": this.token,
       "DataStoreId": Endpoints.answersDataStoreid,
       "Operation": "insert",
-      "Data": `Insert Into answers_last(answerid, questionid, istrue, answer) VALUES('${insertAnswer.answerid}', '${insertAnswer.questionid}', '${insertAnswer.istrue}', '${insertAnswer.answer}')`,
+      "Data": `Insert Into answers_last(answerid, questionid, trueanswer, answertext) VALUES('${insertAnswer.answerid}', '${insertAnswer.questionid}', '${insertAnswer.trueanswer}', '${insertAnswer.answertext}')`,
       "Encrypted": '1951'
     }
     return this.http.post(Endpoints.dataops, body).pipe(
@@ -37,7 +37,7 @@ export class AnswerService {
       "Token": this.token,
       "DataStoreId": Endpoints.answersDataStoreid,
       "Operation": "update",
-      "Data": `Update answers_last set answerid = '${updateAnswer.answerid}', questionid = '${updateAnswer.questionid}', istrue = '${updateAnswer.istrue}', answer = '${updateAnswer.answer}')`,
+      "Data": `Update answers_last set answerid = '${updateAnswer.answerid}', questionid = '${updateAnswer.questionid}', trueanswer = '${updateAnswer.trueanswer}', answertext = '${updateAnswer.answertext}')`,
       "Encrypted": "1951",
     }
     return this.http.post(Endpoints.dataops, body).pipe(
@@ -52,7 +52,7 @@ export class AnswerService {
       "Token": this.token,
       "DataStoreId": Endpoints.answersDataStoreid,
       "Operation": "read",
-      "Data": `Select cast(answerid as text), cast(questionid as text), answer, istrue from answers_last`,
+      "Data": `Select cast(answerid as text), cast(questionid as text), answertext, trueanswer from answers_last`,
       "Encrypted": "1951",
     }
     return this.http.post(Endpoints.dataops, body).pipe(
@@ -69,7 +69,7 @@ export class AnswerService {
       "Token": this.token,
       "DataStoreId": Endpoints.answersDataStoreid,
       "Operation": "read",
-      "Data": `select cast(al.questionid as text), q.question, cast(al.answerid as text), al.answer, al.istrue from answers_last al inner join questions q on q.questionid = al.questionid  where al.questionid = '${questionid}'`,
+      "Data": `select cast(al.questionid as text), q.question, cast(al.answerid as text), al.answertext, al.trueanswer from answers_last al inner join questions q on q.questionid = al.questionid  where al.questionid = '${questionid}'`,
       "Encrypted": "1951",
     }
     return this.http.post(Endpoints.dataops, body).pipe(

@@ -86,9 +86,9 @@ export class UserScoreService {
   insertExamScore(user_id: string, questions: any[]) {
 
     /*questions.map(ques => {
-      if (ques.istrue && ques.istrue == true)
+      if (ques.trueanswer && ques.trueanswer == true)
         console.log('true', ques.question)
-      else if (ques.istrue && ques.istrue == false)
+      else if (ques.trueanswer && ques.trueanswer == false)
         console.log('yanlis', ques)
       else
         console.log('bos', ques)  
@@ -97,16 +97,16 @@ export class UserScoreService {
     let scoreBody: string = ''
     questions.map((ques: any, indis: number) => {
       if (questions[indis + 1]) {
-        if (ques.istrue && ques.istrue == true)
+        if (ques.trueanswer && ques.trueanswer == true)
           scoreBody += `('${user_id}', '${ques.question.questionid}', '${ques.question.examid}', '1'),`
-        else if (ques.istrue && ques.istrue == false)
+        else if (ques.trueanswer && ques.trueanswer == false)
           scoreBody += `('${user_id}', '${ques.question.questionid}', '${ques.question.examid}', '0'),`
         else
           scoreBody += `('${user_id}', '${ques.question.questionid}', '${ques.question.examid}', '0'),`
       } else {
-        if (ques.istrue && ques.istrue == true)
+        if (ques.trueanswer && ques.trueanswer == true)
           scoreBody += `('${user_id}', '${ques.question.questionid}', '${ques.question.examid}', '1')`
-        else if (ques.istrue && ques.istrue == false)
+        else if (ques.trueanswer && ques.trueanswer == false)
           scoreBody += `('${user_id}', '${ques.question.questionid}', '${ques.question.examid}', '0')`
         else
           scoreBody += `('${user_id}', '${ques.question.questionid}', '${ques.question.examid}', '0')`
@@ -117,7 +117,7 @@ export class UserScoreService {
       "Token": this.token,
       "DataStoreId": Endpoints.userScoreDataStoreid,
       "Operation": "insert",
-      "Data": `insert into user_score(user_id, question_id, examid, istrue) values${scoreBody}`,
+      "Data": `insert into user_score(user_id, question_id, examid, trueanswer) values${scoreBody}`,
       "Encrypted": '1951'
     }
     return this.http.post(Endpoints.dataops, body).pipe(
@@ -132,12 +132,44 @@ export class UserScoreService {
       "Token": this.token,
       "DataStoreId": Endpoints.userScoreDataStoreid,
       "Operation": "insert",
-      "Data": `select examid, SUM(istrue) AS dogru_cevap_sayisi, COUNT(examid) AS toplam_soru_sayisi, (SUM(istrue) * 100.0 / COUNT(examid)) AS performans_yuzdesi FROM user_score where user_id = '${userId}' GROUP BY examid`,
+      "Data": `select examid, SUM(trueanswer) AS dogru_cevap_sayisi, COUNT(examid) AS toplam_soru_sayisi, (SUM(trueanswer) * 100.0 / COUNT(examid)) AS performans_yuzdesi FROM user_score where user_id = '${userId}' GROUP BY examid`,
       "Encrypted": '1951'
     }
     return this.http.post(Endpoints.dataops, body).pipe(
       map((response: any) => {
         console.log(response)
+      })
+    )
+  }
+
+  getExamScoresByUserId(userid: string) {
+    const body = {
+      "Token": this.token,
+      "DataStoreId": Endpoints.userScoreDataStoreid,
+      "Operation": "read",
+      "Data": `with sonuc as (select uc.userid, uc.categoryid, ec."Name", us.question_id, us.trueanswer, us.createdate from users_course uc inner join user_score us on us.user_id = uc.userid inner join exam_categories ec on ec.ecategoryid = uc.categoryid where us.user_id = '${userid}') select s."Name", COUNT(case when s.trueanswer = true then 1 else null end) as dogru_soru, COUNT(s.trueanswer) as toplam_soru, (COUNT(case when s.trueanswer = true then 1 else null end)::double precision / COUNT(s.trueanswer) * 100) as performans from sonuc s group by s."Name", s.categoryid`,
+      "Encrypted": '1951'
+    }
+    return this.http.post(Endpoints.dataops, body).pipe(
+      map((response: any) => {
+        console.log(response)
+        return response.message
+      })
+    )
+  }
+
+  getExamScoresByUserIdAndDate(userid: string, date: string) {
+    const body = {
+      "Token": this.token,
+      "DataStoreId": Endpoints.userScoreDataStoreid,
+      "Operation": "read",
+      "Data": `with sonuc as (select uc.userid, uc.categoryid, ec."Name", us.question_id, us.trueanswer, us.createdate from users_course uc inner join user_score us on us.user_id = uc.userid inner join exam_categories ec on ec.ecategoryid = uc.categoryid where us.user_id = '${userid}' and us.createdate = '${date}' ) select s."Name", COUNT(case when s.trueanswer = true then 1 else null end) as dogru_soru, COUNT(s.trueanswer) as toplam_soru, (COUNT(case when s.trueanswer = true then 1 else null end)::double precision / COUNT(s.trueanswer) * 100) as performans from sonuc s group by s."Name", s.categoryid`,
+      "Encrypted": '1951'
+    }
+    return this.http.post(Endpoints.dataops, body).pipe(
+      map((response: any) => {
+        console.log(response)
+        return response.message
       })
     )
   }

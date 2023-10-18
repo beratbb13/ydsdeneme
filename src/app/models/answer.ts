@@ -1,6 +1,6 @@
 export interface answer {
     answerid: string,
     questionid: string,
-    istrue: number,
-    answer: string
+    trueanswer: number,
+    answertext: string
 }

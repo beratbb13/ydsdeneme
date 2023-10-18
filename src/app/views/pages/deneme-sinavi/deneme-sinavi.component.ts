@@ -114,20 +114,20 @@ export class DenemeSinaviComponent implements OnInit{
     let controls = Object.values(this.questionForm.controls);
     let answered = controls.find(e => currentid == e.value.questionid);
 
-    if (answered?.value.istrue === 1) {
+    if (answered?.value.trueanswer === 1) {
       this.toastService.showToast('success', 'Soruyu Doğru Cevapladınız.');
-      this.dogruCevap = this.questions[this.soruIndex].answers?.find(e => e.istrue == 1);
+      this.dogruCevap = this.questions[this.soruIndex].answers?.find(e => e.trueanswer == 1);
       /*this.trueIcon = 'fa-solid fa-check fa-beat'
       this.trueIconColor = '#20511f'*/
 
-    } else if (answered?.value.istrue === 0) {
+    } else if (answered?.value.trueanswer === 0) {
       this.toastService.showToast('danger', 'Soruyu Yanlış Cevapladınız.');
-      this.dogruCevap = this.questions[this.soruIndex].answers?.find(e => e.istrue == 1);
-      this.toastService.showToast('warning', `Dogru cevap: ${this.dogruCevap?.answer}`);
+      this.dogruCevap = this.questions[this.soruIndex].answers?.find(e => e.trueanswer == 1);
+      this.toastService.showToast('warning', `Dogru cevap: ${this.dogruCevap?.answertext}`);
       /*this.falseIcon = 'fa-solid fa-x'
       this.falseIconColor = '#ff0000'*/
 
-    } else if (answered?.value.istrue === undefined) {
+    } else if (answered?.value.trueanswer === undefined) {
       this.toastService.showToast('warning', 'Soruyu Boş Bıraktınız.');
     }
 
@@ -145,7 +145,7 @@ export class DenemeSinaviComponent implements OnInit{
 
       if (soruForm) {
         const cevap = soruForm.value; // Kullanıcının verdiği cevap
-        const dogruCevap = soru.answers?.find(answer => answer.istrue === 1); // Doğru cevap
+        const dogruCevap = soru.answers?.find(answer => answer.trueanswer === 1); // Doğru cevap
 
         if (cevap === undefined) {
           bosSayisi++;

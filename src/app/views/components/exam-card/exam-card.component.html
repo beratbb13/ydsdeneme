@@ -4,7 +4,7 @@
       <img [src]="getSinavResmi(cardInfo.exam_name)" width="30" />
     </div>
     <div style="width: 100%;">
-      <i class="fa-regular fa-circle-xmark" (click)="openConfirmationDialog(cardInfo.usercourseid)"></i>
+      <i class="fa-regular fa-circle-xmark" (click)="openConfirmationDialog(cardInfo.usercourseid); $event.stopPropagation()"></i>
       <div>{{cardInfo.exam_name}}</div>
 
       <nb-progress-bar class="custom-progress" [value]="20" size="tiny" status="warning"></nb-progress-bar>

@@ -67,7 +67,7 @@ export class QuestionService {
       "Token": this.token,
       "DataStoreId": Endpoints.questionsDataStoreid,
       "Operation": "read",
-      "Data": `select cast(al.answerid as text), al.choice, al.trueanswer, cast(q.questionid as text), cast(q.examid as text),cast(q.ecategoryid as text), q.question from questions_27_09 q left join answer_06_10_23 al on al.questionid  = q.questionid left join (select us.user_id, us.question_id from user_score us where us.user_id = '${user_id}') us on us.question_id  = q.questionid where us.question_id is null and ecategoryid = '${categoryid}' order by q."number" asc limit 50`,
+      "Data": `select cast(al.answerid as text), al.answertext, al.trueanswer, cast(q.questionid as text), cast(q.examid as text),cast(q.ecategoryid as text), q.question from questions q left join answers_last al on al.questionid  = q.questionid left join (select us.user_id, us.question_id from user_score us where us.user_id = '${user_id}') us on us.question_id  = q.questionid where ecategoryid = '${categoryid}' order by q.sortnumber asc limit 50`,
       "Encrypted": "1951",
     }
     return this.http.post(Endpoints.dataops, body).pipe(
@@ -76,14 +76,14 @@ export class QuestionService {
       })
     );
   }
-  //      "Data": `select cast(question_27_09.questionid as text), cast(question_27_09.examid as text), cast(question_27_09.ecategoryid as text), question_27_09.question, answers_last.answer, answers_last.istrue, cast(answers_last.answerid as text) from question_27_09 inner join answers_last on question_27_09.questionid=answers_last.questionid LEFT JOIN user_score ON question_27_09.questionid = user_score.question_id WHERE user_score.question_id order by (questions_27_09.number)`,
+  //      "Data": `select cast(question_27_09.questionid as text), cast(question_27_09.examid as text), cast(question_27_09.ecategoryid as text), question_27_09.question, answers_last.answertext, answers_last.trueanswer, cast(answers_last.answerid as text) from question_27_09 inner join answers_last on question_27_09.questionid=answers_last.questionid LEFT JOIN user_score ON question_27_09.questionid = user_score.question_id WHERE user_score.question_id order by (questions_27_09.number)`,
 
   getQuestionsAndAnswersByCategoryId(category_id: string) {
     const body = {
       "Token": this.token,
       "DataStoreId": Endpoints.questionsDataStoreid,
       "Operation": "read",
-      "Data": `WITH updated_questions AS ( UPDATE questions SET issolved = true WHERE questionid IN (SELECT questionid FROM questions WHERE issolved = false LIMIT 10) RETURNING *) select CAST(updated_questions.questionid AS TEXT), CAST(updated_questions.examid AS TEXT), CAST(updated_questions.ecategoryid AS TEXT), updated_questions.question, cast(answers_last.answerid as text), answers_last.answer, answers_last.istrue FROM updated_questions INNER JOIN answers_last on answers_last.questionid = updated_questions.questionid`,
+      "Data": `WITH updated_questions AS ( UPDATE questions SET issolved = true WHERE questionid IN (SELECT questionid FROM questions WHERE issolved = false LIMIT 10) RETURNING *) select CAST(updated_questions.questionid AS TEXT), CAST(updated_questions.examid AS TEXT), CAST(updated_questions.ecategoryid AS TEXT), updated_questions.question, cast(answers_last.answerid as text), answers_last.answertext, answers_last.trueanswer FROM updated_questions INNER JOIN answers_last on answers_last.questionid = updated_questions.questionid`,
       "Encrypted": "1951",
     }
     return this.http.post(Endpoints.dataops, body).pipe(

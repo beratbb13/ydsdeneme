@@ -3,26 +3,27 @@ import { NbDialogService } from '@nebular/theme';
 import { ExamCategoryService } from 'src/app/services/examCategoryService/exam-category.service';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { UserService } from 'src/app/services/userService/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-exam-card',
   templateUrl: './exam-card.component.html',
   styleUrls: ['./exam-card.component.css']
 })
-export class ExamCardComponent implements OnInit{
+export class ExamCardComponent implements OnInit {
   @Input() cardInfo: any
 
-  sinavlar:any[]=[]
+  sinavlar: any[] = []
 
-  constructor(private examCategoryService:ExamCategoryService,
-    private userservice:UserService,
-    private dialogService:NbDialogService){ }
+  constructor(private examCategoryService: ExamCategoryService,
+    private userservice: UserService,
+    private dialogService: NbDialogService) { }
 
   ngOnInit(): void {
     // this.getRegisteredCoursesAndExams()
   }
 
-  openConfirmationDialog(usercourseid:any) {
+  openConfirmationDialog(usercourseid: any) {
     this.dialogService.open(ConfirmationDialogComponent, {
       context: {
         message: 'Bu sınavı silmek istiyor musunuz?',
@@ -32,7 +33,6 @@ export class ExamCardComponent implements OnInit{
         // silme işlemi
         this.silSinav(usercourseid)
         console.log('silindi')
-
       }
       // window.location.reload()
     });
@@ -47,10 +47,10 @@ export class ExamCardComponent implements OnInit{
         } else {
           // Başarılı bir şekilde silindiğinde yapılacak işlemleri burada gerçekleştirin
           console.log('Sınav başarıyla silindi.');
-  
+
           // Sayfadaki verileri güncelleme - Örnek olarak this.sinavlar dizisini güncelleyebilirsiniz
           this.sinavlar = this.sinavlar.filter(sinav => sinav.usercourseid !== usercourseid);
-  
+
           // Sayfayı yenileme işlemini burada yapın, silme işlemi tamamlandığında
           window.location.reload();
         }
@@ -61,7 +61,7 @@ export class ExamCardComponent implements OnInit{
       }
     );
   }
-  
+
   getSinavResmi(sinavAdi: string): string {
     let resimURL: string = '';
 
@@ -85,15 +85,15 @@ export class ExamCardComponent implements OnInit{
         resimURL = 'URL_VARSAYILAN_RESIM';
         break;
     }
-  
+
     return resimURL;
   }
 
 
-  getRegisteredCoursesAndExams(){
-    const currentuser=localStorage.getItem('user')
-    if ((currentuser !== null && currentuser !== undefined)){
-      const userJSON=JSON.parse(currentuser)
+  getRegisteredCoursesAndExams() {
+    const currentuser = localStorage.getItem('user')
+    if ((currentuser !== null && currentuser !== undefined)) {
+      const userJSON = JSON.parse(currentuser)
       if (userJSON.userId) {
         const userid = userJSON.userId;
         // console.log('useerid',userid)
@@ -108,7 +108,7 @@ export class ExamCardComponent implements OnInit{
         this.examCategoryService.getUsersExams(userid).subscribe(
           (res: any) => {
             console.log('Basarili Istek, alinan SINAVLAR:', res);
-        
+
             if (res && typeof res === 'object') {
               // Convert the object to an array
               this.sinavlar = [res];

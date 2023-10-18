@@ -11,8 +11,8 @@
         <nb-card accent="info" status="success">
             <nb-card-header>Cevap</nb-card-header>
             <nb-card-body *ngFor="let answer of ques.question.answers">
-                <div *ngIf="answer.istrue == 1">
-                    {{answer.answer}}
+                <div *ngIf="answer.trueanswer == 1">
+                    {{answer.answertext}}
                 </div>
             </nb-card-body>
         </nb-card>

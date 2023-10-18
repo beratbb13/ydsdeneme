@@ -11,6 +11,7 @@ import { ExamResultComponent } from '../../testResult/exam-result/exam-result.co
 import { NbDialogRef } from '@nebular/theme/public_api';
 import { UserScoreService } from 'src/app/services/userScoreService/user-score.service';
 import { AnswerService } from 'src/app/services/answerService/answer.service';
+import { UserService } from 'src/app/services/userService/user.service';
 
 @Component({
   selector: 'app-exam-form',
@@ -22,6 +23,7 @@ export class ExamFormComponent {
   constructor(
     private questionService: QuestionService,
     private answerService: AnswerService,
+    private userService: UserService,
     private spinnerService: SpinnerService,
     private formBuilder: FormBuilder,
     private dialogService: DialogService,
@@ -105,23 +107,27 @@ export class ExamFormComponent {
   }
 
   getQuestionsAndAnswers() {
-    this.spinnerService.show();
-    this.questionService.getQuestionsAndAnswers(this.user.userId, this.category.ecategoryid).pipe(
-      tap(res => this.answerswithQuestions = [...this.answerswithQuestions, ...res]), // =  res
-      tap(res => this.lastQuestions = res),
-      tap(() => this.soruSayisi = this.answerswithQuestions.length / 5),
-      tap(() => this.pullQuestions()),
-      tap(() => this.answerswithQuestions.map((answer: any) => this.createFormControlObject(answer.questionid))),
-      tap(() => this.updatePaginationButtons()),
-      tap(() => this.totalPages = Math.ceil(this.questions.length / this.itemsPerPage)),
-      tap(() => this.spinnerService.hide())
-    ).subscribe(() => {
-      /*console.log(this.visibleButtons)
-      console.log(this.totalPages)
-      console.log(this.soruIndex)
-      console.log(this.soruSayisi)
-      console.log(this.answerswithQuestions)*/
-    });
+    this.spinnerService.show()
+    let ydsExamid = '6e6e28f6-5df0-4da5-9e29-53a91dbb0e9c'
+    this.userService.insertUserToExamWCategory({ userid: this.user.userId, examid: ydsExamid, categoryid: this.category.ecategoryid }).subscribe(() => {
+
+      this.questionService.getQuestionsAndAnswers(this.user.userId, this.category.ecategoryid).pipe(
+        tap(res => this.answerswithQuestions = [...this.answerswithQuestions, ...res]), // =  res
+        tap(res => this.lastQuestions = res),
+        tap(() => this.soruSayisi = this.answerswithQuestions.length / 5),
+        tap(() => this.pullQuestions()),
+        tap(() => this.answerswithQuestions.map((answer: any) => this.createFormControlObject(answer.questionid))),
+        tap(() => this.updatePaginationButtons()),
+        tap(() => this.totalPages = Math.ceil(this.questions.length / this.itemsPerPage)),
+        tap(() => this.spinnerService.hide())
+      ).subscribe(() => {
+        /*console.log(this.visibleButtons)
+        console.log(this.totalPages)
+        console.log(this.soruIndex)
+        console.log(this.soruSayisi)
+        console.log(this.answerswithQuestions)*/
+      })
+    })
   }
 
   lastQuestions: any[] = []
@@ -194,8 +200,6 @@ export class ExamFormComponent {
 
   nextQuestion() {
 
-    this.reply()
-
     this.questions[this.soruIndex].answers?.map(a => console.log(a))
 
     if (this.soruSayisi > this.soruIndex) {
@@ -216,7 +220,6 @@ export class ExamFormComponent {
   }
 
   previousQuestion() {
-    this.reply()
 
     if (!(this.soruIndex < 0)) {
       this.soruIndex -= 1;
@@ -253,12 +256,12 @@ export class ExamFormComponent {
   getButtonBackgroundColor(questionId: string): string {
     /*const status = this.questionStatus[questionId];
 */
-    /*let isTrue = this.questionForm.controls[questionId].value
+    /*let trueanswer = this.questionForm.controls[questionId].value
 
-    if (isTrue && isTrue === 1) {
+    if (trueanswer && trueanswer === 1) {
       console.log('true')
       return 'green'
-    } else if (isTrue && isTrue === 0) {
+    } else if (trueanswer && trueanswer === 0) {
       console.log('false')
       return 'red'
     } else {
@@ -281,6 +284,7 @@ export class ExamFormComponent {
   }
 
   sinaviBitir() {
+    clearInterval(this.interval)
 
     let controls = Object.values(this.questionForm.controls);
     let trueQuestions: any[] = [];
@@ -291,11 +295,11 @@ export class ExamFormComponent {
 
     controls.map(control => {
       if (control.value.trueanswer == 1) {
-        trueQuestions.push({ question: this.questions.filter(ques => control.value.questionid == ques.questionid)[0], istrue: true });
+        trueQuestions.push({ question: this.questions.filter(ques => control.value.questionid == ques.questionid)[0], trueanswer: true });
         trueIds.push(control.value.questionid);
       }
       else if (control.value.trueanswer == 0) {
-        falseQuestions.push({ question: this.questions.filter(ques => control.value.questionid == ques.questionid)[0], istrue: false });
+        falseQuestions.push({ question: this.questions.filter(ques => control.value.questionid == ques.questionid)[0], trueanswer: false });
         falseIds.push(control.value.questionid);
       }
     })
@@ -303,7 +307,7 @@ export class ExamFormComponent {
     emptyQuestions = this.questions.filter(ques => (!trueIds.includes(ques.questionid) && !falseIds.includes(ques.questionid)));
     let emptyQuestion: any[] = []
     emptyQuestions.map(ques => {
-      emptyQuestion.push({ question: ques, istrue: false })
+      emptyQuestion.push({ question: ques, trueanswer: false })
     })
 
     let items = [
@@ -348,8 +352,8 @@ export class ExamFormComponent {
 
     this.userScoreService.insertExamScore(this.user.userId, allQuestions).subscribe(res => console.log(res))
 
-
-    this.openResultModal({ items: items, questions: allQuestions });
+    let sure = this.dakika.toString() + ':' + (this.saniye < 10) ? '0' : '' + this.saniye.toString()
+    this.openResultModal({ items: items, questions: allQuestions, duration: sure });
 
   }
 

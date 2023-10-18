@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, map } from 'rxjs';
+import { BehaviorSubject, Observable, map } from 'rxjs';
 import { Endpoints } from 'src/app/constants/Endpoints';
 import { LoginRequest } from 'src/app/models/login';
 import { RegisterUser } from 'src/app/models/user';
@@ -79,7 +79,7 @@ export class AuthService {
   }
 
   setStorage(response: any) {
-    localStorage.setItem('user',JSON.stringify(response))
+    localStorage.setItem('user', JSON.stringify(response))
     this.setToken(response.token)
   }
 
@@ -92,6 +92,7 @@ export class AuthService {
   }
 
   getLogout() {
+
     let param = {
       Token: this.getToken(),
     };
@@ -102,7 +103,8 @@ export class AuthService {
         localStorage.removeItem('userUUID')
         return response;
       })
-    );
+    )
+
   }
 
   getUserLanguage() {
