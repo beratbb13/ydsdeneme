@@ -71,7 +71,7 @@ export class UserDashboardComponent implements OnInit {
   getRegisteredCourses() {
     this.examCategoryService.getUsersCourse(this.user_id).subscribe(
       (res: any) => {
-        this.kurslar = [res];
+        this.kurslar = res;
         console.log('KURSLAAAR', this.kurslar)
       },
       (error: any) => {
@@ -90,7 +90,7 @@ export class UserDashboardComponent implements OnInit {
   sinavAdlari: string[] = [];
 
   getUserCourses(userId: string) {
-    this.userservice.getUserIDfromCourses(userId).subscribe((res: any) => {
+    /*this.userservice.getUserIDfromCourses(userId).subscribe((res: any) => {
       this.userCourses = Array.isArray(res) ? res : [res];
       console.log(this.userCourses);
 
@@ -108,7 +108,7 @@ export class UserDashboardComponent implements OnInit {
           console.log(`Kullanıcının katıldığı sınav adları: ${this.sinavAdlari}`);
         });
       }
-    });
+    });*/
   }
 
   filterUserCoursesByUserId(userId: string, userCourses: any[]): any[] {

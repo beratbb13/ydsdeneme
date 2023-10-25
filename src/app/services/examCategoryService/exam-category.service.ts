@@ -63,12 +63,12 @@ export class ExamCategoryService {
     );
   }
 
-  getUsersCourse(userid: any) {
+  getUsersCourse(user_id: any) {
     const body = {
       "Token": this.token,
       "DataStoreId": Endpoints.examCategoryDataStoreid,
       "Operation": "read",
-      "Data": `SELECT exam_categories."Name" FROM exam_categories INNER JOIN users_course ON exam_categories.ecategoryid = users_course.categoryid WHERE users_course.userid = '${userid}'`,
+      "Data": `select cast(e.examid as text), e.exam_name from users_course uc inner join exam e on e.examid = uc.examid where uc.userid = '${user_id}' group by e.examid, e.exam_name`,
       "Encrypted": '1951'
     }
     return this.http.post(Endpoints.dataops, body).pipe(

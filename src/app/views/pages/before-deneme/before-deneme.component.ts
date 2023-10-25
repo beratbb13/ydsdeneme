@@ -34,13 +34,14 @@ export class BeforeDenemeComponent implements OnInit{
         // console.log('useerid',userid)
         this.examCategoryService.getUsersCourse(userid).subscribe(
           (res: any) => {
+            this.sinavlar = [res]
             console.log('Başarılı istek, alinan kurslar:', res);
           },
           (error: any) => {
             console.error('Hata oluştu', error);
           }
         )
-        this.examCategoryService.getUsersExams(userid).subscribe(
+        /*this.examCategoryService.getUsersExams(userid).subscribe(
           (res: any) => {
             console.log('Basarili Istek, alinan SINAVLAR:', res);
         
@@ -55,7 +56,7 @@ export class BeforeDenemeComponent implements OnInit{
           (error: any) => {
             console.error('basarisiz istek', error);
           }
-        );
+        )*/
       }
     }
   }

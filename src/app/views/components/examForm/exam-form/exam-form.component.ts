@@ -110,23 +110,16 @@ export class ExamFormComponent {
     this.spinnerService.show()
     let ydsExamid = '6e6e28f6-5df0-4da5-9e29-53a91dbb0e9c'
     this.userService.insertUserToExamWCategory({ userid: this.user.userId, examid: ydsExamid, categoryid: this.category.ecategoryid }).subscribe(() => {
-
       this.questionService.getQuestionsAndAnswers(this.user.userId, this.category.ecategoryid).pipe(
         tap(res => this.answerswithQuestions = [...this.answerswithQuestions, ...res]), // =  res
         tap(res => this.lastQuestions = res),
-        tap(() => this.soruSayisi = this.answerswithQuestions.length / 5),
+        //tap(() => this.soruSayisi = this.answerswithQuestions.length / 5),
         tap(() => this.pullQuestions()),
         tap(() => this.answerswithQuestions.map((answer: any) => this.createFormControlObject(answer.questionid))),
         tap(() => this.updatePaginationButtons()),
         tap(() => this.totalPages = Math.ceil(this.questions.length / this.itemsPerPage)),
         tap(() => this.spinnerService.hide())
-      ).subscribe(() => {
-        /*console.log(this.visibleButtons)
-        console.log(this.totalPages)
-        console.log(this.soruIndex)
-        console.log(this.soruSayisi)
-        console.log(this.answerswithQuestions)*/
-      })
+      ).subscribe()
     })
   }
 
@@ -148,9 +141,13 @@ export class ExamFormComponent {
         this.questionids.push(answer.questionid)
       }
     })
+
+    console.log(this.answerswithQuestions)
     this.questions.map(ques => {
       ques.answers = this.answerswithQuestions.filter(ans => (ans.questionid == ques.questionid))
     })
+    this.soruSayisi = this.questions.length
+    console.log(this.questions)
   }
 
   setScore() {
@@ -180,7 +177,7 @@ export class ExamFormComponent {
   timer() {
     this.interval = setInterval(() => {
       if (!(this.saniye < 60)) {
-        this.dakika = Math.floor(this.saniye / 60);
+        this.dakika += Math.floor(this.saniye / 60);
         this.saniye = 0;
       }
       this.saniye += 1;
@@ -194,7 +191,7 @@ export class ExamFormComponent {
   openResultModal(sonuc: any) {
     let dialogref: NbDialogRef<any> = this.dialogService.openModal(ExamResultComponent, true, true, 'right-modal', sonuc)
     dialogref.onClose.subscribe(() => {
-      this.router.navigate(['/homepage/filter']);
+      this.router.navigate(['user/exams']);
     })
   }
 
@@ -343,14 +340,30 @@ export class ExamFormComponent {
         ]
       }
     ]
-    /*console.log(trueQuestions)
-    console.log(falseQuestions)
-    console.log(emptyQuestions)*/
-
 
     let allQuestions = [...trueQuestions, ...falseQuestions, ...emptyQuestion];
 
-    this.userScoreService.insertExamScore(this.user.userId, allQuestions).subscribe(res => console.log(res))
+    let user_id = this.user.userId
+    let scoreBody: string = ''
+    allQuestions.map((ques: any, indis: number) => {
+      if (allQuestions[indis + 1]) {
+        if (ques.trueanswer && ques.trueanswer == true)
+          scoreBody += `('${user_id}', '${ques.question.questionid}', '${ques.question.examid}', '1', 'now()'),`
+        else if (ques.trueanswer && ques.trueanswer == false)
+          scoreBody += `('${user_id}', '${ques.question.questionid}', '${ques.question.examid}', '0', 'now()'),`
+        else
+          scoreBody += `('${user_id}', '${ques.question.questionid}', '${ques.question.examid}', '0', 'now()'),`
+      } else {
+        if (ques.trueanswer && ques.trueanswer == true)
+          scoreBody += `('${user_id}', '${ques.question.questionid}', '${ques.question.examid}', '1', 'now()')`
+        else if (ques.trueanswer && ques.trueanswer == false)
+          scoreBody += `('${user_id}', '${ques.question.questionid}', '${ques.question.examid}', '0', 'now()')`
+        else
+          scoreBody += `('${user_id}', '${ques.question.questionid}', '${ques.question.examid}', '0', 'now()')`
+      }
+    })
+
+    this.userScoreService.insertExamScore(this.user.userId, scoreBody).subscribe(res => console.log(res))
 
     let sure = this.dakika.toString() + ':' + (this.saniye < 10) ? '0' : '' + this.saniye.toString()
     this.openResultModal({ items: items, questions: allQuestions, duration: sure });

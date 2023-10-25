@@ -45,9 +45,9 @@ export class HeaderComponent {
 
 
   logOut() {
-    /*this.authService.getLogout().subscribe(res => console.log(res));
+    this.authService.getLogout().subscribe(res => console.log(res));
     localStorage.clear()
-    this.router.navigate(['/']);*/
+    this.router.navigate(['/']);
   }
 
 

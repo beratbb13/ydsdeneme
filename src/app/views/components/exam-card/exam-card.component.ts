@@ -105,7 +105,7 @@ export class ExamCardComponent implements OnInit {
             console.error('Hata oluştu', error);
           }
         )
-        this.examCategoryService.getUsersExams(userid).subscribe(
+        /*this.examCategoryService.getUsersExams(userid).subscribe(
           (res: any) => {
             console.log('Basarili Istek, alinan SINAVLAR:', res);
 
@@ -120,7 +120,7 @@ export class ExamCardComponent implements OnInit {
           (error: any) => {
             console.error('basarisiz istek', error);
           }
-        );
+        )*/
       }
     }
   }

@@ -83,46 +83,18 @@ export class UserScoreService {
     );
   }
 
-  insertExamScore(user_id: string, questions: any[]) {
-
-    /*questions.map(ques => {
-      if (ques.trueanswer && ques.trueanswer == true)
-        console.log('true', ques.question)
-      else if (ques.trueanswer && ques.trueanswer == false)
-        console.log('yanlis', ques)
-      else
-        console.log('bos', ques)  
-    })*/
-
-    let scoreBody: string = ''
-    questions.map((ques: any, indis: number) => {
-      if (questions[indis + 1]) {
-        if (ques.trueanswer && ques.trueanswer == true)
-          scoreBody += `('${user_id}', '${ques.question.questionid}', '${ques.question.examid}', '1'),`
-        else if (ques.trueanswer && ques.trueanswer == false)
-          scoreBody += `('${user_id}', '${ques.question.questionid}', '${ques.question.examid}', '0'),`
-        else
-          scoreBody += `('${user_id}', '${ques.question.questionid}', '${ques.question.examid}', '0'),`
-      } else {
-        if (ques.trueanswer && ques.trueanswer == true)
-          scoreBody += `('${user_id}', '${ques.question.questionid}', '${ques.question.examid}', '1')`
-        else if (ques.trueanswer && ques.trueanswer == false)
-          scoreBody += `('${user_id}', '${ques.question.questionid}', '${ques.question.examid}', '0')`
-        else
-          scoreBody += `('${user_id}', '${ques.question.questionid}', '${ques.question.examid}', '0')`
-      }
-    })
-
+  insertExamScore(user_id: string, query: string) {
     const body = {
       "Token": this.token,
       "DataStoreId": Endpoints.userScoreDataStoreid,
       "Operation": "insert",
-      "Data": `insert into user_score(user_id, question_id, examid, trueanswer) values${scoreBody}`,
+      "Data": `insert into user_score(user_id, question_id, examid, trueanswer, createdate) values${query}`,
       "Encrypted": '1951'
     }
     return this.http.post(Endpoints.dataops, body).pipe(
       map((response: any) => {
         console.log(response)
+        return response
       })
     )
   }

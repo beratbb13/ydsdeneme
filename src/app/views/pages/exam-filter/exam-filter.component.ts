@@ -90,14 +90,14 @@ export class ExamFilterComponent implements OnInit {
       if (userJSON.userId) {
         const userid = userJSON.userId;
         // console.log('useerid',userid)
-        this.examCategoryService.getUsersCourse(userid).subscribe(
+        /*this.examCategoryService.getUsersCourse(userid).subscribe(
           (res: any) => {
             console.log('Başarılı istek, alinan kurslar:', res);
           },
           (error: any) => {
             console.error('Hata oluştu', error);
           }
-        )
+        )*/
         this.examCategoryService.getUsersExams(userid).subscribe(
           (res: any) => {
             console.log('Basarili Istek, alinan SINAVLAR:', res);
@@ -113,7 +113,7 @@ export class ExamFilterComponent implements OnInit {
           (error: any) => {
             console.error('basarisiz istek', error);
           }
-        );
+        )
 
       }
     }
