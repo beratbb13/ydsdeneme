@@ -40,6 +40,7 @@ import { ExamCardComponent } from './views/components/exam-card/exam-card.compon
 import { RegisterExamComponent } from './views/components/register-exam/register-exam.component';
 import { ConfirmationDialogComponent } from './views/components/confirmation-dialog/confirmation-dialog.component';
 import { EnterExamComponent } from './views/components/enter-exam/enter-exam.component';
+import { ExamResultDetailComponent } from './views/components/exam-result-detail/exam-result-detail.component';
 
 
 @NgModule({
@@ -75,6 +76,7 @@ import { EnterExamComponent } from './views/components/enter-exam/enter-exam.com
     RegisterExamComponent,
     ConfirmationDialogComponent,
     EnterExamComponent,
+    ExamResultDetailComponent,
 
   ],
   imports: [

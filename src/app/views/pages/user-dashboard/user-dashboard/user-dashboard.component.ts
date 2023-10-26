@@ -5,7 +5,8 @@ import { ExamCategoryService } from 'src/app/services/examCategoryService/exam-c
 import { UserScoreService } from 'src/app/services/userScoreService/user-score.service';
 import { UserService } from 'src/app/services/userService/user.service';
 import { Router } from '@angular/router'
-
+import { tap } from 'rxjs'
+import { DialogService } from 'src/app/services/dialogService/dialog.service';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -14,15 +15,16 @@ import { Router } from '@angular/router'
 })
 export class UserDashboardComponent implements OnInit {
 
-
-  selectedDate: any
+  selectedDate: any = new Date().toISOString().split('T')[0]
   user_id: string = ''
   performs: any[] = []
+  filteredPerforms: any[] = []
 
   constructor(private sidebarService: NbSidebarService,
     private userservice: UserService,
     private userScoreService: UserScoreService,
     private examCategoryService: ExamCategoryService,
+    private dialogService: DialogService,
     private router: Router) {
   }
 
@@ -69,7 +71,7 @@ export class UserDashboardComponent implements OnInit {
 
   kurslar: any[] = []
   getRegisteredCourses() {
-    this.examCategoryService.getUsersCourse(this.user_id).subscribe(
+    /*this.examCategoryService.getUsersCourse(this.user_id).subscribe(
       (res: any) => {
         this.kurslar = res;
         console.log('KURSLAAAR', this.kurslar)
@@ -77,7 +79,7 @@ export class UserDashboardComponent implements OnInit {
       (error: any) => {
         console.error('Hata oluştu', error);
       }
-    )
+    )*/
   }
 
 
@@ -129,17 +131,18 @@ export class UserDashboardComponent implements OnInit {
     }
   }
 
+
   setDate() {
-    const tarih = new Date(this.selectedDate)
-    const tarihFormat = tarih.toLocaleDateString("tr-TR")
-
-    console.log(tarihFormat)
-    this.userScoreService.getExamScoresByUserIdAndDate(this.user_id, tarih.toISOString().split('T')[0]).subscribe(res => this.performs = res)
-
+    this.filteredPerforms = this.performs.filter(perform => perform.tarih == this.selectedDate)
   }
 
   getCategoryPerforms() {
-    this.userScoreService.getExamScoresByUserId(this.user_id).subscribe(res => this.performs = res)
+    this.userScoreService.getExamScoresByUserId(this.user_id).pipe(
+      tap(res => this.performs = res)
+    ).subscribe(() => this.setDate())
   }
 
+  openExamResultDetailModal(category_id: string) {
+    this.dialogService.openExamResultDetailModal(this.user_id, category_id).onClose.subscribe()
+  }
 }

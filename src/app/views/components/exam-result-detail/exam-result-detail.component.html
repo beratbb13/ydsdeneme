@@ -1,0 +1,58 @@
+<!--<nb-card *ngIf="performs">
+    <nb-card-header>
+        <h4>{{performs.category_name}}</h4>
+    </nb-card-header>
+    <nb-card-body>
+        <table class="table p-2">
+            <thead>
+                <tr>
+                    <th scope="col" align="center">Doğru Sayısı</th>
+                    <th scope="col" align="center">Yanlış Sayısı</th>
+                    <th scope="col" align="center">Soru Sayısı</th>
+                    <th scope="col" align="center">Genel Performans</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td scope="row" align="center">{{ performs.dogru_sayisi}}</td>
+                    <td scope="row" align="center">{{ performs.yanlis_sayisi}}</td>
+                    <td scope="row" align="center">{{ performs.soru_sayisi}}</td>
+                    <td scope="row" align="center">%{{ performs.performans_orani}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </nb-card-body>
+</nb-card>-->
+
+
+<div class="container"
+    style="padding: 24px;background: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);border-radius: 5px;">
+
+    <div class="row d-flex justify-content-between mb-2">
+        <div class="col-9">
+            <h4>{{performs.category_name}}</h4>
+        </div>
+        <div class="col-3 d-flex justify-content-end">
+            <i (click)="close()" style="font-size: 34px;cursor: pointer;" class="fa-regular fa-circle-xmark"></i>
+        </div>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col" align="center">Doğru Sayısı</th>
+                <th scope="col" align="center">Yanlış Sayısı</th>
+                <th scope="col" align="center">Soru Sayısı</th>
+                <th scope="col" align="center">Genel Performans</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td scope="row" align="center">{{ performs.dogru_sayisi}}</td>
+                <td scope="row" align="center">{{ performs.yanlis_sayisi}}</td>
+                <td scope="row" align="center">{{ performs.soru_sayisi}}</td>
+                <td scope="row" align="center">%{{ performs.performans_orani}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

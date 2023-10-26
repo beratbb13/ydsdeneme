@@ -30,9 +30,14 @@
       </nb-card-header>
       <nb-list>
         <nb-list-item *ngFor="let perform of performs">
-          {{perform.Name}}
-          <nb-progress-bar style="width: 100% !important;
-           margin-left: 2% !important;" [value]="perform.performans" status="primary"></nb-progress-bar>
+          <div class="col-4" style="cursor: pointer" (click)="openExamResultDetailModal(perform.categoryid)">
+            {{perform.Name}}
+          </div>
+          <div class="col-8">
+            <nb-progress-bar style="width: 100% !important;
+              margin-left: 2% !important;" title="%{{ perform.performans }}" [value]="perform.performans"
+              status="primary"></nb-progress-bar>
+          </div>
         </nb-list-item>
         <!--<nb-list-item>
           Deneme
@@ -71,46 +76,29 @@
 
     <nb-card class="timespent" size="medium" style="flex: 50%;">
       <nb-card-header style="display: flex;justify-content: space-around;">
-        Time spent on learning..
-        <input nbInput placeholder="Pick Date" style="border: none !important;" [(ngModel)]="selectedDate"
-          (ngModelChange)="setDate()" [nbDatepicker]="dateTimePicker">
-        <nb-datepicker #dateTimePicker></nb-datepicker>
+        <div class="col-6">
+          Filter by Date
+        </div>
+        <div class="col-6">
+          <input type="date" class="form-control" placeholder="Pick Date" [(ngModel)]="selectedDate"
+            (ngModelChange)="setDate()">
+        </div>
       </nb-card-header>
-      <nb-list>
-        <nb-list-item>
-          Deneme
-          <nb-progress-bar style="    width: 100% !important;
-                    margin-left: 2% !important;" [value]="40" status="danger"></nb-progress-bar>
+      <nb-list *ngIf="filteredPerforms.length">
+        <nb-list-item *ngFor="let perform of filteredPerforms">
+          <div class="col-4">
+            {{perform.Name}}
+          </div>
+          <div class="col-8">
+            <nb-progress-bar style="width: 100% !important;
+              margin-left: 2% !important;" title="%{{ perform.performans }}" [value]="perform.performans"
+              status="primary"></nb-progress-bar>
+          </div>
         </nb-list-item>
+      </nb-list>
+      <nb-list *ngIf="!filteredPerforms.length">
         <nb-list-item>
-          Deneme
-          <nb-progress-bar style="    width: 100% !important;
-                    margin-left: 2% !important;" [value]="70" status="danger"></nb-progress-bar>
-        </nb-list-item>
-        <nb-list-item>
-          Deneme
-          <nb-progress-bar style="    width: 100% !important;
-                    margin-left: 2% !important;" [value]="10" status="danger"></nb-progress-bar>
-        </nb-list-item>
-        <nb-list-item>
-          Deneme
-          <nb-progress-bar style="    width: 100% !important;
-                    margin-left: 2% !important;" [value]="50" status="danger"></nb-progress-bar>
-        </nb-list-item>
-        <nb-list-item>
-          Deneme
-          <nb-progress-bar style="    width: 100% !important;
-                    margin-left: 2% !important;" [value]="70" status="danger"></nb-progress-bar>
-        </nb-list-item>
-        <nb-list-item>
-          Deneme
-          <nb-progress-bar style="    width: 100% !important;
-                    margin-left: 2% !important;" [value]="30" status="danger"></nb-progress-bar>
-        </nb-list-item>
-        <nb-list-item>
-          Deneme
-          <nb-progress-bar style="    width: 100% !important;
-                    margin-left: 2% !important;" [value]="40" status="danger"></nb-progress-bar>
+          İlgili tarihte bir sonuc bulunamadi.
         </nb-list-item>
       </nb-list>
     </nb-card>
