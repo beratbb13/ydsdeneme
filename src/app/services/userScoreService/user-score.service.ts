@@ -114,12 +114,12 @@ export class UserScoreService {
     )
   }
 
-  getExamScoresByUserId(userid: string) {
+  getExamScoresByUserId(user_id: string) {
     const body = {
       "Token": this.token,
       "DataStoreId": Endpoints.userScoreDataStoreid,
       "Operation": "read",
-      "Data": `with sonuc as ( select us.userid, us.categoryid, ec."Name", us.questionid, us.trueanswer, us.createdate from user_score us inner join exam_categories ec on ec.ecategoryid = us.categoryid where us.userid = '${userid}') select s."Name", cast(s.categoryid as text), COUNT(case when s.trueanswer = true then 1 else null end) as dogru_soru, COUNT(s.trueanswer) as toplam_soru, (COUNT(case when s.trueanswer = true then 1 else null end)::double precision / COUNT(s.trueanswer) * 100) as performans, to_char(s.createdate, 'YYYY-MM-DD') as tarih from sonuc s group by s."Name", s.categoryid, s.createdate`,
+      "Data": `with sonuc as ( select us.userid, us.categoryid, ec."Name", us.questionid, us.trueanswer, us.createdate from user_score us inner join exam_categories ec on ec.ecategoryid = us.categoryid where us.userid = '${user_id}') select s."Name" as category_name, cast(s.categoryid as text), COUNT(case when s.trueanswer = true then 1 else null end) as dogru_sayisi, COUNT(case when s.trueanswer = false then 1 else null end) as yanlis_sayisi, COUNT(s.trueanswer) as soru_sayisi, (COUNT(case when s.trueanswer = true then 1 else null end)::double precision / COUNT(s.trueanswer) * 100) as performans_orani from sonuc s group by s."Name", s.categoryid`,
       "Encrypted": '1951'
     }
     return this.http.post(Endpoints.dataops, body).pipe(
@@ -130,12 +130,12 @@ export class UserScoreService {
     )
   }
 
-  getExamScoresByUserIdAndDate(userid: string, date: string) {
+  getExamScoresByUserIdAndDate(user_id: string, date: string) {
     const body = {
       "Token": this.token,
       "DataStoreId": Endpoints.userScoreDataStoreid,
       "Operation": "read",
-      "Data": `with sonuc as ( select us.userid, us.categoryid, ec."Name", us.questionid, us.trueanswer, us.createdate from user_score us inner join exam_categories ec on ec.ecategoryid = us.categoryid where us.userid = '${userid}') select s."Name", s.categoryid, COUNT(case when s.trueanswer = true then 1 else null end) as dogru_soru, COUNT(s.trueanswer) as toplam_soru, (COUNT(case when s.trueanswer = true then 1 else null end)::double precision / COUNT(s.trueanswer) * 100) as performans from sonuc s where s.createdate = '${date}' group by s."Name", s.categoryid `,
+      "Data": `with sonuc as ( select us.userid, us.categoryid, ec."Name", us.questionid, us.trueanswer, us.createdate from user_score us inner join exam_categories ec on ec.ecategoryid = us.categoryid where us.userid = '${user_id}') select s."Name" as category_name, cast(s.categoryid as text), COUNT(case when s.trueanswer = true then 1 else null end) as dogru_sayisi, COUNT(case when s.trueanswer = false then 1 else null end) as yanlis_sayisi, COUNT(s.trueanswer) as soru_sayisi, (COUNT(case when s.trueanswer = true then 1 else null end)::double precision / COUNT(s.trueanswer) * 100) as performans_orani from sonuc s where s.createdate = '${date}' group by s."Name", s.categoryid`,
       "Encrypted": '1951'
     }
     return this.http.post(Endpoints.dataops, body).pipe(

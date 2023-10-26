@@ -43,11 +43,10 @@ export class DialogService {
     return dialogRef;
   }
 
-  openExamResultDetailModal(user_id: string, category_id: string) {
+  openExamResultDetailModal(performs: any) {
     const dialogRef = this.nbDialogService.open(ExamResultDetailComponent, {
       context: {
-        user_id: user_id,
-        category_id: category_id
+        performs: performs,
       }
     })
     return dialogRef;

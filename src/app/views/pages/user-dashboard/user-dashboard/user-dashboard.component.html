@@ -29,13 +29,14 @@
         Latest Result
       </nb-card-header>
       <nb-list>
-        <nb-list-item *ngFor="let perform of performs">
-          <div class="col-4" style="cursor: pointer" (click)="openExamResultDetailModal(perform.categoryid)">
-            {{perform.Name}}
+        <nb-list-item *ngFor="let perform of performs" style="cursor: pointer"
+          (click)="openExamResultDetailModal(perform)">
+          <div class="col-4">
+            {{perform.category_name}}
           </div>
           <div class="col-8">
             <nb-progress-bar style="width: 100% !important;
-              margin-left: 2% !important;" title="%{{ perform.performans }}" [value]="perform.performans"
+              margin-left: 2% !important;" title="%{{ perform.performans_orani }}" [value]="perform.performans_orani"
               status="primary"></nb-progress-bar>
           </div>
         </nb-list-item>
@@ -85,13 +86,14 @@
         </div>
       </nb-card-header>
       <nb-list *ngIf="filteredPerforms.length">
-        <nb-list-item *ngFor="let perform of filteredPerforms">
+        <nb-list-item *ngFor="let perform of filteredPerforms" style="cursor: pointer"
+          (click)="openExamResultDetailModal(perform)">
           <div class="col-4">
-            {{perform.Name}}
+            {{perform.category_name}}
           </div>
           <div class="col-8">
             <nb-progress-bar style="width: 100% !important;
-              margin-left: 2% !important;" title="%{{ perform.performans }}" [value]="perform.performans"
+              margin-left: 2% !important;" title="%{{ perform.performans_orani }}" [value]="perform.performans_orani"
               status="primary"></nb-progress-bar>
           </div>
         </nb-list-item>
@@ -104,7 +106,7 @@
     </nb-card>
   </div>
 </div>
-<!--
+
 <div style="padding: 40px;">
   <div class="courses">
     <h3>Çalıştığım Sınavlar</h3>
@@ -132,8 +134,7 @@
       </div>
     </div>
   </div>
--->
-<!--<div class="courses">
+  <div class="courses">
     <h3>Çalıştığım Konular</h3>
     <img width="32" height="32" src="https://img.icons8.com/fluency-systems-regular/48/more.png" alt="more" />
   </div>
@@ -158,4 +159,3 @@
   </div>
   <h5 *ngIf="kurslar.length===0" class="text-center" style="font-weight: 600">Alınan herhangi bir kurs yok
     !</h5>
-  -->

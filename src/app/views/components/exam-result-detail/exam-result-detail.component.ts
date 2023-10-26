@@ -9,10 +9,7 @@ import { NbDialogRef } from '@nebular/theme';
 })
 export class ExamResultDetailComponent {
 
-  @Input() user_id: any
-  @Input() category_id: any
-  performs: any
-
+  @Input() performs: any
   constructor(
     private dialogRef: NbDialogRef<ExamResultDetailComponent>,
     private userScoreService: UserScoreService) { }
@@ -22,8 +19,6 @@ export class ExamResultDetailComponent {
   }
 
   getUserScoreByCategoryid() {
-    this.userScoreService.getGeneralResultsByUserIdAndCategoryId(this.user_id, this.category_id)
-      .subscribe(res => this.performs = res)
   }
 
   close() {

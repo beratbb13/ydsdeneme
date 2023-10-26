@@ -92,7 +92,7 @@ export class UserDashboardComponent implements OnInit {
   sinavAdlari: string[] = [];
 
   getUserCourses(userId: string) {
-    /*this.userservice.getUserIDfromCourses(userId).subscribe((res: any) => {
+    this.userservice.getUserIDfromCourses(userId).subscribe((res: any) => {
       this.userCourses = Array.isArray(res) ? res : [res];
       console.log(this.userCourses);
 
@@ -110,7 +110,7 @@ export class UserDashboardComponent implements OnInit {
           console.log(`Kullanıcının katıldığı sınav adları: ${this.sinavAdlari}`);
         });
       }
-    });*/
+    });
   }
 
   filterUserCoursesByUserId(userId: string, userCourses: any[]): any[] {
@@ -133,16 +133,17 @@ export class UserDashboardComponent implements OnInit {
 
 
   setDate() {
-    this.filteredPerforms = this.performs.filter(perform => perform.tarih == this.selectedDate)
+    this.userScoreService.getExamScoresByUserIdAndDate(this.user_id, this.selectedDate).subscribe(res => this.filteredPerforms = res)
   }
+
 
   getCategoryPerforms() {
     this.userScoreService.getExamScoresByUserId(this.user_id).pipe(
-      tap(res => this.performs = res)
+      tap(res => this.performs = res),
     ).subscribe(() => this.setDate())
   }
 
-  openExamResultDetailModal(category_id: string) {
-    this.dialogService.openExamResultDetailModal(this.user_id, category_id).onClose.subscribe()
+  openExamResultDetailModal(performs: any) {
+    this.dialogService.openExamResultDetailModal(performs).onClose.subscribe()
   }
 }
