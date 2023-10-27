@@ -104,8 +104,8 @@ export class ExamFilterComponent implements OnInit {
             this.getCategories(res.examid)
             if (res && typeof res === 'object') {
               // Convert the object to an array
-              this.sinavlar = [res];
-              console.log('agabababa', this.sinavlar);
+              this.sinavlar = [res]
+              
             } else {
               console.error('Response is not an object:', res);
             }

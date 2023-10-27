@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { answer } from 'src/app/models/answer';
 import { QuestionService } from 'src/app/services/questionService/question.service';
 import { SpinnerService } from 'src/app/services/spinnerService/spinner.service';
@@ -65,6 +65,9 @@ export class ExamFormComponent {
     this.visibleButtons = Array.from({ length: this.itemsPerPage }, (_, i) => i);
     this.soruIndex = 0;
     this.timer()
+
+    let ydsExamid = '6e6e28f6-5df0-4da5-9e29-53a91dbb0e9c'
+    this.userService.insertUserToExamWCategory({ userid: this.user.userId, examid: ydsExamid, categoryid: this.category.ecategoryid }).subscribe()
   }
 
   goToQuestion(index: number) {
@@ -108,19 +111,16 @@ export class ExamFormComponent {
 
   getQuestionsAndAnswers() {
     this.spinnerService.show()
-    let ydsExamid = '6e6e28f6-5df0-4da5-9e29-53a91dbb0e9c'
-    this.userService.insertUserToExamWCategory({ userid: this.user.userId, examid: ydsExamid, categoryid: this.category.ecategoryid }).subscribe(() => {
-      this.questionService.getQuestionsAndAnswers(this.user.userId, this.category.ecategoryid).pipe(
-        tap(res => this.answerswithQuestions = [...this.answerswithQuestions, ...res]), // =  res
-        tap(res => this.lastQuestions = res),
-        //tap(() => this.soruSayisi = this.answerswithQuestions.length / 5),
-        tap(() => this.pullQuestions()),
-        tap(() => this.answerswithQuestions.map((answer: any) => this.createFormControlObject(answer.questionid))),
-        tap(() => this.updatePaginationButtons()),
-        tap(() => this.totalPages = Math.ceil(this.questions.length / this.itemsPerPage)),
-        tap(() => this.spinnerService.hide())
-      ).subscribe()
-    })
+    this.questionService.getQuestionsAndAnswers(this.user.userId, this.category.ecategoryid).pipe(
+      tap(res => this.answerswithQuestions = [...this.answerswithQuestions, ...res]), // =  res
+      tap(res => this.lastQuestions = res),
+      //tap(() => this.soruSayisi = this.answerswithQuestions.length / 5),
+      tap(() => this.pullQuestions()),
+      tap(() => this.answerswithQuestions.map((answer: any) => this.createFormControlObject(answer.questionid))),
+      tap(() => this.updatePaginationButtons()),
+      tap(() => this.totalPages = Math.ceil(this.questions.length / this.itemsPerPage)),
+      tap(() => this.spinnerService.hide())
+    ).subscribe()
   }
 
   lastQuestions: any[] = []
@@ -153,7 +153,7 @@ export class ExamFormComponent {
   setScore() {
     let array: any[] = []
     this.lastQuestionIds.map(id => {
-      array.push({ user_id: this.user.userId, question_id: id })
+      array.push({ user_id: this.user.userId, exam_id: '6e6e28f6-5df0-4da5-9e29-53a91dbb0e9c', category_id: this.category.ecategoryid, question_id: id })
       //this.userScoreService.insertUserScore([{ user_id: user_id, question_id: id }])/*.subscribe(res => console.log(res));*/
     })
     this.userScoreService.insertUserScore(array).subscribe(res => {
@@ -342,32 +342,40 @@ export class ExamFormComponent {
     ]
 
     let allQuestions = [...trueQuestions, ...falseQuestions, ...emptyQuestion];
+    let updatedQuestions = allQuestions.filter(allQ => !this.lastQuestionIds.includes(allQ.question.questionid))
+    let insertedQuestions = allQuestions.filter(allQ => this.lastQuestionIds.includes(allQ.question.questionid))
 
     let user_id = this.user.userId
+
+    updatedQuestions.map(updQ => {
+      let trueanswer = updQ.trueanswer ? '1' : '0'
+
+      this.userScoreService.updateUserScore({
+        userid: user_id, examid: updQ.question.examid,
+        categoryid: this.category.ecategoryid, questionid: updQ.question.questionid, trueanswer: trueanswer
+      }).subscribe(res => console.log(res))
+    })
+
+
     let scoreBody: string = ''
-    allQuestions.map((ques: any, indis: number) => {
-      if (allQuestions[indis + 1]) {
-        if (ques.trueanswer && ques.trueanswer == true)
-          scoreBody += `('${user_id}', '${ques.question.questionid}', '${ques.question.examid}', '1', 'now()'),`
-        else if (ques.trueanswer && ques.trueanswer == false)
-          scoreBody += `('${user_id}', '${ques.question.questionid}', '${ques.question.examid}', '0', 'now()'),`
-        else
-          scoreBody += `('${user_id}', '${ques.question.questionid}', '${ques.question.examid}', '0', 'now()'),`
-      } else {
-        if (ques.trueanswer && ques.trueanswer == true)
-          scoreBody += `('${user_id}', '${ques.question.questionid}', '${ques.question.examid}', '1', 'now()')`
-        else if (ques.trueanswer && ques.trueanswer == false)
-          scoreBody += `('${user_id}', '${ques.question.questionid}', '${ques.question.examid}', '0', 'now()')`
-        else
-          scoreBody += `('${user_id}', '${ques.question.questionid}', '${ques.question.examid}', '0', 'now()')`
+    insertedQuestions.map((ques: any, indis: number) => {
+      if (ques.trueanswer && ques.trueanswer == true)
+        scoreBody += `('${user_id}', '${ques.question.examid}', '${this.category.ecategoryid}', '${ques.question.questionid}', '1', 'now()')`
+      else if (ques.trueanswer && ques.trueanswer == false)
+        scoreBody += `('${user_id}', '${ques.question.examid}', '${this.category.ecategoryid}', '${ques.question.questionid}', '0', 'now()')`
+      else
+        scoreBody += `('${user_id}', '${ques.question.examid}', '${this.category.ecategoryid}', '${ques.question.questionid}', '0', 'now()')`
+      if (insertedQuestions[indis + 1]) {
+        scoreBody += ','
       }
     })
 
-    this.userScoreService.insertExamScore(this.user.userId, scoreBody).subscribe(res => console.log(res))
+    this.userScoreService.insertExamScore(scoreBody).subscribe(res => console.log(res))
 
     let sure = this.dakika.toString() + ':' + (this.saniye < 10) ? '0' : '' + this.saniye.toString()
     this.openResultModal({ items: items, questions: allQuestions, duration: sure });
 
   }
+
 
 }

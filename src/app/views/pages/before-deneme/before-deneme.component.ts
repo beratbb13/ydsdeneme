@@ -7,8 +7,8 @@ import { ExamCategoryService } from 'src/app/services/examCategoryService/exam-c
   templateUrl: './before-deneme.component.html',
   styleUrls: ['./before-deneme.component.css']
 })
-export class BeforeDenemeComponent implements OnInit{
-  selectedExam: string = ''; 
+export class BeforeDenemeComponent implements OnInit {
+  selectedExam: string = '';
   // exams = [
   //   { name: 'YDS', text: 'lorem ipsum dolar sit amet', img: '/assets/icons/yds.png' },
   //   { name: 'KPSS', text: 'lorem ipsum dolar sit amet', img: '/assets/icons/kpss.png' },
@@ -17,18 +17,18 @@ export class BeforeDenemeComponent implements OnInit{
   //   { name: 'LGS', text: 'lorem ipsum dolar sit amet', img: '/assets/icons/lgs.png' },
 
   // ]
-  sinavlar:Usercourse[]=[]
+  sinavlar: Usercourse[] = []
 
-  constructor(private examCategoryService:ExamCategoryService){}
+  constructor(private examCategoryService: ExamCategoryService) { }
 
   ngOnInit(): void {
     this.getRegisteredCoursesAndExams()
   }
 
-  getRegisteredCoursesAndExams(){
-    const currentuser=localStorage.getItem('user')
-    if ((currentuser !== null && currentuser !== undefined)){
-      const userJSON=JSON.parse(currentuser)
+  getRegisteredCoursesAndExams() {
+    const currentuser = localStorage.getItem('user')
+    if ((currentuser !== null && currentuser !== undefined)) {
+      const userJSON = JSON.parse(currentuser)
       if (userJSON.userId) {
         const userid = userJSON.userId;
         // console.log('useerid',userid)
@@ -41,10 +41,10 @@ export class BeforeDenemeComponent implements OnInit{
             console.error('Hata oluştu', error);
           }
         )
-        /*this.examCategoryService.getUsersExams(userid).subscribe(
+        this.examCategoryService.getUsersExams(userid).subscribe(
           (res: any) => {
             console.log('Basarili Istek, alinan SINAVLAR:', res);
-        
+
             if (res && typeof res === 'object') {
               // Convert the object to an array
               this.sinavlar = [res];
@@ -56,7 +56,7 @@ export class BeforeDenemeComponent implements OnInit{
           (error: any) => {
             console.error('basarisiz istek', error);
           }
-        )*/
+        )
       }
     }
   }

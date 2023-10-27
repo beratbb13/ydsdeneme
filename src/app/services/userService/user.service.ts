@@ -146,7 +146,7 @@ export class UserService {
       "Token": this.token,
       "DataStoreId": Endpoints.usersCourseDataStoreId,
       "Operation": "delete",
-      "Data": `delete from users_course where usercourseid = ${usercourseid}`,
+      "Data": `delete from users_course where usercourseid = '${usercourseid}'`,
       "Encrypted": "1951"
     }
     return this.http.post(Endpoints.dataops, body).pipe(

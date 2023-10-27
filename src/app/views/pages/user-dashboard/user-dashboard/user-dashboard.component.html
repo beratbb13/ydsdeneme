@@ -29,10 +29,16 @@
         Latest Result
       </nb-card-header>
       <nb-list>
-        <nb-list-item *ngFor="let perform of performs">
-          {{perform.Name}}
-          <nb-progress-bar style="width: 100% !important;
-           margin-left: 2% !important;" [value]="perform.performans" status="primary"></nb-progress-bar>
+        <nb-list-item *ngFor="let perform of performs" style="cursor: pointer"
+          (click)="openExamResultDetailModal(perform)">
+          <div class="col-4">
+            {{perform.category_name}}
+          </div>
+          <div class="col-8">
+            <nb-progress-bar style="width: 100% !important;
+              margin-left: 2% !important;" title="%{{ perform.performans_orani }}" [value]="perform.performans_orani"
+              status="primary"></nb-progress-bar>
+          </div>
         </nb-list-item>
         <!--<nb-list-item>
           Deneme
@@ -71,52 +77,37 @@
 
     <nb-card class="timespent" size="medium" style="flex: 50%;">
       <nb-card-header style="display: flex;justify-content: space-around;">
-        Time spent on learning..
-        <input nbInput placeholder="Pick Date" style="border: none !important;" [(ngModel)]="selectedDate"
-          (ngModelChange)="setDate()" [nbDatepicker]="dateTimePicker">
-        <nb-datepicker #dateTimePicker></nb-datepicker>
+        <div class="col-6">
+          Filter by Date
+        </div>
+        <div class="col-6">
+          <input type="date" class="form-control" placeholder="Pick Date" [(ngModel)]="selectedDate"
+            (ngModelChange)="setDate()">
+        </div>
       </nb-card-header>
-      <nb-list>
-        <nb-list-item>
-          Deneme
-          <nb-progress-bar style="    width: 100% !important;
-                    margin-left: 2% !important;" [value]="40" status="danger"></nb-progress-bar>
+      <nb-list *ngIf="filteredPerforms.length">
+        <nb-list-item *ngFor="let perform of filteredPerforms" style="cursor: pointer"
+          (click)="openExamResultDetailModal(perform)">
+          <div class="col-4">
+            {{perform.category_name}}
+          </div>
+          <div class="col-8">
+            <nb-progress-bar style="width: 100% !important;
+              margin-left: 2% !important;" title="%{{ perform.performans_orani }}" [value]="perform.performans_orani"
+              status="primary"></nb-progress-bar>
+          </div>
         </nb-list-item>
+      </nb-list>
+      <nb-list *ngIf="!filteredPerforms.length">
         <nb-list-item>
-          Deneme
-          <nb-progress-bar style="    width: 100% !important;
-                    margin-left: 2% !important;" [value]="70" status="danger"></nb-progress-bar>
-        </nb-list-item>
-        <nb-list-item>
-          Deneme
-          <nb-progress-bar style="    width: 100% !important;
-                    margin-left: 2% !important;" [value]="10" status="danger"></nb-progress-bar>
-        </nb-list-item>
-        <nb-list-item>
-          Deneme
-          <nb-progress-bar style="    width: 100% !important;
-                    margin-left: 2% !important;" [value]="50" status="danger"></nb-progress-bar>
-        </nb-list-item>
-        <nb-list-item>
-          Deneme
-          <nb-progress-bar style="    width: 100% !important;
-                    margin-left: 2% !important;" [value]="70" status="danger"></nb-progress-bar>
-        </nb-list-item>
-        <nb-list-item>
-          Deneme
-          <nb-progress-bar style="    width: 100% !important;
-                    margin-left: 2% !important;" [value]="30" status="danger"></nb-progress-bar>
-        </nb-list-item>
-        <nb-list-item>
-          Deneme
-          <nb-progress-bar style="    width: 100% !important;
-                    margin-left: 2% !important;" [value]="40" status="danger"></nb-progress-bar>
+          <h5 class="text-center" style="font-weight: 600">herhangi bir sonuç bulunamadı.
+            !</h5>
         </nb-list-item>
       </nb-list>
     </nb-card>
   </div>
 </div>
-<!--
+
 <div style="padding: 40px;">
   <div class="courses">
     <h3>Çalıştığım Sınavlar</h3>
@@ -144,8 +135,7 @@
       </div>
     </div>
   </div>
--->
-<!--<div class="courses">
+  <div class="courses">
     <h3>Çalıştığım Konular</h3>
     <img width="32" height="32" src="https://img.icons8.com/fluency-systems-regular/48/more.png" alt="more" />
   </div>
@@ -170,4 +160,3 @@
   </div>
   <h5 *ngIf="kurslar.length===0" class="text-center" style="font-weight: 600">Alınan herhangi bir kurs yok
     !</h5>
-  -->
